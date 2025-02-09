@@ -5,15 +5,12 @@
 #![no_std]
 #[cfg(feature = "std")]
 extern crate std;
-#[cfg(feature = "std")]
-use {num_traits::FromPrimitive, solana_decode_error::DecodeError, solana_msg::msg};
-
 #[cfg(feature = "borsh")]
 use borsh::io::Error as BorshIoError;
 #[cfg(feature = "serde")]
 use serde_derive::{Deserialize, Serialize};
 use {
-    core::fmt,
+    core::{convert::TryFrom, fmt},
     solana_instruction::error::{
         InstructionError, ACCOUNT_ALREADY_INITIALIZED, ACCOUNT_BORROW_FAILED,
         ACCOUNT_DATA_TOO_SMALL, ACCOUNT_NOT_RENT_EXEMPT, ARITHMETIC_OVERFLOW, BORSH_IO_ERROR,
@@ -25,9 +22,10 @@ use {
         MISSING_REQUIRED_SIGNATURES, NOT_ENOUGH_ACCOUNT_KEYS, UNINITIALIZED_ACCOUNT,
         UNSUPPORTED_SYSVAR,
     },
-    solana_pubkey::PubkeyError,
-    core::convert::TryFrom,
+    solana_pubkey_error::PubkeyError,
 };
+#[cfg(feature = "std")]
+use {num_traits::FromPrimitive, solana_decode_error::DecodeError, solana_msg::msg};
 
 pub type ProgramResult = core::result::Result<(), ProgramError>;
 
