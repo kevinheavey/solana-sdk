@@ -3050,15 +3050,24 @@ dependencies = [
  "borsh 1.5.5",
  "getrandom 0.2.15",
  "js-sys",
- "num-traits",
  "serde",
  "serde_derive",
  "solana-define-syscall",
- "solana-frozen-abi",
- "solana-frozen-abi-macro",
  "solana-instruction",
+ "solana-instruction-error",
  "solana-pubkey",
  "wasm-bindgen",
+]
+
+[[package]]
+name = "solana-instruction-error"
+version = "1.0.0"
+dependencies = [
+ "num-traits",
+ "serde",
+ "serde_derive",
+ "solana-frozen-abi",
+ "solana-frozen-abi-macro",
 ]
 
 [[package]]
@@ -3453,7 +3462,7 @@ dependencies = [
  "serde",
  "serde_derive",
  "solana-decode-error",
- "solana-instruction",
+ "solana-instruction-error",
  "solana-msg",
  "solana-pubkey-error",
 ]

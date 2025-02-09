@@ -11,7 +11,7 @@ use borsh::io::Error as BorshIoError;
 use serde_derive::{Deserialize, Serialize};
 use {
     core::{convert::TryFrom, fmt},
-    solana_instruction::error::{
+    solana_instruction_error::{
         InstructionError, ACCOUNT_ALREADY_INITIALIZED, ACCOUNT_BORROW_FAILED,
         ACCOUNT_DATA_TOO_SMALL, ACCOUNT_NOT_RENT_EXEMPT, ARITHMETIC_OVERFLOW, BORSH_IO_ERROR,
         BUILTIN_PROGRAMS_MUST_CONSUME_COMPUTE_UNITS, CUSTOM_ZERO, ILLEGAL_OWNER, IMMUTABLE,

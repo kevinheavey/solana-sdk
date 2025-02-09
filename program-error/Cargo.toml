@@ -15,7 +15,7 @@ num-traits = { workspace = true }
 serde = { workspace = true, optional = true }
 serde_derive = { workspace = true, optional = true }
 solana-decode-error = { workspace = true }
-solana-instruction = { workspace = true, default-features = false }
+solana-instruction-error = { workspace = true }
 solana-msg = { workspace = true }
 solana-pubkey-error = { workspace = true, default-features = false }
 

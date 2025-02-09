@@ -23,7 +23,7 @@ use std::vec::Vec;
 pub mod account_meta;
 #[cfg(feature = "std")]
 pub use account_meta::AccountMeta;
-pub mod error;
+pub use solana_instruction_error as error;
 #[cfg(target_os = "solana")]
 pub mod syscalls;
 #[cfg(all(feature = "std", target_arch = "wasm32"))]
