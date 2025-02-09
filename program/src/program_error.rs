@@ -1,5 +1,3 @@
-#[allow(deprecated)]
-pub use solana_program_error::PrintProgramError;
 pub use {
     solana_instruction::error::{
         ACCOUNT_ALREADY_INITIALIZED, ACCOUNT_BORROW_FAILED, ACCOUNT_DATA_TOO_SMALL,
