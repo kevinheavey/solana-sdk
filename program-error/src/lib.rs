@@ -2,14 +2,18 @@
 
 #![allow(clippy::arithmetic_side_effects)]
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
+#![no_std]
+#[cfg(feature = "std")]
+extern crate std;
+#[cfg(feature = "std")]
+use {num_traits::FromPrimitive, solana_decode_error::DecodeError, solana_msg::msg};
+
 #[cfg(feature = "borsh")]
 use borsh::io::Error as BorshIoError;
 #[cfg(feature = "serde")]
 use serde_derive::{Deserialize, Serialize};
 use {
     core::fmt,
-    num_traits::FromPrimitive,
-    solana_decode_error::DecodeError,
     solana_instruction::error::{
         InstructionError, ACCOUNT_ALREADY_INITIALIZED, ACCOUNT_BORROW_FAILED,
         ACCOUNT_DATA_TOO_SMALL, ACCOUNT_NOT_RENT_EXEMPT, ARITHMETIC_OVERFLOW, BORSH_IO_ERROR,
@@ -21,12 +25,11 @@ use {
         MISSING_REQUIRED_SIGNATURES, NOT_ENOUGH_ACCOUNT_KEYS, UNINITIALIZED_ACCOUNT,
         UNSUPPORTED_SYSVAR,
     },
-    solana_msg::msg,
     solana_pubkey::PubkeyError,
-    std::convert::TryFrom,
+    core::convert::TryFrom,
 };
 
-pub type ProgramResult = std::result::Result<(), ProgramError>;
+pub type ProgramResult = core::result::Result<(), ProgramError>;
 
 /// Reasons the program may fail
 #[cfg_attr(feature = "serde", derive(Deserialize, Serialize))]
@@ -63,6 +66,7 @@ pub enum ProgramError {
     IncorrectAuthority,
 }
 
+#[cfg(feature = "std")]
 impl std::error::Error for ProgramError {}
 
 impl fmt::Display for ProgramError {
@@ -126,6 +130,7 @@ impl fmt::Display for ProgramError {
     since = "2.2.2",
     note = "Use `ToStr` instead with `solana_msg::msg!` or any other logging"
 )]
+#[cfg(feature = "std")]
 pub trait PrintProgramError {
     fn print<E>(&self)
     where
@@ -133,6 +138,7 @@ pub trait PrintProgramError {
 }
 
 #[allow(deprecated)]
+#[cfg(feature = "std")]
 impl PrintProgramError for ProgramError {
     fn print<E>(&self)
     where

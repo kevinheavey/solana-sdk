@@ -15,15 +15,14 @@ num-traits = { workspace = true }
 serde = { workspace = true, optional = true }
 serde_derive = { workspace = true, optional = true }
 solana-decode-error = { workspace = true }
-solana-instruction = { workspace = true, default-features = false, features = [
-    "std",
-] }
+solana-instruction = { workspace = true, default-features = false }
 solana-msg = { workspace = true }
 solana-pubkey = { workspace = true, default-features = false }
 
 [features]
 borsh = ["dep:borsh"]
 serde = ["dep:serde", "dep:serde_derive"]
+std = []
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]
