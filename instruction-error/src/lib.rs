@@ -1,4 +1,5 @@
 #![no_std]
+#![cfg_attr(feature = "frozen-abi", feature(min_specialization))]
 use core::fmt;
 #[cfg(feature = "num-traits")]
 use num_traits::ToPrimitive;
