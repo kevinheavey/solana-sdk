@@ -24,7 +24,7 @@ use {
     },
     solana_pubkey_error::PubkeyError,
 };
-#[cfg(feature = "std")]
+#[cfg(feature = "num-traits")]
 use {num_traits::FromPrimitive, solana_decode_error::DecodeError, solana_msg::msg};
 
 pub type ProgramResult = core::result::Result<(), ProgramError>;
@@ -124,14 +124,14 @@ impl fmt::Display for ProgramError {
     }
 }
 
-#[cfg(feature = "std")]
+#[cfg(feature = "num-traits")]
 pub trait PrintProgramError {
     fn print<E>(&self)
     where
         E: 'static + std::error::Error + DecodeError<E> + PrintProgramError + FromPrimitive;
 }
 
-#[cfg(feature = "std")]
+#[cfg(feature = "num-traits")]
 impl PrintProgramError for ProgramError {
     fn print<E>(&self)
     where
