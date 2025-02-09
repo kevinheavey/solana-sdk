@@ -1,7 +1,11 @@
+#![no_std]
 use core::fmt;
+#[cfg(feature = "num-traits")]
+use num_traits::ToPrimitive;
 #[cfg(feature = "frozen-abi")]
 use solana_frozen_abi_macro::{AbiEnumVisitor, AbiExample};
-use num_traits::ToPrimitive;
+#[cfg(feature = "std")]
+extern crate std;
 
 /// Builtin return values occupy the upper 32 bits
 const BUILTIN_BIT_SHIFT: usize = 32;
@@ -371,6 +375,7 @@ impl fmt::Display for InstructionError {
     }
 }
 
+#[cfg(feature = "num-traits")]
 impl<T> From<T> for InstructionError
 where
     T: ToPrimitive,
