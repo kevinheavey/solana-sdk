@@ -1,11 +1,7 @@
 use core::fmt;
 #[cfg(feature = "frozen-abi")]
 use solana_frozen_abi_macro::{AbiEnumVisitor, AbiExample};
-#[cfg(feature = "std")]
-use {
-    num_traits::ToPrimitive,
-    std::string::{String, ToString},
-};
+use num_traits::ToPrimitive;
 
 /// Builtin return values occupy the upper 32 bits
 const BUILTIN_BIT_SHIFT: usize = 32;
@@ -54,7 +50,6 @@ pub const INCORRECT_AUTHORITY: u64 = to_builtin!(26);
 /// an error be consistent across software versions.  For example, it is
 /// dangerous to include error strings from 3rd party crates because they could
 /// change at any time and changes to them are difficult to detect.
-#[cfg(feature = "std")]
 #[cfg_attr(feature = "frozen-abi", derive(AbiExample, AbiEnumVisitor))]
 #[cfg_attr(
     feature = "serde",
@@ -202,15 +197,7 @@ pub enum InstructionError {
     IncorrectAuthority,
 
     /// Failed to serialize or deserialize account data
-    ///
-    /// Warning: This error should never be emitted by the runtime.
-    ///
-    /// This error includes strings from the underlying 3rd party Borsh crate
-    /// which can be dangerous because the error strings could change across
-    /// Borsh versions. Only programs can use this error because they are
-    /// consistent across Solana software versions.
-    ///
-    BorshIoError(String),
+    BorshIoError,
 
     /// An account does not have enough lamports to be rent-exempt
     AccountNotRentExempt,
@@ -245,7 +232,6 @@ pub enum InstructionError {
 #[cfg(feature = "std")]
 impl std::error::Error for InstructionError {}
 
-#[cfg(feature = "std")]
 impl fmt::Display for InstructionError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
@@ -361,8 +347,8 @@ impl fmt::Display for InstructionError {
             InstructionError::ProgramFailedToCompile => f.write_str("Program failed to compile"),
             InstructionError::Immutable => f.write_str("Account is immutable"),
             InstructionError::IncorrectAuthority => f.write_str("Incorrect authority provided"),
-            InstructionError::BorshIoError(s) => {
-                write!(f, "Failed to serialize or deserialize account data: {s}",)
+            InstructionError::BorshIoError => {
+                f.write_str("Failed to serialize or deserialize account data")
             }
             InstructionError::AccountNotRentExempt => {
                 f.write_str("An account does not have enough lamports to be rent-exempt")
@@ -385,7 +371,6 @@ impl fmt::Display for InstructionError {
     }
 }
 
-#[cfg(feature = "std")]
 impl<T> From<T> for InstructionError
 where
     T: ToPrimitive,
@@ -407,7 +392,7 @@ where
             ACCOUNT_BORROW_FAILED => Self::AccountBorrowFailed,
             MAX_SEED_LENGTH_EXCEEDED => Self::MaxSeedLengthExceeded,
             INVALID_SEEDS => Self::InvalidSeeds,
-            BORSH_IO_ERROR => Self::BorshIoError("Unknown".to_string()),
+            BORSH_IO_ERROR => Self::BorshIoError,
             ACCOUNT_NOT_RENT_EXEMPT => Self::AccountNotRentExempt,
             UNSUPPORTED_SYSVAR => Self::UnsupportedSysvar,
             ILLEGAL_OWNER => Self::IllegalOwner,
@@ -453,7 +438,6 @@ impl fmt::Display for LamportsError {
     }
 }
 
-#[cfg(feature = "std")]
 impl From<LamportsError> for InstructionError {
     fn from(error: LamportsError) -> Self {
         match error {
