@@ -224,7 +224,7 @@ mod tests {
         for dst in 13..20 {
             assert!(is_nonoverlapping(10, 3, dst, 3));
         }
-        assert!(is_nonoverlapping::<u8>(255, 3, 254, 1));
-        assert!(!is_nonoverlapping::<u8>(255, 2, 254, 3));
+        assert!(is_nonoverlapping(255, 3, 254, 1));
+        assert!(!is_nonoverlapping(255, 2, 254, 3));
     }
 }
