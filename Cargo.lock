@@ -3594,6 +3594,7 @@ dependencies = [
  "libsecp256k1",
  "openssl",
  "rand 0.7.3",
+ "rand 0.8.5",
  "serde",
  "serde_derive",
  "serde_json",
