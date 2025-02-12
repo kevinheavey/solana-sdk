@@ -81,9 +81,9 @@ impl AsRef<[u8]> for Signature {
     }
 }
 
-fn write_as_base58(f: &mut fmt::Formatter, h: &Signature) -> fmt::Result {
+fn write_as_base58(f: &mut fmt::Formatter, s: &Signature) -> fmt::Result {
     let mut out = [0u8; MAX_BASE58_SIGNATURE_LEN];
-    let len = five8::encode_64(&h.0, &mut out) as usize;
+    let len = five8::encode_64(&s.0, &mut out) as usize;
     // any sequence of base58 chars is valid utf8
     let as_str = unsafe { from_utf8_unchecked(&out[..len]) };
     f.write_str(as_str)

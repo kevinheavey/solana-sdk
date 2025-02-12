@@ -998,9 +998,9 @@ impl AsMut<[u8]> for Pubkey {
     }
 }
 
-fn write_as_base58(f: &mut fmt::Formatter, h: &Pubkey) -> fmt::Result {
+fn write_as_base58(f: &mut fmt::Formatter, p: &Pubkey) -> fmt::Result {
     let mut out = [0u8; MAX_BASE58_LEN];
-    let len = five8::encode_32(&h.0, &mut out) as usize;
+    let len = five8::encode_32(&p.0, &mut out) as usize;
     // any sequence of base58 chars is valid utf8
     let as_str = unsafe { from_utf8_unchecked(&out[..len]) };
     f.write_str(as_str)
