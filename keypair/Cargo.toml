@@ -10,9 +10,9 @@ license = { workspace = true }
 edition = { workspace = true }
 
 [dependencies]
-five8 = { workspace = true }
 ed25519-dalek = { workspace = true }
 ed25519-dalek-bip32 = { workspace = true, optional = true }
+five8 = { workspace = true }
 rand0-7 = { workspace = true }
 solana-derivation-path = { workspace = true, optional = true }
 solana-pubkey = { workspace = true }
