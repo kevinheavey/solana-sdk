@@ -26,7 +26,7 @@ use {
         fmt,
         hash::{Hash, Hasher},
         mem,
-        str::{from_utf8, FromStr},
+        str::{from_utf8_unchecked, FromStr},
     },
     num_traits::{FromPrimitive, ToPrimitive},
     solana_decode_error::DecodeError,
@@ -391,18 +391,19 @@ impl FromStr for Pubkey {
     type Err = ParsePubkeyError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
+        use five8::DecodeError;
         if s.len() > MAX_BASE58_LEN {
             return Err(ParsePubkeyError::WrongSize);
         }
         let mut bytes = [0; PUBKEY_BYTES];
-        let decoded_size = bs58::decode(s)
-            .onto(&mut bytes)
-            .map_err(|_| ParsePubkeyError::Invalid)?;
-        if decoded_size != mem::size_of::<Pubkey>() {
-            Err(ParsePubkeyError::WrongSize)
-        } else {
-            Ok(Pubkey(bytes))
-        }
+        five8::decode_32(s, &mut bytes).map_err(|e| match e {
+            DecodeError::InvalidChar(_) => ParsePubkeyError::Invalid,
+            DecodeError::TooLong
+            | DecodeError::TooShort
+            | DecodeError::LargestTermTooHigh
+            | DecodeError::OutputTooLong => ParsePubkeyError::WrongSize,
+        })?;
+        Ok(Pubkey(bytes))
     }
 }
 
@@ -997,13 +998,11 @@ impl AsMut<[u8]> for Pubkey {
     }
 }
 
-fn write_as_base58(f: &mut fmt::Formatter, p: &Pubkey) -> fmt::Result {
+fn write_as_base58(f: &mut fmt::Formatter, h: &Pubkey) -> fmt::Result {
     let mut out = [0u8; MAX_BASE58_LEN];
-    let out_slice: &mut [u8] = &mut out;
-    // This will never fail because the only possible error is BufferTooSmall,
-    // and we will never call it with too small a buffer.
-    let len = bs58::encode(p.0).onto(out_slice).unwrap();
-    let as_str = from_utf8(&out[..len]).unwrap();
+    let len = five8::encode_32(&h.0, &mut out) as usize;
+    // any sequence of base58 chars is valid utf8
+    let as_str = unsafe { from_utf8_unchecked(&out[..len]) };
     f.write_str(as_str)
 }
 
@@ -1316,7 +1315,7 @@ pub fn new_rand() -> Pubkey {
 
 #[cfg(test)]
 mod tests {
-    use {super::*, strum::IntoEnumIterator};
+    use {super::*, core::str::from_utf8, strum::IntoEnumIterator};
 
     #[test]
     fn test_new_unique() {

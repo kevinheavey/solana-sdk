@@ -10,7 +10,7 @@ license = { workspace = true }
 edition = { workspace = true }
 
 [dependencies]
-bs58 = { workspace = true, features = ["std"] }
+five8 = { workspace = true }
 ed25519-dalek = { workspace = true }
 ed25519-dalek-bip32 = { workspace = true, optional = true }
 rand0-7 = { workspace = true }
