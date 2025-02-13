@@ -474,7 +474,7 @@ pub mod test {
     fn test_offsets_to_ed25519_instruction() {
         solana_logger::setup();
 
-        let privkey = ed25519_dalek::Keypair::generate(&mut thread_rng());
+        let privkey = ed25519_dalek::SigningKey::generate(&mut thread_rng());
         let messages: [&[u8]; 3] = [b"hello", b"IBRL", b"goodbye"];
         let data_start =
             messages.len() * SIGNATURE_OFFSETS_SERIALIZED_SIZE + SIGNATURE_OFFSETS_START;
@@ -502,8 +502,8 @@ pub mod test {
 
         let mut instruction = offsets_to_ed25519_instruction(&offsets);
 
-        let pubkey = privkey.public.as_ref();
-        instruction.data.extend_from_slice(pubkey);
+        let pubkey = privkey.verifying_key();
+        instruction.data.extend_from_slice(pubkey.as_ref());
 
         for message in messages {
             let signature = privkey.sign(message).to_bytes();
@@ -524,7 +524,7 @@ pub mod test {
         assert!(tx.verify_precompiles(&feature_set).is_ok());
 
         let index = loop {
-            let index = thread_rng().gen_range(0, instruction.data.len());
+            let index = thread_rng().gen_range(0..instruction.data.len());
             // byte 1 is not used, so this would not cause the verify to fail
             if index != 1 {
                 break index;
