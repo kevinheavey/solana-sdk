@@ -9,6 +9,8 @@ extern crate std;
 use borsh::io::Error as BorshIoError;
 #[cfg(feature = "serde")]
 use serde_derive::{Deserialize, Serialize};
+#[cfg(feature = "solana-msg")]
+use solana_msg::msg;
 use {
     core::{convert::TryFrom, fmt},
     solana_instruction_error::{
@@ -24,8 +26,6 @@ use {
     },
     solana_pubkey_error::PubkeyError,
 };
-#[cfg(feature = "num-traits")]
-use solana_msg::msg;
 
 pub type ProgramResult = core::result::Result<(), ProgramError>;
 
@@ -124,14 +124,13 @@ impl fmt::Display for ProgramError {
     }
 }
 
-#[cfg(feature = "num-traits")]
 pub trait PrintProgramError {
     fn print<E>(&self)
     where
         E: 'static + PrintProgramError + TryFrom<u32>;
 }
 
-#[cfg(feature = "num-traits")]
+#[cfg(feature = "solana-msg")]
 impl PrintProgramError for ProgramError {
     fn print<E>(&self)
     where
