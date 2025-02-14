@@ -3461,7 +3461,6 @@ dependencies = [
  "num-traits",
  "serde",
  "serde_derive",
- "solana-decode-error",
  "solana-instruction-error",
  "solana-msg",
  "solana-pubkey-error",

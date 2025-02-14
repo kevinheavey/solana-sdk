@@ -14,7 +14,6 @@ borsh = { workspace = true, optional = true }
 num-traits = { workspace = true, optional = true }
 serde = { workspace = true, optional = true }
 serde_derive = { workspace = true, optional = true }
-solana-decode-error = { workspace = true, optional = true }
 solana-instruction-error = { workspace = true }
 solana-msg = { workspace = true, optional = true }
 solana-pubkey-error = { workspace = true, default-features = false }
@@ -23,7 +22,6 @@ solana-pubkey-error = { workspace = true, default-features = false }
 borsh = ["dep:borsh"]
 num-traits = [
     "dep:num-traits",
-    "dep:solana-decode-error",
     "dep:solana-msg",
     "std",
 ]

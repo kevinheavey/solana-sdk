@@ -25,7 +25,7 @@ use {
     solana_pubkey_error::PubkeyError,
 };
 #[cfg(feature = "num-traits")]
-use {num_traits::FromPrimitive, solana_decode_error::DecodeError, solana_msg::msg};
+use {num_traits::FromPrimitive, solana_msg::msg};
 
 pub type ProgramResult = core::result::Result<(), ProgramError>;
 
@@ -132,7 +132,7 @@ impl fmt::Display for ProgramError {
 pub trait PrintProgramError {
     fn print<E>(&self)
     where
-        E: 'static + std::error::Error + DecodeError<E> + PrintProgramError + FromPrimitive;
+        E: 'static + std::error::Error + PrintProgramError + FromPrimitive;
 }
 
 #[allow(deprecated)]
@@ -140,11 +140,11 @@ pub trait PrintProgramError {
 impl PrintProgramError for ProgramError {
     fn print<E>(&self)
     where
-        E: 'static + std::error::Error + DecodeError<E> + PrintProgramError + FromPrimitive,
+        E: 'static + std::error::Error + PrintProgramError + FromPrimitive,
     {
         match self {
             Self::Custom(error) => {
-                if let Some(custom_error) = E::decode_custom_error_to_enum(*error) {
+                if let Some(custom_error) = E::from_u32(*error) {
                     custom_error.print::<E>();
                 } else {
                     msg!("Error: Unknown");
