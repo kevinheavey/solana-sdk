@@ -23,7 +23,6 @@ borsh = ["dep:borsh"]
 num-traits = [
     "dep:num-traits",
     "dep:solana-msg",
-    "std",
 ]
 serde = ["dep:serde", "dep:serde_derive"]
 std = []

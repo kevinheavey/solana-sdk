@@ -128,14 +128,14 @@ impl fmt::Display for ProgramError {
 pub trait PrintProgramError {
     fn print<E>(&self)
     where
-        E: 'static + std::error::Error + PrintProgramError + FromPrimitive;
+        E: 'static + PrintProgramError + FromPrimitive;
 }
 
 #[cfg(feature = "num-traits")]
 impl PrintProgramError for ProgramError {
     fn print<E>(&self)
     where
-        E: 'static + std::error::Error + PrintProgramError + FromPrimitive,
+        E: 'static + PrintProgramError + FromPrimitive,
     {
         match self {
             Self::Custom(error) => {
