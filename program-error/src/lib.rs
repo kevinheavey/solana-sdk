@@ -132,7 +132,7 @@ impl fmt::Display for ProgramError {
 pub trait PrintProgramError {
     fn print<E>(&self)
     where
-        E: 'static + std::error::Error + PrintProgramError + FromPrimitive;
+        E: 'static + PrintProgramError + FromPrimitive;
 }
 
 #[allow(deprecated)]
@@ -140,7 +140,7 @@ pub trait PrintProgramError {
 impl PrintProgramError for ProgramError {
     fn print<E>(&self)
     where
-        E: 'static + std::error::Error + PrintProgramError + FromPrimitive,
+        E: 'static + PrintProgramError + FromPrimitive,
     {
         match self {
             Self::Custom(error) => {
