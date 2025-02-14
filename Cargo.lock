@@ -3458,7 +3458,6 @@ name = "solana-program-error"
 version = "2.2.1"
 dependencies = [
  "borsh 1.5.5",
- "num-traits",
  "serde",
  "serde_derive",
  "solana-instruction-error",

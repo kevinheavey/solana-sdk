@@ -9,6 +9,8 @@ extern crate std;
 use borsh::io::Error as BorshIoError;
 #[cfg(feature = "serde")]
 use serde_derive::{Deserialize, Serialize};
+#[cfg(feature = "solana-msg")]
+use solana_msg::msg;
 use {
     core::{convert::TryFrom, fmt},
     solana_instruction_error::{
@@ -24,8 +26,6 @@ use {
     },
     solana_pubkey_error::PubkeyError,
 };
-#[cfg(feature = "num-traits")]
-use solana_msg::msg;
 
 pub type ProgramResult = core::result::Result<(), ProgramError>;
 
@@ -128,7 +128,6 @@ impl fmt::Display for ProgramError {
     since = "2.2.2",
     note = "Use `ToStr` instead with `solana_msg::msg!` or any other logging"
 )]
-#[cfg(feature = "num-traits")]
 pub trait PrintProgramError {
     fn print<E>(&self)
     where
@@ -136,7 +135,7 @@ pub trait PrintProgramError {
 }
 
 #[allow(deprecated)]
-#[cfg(feature = "num-traits")]
+#[cfg(feature = "solana-msg")]
 impl PrintProgramError for ProgramError {
     fn print<E>(&self)
     where
