@@ -3040,6 +3040,7 @@ dependencies = [
  "serde_derive",
  "solana-frozen-abi",
  "solana-frozen-abi-macro",
+ "solana-program-error",
 ]
 
 [[package]]
@@ -3430,7 +3431,6 @@ dependencies = [
  "borsh 1.5.5",
  "serde",
  "serde_derive",
- "solana-instruction-error",
  "solana-msg",
  "solana-pubkey-error",
 ]
