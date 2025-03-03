@@ -67,7 +67,7 @@ impl Keypair {
     pub fn to_base58_string(&self) -> String {
         let mut out = [0u8; five8::BASE58_ENCODED_64_MAX_LEN];
         let len = five8::encode_64(&self.0.to_bytes(), &mut out);
-        out[..len as usize].iter().map(|c| *c as char).collect()
+        unsafe { String::from_utf8_unchecked(out[..len as usize].to_vec()) }
     }
 
     /// Gets this `Keypair`'s SecretKey
