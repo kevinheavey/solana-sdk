@@ -271,8 +271,9 @@ pub fn keypair_from_seed(seed: &[u8]) -> Result<Keypair, Box<dyn error::Error>> 
     if seed.len() < ed25519_dalek::SECRET_KEY_LENGTH {
         return Err("Seed is too short".into());
     }
-    let secret_key = ed25519_dalek::SecretKey::try_from(&seed[..ed25519_dalek::SECRET_KEY_LENGTH])
-        .map_err(|e| e.to_string())?;
+    // this won't fail as we've already checked the length
+    let secret_key =
+        ed25519_dalek::SecretKey::try_from(&seed[..ed25519_dalek::SECRET_KEY_LENGTH]).unwrap();
     Ok(Keypair(ed25519_dalek::SigningKey::from(secret_key)))
 }
 
