@@ -45,12 +45,11 @@
 //! #
 //! # Ok::<(), anyhow::Error>(())
 //! ```
-
 #[cfg(feature = "bytemuck")]
 use bytemuck_derive::{Pod, Zeroable};
 #[cfg(feature = "bincode")]
 use {crate::Sysvar, solana_account_info::AccountInfo};
-use {solana_clock::Slot, solana_hash::Hash};
+use {crate::SysvarGet, solana_clock::Slot, solana_hash::Hash};
 
 #[cfg(feature = "bytemuck")]
 const U64_SIZE: usize = std::mem::size_of::<u64>();
@@ -64,6 +63,7 @@ pub use {
     solana_sysvar_id::SysvarId,
 };
 
+impl SysvarGet for SlotHashes {}
 #[cfg(feature = "bincode")]
 impl Sysvar for SlotHashes {
     // override
@@ -208,7 +208,7 @@ impl SlotHashesSysvar {
     }
 }
 
-#[cfg(feature = "bytemuck")]
+#[cfg(all(feature = "bincode", feature = "bytemuck"))]
 fn get_pod_slot_hashes() -> Result<Vec<PodSlotHash>, solana_program_error::ProgramError> {
     let mut pod_hashes = vec![PodSlotHash::default(); solana_slot_hashes::MAX_ENTRIES];
     {
