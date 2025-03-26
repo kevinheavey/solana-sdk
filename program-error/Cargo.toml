@@ -17,7 +17,7 @@ solana-msg = { workspace = true, optional = true }
 
 [features]
 borsh = ["dep:borsh"]
-solana-msg = ["dep:solana-msg"]
+solana-msg = ["dep:solana-msg", "std"]
 serde = ["dep:serde", "dep:serde_derive"]
 std = []
 
