@@ -17,7 +17,7 @@ bs58 = { workspace = true }
 bytemuck = { workspace = true, optional = true }
 bytemuck_derive = { workspace = true, optional = true }
 five8_const = { workspace = true }
-num-traits = { workspace = true }
+num-traits = { workspace = true, optional = true }
 rand = { workspace = true, optional = true }
 serde = { workspace = true, optional = true }
 serde_derive = { workspace = true, optional = true }
@@ -71,6 +71,7 @@ frozen-abi = [
     "dep:solana-frozen-abi-macro",
     "std",
 ]
+num-traits = ["dep:num-traits"]
 rand = ["dep:rand", "std"]
 serde = ["dep:serde", "dep:serde_derive"]
 sha2 = ["dep:solana-sha256-hasher", "solana-sha256-hasher/sha2"]

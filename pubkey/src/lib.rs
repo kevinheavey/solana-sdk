@@ -28,9 +28,10 @@ use {
         mem,
         str::{from_utf8, FromStr},
     },
-    num_traits::{FromPrimitive, ToPrimitive},
     solana_decode_error::DecodeError,
 };
+#[cfg(feature = "num-traits")]
+use num_traits::{FromPrimitive, ToPrimitive};
 #[cfg(target_arch = "wasm32")]
 use {
     js_sys::{Array, Uint8Array},
@@ -68,6 +69,7 @@ pub enum PubkeyError {
     IllegalOwner,
 }
 
+#[cfg(feature = "num-traits")]
 impl ToPrimitive for PubkeyError {
     #[inline]
     fn to_i64(&self) -> Option<i64> {
@@ -83,6 +85,7 @@ impl ToPrimitive for PubkeyError {
     }
 }
 
+#[cfg(feature = "num-traits")]
 impl FromPrimitive for PubkeyError {
     #[inline]
     fn from_i64(n: i64) -> Option<Self> {
@@ -329,6 +332,7 @@ pub enum ParsePubkeyError {
     Invalid,
 }
 
+#[cfg(feature = "num-traits")]
 impl ToPrimitive for ParsePubkeyError {
     #[inline]
     fn to_i64(&self) -> Option<i64> {
@@ -343,6 +347,7 @@ impl ToPrimitive for ParsePubkeyError {
     }
 }
 
+#[cfg(feature = "num-traits")]
 impl FromPrimitive for ParsePubkeyError {
     #[inline]
     fn from_i64(n: i64) -> Option<Self> {
