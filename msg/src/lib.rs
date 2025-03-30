@@ -42,12 +42,15 @@ pub mod syscalls;
 
 /// Print a string to the log.
 #[inline]
-pub fn sol_log(_message: &str) {
+pub fn sol_log(message: &str) {
     #[cfg(target_os = "solana")]
     unsafe {
-        syscalls::sol_log_(_message.as_ptr(), _message.len() as u64);
+        syscalls::sol_log_(message.as_ptr(), message.len() as u64);
     }
 
     #[cfg(all(not(target_os = "solana"), feature = "std"))]
-    std::println!("{_message}");
+    std::println!("{message}");
+
+    #[cfg(all(not(target_os = "solana"), not(feature = "std")))]
+    core::hint::black_box(message);
 }
