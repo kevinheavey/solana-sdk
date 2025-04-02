@@ -128,9 +128,7 @@ pub trait SysvarGet: Default + Sized {
 
 #[cfg(feature = "bincode")]
 /// A type that holds sysvar data.
-pub trait Sysvar:
-    SysvarGet + SysvarId + serde::Serialize + serde::de::DeserializeOwned
-{
+pub trait Sysvar: SysvarGet + SysvarId + serde::Serialize + serde::de::DeserializeOwned {
     /// The size in bytes of the sysvar as serialized account data.
     fn size_of() -> usize {
         bincode::serialized_size(&Self::default()).unwrap() as usize
