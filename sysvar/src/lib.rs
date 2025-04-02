@@ -143,7 +143,7 @@ pub fn is_sysvar_id(id: &Pubkey) -> bool {
 }
 
 /// Interface for loading a sysvar.
-pub trait SysvarGet: Sized {
+pub trait SysvarGet: Default + Sized {
     /// Load the sysvar directly from the runtime.
     ///
     /// This is the preferred way to load a sysvar. Calling this method does not
@@ -160,7 +160,7 @@ pub trait SysvarGet: Sized {
 #[cfg(feature = "bincode")]
 /// A type that holds sysvar data.
 pub trait Sysvar:
-    SysvarGet + SysvarId + Default + serde::Serialize + serde::de::DeserializeOwned
+    SysvarGet + SysvarId + serde::Serialize + serde::de::DeserializeOwned
 {
     /// The size in bytes of the sysvar as serialized account data.
     fn size_of() -> usize {
