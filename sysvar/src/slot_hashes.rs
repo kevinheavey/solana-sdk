@@ -208,7 +208,7 @@ impl SlotHashesSysvar {
     }
 }
 
-#[cfg(all(feature = "bincode", feature = "bytemuck"))]
+#[cfg(feature = "bytemuck")]
 fn get_pod_slot_hashes() -> Result<Vec<PodSlotHash>, solana_program_error::ProgramError> {
     let mut pod_hashes = vec![PodSlotHash::default(); solana_slot_hashes::MAX_ENTRIES];
     {
