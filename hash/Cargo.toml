@@ -32,7 +32,6 @@ solana-sanitize = { workspace = true }
 
 [dev-dependencies]
 bs58 = { workspace = true, default-features = false }
-solana-hash = { path = ".", features = ["dev-context-only-utils"] }
 
 [target.'cfg(target_arch = "wasm32")'.dependencies]
 js-sys = { workspace = true }
@@ -42,7 +41,6 @@ wasm-bindgen = { workspace = true }
 borsh = ["dep:borsh", "std"]
 bytemuck = ["dep:bytemuck", "dep:bytemuck_derive"]
 default = ["std"]
-dev-context-only-utils = ["bs58/alloc"]
 frozen-abi = [
     "dep:solana-frozen-abi",
     "dep:solana-frozen-abi-macro",
