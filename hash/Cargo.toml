@@ -31,7 +31,7 @@ solana-frozen-abi-macro = { workspace = true, optional = true, features = [
 solana-sanitize = { workspace = true }
 
 [dev-dependencies]
-bs58 = { workspace = true, default-features = false }
+bs58 = { workspace = true, default-features = false, features = ["alloc"] }
 
 [target.'cfg(target_arch = "wasm32")'.dependencies]
 js-sys = { workspace = true }
