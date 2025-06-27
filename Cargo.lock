@@ -2750,7 +2750,7 @@ dependencies = [
  "solana-clock",
  "solana-frozen-abi",
  "solana-frozen-abi-macro",
- "solana-instruction",
+ "solana-instruction-error",
  "solana-logger",
  "solana-pubkey",
  "solana-sdk-ids",
@@ -2782,6 +2782,7 @@ dependencies = [
  "solana-frozen-abi-macro",
  "solana-hash",
  "solana-instruction",
+ "solana-instruction-error",
  "solana-pubkey",
  "solana-sdk-ids",
  "solana-slot-hashes",
@@ -2813,7 +2814,7 @@ version = "2.2.1"
 dependencies = [
  "bincode",
  "serde",
- "solana-instruction",
+ "solana-instruction-error",
  "solana-system-interface",
 ]
 
@@ -3230,7 +3231,6 @@ dependencies = [
  "borsh 1.5.5",
  "getrandom 0.2.15",
  "js-sys",
- "num-traits",
  "serde",
  "serde_derive",
  "solana-define-syscall",
@@ -3262,6 +3262,7 @@ dependencies = [
  "qualifier_attr",
  "solana-account-info",
  "solana-instruction",
+ "solana-instruction-error",
  "solana-program-error",
  "solana-pubkey",
  "solana-sanitize",
@@ -3560,6 +3561,7 @@ dependencies = [
  "solana-frozen-abi-macro",
  "solana-hash",
  "solana-instruction",
+ "solana-instruction-error",
  "solana-instructions-sysvar",
  "solana-keccak-hasher",
  "solana-last-restart-slot",
@@ -3879,7 +3881,7 @@ dependencies = [
  "borsh 1.5.5",
  "rand 0.8.5",
  "serde",
- "solana-instruction",
+ "solana-instruction-error",
  "solana-pubkey",
  "solana-sanitize",
 ]
@@ -4126,7 +4128,7 @@ dependencies = [
  "serde_derive",
  "solana-frozen-abi",
  "solana-frozen-abi-macro",
- "solana-instruction",
+ "solana-instruction-error",
  "solana-sanitize",
 ]
 
@@ -4152,6 +4154,7 @@ dependencies = [
  "solana-frozen-abi-macro",
  "solana-hash",
  "solana-instruction",
+ "solana-instruction-error",
  "solana-logger",
  "solana-pubkey",
  "solana-rent",

@@ -18,7 +18,6 @@ rustdoc-args = ["--cfg=docsrs"]
 bincode = [
     "dep:bincode",
     "dep:solana-sysvar",
-    "solana-instruction/serde",
     "serde",
 ]
 dev-context-only-utils = ["bincode", "dep:qualifier_attr"]
@@ -45,7 +44,7 @@ solana-account-info = { workspace = true }
 solana-clock = { workspace = true }
 solana-frozen-abi = { workspace = true, optional = true }
 solana-frozen-abi-macro = { workspace = true, optional = true }
-solana-instruction = { workspace = true }
+solana-instruction-error = { workspace = true }
 solana-logger = { workspace = true, optional = true }
 solana-pubkey = { workspace = true }
 solana-sdk-ids = { workspace = true }
