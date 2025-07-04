@@ -47,9 +47,9 @@
 //! # Ok::<(), anyhow::Error>(())
 //! ```
 
+use crate::Sysvar;
 #[cfg(feature = "bincode")]
 use crate::SysvarSerialize;
-use crate::Sysvar;
 pub use {
     solana_account_info::AccountInfo,
     solana_program_error::ProgramError,
