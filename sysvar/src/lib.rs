@@ -112,7 +112,7 @@ const OFFSET_LENGTH_EXCEEDS_SYSVAR: u64 = 1;
 const SYSVAR_NOT_FOUND: u64 = 2;
 
 /// Interface for loading a sysvar.
-pub trait SysvarGet: Default + Sized {
+pub trait Sysvar: Default + Sized {
     /// Load the sysvar directly from the runtime.
     ///
     /// This is the preferred way to load a sysvar. Calling this method does not
@@ -128,7 +128,7 @@ pub trait SysvarGet: Default + Sized {
 
 #[cfg(feature = "bincode")]
 /// A type that holds sysvar data.
-pub trait Sysvar: SysvarGet + SysvarId + serde::Serialize + serde::de::DeserializeOwned {
+pub trait SysvarSerialize: Sysvar + SysvarId + serde::Serialize + serde::de::DeserializeOwned {
     /// The size in bytes of the sysvar as serialized account data.
     fn size_of() -> usize {
         bincode::serialized_size(&Self::default()).unwrap() as usize
@@ -158,7 +158,7 @@ pub trait Sysvar: SysvarGet + SysvarId + serde::Serialize + serde::de::Deseriali
 
     /// Calls [`SysvarGet::get`].
     fn get() -> Result<Self, ProgramError> {
-        <Self as SysvarGet>::get()
+        <Self as Sysvar>::get()
     }
 }
 
@@ -246,8 +246,8 @@ mod tests {
             check_id(pubkey)
         }
     }
-    impl SysvarGet for TestSysvar {}
     impl Sysvar for TestSysvar {}
+    impl SysvarSerialize for TestSysvar {}
 
     // NOTE tests that use this mock MUST carry the #[serial] attribute
     struct MockGetSysvarSyscall {
