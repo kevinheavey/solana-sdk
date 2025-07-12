@@ -5,7 +5,7 @@
 //! The [`Sysvar::get`] method always returns
 //! [`ProgramError::UnsupportedSysvar`], and in practice the data size of this
 //! sysvar is too large to process on chain. One can still use the
-//! [`SysvarId::id`], [`SysvarId::check_id`] and [`Sysvar::size_of`] methods in
+//! [`SysvarId::id`], [`SysvarId::check_id`] and [`SysvarSerialize::size_of`] methods in
 //! an on-chain program, and it can be accessed off-chain through RPC.
 //!
 //! [`ProgramError::UnsupportedSysvar`]: https://docs.rs/solana-program-error/latest/solana_program_error/enum.ProgramError.html#variant.UnsupportedSysvar
