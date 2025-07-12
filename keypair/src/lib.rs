@@ -89,21 +89,14 @@ impl TryFrom<&[u8]> for Keypair {
             )));
         };
         // compiler elides the second len check so try_into().unwrap() is as fast as unsafe code
-        let keypair_bytes: [u8; ed25519_dalek::KEYPAIR_LENGTH] = keypair_slice.try_into().unwrap();
-        let secret: ed25519_dalek::SecretKey = keypair_bytes[..ed25519_dalek::SECRET_KEY_LENGTH]
-            .try_into()
-            .unwrap();
-        let signing_key = ed25519_dalek::SigningKey::from_bytes(&secret);
-        let public = ed25519_dalek::VerifyingKey::try_from(
-            &keypair_bytes[ed25519_dalek::SECRET_KEY_LENGTH..],
-        )
-        .map_err(SignatureError::from_source)?;
-        let expected_public = signing_key.verifying_key();
-        (public == expected_public)
-            .then_some(Self(signing_key))
-            .ok_or(SignatureError::from_source(String::from(
-                "keypair bytes do not specify same pubkey as derived from their secret key",
-            )))
+        let keypair_bytes: &[u8; ed25519_dalek::KEYPAIR_LENGTH] = keypair_slice.try_into().unwrap();
+        ed25519_dalek::SigningKey::from_keypair_bytes(keypair_bytes)
+            .map_err(|_| {
+                SignatureError::from_source(String::from(
+                    "keypair bytes do not specify same pubkey as derived from their secret key",
+                ))
+            })
+            .map(Self)
     }
 }
 
