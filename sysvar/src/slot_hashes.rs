@@ -2,11 +2,11 @@
 //!
 //! The _slot hashes sysvar_ provides access to the [`SlotHashes`] type.
 //!
-//! The [`Sysvar::from_account_info`] and [`Sysvar::get`] methods always return
+//! The [`SysvarSerialize::from_account_info`] and [`Sysvar::get`] methods always return
 //! [`solana_program_error::ProgramError::UnsupportedSysvar`] because this sysvar account is too large
 //! to process on-chain. Thus this sysvar cannot be accessed on chain, though
 //! one can still use the [`SysvarId::id`], [`SysvarId::check_id`] and
-//! [`Sysvar::size_of`] methods in an on-chain program, and it can be accessed
+//! [`SysvarSerialize::size_of`] methods in an on-chain program, and it can be accessed
 //! off-chain through RPC.
 //!
 //! [`SysvarId::id`]: https://docs.rs/solana-sysvar-id/latest/solana_sysvar_id/trait.SysvarId.html#tymethod.id

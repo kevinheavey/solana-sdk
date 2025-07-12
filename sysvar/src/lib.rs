@@ -31,7 +31,7 @@
 //!
 //! Since Solana sysvars are accounts, if the `AccountInfo` is provided to the
 //! program, then the program can deserialize the sysvar with
-//! [`Sysvar::from_account_info`] to access its data, as in this example that
+//! [`SysvarSerialize::from_account_info`] to access its data, as in this example that
 //! again logs the [`clock`] sysvar.
 //!
 //! ```
@@ -158,7 +158,7 @@ pub trait SysvarSerialize:
         bincode::serialize_into(&mut account_info.data.borrow_mut()[..], self).ok()
     }
 
-    /// Calls [`SysvarGet::get`].
+    /// Calls [`Sysvar::get`].
     fn get() -> Result<Self, ProgramError> {
         <Self as Sysvar>::get()
     }
