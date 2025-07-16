@@ -266,7 +266,7 @@ pub fn keypair_from_seed(seed: &[u8]) -> Result<Keypair, Box<dyn error::Error>> 
     }
     // this won't fail as we've already checked the length
     let secret_key =
-        ed25519_dalek::SecretKey::try_from(&seed[..ed25519_dalek::SECRET_KEY_LENGTH]).unwrap();
+ed25519_dalek::SecretKey::try_from(&seed[..ed25519_dalek::SECRET_KEY_LENGTH])?;
     Ok(Keypair(ed25519_dalek::SigningKey::from(secret_key)))
 }
 
