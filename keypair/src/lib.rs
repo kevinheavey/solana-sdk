@@ -83,13 +83,12 @@ impl TryFrom<&[u8]> for Keypair {
     type Error = SignatureError;
 
     fn try_from(bytes: &[u8]) -> Result<Self, Self::Error> {
-        let Some(keypair_slice) = bytes.get(..ed25519_dalek::KEYPAIR_LENGTH) else {
-            return Err(SignatureError::from_source(String::from(
-                "candidate keypair byte array is too short",
-            )));
-        };
-        // compiler elides the second len check so try_into().unwrap() is as fast as unsafe code
-        let keypair_bytes: &[u8; ed25519_dalek::KEYPAIR_LENGTH] = keypair_slice.try_into().unwrap();
+        let keypair_bytes: &[u8; ed25519_dalek::KEYPAIR_LENGTH] =
+            bytes.try_into().map_err(|_| {
+                SignatureError::from_source(String::from(
+                    "candidate keypair byte array is the wrong length",
+                ))
+            })?;
         ed25519_dalek::SigningKey::from_keypair_bytes(keypair_bytes)
             .map_err(|_| {
                 SignatureError::from_source(String::from(
