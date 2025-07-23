@@ -75,7 +75,7 @@
 //! # use solana_msg::msg;
 //! # use solana_program_error::{ProgramError, ProgramResult};
 //! # use solana_pubkey::Pubkey;
-//! # use solana_sysvar::Sysvar;
+//! # use solana_sysvar::{Sysvar, SysvarSerialize};
 //! # use solana_sdk_ids::sysvar::epoch_rewards;
 //! #
 //! fn process_instruction(

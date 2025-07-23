@@ -58,7 +58,7 @@
 //! # use solana_program_error::{ProgramError, ProgramResult};
 //! # use solana_pubkey::Pubkey;
 //! # use solana_sdk_ids::sysvar::epoch_schedule;
-//! # use solana_sysvar::Sysvar;
+//! # use solana_sysvar::{Sysvar, SysvarSerialize};
 //! fn process_instruction(
 //!     program_id: &Pubkey,
 //!     accounts: &[AccountInfo],
