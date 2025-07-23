@@ -83,9 +83,9 @@ pub mod __private {
     pub use solana_define_syscall::definitions;
     pub use {solana_program_entrypoint::SUCCESS, solana_program_error::ProgramError};
 }
-use {solana_pubkey::Pubkey, solana_program_error::ProgramError};
 #[cfg(feature = "bincode")]
 use {solana_account_info::AccountInfo, solana_sysvar_id::SysvarId};
+use {solana_program_error::ProgramError, solana_pubkey::Pubkey};
 
 pub mod clock;
 pub mod epoch_rewards;
