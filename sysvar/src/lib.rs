@@ -157,11 +157,6 @@ pub trait SysvarSerialize:
     fn to_account_info(&self, account_info: &mut AccountInfo) -> Option<()> {
         bincode::serialize_into(&mut account_info.data.borrow_mut()[..], self).ok()
     }
-
-    /// Calls [`Sysvar::get`].
-    fn get() -> Result<Self, ProgramError> {
-        <Self as Sysvar>::get()
-    }
 }
 
 /// Implements the [`Sysvar::get`] method for both SBF and host targets.
