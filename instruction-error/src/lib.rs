@@ -5,8 +5,6 @@ use core::fmt;
 use num_traits::ToPrimitive;
 #[cfg(feature = "frozen-abi")]
 use solana_frozen_abi_macro::{AbiEnumVisitor, AbiExample};
-#[cfg(feature = "std")]
-extern crate std;
 use solana_program_error::ProgramError;
 pub use solana_program_error::{
     ACCOUNT_ALREADY_INITIALIZED, ACCOUNT_BORROW_FAILED, ACCOUNT_DATA_TOO_SMALL,
