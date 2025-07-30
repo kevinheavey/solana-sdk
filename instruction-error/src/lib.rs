@@ -4,6 +4,8 @@
 use num_traits::ToPrimitive;
 #[cfg(feature = "frozen-abi")]
 use solana_frozen_abi_macro::{AbiEnumVisitor, AbiExample};
+#[cfg(feature = "frozen-abi")]
+extern crate std;
 pub use solana_program_error::{
     ACCOUNT_ALREADY_INITIALIZED, ACCOUNT_BORROW_FAILED, ACCOUNT_DATA_TOO_SMALL,
     ACCOUNT_NOT_RENT_EXEMPT, ARITHMETIC_OVERFLOW, BORSH_IO_ERROR,
