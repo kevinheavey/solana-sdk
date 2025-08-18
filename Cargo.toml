@@ -12,8 +12,6 @@ members = [
     "frozen-abi-macro",
     "hash",
     "logger",
-    "package-metadata",
-    "package-metadata-macro",
     "poh-config",
     "precompile-error",
     "program",
@@ -145,8 +143,6 @@ solana-frozen-abi = { path = "frozen-abi", version = "3.0.0" }
 solana-frozen-abi-macro = { path = "frozen-abi-macro", version = "3.0.0" }
 solana-hash = { path = "hash", version = "3.0.0", default-features = false }
 solana-logger = { path = "logger", version = "3.0.0" }
-solana-package-metadata = { path = "package-metadata", version = "3.0.0" }
-solana-package-metadata-macro = { path = "package-metadata-macro", version = "3.0.0" }
 solana-poh-config = { path = "poh-config", version = "3.0.0" }
 solana-precompile-error = { path = "precompile-error", version = "3.0.0" }
 solana-program = { path = "program", version = "3.0.0", default-features = false }
