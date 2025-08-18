@@ -43,10 +43,11 @@ frozen-abi = [
     "solana-pubkey/frozen-abi",
     "solana-rent/frozen-abi",
     "solana-short-vec/frozen-abi",
-    "solana-sysvar/frozen-abi",
 ]
 
 [dependencies]
+bytemuck = { workspace = true }
+bytemuck_derive = { workspace = true }
 memoffset = { workspace = true }
 serde = { workspace = true }
 serde_derive = { workspace = true }
@@ -87,6 +88,7 @@ solana-program-pack = { workspace = true }
 solana-pubkey = { workspace = true, features = ["bytemuck", "curve25519", "serde", "std"] }
 solana-rent = { workspace = true, features = ["serde", "sysvar"] }
 solana-sdk-ids = { workspace = true }
+solana-sdk-macro = { workspace = true }
 solana-secp256k1-recover = { workspace = true }
 solana-serde-varint = { workspace = true }
 solana-serialize-utils = { workspace = true }
@@ -96,10 +98,10 @@ solana-slot-hashes = { workspace = true, features = ["serde", "sysvar"] }
 solana-slot-history = { workspace = true, features = ["serde", "sysvar"] }
 solana-stable-layout = { workspace = true }
 solana-system-interface = { workspace = true, features = ["bincode"] }
-solana-sysvar = { workspace = true, features = ["bincode", "bytemuck"] }
 solana-sysvar-id = { workspace = true }
 
 [target.'cfg(not(target_os = "solana"))'.dependencies]
+base64 = { workspace = true }
 bincode = { workspace = true }
 blake3 = { workspace = true, features = ["traits-preview"] }
 lazy_static = { workspace = true }
@@ -115,7 +117,6 @@ solana-define-syscall = { workspace = true }
 
 [dev-dependencies]
 solana-pubkey = { workspace = true, features = ["dev-context-only-utils"] }
-solana-sysvar = { workspace = true, features = ["dev-context-only-utils"] }
 
 [lints]
 workspace = true

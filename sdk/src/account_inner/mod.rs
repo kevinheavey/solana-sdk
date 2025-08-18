@@ -4,7 +4,7 @@
 
 use serde::ser::{Serialize, Serializer};
 
-use solana_sysvar::SysvarSerialize;
+use solana_program::sysvar_inner::SysvarSerialize;
 use {
     solana_account_info::{debug_account_data::*, AccountInfo},
     solana_clock::{Epoch, INITIAL_RENT_EPOCH},

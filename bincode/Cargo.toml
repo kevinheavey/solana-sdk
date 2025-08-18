@@ -17,8 +17,5 @@ bincode = { workspace = true }
 serde = { workspace = true }
 solana-instruction-error = { workspace = true }
 
-[dev-dependencies]
-solana-system-interface = { workspace = true, features = ["bincode"] }
-
 [lints]
 workspace = true

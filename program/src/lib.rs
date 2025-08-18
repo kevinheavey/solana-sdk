@@ -492,6 +492,7 @@ pub mod sysvar;
 
 pub mod example_mocks_inner;
 pub mod message_inner;
+pub mod sysvar_inner;
 
 #[deprecated(since = "2.2.0", note = "Use `solana-big-mod-exp` crate instead")]
 pub use solana_big_mod_exp as big_mod_exp;
@@ -523,7 +524,7 @@ pub use solana_short_vec as short_vec;
 #[deprecated(since = "2.1.0", note = "Use `solana-stable-layout` crate instead")]
 pub use solana_stable_layout as stable_layout;
 #[cfg(not(target_os = "solana"))]
-pub use solana_sysvar::program_stubs;
+pub use sysvar_inner::program_stubs;
 pub use {
     solana_account_info::{self as account_info, debug_account_data},
     solana_clock as clock,
@@ -534,7 +535,6 @@ pub use {
         entrypoint_no_alloc,
     },
     solana_program_option as program_option, solana_pubkey as pubkey, solana_rent as rent,
-    solana_sysvar::impl_sysvar_get,
 };
 /// The [config native program][np].
 ///

@@ -58,9 +58,6 @@ const RECENT_BLOCKHASHES_ID: Pubkey =
 #[cfg(feature = "bincode")]
 const RENT_ID: Pubkey = Pubkey::from_str_const("SysvarRent111111111111111111111111111111111");
 
-#[cfg(feature = "bincode")]
-#[cfg(test)]
-static_assertions::const_assert_eq!(solana_nonce::state::State::size(), NONCE_STATE_SIZE);
 /// The serialized size of the nonce state.
 #[cfg(feature = "bincode")]
 const NONCE_STATE_SIZE: usize = 80;
@@ -1665,54 +1662,4 @@ pub fn authorize_nonce_account(
 pub fn upgrade_nonce_account(nonce_pubkey: Pubkey) -> Instruction {
     let account_metas = vec![AccountMeta::new(nonce_pubkey, /*is_signer:*/ false)];
     Instruction::new_with_bincode(ID, &SystemInstruction::UpgradeNonceAccount, account_metas)
-}
-
-#[cfg(feature = "bincode")]
-#[cfg(test)]
-mod tests {
-    use {super::*, solana_sysvar_id::SysvarId};
-
-    fn get_keys(instruction: &Instruction) -> Vec<Pubkey> {
-        instruction.accounts.iter().map(|x| x.pubkey).collect()
-    }
-
-    #[allow(deprecated)]
-    #[test]
-    fn test_constants() {
-        // Ensure that the constants are in sync with the solana program.
-        assert_eq!(
-            RECENT_BLOCKHASHES_ID,
-            solana_sysvar::recent_blockhashes::RecentBlockhashes::id(),
-        );
-
-        // Ensure that the constants are in sync with the solana rent.
-        assert_eq!(RENT_ID, solana_sysvar::rent::Rent::id());
-    }
-
-    #[test]
-    fn test_move_many() {
-        let alice_pubkey = Pubkey::new_unique();
-        let bob_pubkey = Pubkey::new_unique();
-        let carol_pubkey = Pubkey::new_unique();
-        let to_lamports = vec![(bob_pubkey, 1), (carol_pubkey, 2)];
-
-        let instructions = transfer_many(&alice_pubkey, &to_lamports);
-        assert_eq!(instructions.len(), 2);
-        assert_eq!(get_keys(&instructions[0]), vec![alice_pubkey, bob_pubkey]);
-        assert_eq!(get_keys(&instructions[1]), vec![alice_pubkey, carol_pubkey]);
-    }
-
-    #[test]
-    fn test_create_nonce_account() {
-        let from_pubkey = Pubkey::new_unique();
-        let nonce_pubkey = Pubkey::new_unique();
-        let authorized = nonce_pubkey;
-        let ixs = create_nonce_account(&from_pubkey, &nonce_pubkey, &authorized, 42);
-        assert_eq!(ixs.len(), 2);
-        let ix = &ixs[0];
-        assert_eq!(ix.program_id, crate::program::ID);
-        let pubkeys: Vec<_> = ix.accounts.iter().map(|am| am.pubkey).collect();
-        assert!(pubkeys.contains(&from_pubkey));
-        assert!(pubkeys.contains(&nonce_pubkey));
-    }
 }

@@ -119,9 +119,9 @@
 //! #
 //! # Ok::<(), anyhow::Error>(())
 //! ```
-#[cfg(feature = "bincode")]
-use crate::SysvarSerialize;
-use crate::{impl_sysvar_get, Sysvar};
+use super::Sysvar;
+use super::SysvarSerialize;
+use crate::impl_sysvar_get;
 pub use {
     solana_epoch_schedule::EpochSchedule,
     solana_sdk_ids::sysvar::epoch_schedule::{check_id, id, ID},
@@ -131,5 +131,4 @@ impl Sysvar for EpochSchedule {
     impl_sysvar_get!(sol_get_epoch_schedule_sysvar);
 }
 
-#[cfg(feature = "bincode")]
 impl SysvarSerialize for EpochSchedule {}

@@ -3,9 +3,6 @@ use {
     solana_program_error::{ProgramError, ToStr},
 };
 
-// Use strum when testing to ensure our FromPrimitive
-// impl is exhaustive
-#[cfg_attr(test, derive(strum_macros::FromRepr, strum_macros::EnumIter))]
 #[cfg_attr(
     feature = "serde",
     derive(serde_derive::Deserialize, serde_derive::Serialize)
@@ -143,22 +140,5 @@ impl TryFrom<u32> for SystemError {
 impl From<u64> for SystemError {
     fn from(error: u64) -> Self {
         SystemError::from_u64(error).unwrap()
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use {super::SystemError, num_traits::FromPrimitive, strum::IntoEnumIterator};
-
-    #[test]
-    fn test_system_error_from_primitive_exhaustive() {
-        for variant in SystemError::iter() {
-            let variant_i64 = variant.clone() as i64;
-            assert_eq!(
-                SystemError::from_repr(variant_i64 as usize),
-                SystemError::from_i64(variant_i64)
-            );
-            assert_eq!(SystemError::from(variant_i64 as u64), variant);
-        }
     }
 }

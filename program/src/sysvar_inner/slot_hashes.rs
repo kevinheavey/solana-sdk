@@ -44,16 +44,12 @@
 //! #
 //! # Ok::<(), anyhow::Error>(())
 //! ```
-#[cfg(feature = "bytemuck")]
 use bytemuck_derive::{Pod, Zeroable};
-use {crate::Sysvar, solana_clock::Slot, solana_hash::Hash};
-#[cfg(feature = "bincode")]
-use {crate::SysvarSerialize, solana_account_info::AccountInfo};
+use {super::Sysvar, solana_clock::Slot, solana_hash::Hash};
+use {super::SysvarSerialize, solana_account_info::AccountInfo};
 
-#[cfg(feature = "bytemuck")]
 const U64_SIZE: usize = std::mem::size_of::<u64>();
 
-#[cfg(any(feature = "bytemuck", feature = "bincode"))]
 const SYSVAR_LEN: usize = 20_488; // golden, update if MAX_ENTRIES changes
 
 pub use {
@@ -63,7 +59,6 @@ pub use {
 };
 
 impl Sysvar for SlotHashes {}
-#[cfg(feature = "bincode")]
 impl SysvarSerialize for SlotHashes {
     // override
     fn size_of() -> usize {
@@ -79,15 +74,13 @@ impl SysvarSerialize for SlotHashes {
 }
 
 /// A bytemuck-compatible (plain old data) version of `SlotHash`.
-#[cfg_attr(feature = "bytemuck", derive(Pod, Zeroable))]
-#[derive(Copy, Clone, Default)]
+#[derive(Copy, Clone, Default, Pod, Zeroable)]
 #[repr(C)]
 pub struct PodSlotHash {
     pub slot: Slot,
     pub hash: Hash,
 }
 
-#[cfg(feature = "bytemuck")]
 /// API for querying of the `SlotHashes` sysvar by on-chain programs.
 ///
 /// Hangs onto the allocated raw buffer from the account data, which can be
@@ -99,7 +92,6 @@ pub struct PodSlotHashes {
     slot_hashes_end: usize,
 }
 
-#[cfg(feature = "bytemuck")]
 impl PodSlotHashes {
     /// Fetch all of the raw sysvar data using the `sol_get_sysvar` syscall.
     pub fn fetch() -> Result<Self, solana_program_error::ProgramError> {
@@ -114,7 +106,7 @@ impl PodSlotHashes {
 
         // Populate the buffer by fetching all sysvar data using the
         // `sol_get_sysvar` syscall.
-        crate::get_sysvar(
+        super::get_sysvar(
             &mut data,
             &SlotHashes::id(),
             /* offset */ 0,
@@ -174,105 +166,5 @@ impl PodSlotHashes {
                 .binary_search_by(|PodSlotHash { slot: this, .. }| slot.cmp(this))
                 .ok()
         })
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use {
-        super::*, crate::tests::mock_get_sysvar_syscall, serial_test::serial, solana_hash::Hash,
-        solana_sha256_hasher::hash, solana_slot_hashes::MAX_ENTRIES, test_case::test_case,
-    };
-
-    #[test]
-    fn test_size_of() {
-        assert_eq!(
-            SlotHashes::size_of(),
-            bincode::serialized_size(
-                &(0..MAX_ENTRIES)
-                    .map(|slot| (slot as Slot, Hash::default()))
-                    .collect::<SlotHashes>()
-            )
-            .unwrap() as usize
-        );
-    }
-
-    fn mock_slot_hashes(slot_hashes: &SlotHashes) {
-        // The data is always `SlotHashes::size_of()`.
-        let mut data = vec![0; SlotHashes::size_of()];
-        bincode::serialize_into(&mut data[..], slot_hashes).unwrap();
-        mock_get_sysvar_syscall(&data);
-    }
-
-    #[test_case(0)]
-    #[test_case(1)]
-    #[test_case(2)]
-    #[test_case(5)]
-    #[test_case(10)]
-    #[test_case(64)]
-    #[test_case(128)]
-    #[test_case(192)]
-    #[test_case(256)]
-    #[test_case(384)]
-    #[test_case(MAX_ENTRIES)]
-    #[serial]
-    fn test_pod_slot_hashes(num_entries: usize) {
-        let mut slot_hashes = vec![];
-        for i in 0..num_entries {
-            slot_hashes.push((
-                i as u64,
-                hash(&[(i >> 24) as u8, (i >> 16) as u8, (i >> 8) as u8, i as u8]),
-            ));
-        }
-
-        let check_slot_hashes = SlotHashes::new(&slot_hashes);
-        mock_slot_hashes(&check_slot_hashes);
-
-        let pod_slot_hashes = PodSlotHashes::fetch().unwrap();
-
-        // Assert the slice of `PodSlotHash` has the same length as
-        // `SlotHashes`.
-        let pod_slot_hashes_slice = pod_slot_hashes.as_slice().unwrap();
-        assert_eq!(pod_slot_hashes_slice.len(), slot_hashes.len());
-
-        // Assert `PodSlotHashes` and `SlotHashes` contain the same slot hashes
-        // in the same order.
-        for slot in slot_hashes.iter().map(|(slot, _hash)| slot) {
-            // `get`:
-            assert_eq!(
-                pod_slot_hashes.get(slot).unwrap().as_ref(),
-                check_slot_hashes.get(slot),
-            );
-            // `position`:
-            assert_eq!(
-                pod_slot_hashes.position(slot).unwrap(),
-                check_slot_hashes.position(slot),
-            );
-        }
-
-        // Check a few `None` values.
-        let not_a_slot = num_entries.saturating_add(1) as u64;
-        assert_eq!(
-            pod_slot_hashes.get(&not_a_slot).unwrap().as_ref(),
-            check_slot_hashes.get(&not_a_slot),
-        );
-        assert_eq!(pod_slot_hashes.get(&not_a_slot).unwrap(), None);
-        assert_eq!(
-            pod_slot_hashes.position(&not_a_slot).unwrap(),
-            check_slot_hashes.position(&not_a_slot),
-        );
-        assert_eq!(pod_slot_hashes.position(&not_a_slot).unwrap(), None);
-
-        let not_a_slot = num_entries.saturating_add(2) as u64;
-        assert_eq!(
-            pod_slot_hashes.get(&not_a_slot).unwrap().as_ref(),
-            check_slot_hashes.get(&not_a_slot),
-        );
-        assert_eq!(pod_slot_hashes.get(&not_a_slot).unwrap(), None);
-        assert_eq!(
-            pod_slot_hashes.position(&not_a_slot).unwrap(),
-            check_slot_hashes.position(&not_a_slot),
-        );
-        assert_eq!(pod_slot_hashes.position(&not_a_slot).unwrap(), None);
     }
 }

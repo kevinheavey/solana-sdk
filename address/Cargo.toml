@@ -55,27 +55,5 @@ solana-sha256-hasher = { workspace = true, features = ["sha2"], optional = true 
 solana-define-syscall = { workspace = true, optional = true }
 solana-sha256-hasher = { workspace = true, optional = true }
 
-[dev-dependencies]
-anyhow = { workspace = true }
-solana-account-info = { path = "../account-info" }
-solana-address = { path = ".", features = [
-    "atomic",
-    "borsh",
-    "curve25519",
-    "decode",
-    "dev-context-only-utils",
-    "error",
-    "sanitize",
-    "std",
-    "syscalls"
-] }
-solana-cpi = { path = "../cpi" }
-solana-hash = { workspace = true }
-solana-instruction = { path = "../instruction", features = ["borsh"] }
-solana-program-error = { workspace = true, features = ["borsh"] }
-solana-system-interface = { path = "../system-interface", features = ["bincode"] }
-strum = { workspace = true }
-strum_macros = { workspace = true }
-
 [lints]
 workspace = true

@@ -64,7 +64,6 @@ members = [
     "slot-history",
     "stable-layout",
     "system-interface",
-    "sysvar",
     "sysvar-id",
     "transaction-error",
     "validator-exit",
@@ -241,7 +240,6 @@ solana-slot-hashes = { path = "slot-hashes", version = "3.0.0" }
 solana-slot-history = { path = "slot-history", version = "3.0.0" }
 solana-stable-layout = { path = "stable-layout", version = "3.0.0" }
 solana-system-interface = { path = "system-interface", version = "2.0" }
-solana-sysvar = { path = "sysvar", version = "3.0.0" }
 solana-sysvar-id = { path = "sysvar-id", version = "3.0.0" }
 solana-transaction-error = { path = "transaction-error", version = "3.0.0" }
 solana-validator-exit = { path = "validator-exit", version = "3.0.0" }

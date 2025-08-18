@@ -1,16 +1,13 @@
 //! This sysvar is deprecated and unused.
-#[cfg(feature = "bincode")]
-use crate::SysvarSerialize;
-#[cfg(feature = "serde")]
+use super::SysvarSerialize;
 use serde_derive::{Deserialize, Serialize};
 pub use solana_sdk_ids::sysvar::rewards::{check_id, id, ID};
-use {crate::Sysvar, solana_sysvar_id::impl_sysvar_id};
+use {super::Sysvar, solana_sysvar_id::impl_sysvar_id};
 
 impl_sysvar_id!(Rewards);
 
 #[repr(C)]
-#[cfg_attr(feature = "serde", derive(Deserialize, Serialize))]
-#[derive(Debug, Default, PartialEq)]
+#[derive(Debug, Default, PartialEq, Deserialize, Serialize)]
 pub struct Rewards {
     pub validator_point_value: f64,
     pub unused: f64,
@@ -24,5 +21,4 @@ impl Rewards {
     }
 }
 impl Sysvar for Rewards {}
-#[cfg(feature = "bincode")]
 impl SysvarSerialize for Rewards {}

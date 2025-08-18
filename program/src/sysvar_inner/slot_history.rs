@@ -47,9 +47,8 @@
 //! # Ok::<(), anyhow::Error>(())
 //! ```
 
-use crate::Sysvar;
-#[cfg(feature = "bincode")]
-use crate::SysvarSerialize;
+use super::Sysvar;
+use super::SysvarSerialize;
 pub use {
     solana_account_info::AccountInfo,
     solana_program_error::ProgramError,
@@ -57,7 +56,6 @@ pub use {
     solana_slot_history::SlotHistory,
 };
 impl Sysvar for SlotHistory {}
-#[cfg(feature = "bincode")]
 impl SysvarSerialize for SlotHistory {
     // override
     fn size_of() -> usize {

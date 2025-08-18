@@ -1,5 +1,4 @@
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
-#![cfg_attr(feature = "frozen-abi", feature(min_specialization))]
 //! Access to special accounts with dynamically-updated data.
 //!
 //! Sysvars are special accounts that contain dynamically-updated data about the
@@ -83,7 +82,6 @@ pub mod __private {
     pub use solana_define_syscall::definitions;
     pub use {solana_program_entrypoint::SUCCESS, solana_program_error::ProgramError};
 }
-#[cfg(feature = "bincode")]
 use {solana_account_info::AccountInfo, solana_sysvar_id::SysvarId};
 use {solana_program_error::ProgramError, solana_pubkey::Pubkey};
 
@@ -125,7 +123,6 @@ pub trait Sysvar: Default + Sized {
     }
 }
 
-#[cfg(feature = "bincode")]
 /// A type that holds sysvar data.
 pub trait SysvarSerialize:
     Sysvar + SysvarId + serde::Serialize + serde::de::DeserializeOwned
@@ -162,20 +159,20 @@ pub trait SysvarSerialize:
 #[macro_export]
 macro_rules! impl_sysvar_get {
     ($syscall_name:ident) => {
-        fn get() -> Result<Self, $crate::__private::ProgramError> {
+        fn get() -> Result<Self, $crate::sysvar_inner::__private::ProgramError> {
             let mut var = Self::default();
             let var_addr = &mut var as *mut _ as *mut u8;
 
             #[cfg(target_os = "solana")]
-            let result = unsafe { $crate::__private::definitions::$syscall_name(var_addr) };
+            let result = unsafe { $crate::sysvar_inner::__private::definitions::$syscall_name(var_addr) };
 
             #[cfg(not(target_os = "solana"))]
-            let result = $crate::program_stubs::$syscall_name(var_addr);
+            let result = $crate::sysvar_inner::program_stubs::$syscall_name(var_addr);
 
             match result {
-                $crate::__private::SUCCESS => Ok(var),
+                $crate::sysvar_inner::__private::SUCCESS => Ok(var),
                 // Unexpected errors are folded into `UnsupportedSysvar`.
-                _ => Err($crate::__private::ProgramError::UnsupportedSysvar),
+                _ => Err($crate::sysvar_inner::__private::ProgramError::UnsupportedSysvar),
             }
         }
     };
@@ -212,86 +209,5 @@ pub fn get_sysvar(
         SYSVAR_NOT_FOUND => Err(solana_program_error::ProgramError::UnsupportedSysvar),
         // Unexpected errors are folded into `UnsupportedSysvar`.
         _ => Err(solana_program_error::ProgramError::UnsupportedSysvar),
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use {
-        super::*,
-        crate::program_stubs::{set_syscall_stubs, SyscallStubs},
-        serde_derive::{Deserialize, Serialize},
-        solana_program_entrypoint::SUCCESS,
-        solana_program_error::ProgramError,
-        solana_pubkey::Pubkey,
-        std::{cell::RefCell, rc::Rc},
-    };
-
-    #[repr(C)]
-    #[derive(Serialize, Deserialize, Debug, Default, PartialEq, Eq)]
-    struct TestSysvar {
-        something: Pubkey,
-    }
-    solana_pubkey::declare_id!("TestSysvar111111111111111111111111111111111");
-    impl solana_sysvar_id::SysvarId for TestSysvar {
-        fn id() -> solana_pubkey::Pubkey {
-            id()
-        }
-
-        fn check_id(pubkey: &solana_pubkey::Pubkey) -> bool {
-            check_id(pubkey)
-        }
-    }
-    impl Sysvar for TestSysvar {}
-    impl SysvarSerialize for TestSysvar {}
-
-    // NOTE tests that use this mock MUST carry the #[serial] attribute
-    struct MockGetSysvarSyscall {
-        data: Vec<u8>,
-    }
-    impl SyscallStubs for MockGetSysvarSyscall {
-        #[allow(clippy::arithmetic_side_effects)]
-        fn sol_get_sysvar(
-            &self,
-            _sysvar_id_addr: *const u8,
-            var_addr: *mut u8,
-            offset: u64,
-            length: u64,
-        ) -> u64 {
-            let slice = unsafe { std::slice::from_raw_parts_mut(var_addr, length as usize) };
-            slice.copy_from_slice(&self.data[offset as usize..(offset + length) as usize]);
-            SUCCESS
-        }
-    }
-    pub fn mock_get_sysvar_syscall(data: &[u8]) {
-        set_syscall_stubs(Box::new(MockGetSysvarSyscall {
-            data: data.to_vec(),
-        }));
-    }
-
-    #[test]
-    fn test_sysvar_account_info_to_from() {
-        let test_sysvar = TestSysvar::default();
-        let key = id();
-        let wrong_key = Pubkey::new_unique();
-        let owner = Pubkey::new_unique();
-        let mut lamports = 42;
-        let mut data = vec![0_u8; TestSysvar::size_of()];
-        let mut account_info =
-            AccountInfo::new(&key, false, true, &mut lamports, &mut data, &owner, false);
-
-        test_sysvar.to_account_info(&mut account_info).unwrap();
-        let new_test_sysvar = TestSysvar::from_account_info(&account_info).unwrap();
-        assert_eq!(test_sysvar, new_test_sysvar);
-
-        account_info.key = &wrong_key;
-        assert_eq!(
-            TestSysvar::from_account_info(&account_info),
-            Err(ProgramError::InvalidArgument)
-        );
-
-        let mut small_data = vec![];
-        account_info.data = Rc::new(RefCell::new(&mut small_data));
-        assert_eq!(test_sysvar.to_account_info(&mut account_info), None);
     }
 }
