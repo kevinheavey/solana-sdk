@@ -61,7 +61,7 @@
 //! use solana_instruction::Instruction;
 //! use solana_keypair::Keypair;
 //! use solana_message::Message;
-//! use solana_program::pubkey::Pubkey;
+//! use crate::program::pubkey::Pubkey;
 //! use solana_rpc_client::rpc_client::RpcClient;
 //! use solana_signer::Signer;
 //! use solana_transaction::Transaction;
@@ -112,24 +112,24 @@
 
 use {
     crate::signature_inner::Signature,
-    solana_program::instruction_inner::Instruction,
-    solana_program::message_inner::{
+    crate::program::instruction_inner::Instruction,
+    crate::program::message_inner::{
         compiled_instruction::CompiledInstruction, inline_nonce::is_advance_nonce_instruction_data,
         Message,
     },
-    solana_program::pubkey::Pubkey,
-    solana_program::sanitize_inner::{Sanitize, SanitizeError},
-    solana_program::sdk_ids::system_program,
-    solana_program::transaction_error_inner::{TransactionError, TransactionResult as Result},
+    crate::program::pubkey::Pubkey,
+    crate::program::sanitize_inner::{Sanitize, SanitizeError},
+    crate::program::sdk_ids::system_program,
+    crate::program::transaction_error_inner::{TransactionError, TransactionResult as Result},
     std::result,
 };
 use {
     crate::signer_inner::{signers::Signers, SignerError},
-    solana_program::hash_inner::Hash,
+    crate::program::hash_inner::Hash,
 };
 use {
     serde_derive::{Deserialize, Serialize},
-    solana_program::short_vec,
+    crate::program::short_vec,
 };
 
 pub mod sanitized;
@@ -218,7 +218,7 @@ impl Transaction {
     /// use solana_instruction::Instruction;
     /// use solana_keypair::Keypair;
     /// use solana_message::Message;
-    /// use solana_program::pubkey::Pubkey;
+    /// use crate::program::pubkey::Pubkey;
     /// use solana_rpc_client::rpc_client::RpcClient;
     /// use solana_signer::Signer;
     /// use solana_transaction::Transaction;
@@ -296,7 +296,7 @@ impl Transaction {
     /// use solana_instruction::Instruction;
     /// use solana_keypair::Keypair;
     /// use solana_message::Message;
-    /// use solana_program::pubkey::Pubkey;
+    /// use crate::program::pubkey::Pubkey;
     /// use solana_rpc_client::rpc_client::RpcClient;
     /// use solana_signer::Signer;
     /// use solana_transaction::Transaction;
@@ -374,7 +374,7 @@ impl Transaction {
     /// use solana_instruction::Instruction;
     /// use solana_keypair::Keypair;
     /// use solana_message::Message;
-    /// use solana_program::pubkey::Pubkey;
+    /// use crate::program::pubkey::Pubkey;
     /// use solana_rpc_client::rpc_client::RpcClient;
     /// use solana_signer::Signer;
     /// use solana_transaction::Transaction;
@@ -449,7 +449,7 @@ impl Transaction {
     /// use solana_instruction::Instruction;
     /// use solana_keypair::Keypair;
     /// use solana_message::Message;
-    /// use solana_program::pubkey::Pubkey;
+    /// use crate::program::pubkey::Pubkey;
     /// use solana_rpc_client::rpc_client::RpcClient;
     /// use solana_signer::Signer;
     /// use solana_transaction::Transaction;
@@ -656,7 +656,7 @@ impl Transaction {
     /// use solana_instruction::Instruction;
     /// use solana_keypair::Keypair;
     /// use solana_message::Message;
-    /// use solana_program::pubkey::Pubkey;
+    /// use crate::program::pubkey::Pubkey;
     /// use solana_rpc_client::rpc_client::RpcClient;
     /// use solana_signer::Signer;
     /// use solana_transaction::Transaction;
@@ -793,7 +793,7 @@ impl Transaction {
     /// use solana_instruction::Instruction;
     /// use solana_keypair::Keypair;
     /// use solana_message::Message;
-    /// use solana_program::pubkey::Pubkey;
+    /// use crate::program::pubkey::Pubkey;
     /// use solana_rpc_client::rpc_client::RpcClient;
     /// use solana_signer::Signer;
     /// use solana_transaction::Transaction;

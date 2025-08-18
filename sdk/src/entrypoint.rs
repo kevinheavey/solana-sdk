@@ -4,4 +4,4 @@
 //!
 //! [`bpf_loader`]: crate::bpf_loader
 
-pub use solana_program::entrypoint::*;
+pub use crate::program::entrypoint::*;

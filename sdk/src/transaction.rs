@@ -9,7 +9,7 @@ pub use crate::transaction_inner::{
     Transaction, TransactionVerificationMode,
 };
 #[deprecated(since = "2.2.0", note = "Use solana_transaction_error crate instead")]
-pub use solana_program::transaction_error_inner::{
+pub use crate::program::transaction_error_inner::{
     AddressLoaderError, SanitizeMessageError, TransactionError, TransactionResult as Result,
     TransportError, TransportResult,
 };

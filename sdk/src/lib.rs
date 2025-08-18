@@ -34,23 +34,22 @@
 // Allows macro expansion of `use ::solana_sdk::*` to work within this crate
 extern crate self as solana_sdk;
 
+#[cfg(feature = "borsh")]
+pub use crate::program::borsh1;
+#[deprecated(since = "2.2.0", note = "Use `solana-message` crate instead")]
+pub use crate::program::message_inner as message;
+#[cfg(not(target_os = "solana"))]
+pub use crate::program::program_stubs;
+pub use crate::program::{
+    account_info, big_mod_exp, blake3, bpf_loader, bpf_loader_deprecated, clock, config,
+    debug_account_data, ed25519_program, epoch_rewards, epoch_schedule, fee_calculator,
+    incinerator, instruction, keccak, lamports, native_token, program_error,
+    program_option, program_pack, rent, secp256k1_program, serialize_utils, slot_hashes,
+    slot_history, stable_layout, syscalls, sysvar,
+};
 #[cfg(feature = "full")]
 #[deprecated(since = "2.2.0", note = "Use `solana-signer` crate instead")]
 pub use crate::signer_inner::signers;
-#[cfg(feature = "borsh")]
-pub use solana_program::borsh1;
-#[deprecated(since = "2.2.0", note = "Use `solana-message` crate instead")]
-pub use solana_program::message_inner as message;
-#[cfg(not(target_os = "solana"))]
-pub use solana_program::program_stubs;
-pub use solana_program::{
-    account_info, big_mod_exp, blake3, bpf_loader, bpf_loader_deprecated, clock, config,
-    custom_heap_default, custom_panic_default, debug_account_data, declare_deprecated_sysvar_id,
-    declare_sysvar_id, ed25519_program, epoch_rewards, epoch_schedule, fee_calculator,
-    impl_sysvar_get, incinerator, instruction, keccak, lamports, msg, native_token, program,
-    program_error, program_option, program_pack, rent, secp256k1_program, serialize_utils,
-    slot_hashes, slot_history, stable_layout, syscalls, sysvar, unchecked_div_by_const,
-};
 pub mod entrypoint;
 pub mod entrypoint_deprecated;
 pub mod epoch_info_inner;
@@ -72,6 +71,7 @@ mod keypair_inner;
 pub mod offchain_message_inner;
 pub mod packet_inner;
 pub mod presigner_inner;
+pub mod program;
 mod seed_derivable_inner;
 mod seed_phrase_inner;
 pub mod serde_inner;
@@ -85,6 +85,14 @@ pub mod transaction;
 mod transaction_inner;
 pub mod transport;
 
+#[deprecated(since = "2.1.0", note = "Use `solana-program-memory` crate instead")]
+pub use crate::program::program_memory;
+#[deprecated(since = "2.1.0", note = "Use `solana-sanitize` crate instead")]
+pub use crate::program::sanitize_inner as sanitize;
+#[deprecated(since = "2.1.0", note = "Use `solana-serde-varint` crate instead")]
+pub use crate::program::serde_varint_inner as serde_varint;
+#[deprecated(since = "2.1.0", note = "Use `solana-short-vec` crate instead")]
+pub use crate::program::short_vec;
 #[deprecated(since = "2.1.0", note = "Use `solana-account` crate instead")]
 pub use account_inner as account;
 #[deprecated(
@@ -92,6 +100,8 @@ pub use account_inner as account;
     note = "Use `solana_account::state_traits` crate instead"
 )]
 pub use account_inner::state_traits as account_utils;
+#[deprecated(since = "2.2.0", note = "Use `solana-epoch-info` crate instead")]
+pub use epoch_info_inner as epoch_info;
 #[deprecated(
     since = "2.2.0",
     note = "Use `solana-epoch-rewards-hasher` crate instead"
@@ -111,18 +121,6 @@ pub use message::inner_instruction;
 pub use offchain_message_inner as offchain_message;
 #[deprecated(since = "2.2.0", note = "Use `solana-serde` crate instead")]
 pub use serde_inner as deserialize_utils;
-#[deprecated(since = "2.2.0", note = "Use `solana-epoch-info` crate instead")]
-pub use epoch_info_inner as epoch_info;
-#[deprecated(since = "2.1.0", note = "Use `solana-program-memory` crate instead")]
-pub use solana_program::program_memory;
-#[deprecated(since = "2.1.0", note = "Use `solana-sanitize` crate instead")]
-pub use solana_program::sanitize_inner as sanitize;
-#[deprecated(since = "2.1.0", note = "Use `solana-serde-varint` crate instead")]
-pub use solana_program::serde_varint_inner as serde_varint;
-#[deprecated(since = "2.1.0", note = "Use `solana-short-vec` crate instead")]
-pub use solana_program::short_vec;
-/// Same as `declare_id` except report that this id has been deprecated.
-pub use solana_sdk_macro::declare_deprecated_id;
 /// Convenience macro to declare a static public key and functions to interact with it.
 ///
 /// Input: a single literal base58 string representation of a program's id

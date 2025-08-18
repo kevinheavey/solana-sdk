@@ -1,5 +1,5 @@
 use {
-    siphasher::sip::SipHasher13, solana_program::hash_inner::Hash, solana_program::pubkey::Pubkey,
+    siphasher::sip::SipHasher13, crate::program::hash_inner::Hash, crate::program::pubkey::Pubkey,
     std::hash::Hasher,
 };
 

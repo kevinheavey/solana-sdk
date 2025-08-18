@@ -2,7 +2,7 @@
 use crate::account_inner::{
     Account, AccountSharedData, InheritableAccountFields, DUMMY_INHERITABLE_ACCOUNT_FIELDS,
 };
-pub use solana_program::sdk_ids::native_loader::{check_id, id, ID};
+pub use crate::program::sdk_ids::native_loader::{check_id, id, ID};
 
 /// Create an executable account with the given shared object name.
 pub fn create_loadable_account_with_fields(

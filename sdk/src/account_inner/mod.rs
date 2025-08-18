@@ -3,13 +3,13 @@
 
 use serde::ser::{Serialize, Serializer};
 
-use solana_program::sysvar_inner::SysvarSerialize;
+use crate::program::sysvar_inner::SysvarSerialize;
 use {
     super::account_info::{debug_account_data::*, AccountInfo},
     super::clock::{Epoch, INITIAL_RENT_EPOCH},
-    solana_program::instruction_error_inner::LamportsError,
-    solana_program::pubkey::Pubkey,
-    solana_program::sdk_ids::{bpf_loader, bpf_loader_deprecated, bpf_loader_upgradeable, loader_v4},
+    crate::program::instruction_error_inner::LamportsError,
+    crate::program::pubkey::Pubkey,
+    crate::program::sdk_ids::{bpf_loader, bpf_loader_deprecated, bpf_loader_upgradeable, loader_v4},
     std::{
         cell::{Ref, RefCell},
         fmt,
@@ -47,7 +47,7 @@ mod account_serialize {
         super::super::clock::Epoch,
         super::ReadableAccount,
         serde::{ser::Serializer, Serialize},
-        solana_program::pubkey::Pubkey,
+        crate::program::pubkey::Pubkey,
     };
     #[repr(C)]
     #[derive(serde_derive::Serialize)]
@@ -686,7 +686,7 @@ pub fn create_account_with_fields<S: SysvarSerialize>(
     (lamports, rent_epoch): InheritableAccountFields,
 ) -> Account {
     let data_len = S::size_of().max(bincode::serialized_size(sysvar).unwrap() as usize);
-    let mut account = Account::new(lamports, data_len, &solana_program::sdk_ids::sysvar::id());
+    let mut account = Account::new(lamports, data_len, &crate::program::sdk_ids::sysvar::id());
     to_account::<S, Account>(sysvar, &mut account).unwrap();
     account.rent_epoch = rent_epoch;
     account

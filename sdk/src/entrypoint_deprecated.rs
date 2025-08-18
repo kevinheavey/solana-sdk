@@ -7,4 +7,4 @@
 //!
 //! [`bpf_loader_deprecated`]: crate::bpf_loader_deprecated
 
-pub use solana_program::entrypoint_deprecated::*;
+pub use crate::program::entrypoint_deprecated::*;

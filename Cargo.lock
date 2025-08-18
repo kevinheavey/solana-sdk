@@ -2229,36 +2229,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-program"
-version = "3.0.0"
-dependencies = [
- "base64 0.22.1",
- "bincode",
- "bitflags 2.8.0",
- "blake3",
- "borsh",
- "bv",
- "bytemuck",
- "bytemuck_derive",
- "curve25519-dalek",
- "five8",
- "five8_const",
- "k256",
- "lazy_static",
- "log",
- "memoffset",
- "num-bigint",
- "num-traits",
- "rand",
- "serde",
- "serde_derive",
- "sha2",
- "sha3",
- "solana-sdk-macro",
- "thiserror",
-]
-
-[[package]]
 name = "solana-reward-info"
 version = "3.0.0"
 dependencies = [
@@ -2272,14 +2242,28 @@ dependencies = [
 name = "solana-sdk"
 version = "2.3.0"
 dependencies = [
+ "base64 0.22.1",
  "bincode",
  "bitflags 2.8.0",
+ "blake3",
+ "borsh",
  "bs58",
+ "bv",
+ "bytemuck",
+ "bytemuck_derive",
+ "curve25519-dalek",
  "derivation-path",
  "ed25519-dalek",
  "ed25519-dalek-bip32",
  "five8",
+ "five8_const",
  "hmac",
+ "k256",
+ "lazy_static",
+ "log",
+ "memoffset",
+ "num-bigint",
+ "num-traits",
  "num_enum",
  "pbkdf2",
  "qstring",
@@ -2289,8 +2273,8 @@ dependencies = [
  "serde_bytes",
  "serde_derive",
  "sha2",
+ "sha3",
  "siphasher",
- "solana-program",
  "solana-sdk-macro",
  "thiserror",
  "uriparse",

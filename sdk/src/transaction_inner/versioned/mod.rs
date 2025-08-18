@@ -4,16 +4,16 @@ use crate::signer_inner::{signers::Signers, SignerError};
 use {
     super::Transaction,
     crate::signature_inner::Signature,
-    solana_program::message_inner::{
+    crate::program::message_inner::{
         inline_nonce::is_advance_nonce_instruction_data, VersionedMessage,
     },
-    solana_program::sanitize_inner::SanitizeError,
-    solana_program::sdk_ids::system_program,
+    crate::program::sanitize_inner::SanitizeError,
+    crate::program::sdk_ids::system_program,
     std::cmp::Ordering,
 };
 use {
     serde_derive::{Deserialize, Serialize},
-    solana_program::short_vec,
+    crate::program::short_vec,
 };
 
 pub mod sanitized;
@@ -162,7 +162,7 @@ impl VersionedTransaction {
     /// Verify the transaction and hash its message
     pub fn verify_and_hash_message(
         &self,
-    ) -> solana_program::transaction_error_inner::TransactionResult<solana_program::hash_inner::Hash>
+    ) -> crate::program::transaction_error_inner::TransactionResult<crate::program::hash_inner::Hash>
     {
         let message_bytes = self.message.serialize();
         if !self
@@ -170,7 +170,7 @@ impl VersionedTransaction {
             .iter()
             .all(|verify_result| *verify_result)
         {
-            Err(solana_program::transaction_error_inner::TransactionError::SignatureFailure)
+            Err(crate::program::transaction_error_inner::TransactionError::SignatureFailure)
         } else {
             Ok(VersionedMessage::hash_raw_message(&message_bytes))
         }

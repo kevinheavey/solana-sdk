@@ -29,6 +29,19 @@ borsh = []
 dev-context-only-utils = []
 
 [dependencies]
+borsh = { workspace = true }
+bytemuck = { workspace = true }
+bytemuck_derive = { workspace = true }
+bv = { workspace = true, features = ["serde"] }
+curve25519-dalek = { workspace = true }
+five8_const = { workspace = true }
+log = { workspace = true }
+memoffset = { workspace = true }
+num-traits = { workspace = true }
+rand = { workspace = true }
+serde = { workspace = true }
+serde_derive = { workspace = true }
+solana-sdk-macro = { workspace = true }
 bincode = { workspace = true }
 bitflags = { workspace = true }
 bs58 = { workspace = true }
@@ -40,17 +53,24 @@ hmac = { workspace = true }
 num_enum = { workspace = true }
 pbkdf2 = { workspace = true }
 qstring = { workspace = true }
-rand = { workspace = true }
-serde = { workspace = true }
 serde-big-array = { workspace = true }
 serde_bytes = { workspace = true }
-serde_derive = { workspace = true }
 sha2 = { workspace = true }
 siphasher = { workspace = true }
-solana-program = { workspace = true }
-solana-sdk-macro = { workspace = true }
 thiserror = { workspace = true }
 uriparse = { workspace = true }
+
+[target.'cfg(not(target_os = "solana"))'.dependencies]
+base64 = { workspace = true }
+bincode = { workspace = true }
+bitflags = { workspace = true }
+blake3 = { workspace = true, features = ["traits-preview"] }
+k256 = { workspace = true }
+lazy_static = { workspace = true }
+num-bigint = { workspace = true }
+sha2 = { workspace = true }
+sha3 = { workspace = true }
+thiserror = { workspace = true }
 
 [lints]
 workspace = true

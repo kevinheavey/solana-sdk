@@ -2,9 +2,9 @@
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 use {
     core::fmt,
-    solana_program::pubkey::Pubkey,
+    crate::program::pubkey::Pubkey,
     crate::signature_inner::Signature,
-    solana_program::transaction_error_inner::TransactionError,
+    crate::program::transaction_error_inner::TransactionError,
     std::{
         error,
         fs::{self, File, OpenOptions},

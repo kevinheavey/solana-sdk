@@ -1,6 +1,6 @@
 use {
     super::versioned::sanitized::SanitizedVersionedTransaction, crate::signature_inner::Signature,
-    solana_program::message_inner::VersionedMessage, solana_program::pubkey::Pubkey,
+    crate::program::message_inner::VersionedMessage, crate::program::pubkey::Pubkey,
 };
 
 /// Simple vote transaction meets these conditions:
@@ -43,6 +43,6 @@ pub fn is_simple_vote_transaction_impl<'a>(
         && instruction_programs
             .next()
             .xor(instruction_programs.next())
-            .map(|program_id| program_id == &solana_program::sdk_ids::vote::ID)
+            .map(|program_id| program_id == &crate::program::sdk_ids::vote::ID)
             .unwrap_or(false)
 }

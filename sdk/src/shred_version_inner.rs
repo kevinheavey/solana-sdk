@@ -3,8 +3,8 @@
 //! [shred]: https://solana.com/docs/terminology#shred
 
 use {
-    crate::hard_forks_inner::HardForks, solana_program::hash_inner::Hash,
-    solana_program::sha256_hasher_inner::hashv,
+    crate::hard_forks_inner::HardForks, crate::program::hash_inner::Hash,
+    crate::program::sha256_hasher_inner::hashv,
 };
 
 pub fn version_from_hash(hash: &Hash) -> u16 {

@@ -28,7 +28,7 @@ impl Default for Signature {
     }
 }
 
-impl solana_program::sanitize_inner::Sanitize for Signature {}
+impl crate::program::sanitize_inner::Sanitize for Signature {}
 
 impl Signature {
     /// Return a reference to the `Signature`'s byte array.

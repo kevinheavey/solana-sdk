@@ -4,8 +4,8 @@ use {
     crate::signature_inner::Signature,
     crate::signer_inner::Signer,
     num_enum::{IntoPrimitive, TryFromPrimitive},
-    solana_program::hash_inner::Hash,
-    solana_program::sanitize_inner::SanitizeError,
+    crate::program::hash_inner::Hash,
+    crate::program::sanitize_inner::SanitizeError,
 };
 
 /// Check if given bytes contain only printable ASCII characters
@@ -36,9 +36,9 @@ pub mod v0 {
     use {
         super::{is_printable_ascii, is_utf8, MessageFormat, OffchainMessage as Base},
         crate::packet_inner::PACKET_DATA_SIZE,
-        solana_program::hash::Hash,
-        solana_program::sanitize_inner::SanitizeError,
-        solana_program::sha256_hasher_inner::Hasher,
+        crate::program::hash::Hash,
+        crate::program::sanitize_inner::SanitizeError,
+        crate::program::sha256_hasher_inner::Hasher,
     };
 
     /// OffchainMessage Version 0.
@@ -230,7 +230,7 @@ impl OffchainMessage {
     /// Verify that the message signature is valid for the given public key
     pub fn verify(
         &self,
-        signer: &solana_program::pubkey::Pubkey,
+        signer: &crate::program::pubkey::Pubkey,
         signature: &Signature,
     ) -> Result<bool, SanitizeError> {
         Ok(signature.verify(signer.as_ref(), &self.serialize()?))
