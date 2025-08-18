@@ -88,11 +88,11 @@ pub mod solana_rpc_client_api {
 
 pub mod solana_rpc_client_nonce_utils {
     use {
-        super::solana_sdk::{account::ReadableAccount, account_utils::StateMut, pubkey::Pubkey},
-        solana_nonce::{
+        super::super::nonce_inner::{
             state::{Data, DurableNonce},
             versions::Versions,
         },
+        super::solana_sdk::{account::ReadableAccount, account_utils::StateMut, pubkey::Pubkey},
     };
 
     #[derive(thiserror::Error, Debug)]
@@ -184,11 +184,11 @@ pub mod solana_keypair {
 
 pub mod solana_transaction {
     use {
+        super::super::instruction::Instruction,
         super::super::message_inner::Message,
         super::solana_signer::{signers::Signers, SignerError},
         serde_derive::Serialize,
         solana_hash::Hash,
-        super::super::instruction::Instruction,
         solana_pubkey::Pubkey,
     };
 
@@ -275,20 +275,22 @@ pub mod solana_transaction {
 /// programs.
 pub mod solana_sdk {
     pub use {
-        super::super::message_inner as message,
-        super::{
-            solana_account::{self as account, state_traits as account_utils},
-            solana_signer::{self as signer, signers},
-        },
         super::super::clock_inner::Clock,
-        solana_hash as hash, super::super::instruction, super::super::keccak_hasher_inner as keccak,
-        solana_nonce as nonce,
-        solana_pubkey::{self as pubkey, Pubkey},
+        super::super::instruction,
+        super::super::keccak_hasher_inner as keccak,
+        super::super::message_inner as message,
+        super::super::nonce_inner as nonce,
         super::super::sdk_ids::{
             system_program,
             sysvar::{self, clock},
         },
         super::super::system_interface_inner::instruction as system_instruction,
+        super::{
+            solana_account::{self as account, state_traits as account_utils},
+            solana_signer::{self as signer, signers},
+        },
+        solana_hash as hash,
+        solana_pubkey::{self as pubkey, Pubkey},
     };
 
     pub mod signature {

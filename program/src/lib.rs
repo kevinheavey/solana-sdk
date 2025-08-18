@@ -509,6 +509,7 @@ pub mod last_restart_slot_inner;
 pub mod message_inner;
 pub mod msg_inner;
 pub mod native_token_inner;
+pub mod nonce_inner;
 pub mod program_entrypoint_inner;
 pub mod program_memory_inner;
 pub mod program_option_inner;

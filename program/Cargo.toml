@@ -75,7 +75,6 @@ lazy_static = { workspace = true }
 num-bigint = { workspace = true }
 sha3 = { workspace = true }
 solana-logger = { workspace = true }
-solana-nonce = { workspace = true }
 solana-sanitize = { workspace = true }
 thiserror = { workspace = true }
 

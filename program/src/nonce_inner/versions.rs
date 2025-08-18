@@ -1,16 +1,12 @@
 //! State for durable transaction nonces.
 
 use {
-    crate::state::{Data, DurableNonce, State},
+    super::state::{Data, DurableNonce, State},
     solana_hash::Hash,
     solana_pubkey::Pubkey,
     std::collections::HashSet,
 };
 
-#[cfg_attr(
-    feature = "serde",
-    derive(serde_derive::Deserialize, serde_derive::Serialize)
-)]
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum Versions {
     Legacy(Box<State>),

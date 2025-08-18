@@ -2514,20 +2514,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-nonce"
-version = "3.0.0"
-dependencies = [
- "bincode",
- "serde",
- "serde_derive",
- "solana-fee-calculator",
- "solana-hash",
- "solana-nonce",
- "solana-pubkey",
- "solana-sha256-hasher",
-]
-
-[[package]]
 name = "solana-package-metadata"
 version = "3.0.0"
 dependencies = [
@@ -2588,7 +2574,6 @@ dependencies = [
  "solana-frozen-abi-macro",
  "solana-hash",
  "solana-logger",
- "solana-nonce",
  "solana-program-error",
  "solana-pubkey",
  "solana-sanitize",
