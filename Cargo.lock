@@ -2505,16 +2505,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-blake3-hasher"
-version = "3.0.0"
-dependencies = [
- "blake3",
- "solana-blake3-hasher",
- "solana-define-syscall",
- "solana-hash",
-]
-
-[[package]]
 name = "solana-bn254"
 version = "3.0.0"
 dependencies = [
@@ -2884,7 +2874,6 @@ dependencies = [
  "serde_derive",
  "sha3",
  "solana-account-info",
- "solana-blake3-hasher",
  "solana-clock",
  "solana-define-syscall",
  "solana-epoch-rewards",

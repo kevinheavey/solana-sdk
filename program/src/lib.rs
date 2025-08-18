@@ -492,6 +492,7 @@ pub mod sysvar;
 
 pub mod address_lookup_table_interface_inner;
 pub mod big_mod_exp_inner;
+pub mod blake3_hasher_inner;
 pub mod borsh_inner;
 pub mod cpi_inner;
 pub mod example_mocks_inner;
@@ -507,7 +508,7 @@ pub use big_mod_exp_inner as big_mod_exp;
 #[deprecated(since = "2.2.0", note = "Use `solana-keccak-hasher` crate instead")]
 pub use keccak_hasher_inner as keccak;
 #[deprecated(since = "2.2.0", note = "Use `solana-blake3-hasher` crate instead")]
-pub use solana_blake3_hasher as blake3;
+pub use blake3_hasher_inner as blake3;
 #[cfg(feature = "borsh")]
 #[deprecated(since = "2.1.0", note = "Use `solana-borsh` crate instead")]
 pub use borsh_inner::v1 as borsh1;

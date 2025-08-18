@@ -4,7 +4,6 @@ members = [
     "address",
     "atomic-u64",
     "bincode",
-    "blake3-hasher",
     "bn254",
     "clock",
     "cluster-type",
@@ -171,7 +170,6 @@ solana-account-info = { path = "account-info", version = "3.0.0" }
 solana-address = { path = "address", version = "1.0.0" }
 solana-atomic-u64 = { path = "atomic-u64", version = "3.0.0" }
 solana-bincode = { path = "bincode", version = "3.0.0" }
-solana-blake3-hasher = { path = "blake3-hasher", version = "3.0.0" }
 solana-bn254 = { path = "bn254", version = "3.0.0" }
 solana-clock = { path = "clock", version = "3.0.0" }
 solana-cluster-type = { path = "cluster-type", version = "3.0.0" }
