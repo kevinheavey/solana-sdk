@@ -1,5 +1,5 @@
 use {
-    solana_fee_calculator::FeeCalculator, solana_hash::Hash, solana_pubkey::Pubkey,
+    super::super::fee_calculator_inner::FeeCalculator, solana_hash::Hash, solana_pubkey::Pubkey,
     solana_sha256_hasher::hashv,
 };
 

@@ -2433,17 +2433,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-fee-calculator"
-version = "3.0.0"
-dependencies = [
- "log",
- "serde",
- "serde_derive",
- "solana-frozen-abi",
- "solana-frozen-abi-macro",
-]
-
-[[package]]
 name = "solana-file-download"
 version = "3.0.0"
 dependencies = [
@@ -2562,6 +2551,7 @@ dependencies = [
  "bytemuck_derive",
  "k256",
  "lazy_static",
+ "log",
  "memoffset",
  "num-bigint",
  "num-traits",
@@ -2569,7 +2559,6 @@ dependencies = [
  "serde_derive",
  "sha3",
  "solana-define-syscall",
- "solana-fee-calculator",
  "solana-frozen-abi",
  "solana-frozen-abi-macro",
  "solana-hash",

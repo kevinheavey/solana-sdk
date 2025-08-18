@@ -32,7 +32,6 @@ dev-context-only-utils = []
 frozen-abi = [
     "dep:solana-frozen-abi",
     "dep:solana-frozen-abi-macro",
-    "solana-fee-calculator/frozen-abi",
     "solana-hash/frozen-abi",
     "solana-pubkey/frozen-abi",
 ]
@@ -42,12 +41,12 @@ borsh = { workspace = true, optional = true }
 bytemuck = { workspace = true }
 bytemuck_derive = { workspace = true }
 bv = { workspace = true }
+log = { workspace = true }
 memoffset = { workspace = true }
 num-traits = { workspace = true }
 serde = { workspace = true }
 serde_derive = { workspace = true }
 solana-define-syscall = { workspace = true }
-solana-fee-calculator = { workspace = true, features = ["serde"] }
 solana-frozen-abi = { workspace = true, optional = true, features = [
     "frozen-abi",
 ] }

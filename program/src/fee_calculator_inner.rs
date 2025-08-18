@@ -1,20 +1,11 @@
 //! Calculation of transaction fees.
-#![cfg_attr(feature = "frozen-abi", feature(min_specialization))]
 #![allow(clippy::arithmetic_side_effects)]
-#![no_std]
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 use log::*;
-#[cfg(feature = "frozen-abi")]
-extern crate std;
 
 #[repr(C)]
-#[cfg_attr(feature = "frozen-abi", derive(solana_frozen_abi_macro::AbiExample))]
-#[cfg_attr(
-    feature = "serde",
-    derive(serde_derive::Serialize, serde_derive::Deserialize)
-)]
-#[derive(Default, PartialEq, Eq, Clone, Copy, Debug)]
-#[cfg_attr(feature = "serde", serde(rename_all = "camelCase"))]
+#[derive(Default, PartialEq, Eq, Clone, Copy, Debug, serde_derive::Serialize, serde_derive::Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct FeeCalculator {
     /// The current cost of a signature.
     ///
@@ -32,16 +23,12 @@ impl FeeCalculator {
 }
 
 #[cfg_attr(feature = "frozen-abi", derive(solana_frozen_abi_macro::AbiExample))]
-#[cfg_attr(
-    feature = "serde",
-    derive(serde_derive::Serialize, serde_derive::Deserialize)
-)]
-#[derive(PartialEq, Eq, Clone, Debug)]
-#[cfg_attr(feature = "serde", serde(rename_all = "camelCase"))]
+#[derive(PartialEq, Eq, Clone, Debug, serde_derive::Serialize, serde_derive::Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct FeeRateGovernor {
     // The current cost of a signature  This amount may increase/decrease over time based on
     // cluster processing load.
-    #[cfg_attr(feature = "serde", serde(skip))]
+    #[serde(skip)]
     pub lamports_per_signature: u64,
 
     // The target cost of a signature when the cluster is operating around target_signatures_per_slot

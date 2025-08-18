@@ -501,6 +501,7 @@ pub mod epoch_rewards_inner;
 pub mod epoch_schedule_inner;
 pub mod epoch_stake_inner;
 pub mod example_mocks_inner;
+pub mod fee_calculator_inner;
 pub mod instruction_inner;
 pub mod instruction_error_inner;
 pub mod instructions_sysvar_inner;
@@ -552,7 +553,7 @@ pub use serialize_utils_inner as serialize_utils;
 #[deprecated(since = "2.1.0", note = "Use `solana-short-vec` crate instead")]
 pub use short_vec_inner as short_vec;
 #[deprecated(since = "2.1.0", note = "Use `solana-fee-calculator` crate instead")]
-pub use solana_fee_calculator as fee_calculator;
+pub use fee_calculator_inner as fee_calculator;
 #[deprecated(since = "2.1.0", note = "Use `solana-program-memory` crate instead")]
 pub use program_memory_inner as program_memory;
 #[deprecated(since = "2.1.0", note = "Use `solana-stable-layout` crate instead")]

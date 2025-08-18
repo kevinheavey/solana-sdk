@@ -18,14 +18,14 @@
 
 #![allow(deprecated)]
 #![allow(clippy::arithmetic_side_effects)]
+pub use super::super::sdk_ids::sysvar::recent_blockhashes::{check_id, id, ID};
 use super::SysvarSerialize;
 use serde_derive::{Deserialize, Serialize};
-pub use super::super::sdk_ids::sysvar::recent_blockhashes::{check_id, id, ID};
 use {
-    super::Sysvar,
-    solana_fee_calculator::FeeCalculator,
-    solana_hash::Hash,
+    super::super::fee_calculator_inner::FeeCalculator,
     super::super::impl_sysvar_id,
+    super::Sysvar,
+    solana_hash::Hash,
     std::{cmp::Ordering, collections::BinaryHeap, iter::FromIterator, ops::Deref},
 };
 

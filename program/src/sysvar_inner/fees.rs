@@ -20,13 +20,13 @@
 
 #![allow(deprecated)]
 
+pub use super::super::sdk_ids::sysvar::fees::{check_id, id, ID};
 use super::SysvarSerialize;
 use crate::impl_sysvar_get;
 use serde_derive::{Deserialize, Serialize};
-pub use super::super::sdk_ids::sysvar::fees::{check_id, id, ID};
 use {
-    crate::impl_deprecated_sysvar_id, super::Sysvar, solana_fee_calculator::FeeCalculator,
-    solana_sdk_macro::CloneZeroed,
+    super::super::fee_calculator_inner::FeeCalculator, super::Sysvar,
+    crate::impl_deprecated_sysvar_id, solana_sdk_macro::CloneZeroed,
 };
 
 impl_deprecated_sysvar_id!(Fees);
