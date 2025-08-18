@@ -20,8 +20,6 @@ members = [
     "instruction",
     "instruction-error",
     "loader-v2-interface",
-    "loader-v3-interface",
-    "loader-v4-interface",
     "logger",
     "msg",
     "nonce",
@@ -46,7 +44,6 @@ members = [
     "sha256-hasher",
     "signer-store",
     "stable-layout",
-    "system-interface",
     "sysvar-id",
     "validator-exit",
 ]
@@ -176,8 +173,6 @@ solana-hash = { path = "hash", version = "3.0.0", default-features = false }
 solana-instruction = { path = "instruction", version = "3.0.0", default-features = false }
 solana-instruction-error = { path = "instruction-error", version = "2.0.0" }
 solana-loader-v2-interface = { path = "loader-v2-interface", version = "3.0.0" }
-solana-loader-v3-interface = { path = "loader-v3-interface", version = "6.0.0" }
-solana-loader-v4-interface = { path = "loader-v4-interface", version = "3.0.0" }
 solana-logger = { path = "logger", version = "3.0.0" }
 solana-msg = { path = "msg", version = "3.0.0" }
 solana-nonce = { path = "nonce", version = "3.0.0" }
@@ -202,7 +197,6 @@ solana-serialize-utils = { path = "serialize-utils", version = "3.0.0" }
 solana-sha256-hasher = { path = "sha256-hasher", version = "3.0.0" }
 solana-signer-store = { path = "signer-store", version = "0.1.0" }
 solana-stable-layout = { path = "stable-layout", version = "3.0.0" }
-solana-system-interface = { path = "system-interface", version = "2.0" }
 solana-sysvar-id = { path = "sysvar-id", version = "3.0.0" }
 solana-validator-exit = { path = "validator-exit", version = "3.0.0" }
 static_assertions = "1.1.0"

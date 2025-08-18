@@ -288,7 +288,7 @@ pub mod solana_sdk {
             system_program,
             sysvar::{self, clock},
         },
-        solana_system_interface::instruction as system_instruction,
+        super::super::system_interface_inner::instruction as system_instruction,
     };
 
     pub mod signature {

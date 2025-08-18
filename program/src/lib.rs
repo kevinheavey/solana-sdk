@@ -510,6 +510,7 @@ pub mod secp256k1_recover_inner;
 pub mod short_vec_inner;
 pub mod slot_hashes_inner;
 pub mod slot_history_inner;
+pub mod system_interface_inner;
 pub mod sysvar_inner;
 pub mod transaction_error_inner;
 
