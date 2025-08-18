@@ -3,10 +3,10 @@
 use crate::signer_inner::{signers::Signers, SignerError};
 use {
     super::Transaction,
+    crate::signature_inner::Signature,
     solana_message::{inline_nonce::is_advance_nonce_instruction_data, VersionedMessage},
     solana_sanitize::SanitizeError,
     solana_sdk_ids::system_program,
-    solana_signature::Signature,
     std::cmp::Ordering,
 };
 use {
