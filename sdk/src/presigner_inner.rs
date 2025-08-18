@@ -1,8 +1,8 @@
-pub use solana_signer::PresignerError;
+pub use crate::signer_inner::PresignerError;
 use {
     solana_pubkey::Pubkey,
     solana_signature::Signature,
-    solana_signer::{Signer, SignerError},
+    crate::signer_inner::{Signer, SignerError},
 };
 
 /// A `Signer` implementation that represents a `Signature` that has been

@@ -7,4 +7,4 @@ pub use crate::keypair_inner::{
 #[deprecated(since = "2.2.0", note = "Use `solana-seed-phrase` crate instead")]
 pub use crate::seed_phrase_inner::generate_seed_from_seed_phrase_and_passphrase;
 #[deprecated(since = "2.2.0", note = "Use `solana-signer` crate instead")]
-pub use solana_signer::*;
+pub use crate::signer_inner::*;

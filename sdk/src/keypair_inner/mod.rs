@@ -6,7 +6,7 @@ use {
     solana_pubkey::Pubkey,
     crate::seed_phrase_inner::generate_seed_from_seed_phrase_and_passphrase,
     solana_signature::{error::Error as SignatureError, Signature},
-    solana_signer::{EncodableKey, EncodableKeypair, Signer, SignerError},
+    crate::signer_inner::{EncodableKey, EncodableKeypair, Signer, SignerError},
     std::{
         error,
         io::{Read, Write},

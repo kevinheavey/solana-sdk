@@ -27,7 +27,6 @@ default = [
 full = [
     "solana-signature",
     "solana-pubkey/rand",
-    "dep:solana-signer",
     "dep:solana-transaction-error",
 ]
 borsh = ["solana-program/borsh"]
@@ -84,7 +83,6 @@ solana-signature = { workspace = true, features = [
     "std",
     "verify",
 ], optional = true }
-solana-signer = { workspace = true, optional = true }
 solana-sysvar = { workspace = true, features = ["bincode"] }
 solana-time-utils = { workspace = true }
 solana-transaction-error = { workspace = true, features = [

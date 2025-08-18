@@ -1,5 +1,5 @@
 use {
-    crate::{Signer, SignerError},
+    super::{Signer, SignerError},
     solana_pubkey::Pubkey,
     solana_signature::Signature,
 };

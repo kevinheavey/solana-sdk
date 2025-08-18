@@ -1272,12 +1272,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f154ce46856750ed433c8649605bf7ed2de3bc35fd9d2a9f30cddd873c80cb08"
 
 [[package]]
-name = "hex"
-version = "0.4.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7f24254aa9a54b5c858eaee2f5bccdb46aaf0e486a595ed5fd8f86ba55232a70"
-
-[[package]]
 name = "hmac"
 version = "0.12.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3275,7 +3269,6 @@ dependencies = [
  "solana-sha256-hasher",
  "solana-short-vec",
  "solana-signature",
- "solana-signer",
  "solana-sysvar",
  "solana-time-utils",
  "solana-transaction-error",
@@ -3298,31 +3291,6 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn 2.0.98",
-]
-
-[[package]]
-name = "solana-secp256k1-program"
-version = "3.0.0"
-dependencies = [
- "anyhow",
- "bincode",
- "digest",
- "hex",
- "k256",
- "rand",
- "serde",
- "serde_derive",
- "sha3",
- "solana-account-info",
- "solana-example-mocks",
- "solana-instruction",
- "solana-instructions-sysvar",
- "solana-keccak-hasher",
- "solana-msg",
- "solana-program-error",
- "solana-sdk-ids",
- "solana-secp256k1-program",
- "solana-signature",
 ]
 
 [[package]]
@@ -3418,15 +3386,6 @@ dependencies = [
  "solana-sanitize",
  "solana-short-vec",
  "solana-signature",
-]
-
-[[package]]
-name = "solana-signer"
-version = "3.0.0"
-dependencies = [
- "solana-pubkey",
- "solana-signature",
- "solana-transaction-error",
 ]
 
 [[package]]

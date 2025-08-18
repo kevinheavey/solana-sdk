@@ -1,6 +1,6 @@
 //! Defines a transaction which supports multiple versions of messages.
 
-use solana_signer::{signers::Signers, SignerError};
+use crate::signer_inner::{signers::Signers, SignerError};
 use {
     super::Transaction,
     solana_message::{inline_nonce::is_advance_nonce_instruction_data, VersionedMessage},

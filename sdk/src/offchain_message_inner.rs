@@ -5,7 +5,7 @@ use {
     solana_hash::Hash,
     solana_sanitize::SanitizeError,
     solana_signature::Signature,
-    solana_signer::Signer,
+    crate::signer_inner::Signer,
 };
 
 /// Check if given bytes contain only printable ASCII characters

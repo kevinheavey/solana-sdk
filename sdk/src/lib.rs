@@ -50,7 +50,7 @@ pub use solana_program::{
 };
 #[cfg(feature = "full")]
 #[deprecated(since = "2.2.0", note = "Use `solana-signer` crate instead")]
-pub use solana_signer::signers;
+pub use crate::signer_inner::signers;
 pub mod entrypoint;
 pub mod entrypoint_deprecated;
 pub mod example_mocks;
@@ -76,6 +76,7 @@ pub mod serde_inner;
 pub mod shred_version_inner;
 pub mod signature;
 pub mod signer;
+pub mod signer_inner;
 pub mod transaction;
 mod transaction_inner;
 pub mod transport;

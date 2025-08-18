@@ -116,7 +116,7 @@ use {
 };
 use {
     solana_hash::Hash,
-    solana_signer::{signers::Signers, SignerError},
+    crate::signer_inner::{signers::Signers, SignerError},
 };
 use {
     solana_instruction::Instruction,
