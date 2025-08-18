@@ -80,7 +80,7 @@
 pub mod __private {
     #[cfg(target_os = "solana")]
     pub use solana_define_syscall::definitions;
-    pub use {solana_program_entrypoint::SUCCESS, solana_program_error::ProgramError};
+    pub use {super::super::program_entrypoint_inner::SUCCESS, solana_program_error::ProgramError};
 }
 use {solana_account_info::AccountInfo, solana_sysvar_id::SysvarId};
 use {solana_program_error::ProgramError, solana_pubkey::Pubkey};
@@ -204,7 +204,7 @@ pub fn get_sysvar(
     let result = crate::program_stubs::sol_get_sysvar(sysvar_id, var_addr, offset, length);
 
     match result {
-        solana_program_entrypoint::SUCCESS => Ok(()),
+        super::program_entrypoint_inner::SUCCESS => Ok(()),
         OFFSET_LENGTH_EXCEEDS_SYSVAR => Err(solana_program_error::ProgramError::InvalidArgument),
         SYSVAR_NOT_FOUND => Err(solana_program_error::ProgramError::UnsupportedSysvar),
         // Unexpected errors are folded into `UnsupportedSysvar`.

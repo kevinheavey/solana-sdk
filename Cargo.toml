@@ -30,7 +30,6 @@ members = [
     "poh-config",
     "precompile-error",
     "program",
-    "program-entrypoint",
     "program-error",
     "program-memory",
     "program-option",
@@ -192,7 +191,6 @@ solana-package-metadata-macro = { path = "package-metadata-macro", version = "3.
 solana-poh-config = { path = "poh-config", version = "3.0.0" }
 solana-precompile-error = { path = "precompile-error", version = "3.0.0" }
 solana-program = { path = "program", version = "3.0.0", default-features = false }
-solana-program-entrypoint = { path = "program-entrypoint", version = "3.0.0" }
 solana-program-error = { path = "program-error", version = "3.0.0" }
 solana-program-memory = { path = "program-memory", version = "3.0.0" }
 solana-program-option = { path = "program-option", version = "3.0.0" }

@@ -2815,7 +2815,6 @@ dependencies = [
  "solana-logger",
  "solana-msg",
  "solana-nonce",
- "solana-program-entrypoint",
  "solana-program-error",
  "solana-program-memory",
  "solana-program-option",
@@ -2836,17 +2835,6 @@ dependencies = [
  "solana-system-interface",
  "solana-sysvar-id",
  "thiserror",
-]
-
-[[package]]
-name = "solana-program-entrypoint"
-version = "3.1.0"
-dependencies = [
- "solana-account-info",
- "solana-define-syscall",
- "solana-msg",
- "solana-program-error",
- "solana-pubkey",
 ]
 
 [[package]]

@@ -50,6 +50,7 @@ serde = { workspace = true }
 serde_derive = { workspace = true }
 solana-account-info = { workspace = true, features = ["bincode"] }
 solana-clock = { workspace = true, features = ["serde", "sysvar"] }
+solana-define-syscall = { workspace = true }
 solana-fee-calculator = { workspace = true, features = ["serde"] }
 solana-frozen-abi = { workspace = true, optional = true, features = [
     "frozen-abi",
@@ -69,7 +70,6 @@ solana-instruction-error = { workspace = true, features = [
     "serde",
 ] }
 solana-msg = { workspace = true }
-solana-program-entrypoint = { workspace = true }
 solana-program-error = { workspace = true, features = ["serde"] }
 solana-program-memory = { workspace = true }
 solana-program-option = { workspace = true }
@@ -109,7 +109,6 @@ solana-sanitize = { workspace = true }
 thiserror = { workspace = true }
 
 [target.'cfg(target_os = "solana")'.dependencies]
-solana-define-syscall = { workspace = true }
 solana-stable-layout = { workspace = true }
 
 [dev-dependencies]
