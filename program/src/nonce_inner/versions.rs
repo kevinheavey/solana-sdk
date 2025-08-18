@@ -1,9 +1,9 @@
 //! State for durable transaction nonces.
 
 use {
-    super::state::{Data, DurableNonce, State},
-    solana_hash::Hash,
+    super::super::hash_inner::Hash,
     super::super::pubkey::Pubkey,
+    super::state::{Data, DurableNonce, State},
     std::collections::HashSet,
 };
 

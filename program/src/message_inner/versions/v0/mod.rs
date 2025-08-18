@@ -12,7 +12,10 @@
 pub use loaded::*;
 use serde_derive::{Deserialize, Serialize};
 use {
+    super::super::super::super::hash_inner::Hash,
     super::super::super::super::instruction_inner::Instruction,
+    super::super::super::super::pubkey::Pubkey,
+    super::super::super::super::sanitize_inner::SanitizeError,
     super::super::super::super::sdk_ids::bpf_loader_upgradeable,
     super::super::{
         super::{
@@ -23,9 +26,6 @@ use {
         },
         AccountKeys,
     },
-    solana_hash::Hash,
-    super::super::super::super::pubkey::Pubkey,
-    solana_sanitize::SanitizeError,
     std::collections::HashSet,
 };
 

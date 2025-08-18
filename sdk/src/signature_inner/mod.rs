@@ -1,11 +1,11 @@
 //! 64-byte signature type.
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 use core::convert::TryInto;
+use core::error::Error;
 use core::{
     fmt,
     str::{from_utf8_unchecked, FromStr},
 };
-use core::error::Error;
 use {
     serde_big_array::BigArray,
     serde_derive::{Deserialize, Serialize},
@@ -20,9 +20,7 @@ const MAX_BASE58_SIGNATURE_LEN: usize = 88;
 
 #[repr(transparent)]
 #[derive(Clone, Copy, Eq, PartialEq, Ord, PartialOrd, Hash, Deserialize, Serialize)]
-pub struct Signature(
-    #[serde(with = "BigArray")] [u8; SIGNATURE_BYTES],
-);
+pub struct Signature(#[serde(with = "BigArray")] [u8; SIGNATURE_BYTES]);
 
 impl Default for Signature {
     fn default() -> Self {
@@ -30,7 +28,7 @@ impl Default for Signature {
     }
 }
 
-impl solana_sanitize::Sanitize for Signature {}
+impl solana_program::sanitize_inner::Sanitize for Signature {}
 
 impl Signature {
     /// Return a reference to the `Signature`'s byte array.

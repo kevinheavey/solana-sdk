@@ -1,7 +1,7 @@
 use {
     super::versioned::{sanitized::SanitizedVersionedTransaction, VersionedTransaction},
     crate::signature_inner::Signature,
-    solana_hash::Hash,
+    solana_program::hash_inner::Hash,
     solana_program::message_inner::{
         legacy,
         v0::{self, LoadedAddresses},
@@ -12,7 +12,7 @@ use {
     solana_program::transaction_error_inner::{TransactionError, TransactionResult as Result},
     std::collections::HashSet,
 };
-use {super::Transaction, solana_sanitize::Sanitize};
+use {super::Transaction, solana_program::sanitize_inner::Sanitize};
 
 /// Maximum number of accounts that a transaction may lock.
 /// 128 was chosen because it is the minimum number of accounts

@@ -3,7 +3,7 @@
 //! [blake3]: https://github.com/BLAKE3-team/BLAKE3
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 
-pub use solana_hash::{Hash, ParseHashError, HASH_BYTES, MAX_BASE58_LEN};
+pub use super::hash_inner::{Hash, ParseHashError, HASH_BYTES, MAX_BASE58_LEN};
 
 #[derive(Clone, Default)]
 #[cfg(not(target_os = "solana"))]

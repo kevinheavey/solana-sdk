@@ -1,22 +1,13 @@
-#![no_std]
-#![cfg_attr(docsrs, feature(doc_auto_cfg))]
-#![cfg_attr(feature = "frozen-abi", feature(min_specialization))]
-#[cfg(feature = "borsh")]
 use borsh::{BorshDeserialize, BorshSchema, BorshSerialize};
-#[cfg(feature = "std")]
-extern crate std;
-#[cfg(feature = "bytemuck")]
 use bytemuck_derive::{Pod, Zeroable};
-#[cfg(feature = "serde")]
 use serde_derive::{Deserialize, Serialize};
-#[cfg(all(feature = "borsh", feature = "std"))]
 use std::string::ToString;
 use {
+    super::sanitize_inner::Sanitize,
     core::{
         fmt,
         str::{from_utf8_unchecked, FromStr},
     },
-    solana_sanitize::Sanitize,
 };
 
 /// Size of a hash in bytes.
@@ -31,16 +22,23 @@ pub const MAX_BASE58_LEN: usize = 44;
 ///
 /// [SHA-256]: https://en.wikipedia.org/wiki/SHA-2
 /// [blake3]: https://github.com/BLAKE3-team/BLAKE3
-#[cfg_attr(feature = "frozen-abi", derive(solana_frozen_abi_macro::AbiExample))]
-#[cfg_attr(
-    feature = "borsh",
-    derive(BorshSerialize, BorshDeserialize),
-    borsh(crate = "borsh")
+#[derive(
+    Clone,
+    Copy,
+    Default,
+    Eq,
+    PartialEq,
+    Ord,
+    PartialOrd,
+    Hash,
+    BorshSerialize,
+    BorshDeserialize,
+    BorshSchema,
+    Pod,
+    Zeroable,
+    Serialize,
+    Deserialize,
 )]
-#[cfg_attr(all(feature = "borsh", feature = "std"), derive(BorshSchema))]
-#[cfg_attr(feature = "bytemuck", derive(Pod, Zeroable))]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize,))]
-#[derive(Clone, Copy, Default, Eq, PartialEq, Ord, PartialOrd, Hash)]
 #[repr(transparent)]
 pub struct Hash(pub(crate) [u8; HASH_BYTES]);
 
@@ -122,7 +120,7 @@ impl Hash {
 
     /// unique Hash for tests and benchmarks.
     pub fn new_unique() -> Self {
-        use solana_atomic_u64::AtomicU64;
+        use super::atomic_u64_inner::AtomicU64;
         static I: AtomicU64 = AtomicU64::new(1);
 
         let mut b = [0u8; HASH_BYTES];
@@ -137,56 +135,5 @@ impl Hash {
 
     pub const fn as_bytes(&self) -> &[u8; HASH_BYTES] {
         &self.0
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_new_unique() {
-        assert!(Hash::new_unique() != Hash::new_unique());
-    }
-
-    #[test]
-    fn test_hash_fromstr() {
-        let hash = Hash::new_from_array([1; 32]);
-
-        let mut hash_base58_str = bs58::encode(hash).into_string();
-
-        assert_eq!(hash_base58_str.parse::<Hash>(), Ok(hash));
-
-        hash_base58_str.push_str(&bs58::encode(hash.as_ref()).into_string());
-        assert_eq!(
-            hash_base58_str.parse::<Hash>(),
-            Err(ParseHashError::WrongSize)
-        );
-
-        hash_base58_str.truncate(hash_base58_str.len() / 2);
-        assert_eq!(hash_base58_str.parse::<Hash>(), Ok(hash));
-
-        hash_base58_str.truncate(hash_base58_str.len() / 2);
-        assert_eq!(
-            hash_base58_str.parse::<Hash>(),
-            Err(ParseHashError::WrongSize)
-        );
-
-        let input_too_big = bs58::encode(&[0xffu8; HASH_BYTES + 1]).into_string();
-        assert!(input_too_big.len() > MAX_BASE58_LEN);
-        assert_eq!(
-            input_too_big.parse::<Hash>(),
-            Err(ParseHashError::WrongSize)
-        );
-
-        let mut hash_base58_str = bs58::encode(hash.as_ref()).into_string();
-        assert_eq!(hash_base58_str.parse::<Hash>(), Ok(hash));
-
-        // throw some non-base58 stuff in there
-        hash_base58_str.replace_range(..1, "I");
-        assert_eq!(
-            hash_base58_str.parse::<Hash>(),
-            Err(ParseHashError::Invalid)
-        );
     }
 }

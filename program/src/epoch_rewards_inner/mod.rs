@@ -10,7 +10,7 @@
 pub mod sysvar;
 
 use serde_derive::{Deserialize, Serialize};
-use {solana_hash::Hash, solana_sdk_macro::CloneZeroed};
+use {super::hash_inner::Hash, solana_sdk_macro::CloneZeroed};
 
 #[repr(C, align(16))]
 #[derive(Debug, PartialEq, Eq, Default, CloneZeroed, Deserialize, Serialize)]

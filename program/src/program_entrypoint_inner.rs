@@ -2,9 +2,9 @@
 
 extern crate alloc;
 use {
-    alloc::vec::Vec,
     super::account_info::AccountInfo,
     super::pubkey::Pubkey,
+    alloc::vec::Vec,
     std::{
         alloc::Layout,
         mem::{size_of, MaybeUninit},
@@ -18,10 +18,10 @@ pub use {
     super::account_info::AccountInfo as __AccountInfo,
     super::account_info::MAX_PERMITTED_DATA_INCREASE,
     // Re-exporting for custom_panic
-    solana_define_syscall::definitions::{sol_log_ as __log, sol_panic_ as __panic},
+    super::define_syscall_inner::definitions::{sol_log_ as __log, sol_panic_ as __panic},
+    super::pubkey::Pubkey as __Pubkey,
     crate::msg as __msg,
     solana_program_error::ProgramResult,
-    super::pubkey::Pubkey as __Pubkey,
 };
 
 /// User implemented function to process an instruction

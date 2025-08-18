@@ -4,8 +4,8 @@
 //! [`Hash`]: struct@Hash
 
 #[cfg(not(target_os = "solana"))]
-pub use solana_sha256_hasher::Hasher;
+pub use super::sha256_hasher_inner::Hasher;
 pub use {
-    solana_hash::{Hash, ParseHashError, HASH_BYTES},
-    solana_sha256_hasher::{hash, hashv},
+    super::hash_inner::{Hash, ParseHashError, HASH_BYTES},
+    super::sha256_hasher_inner::{hash, hashv},
 };

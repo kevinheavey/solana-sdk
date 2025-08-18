@@ -1,8 +1,6 @@
-#[cfg(all(not(target_os = "solana"), feature = "curve25519"))]
-use crate::bytes_are_curve_point;
-#[cfg(any(target_os = "solana", feature = "curve25519"))]
-use crate::error::AddressError;
-use crate::Address;
+use super::bytes_are_curve_point;
+use super::error::AddressError;
+use super::Address;
 #[cfg(target_os = "solana")]
 /// Syscall definitions used by `solana_address`.
 pub use solana_define_syscall::definitions::{
@@ -15,7 +13,6 @@ pub use solana_define_syscall::definitions::{
 const SUCCESS: u64 = 0;
 
 impl Address {
-    #[cfg(any(target_os = "solana", feature = "std"))]
     /// Log a `Address` from a program
     pub fn log(&self) {
         #[cfg(target_os = "solana")]
@@ -275,7 +272,6 @@ impl Address {
     // syscalls which bring no dependencies.
     // When target_os != "solana", this should be opt-in so users
     // don't need the curve25519 dependency.
-    #[cfg(any(target_os = "solana", feature = "curve25519"))]
     pub fn find_program_address(seeds: &[&[u8]], program_id: &Address) -> (Address, u8) {
         Self::try_find_program_address(seeds, program_id)
             .unwrap_or_else(|| panic!("Unable to find a viable program address bump seed"))
@@ -297,7 +293,6 @@ impl Address {
     // syscalls which bring no dependencies.
     // When target_os != "solana", this should be opt-in so users
     // don't need the curve25519 dependency.
-    #[cfg(any(target_os = "solana", feature = "curve25519"))]
     #[allow(clippy::same_item_push)]
     pub fn try_find_program_address(
         seeds: &[&[u8]],
@@ -389,18 +384,17 @@ impl Address {
     // syscalls which bring no dependencies.
     // When target_os != "solana", this should be opt-in so users
     // don't need the curve225519 dep.
-    #[cfg(any(target_os = "solana", feature = "curve25519"))]
     pub fn create_program_address(
         seeds: &[&[u8]],
         program_id: &Address,
     ) -> Result<Address, AddressError> {
-        use crate::MAX_SEEDS;
+        use super::MAX_SEEDS;
 
         if seeds.len() > MAX_SEEDS {
             return Err(AddressError::MaxSeedLengthExceeded);
         }
         for seed in seeds.iter() {
-            use crate::MAX_SEED_LEN;
+            use super::MAX_SEED_LEN;
 
             if seed.len() > MAX_SEED_LEN {
                 return Err(AddressError::MaxSeedLengthExceeded);
@@ -411,9 +405,9 @@ impl Address {
         // not supported
         #[cfg(not(target_os = "solana"))]
         {
-            use crate::PDA_MARKER;
+            use super::PDA_MARKER;
 
-            let mut hasher = solana_sha256_hasher::Hasher::default();
+            let mut hasher = super::super::sha256_hasher_inner::Hasher::default();
             for seed in seeds.iter() {
                 hasher.hash(seed);
             }

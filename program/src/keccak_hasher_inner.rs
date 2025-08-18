@@ -1,10 +1,9 @@
 //! Hashing with the [keccak] (SHA-3) hash function.
 //!
 //! [keccak]: https://keccak.team/keccak.html
-#![cfg_attr(docsrs, feature(doc_auto_cfg))]
+pub use super::hash_inner::{Hash, ParseHashError, HASH_BYTES, MAX_BASE58_LEN};
 #[cfg(not(target_os = "solana"))]
 use sha3::{Digest, Keccak256};
-pub use solana_hash::{Hash, ParseHashError, HASH_BYTES, MAX_BASE58_LEN};
 
 #[derive(Clone, Default)]
 #[cfg(not(target_os = "solana"))]

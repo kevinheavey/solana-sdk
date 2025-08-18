@@ -7,7 +7,7 @@ use {
     solana_program::message_inner::{
         inline_nonce::is_advance_nonce_instruction_data, VersionedMessage,
     },
-    solana_sanitize::SanitizeError,
+    solana_program::sanitize_inner::SanitizeError,
     solana_program::sdk_ids::system_program,
     std::cmp::Ordering,
 };
@@ -162,7 +162,8 @@ impl VersionedTransaction {
     /// Verify the transaction and hash its message
     pub fn verify_and_hash_message(
         &self,
-    ) -> solana_program::transaction_error_inner::TransactionResult<solana_hash::Hash> {
+    ) -> solana_program::transaction_error_inner::TransactionResult<solana_program::hash_inner::Hash>
+    {
         let message_bytes = self.message.serialize();
         if !self
             ._verify_with_results(&message_bytes)

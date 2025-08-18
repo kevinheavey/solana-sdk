@@ -3,43 +3,26 @@
 //! An address is a sequence of 32 bytes, often shown as a base58 encoded string
 //! (e.g. 14grJpemFaf88c8tiVb77W7TYg2W3ir6pfkKz3YjhhZ5).
 
-#![no_std]
-#![cfg_attr(docsrs, feature(doc_auto_cfg))]
-#![cfg_attr(feature = "frozen-abi", feature(min_specialization))]
 #![allow(clippy::arithmetic_side_effects)]
 
-#[cfg(feature = "error")]
 pub mod error;
-#[cfg(feature = "rand")]
 mod hasher;
-#[cfg(any(feature = "curve25519", feature = "syscalls"))]
 pub mod syscalls;
 
-#[cfg(feature = "sha2")]
-use crate::error::AddressError;
-#[cfg(feature = "decode")]
-use crate::error::ParseAddressError;
-#[cfg(all(feature = "rand", not(target_os = "solana")))]
-pub use crate::hasher::{AddressHasher, AddressHasherBuilder};
+use error::AddressError;
+use error::ParseAddressError;
+#[cfg(not(target_os = "solana"))]
+pub use hasher::{AddressHasher, AddressHasherBuilder};
 
-#[cfg(feature = "std")]
-extern crate std;
-#[cfg(feature = "dev-context-only-utils")]
-use arbitrary::Arbitrary;
-#[cfg(feature = "bytemuck")]
 use bytemuck_derive::{Pod, Zeroable};
-#[cfg(feature = "decode")]
 use core::str::FromStr;
 use core::{
     array,
     convert::TryFrom,
     hash::{Hash, Hasher},
 };
-#[cfg(feature = "serde")]
 use serde_derive::{Deserialize, Serialize};
-#[cfg(feature = "std")]
 use std::vec::Vec;
-#[cfg(feature = "borsh")]
 use {
     borsh::{BorshDeserialize, BorshSchema, BorshSerialize},
     std::string::ToString,
@@ -51,11 +34,9 @@ pub const ADDRESS_BYTES: usize = 32;
 pub const MAX_SEED_LEN: usize = 32;
 /// Maximum number of seeds
 pub const MAX_SEEDS: usize = 16;
-#[cfg(feature = "decode")]
 /// Maximum string length of a base58 encoded address.
 const MAX_BASE58_LEN: usize = 44;
 
-#[cfg(feature = "sha2")]
 const PDA_MARKER: &[u8; 21] = b"ProgramDerivedAddress";
 
 /// The address of a [Solana account][acc].
@@ -73,23 +54,26 @@ const PDA_MARKER: &[u8; 21] = b"ProgramDerivedAddress";
 /// [pdas]: https://solana.com/docs/core/cpi#program-derived-addresses
 /// [`Keypair`]: https://docs.rs/solana-sdk/latest/solana_sdk/signer/keypair/struct.Keypair.html
 #[repr(transparent)]
-#[cfg_attr(feature = "frozen-abi", derive(solana_frozen_abi_macro::AbiExample))]
-#[cfg_attr(
-    feature = "borsh",
-    derive(BorshSerialize, BorshDeserialize),
-    borsh(crate = "borsh")
+#[derive(
+    Clone,
+    Copy,
+    Default,
+    Eq,
+    Ord,
+    PartialEq,
+    PartialOrd,
+    BorshSerialize,
+    BorshDeserialize,
+    BorshSchema,
+    Pod,
+    Zeroable,
+    Deserialize,
+    Serialize,
 )]
-#[cfg_attr(all(feature = "borsh", feature = "std"), derive(BorshSchema))]
-#[cfg_attr(feature = "serde", derive(Deserialize, Serialize))]
-#[cfg_attr(feature = "bytemuck", derive(Pod, Zeroable))]
-#[derive(Clone, Copy, Default, Eq, Ord, PartialEq, PartialOrd)]
-#[cfg_attr(feature = "dev-context-only-utils", derive(Arbitrary))]
 pub struct Address(pub(crate) [u8; 32]);
 
-#[cfg(feature = "sanitize")]
-impl solana_sanitize::Sanitize for Address {}
+impl super::sanitize_inner::Sanitize for Address {}
 
-#[cfg(feature = "decode")]
 impl FromStr for Address {
     type Err = ParseAddressError;
 
@@ -143,7 +127,6 @@ impl TryFrom<&[u8]> for Address {
     }
 }
 
-#[cfg(feature = "std")]
 impl TryFrom<Vec<u8>> for Address {
     type Error = Vec<u8>;
 
@@ -152,7 +135,6 @@ impl TryFrom<Vec<u8>> for Address {
         <[u8; 32]>::try_from(address).map(Self::from)
     }
 }
-#[cfg(feature = "decode")]
 impl TryFrom<&str> for Address {
     type Error = ParseAddressError;
     fn try_from(s: &str) -> Result<Self, Self::Error> {
@@ -163,7 +145,6 @@ impl TryFrom<&str> for Address {
 // If target_os = "solana", then this panics so there are no dependencies.
 // When target_os != "solana", this should be opt-in so users
 // don't need the curve25519 dependency.
-#[cfg(any(target_os = "solana", feature = "curve25519"))]
 #[allow(clippy::used_underscore_binding)]
 pub fn bytes_are_curve_point<T: AsRef<[u8]>>(_bytes: T) -> bool {
     #[cfg(not(target_os = "solana"))]
@@ -184,45 +165,31 @@ impl Address {
         Self(address_array)
     }
 
-    #[cfg(feature = "decode")]
     /// Decode a string into an `Address`, usable in a const context
     pub const fn from_str_const(s: &str) -> Self {
         let id_array = five8_const::decode_32_const(s);
         Address::new_from_array(id_array)
     }
 
-    #[cfg(feature = "atomic")]
     /// Create an unique `Address` for tests and benchmarks.
     pub fn new_unique() -> Self {
-        use solana_atomic_u64::AtomicU64;
+        use super::atomic_u64_inner::AtomicU64;
         static I: AtomicU64 = AtomicU64::new(1);
         type T = u32;
         const COUNTER_BYTES: usize = core::mem::size_of::<T>();
         let mut b = [0u8; ADDRESS_BYTES];
-        #[cfg(feature = "std")]
         let mut i = I.fetch_add(1) as T;
-        #[cfg(not(feature = "std"))]
-        let i = I.fetch_add(1) as T;
         // use big endian representation to ensure that recent unique addresses
         // are always greater than less recent unique addresses.
         b[0..COUNTER_BYTES].copy_from_slice(&i.to_be_bytes());
         // fill the rest of the address with pseudorandom numbers to make
         // data statistically similar to real addresses.
-        #[cfg(feature = "std")]
         {
             let mut hash = std::hash::DefaultHasher::new();
             for slice in b[COUNTER_BYTES..].chunks_mut(COUNTER_BYTES) {
                 hash.write_u32(i);
                 i += 1;
                 slice.copy_from_slice(&hash.finish().to_ne_bytes()[0..COUNTER_BYTES]);
-            }
-        }
-        // if std is not available, just replicate last byte of the counter.
-        // this is not as good as a proper hash, but at least it is uniform
-        #[cfg(not(feature = "std"))]
-        {
-            for b in b[COUNTER_BYTES..].iter_mut() {
-                *b = (i & 0xFF) as u8;
             }
         }
         Self::from(b)
@@ -232,7 +199,6 @@ impl Address {
     // syscalls which bring no dependencies.
     // When target_os != "solana", this should be opt-in so users
     // don't need the sha2 dependency.
-    #[cfg(feature = "sha2")]
     pub fn create_with_seed(
         base: &Address,
         seed: &str,
@@ -249,7 +215,7 @@ impl Address {
                 return Err(AddressError::IllegalOwner);
             }
         }
-        let hash = solana_sha256_hasher::hashv(&[base.as_ref(), seed.as_ref(), owner]);
+        let hash = super::sha256_hasher_inner::hashv(&[base.as_ref(), seed.as_ref(), owner]);
         Ok(Address::from(hash.to_bytes()))
     }
 
@@ -266,7 +232,6 @@ impl Address {
     // If target_os = "solana", then this panics so there are no dependencies.
     // When target_os != "solana", this should be opt-in so users
     // don't need the curve25519 dependency.
-    #[cfg(any(target_os = "solana", feature = "curve25519"))]
     pub fn is_on_curve(&self) -> bool {
         bytes_are_curve_point(self)
     }
@@ -284,7 +249,6 @@ impl AsMut<[u8]> for Address {
     }
 }
 
-#[cfg(feature = "decode")]
 fn write_as_base58(f: &mut core::fmt::Formatter, p: &Address) -> core::fmt::Result {
     let mut out = [0u8; MAX_BASE58_LEN];
     let len = five8::encode_32(&p.0, &mut out) as usize;
@@ -293,14 +257,12 @@ fn write_as_base58(f: &mut core::fmt::Formatter, p: &Address) -> core::fmt::Resu
     f.write_str(as_str)
 }
 
-#[cfg(feature = "decode")]
 impl core::fmt::Debug for Address {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
         write_as_base58(f, self)
     }
 }
 
-#[cfg(feature = "decode")]
 impl core::fmt::Display for Address {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
         write_as_base58(f, self)
@@ -325,6 +287,6 @@ impl core::fmt::Display for Address {
 #[macro_export]
 macro_rules! address {
     ($input:literal) => {
-        $crate::Address::from_str_const($input)
+        $crate::address_inner::Address::from_str_const($input)
     };
 }

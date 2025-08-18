@@ -1,6 +1,6 @@
 use {
-    super::super::fee_calculator_inner::FeeCalculator, solana_hash::Hash, super::super::pubkey::Pubkey,
-    solana_sha256_hasher::hashv,
+    super::super::fee_calculator_inner::FeeCalculator, super::super::hash_inner::Hash,
+    super::super::pubkey::Pubkey, super::super::sha256_hasher_inner::hashv,
 };
 
 const DURABLE_NONCE_HASH_PREFIX: &[u8] = "DURABLE_NONCE".as_bytes();

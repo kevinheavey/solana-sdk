@@ -1,6 +1,6 @@
-use serde_derive::{Deserialize, Serialize};
-use {super::super::pubkey::Pubkey, solana_sanitize::Sanitize};
 use super::super::short_vec;
+use serde_derive::{Deserialize, Serialize};
+use {super::super::pubkey::Pubkey, super::super::sanitize_inner::Sanitize};
 
 /// A compact encoding of an instruction.
 ///

@@ -46,16 +46,16 @@
 //! ```
 use bytemuck_derive::{Pod, Zeroable};
 use {super::super::account_info::AccountInfo, super::SysvarSerialize};
-use {super::super::clock_inner::Slot, super::Sysvar, solana_hash::Hash};
+use {super::super::clock_inner::Slot, super::super::hash_inner::Hash, super::Sysvar};
 
 const U64_SIZE: usize = std::mem::size_of::<u64>();
 
 const SYSVAR_LEN: usize = 20_488; // golden, update if MAX_ENTRIES changes
 
 pub use {
+    super::super::sdk_ids::sysvar::slot_hashes::{check_id, id, ID},
     super::super::slot_hashes_inner::SlotHashes,
     super::super::sysvar_id_inner::SysvarId,
-    super::super::sdk_ids::sysvar::slot_hashes::{check_id, id, ID},
 };
 
 impl Sysvar for SlotHashes {}

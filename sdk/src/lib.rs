@@ -114,12 +114,12 @@ pub use serde_inner as deserialize_utils;
 pub use solana_epoch_info as epoch_info;
 #[deprecated(since = "2.1.0", note = "Use `solana-program-memory` crate instead")]
 pub use solana_program::program_memory;
+#[deprecated(since = "2.1.0", note = "Use `solana-sanitize` crate instead")]
+pub use solana_program::sanitize_inner as sanitize;
 #[deprecated(since = "2.1.0", note = "Use `solana-serde-varint` crate instead")]
 pub use solana_program::serde_varint_inner as serde_varint;
 #[deprecated(since = "2.1.0", note = "Use `solana-short-vec` crate instead")]
 pub use solana_program::short_vec;
-#[deprecated(since = "2.1.0", note = "Use `solana-sanitize` crate instead")]
-pub use solana_sanitize as sanitize;
 /// Same as `declare_id` except report that this id has been deprecated.
 pub use solana_sdk_macro::declare_deprecated_id;
 /// Convenience macro to declare a static public key and functions to interact with it.

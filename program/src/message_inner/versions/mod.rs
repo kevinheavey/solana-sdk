@@ -1,4 +1,7 @@
 use {
+    super::super::super::hash_inner::Hash,
+    super::super::super::pubkey::Pubkey,
+    super::super::super::sanitize_inner::{Sanitize, SanitizeError},
     super::{
         super::{
             super::short_vec, compiled_instruction::CompiledInstruction,
@@ -6,9 +9,6 @@ use {
         },
         v0::MessageAddressTableLookup,
     },
-    solana_hash::Hash,
-    super::super::super::pubkey::Pubkey,
-    solana_sanitize::{Sanitize, SanitizeError},
     std::collections::HashSet,
 };
 use {
@@ -156,7 +156,8 @@ impl VersionedMessage {
         let mut hasher = blake3::Hasher::new();
         hasher.update(b"solana-tx-message-v1");
         hasher.update(message_bytes);
-        let hash_bytes: [u8; solana_hash::HASH_BYTES] = hasher.finalize().into();
+        let hash_bytes: [u8; super::super::super::hash_inner::HASH_BYTES] =
+            hasher.finalize().into();
         hash_bytes.into()
     }
 }

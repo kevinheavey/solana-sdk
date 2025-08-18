@@ -166,7 +166,7 @@ pub mod solana_signer {
 }
 
 pub mod solana_keypair {
-    use {super::solana_signer::Signer, super::super::pubkey::Pubkey};
+    use {super::super::pubkey::Pubkey, super::solana_signer::Signer};
     pub struct Keypair;
 
     impl Keypair {
@@ -184,12 +184,12 @@ pub mod solana_keypair {
 
 pub mod solana_transaction {
     use {
+        super::super::hash_inner::Hash,
         super::super::instruction::Instruction,
         super::super::message_inner::Message,
+        super::super::pubkey::Pubkey,
         super::solana_signer::{signers::Signers, SignerError},
         serde_derive::Serialize,
-        solana_hash::Hash,
-        super::super::pubkey::Pubkey,
     };
 
     pub mod versioned {
@@ -276,10 +276,12 @@ pub mod solana_transaction {
 pub mod solana_sdk {
     pub use {
         super::super::clock_inner::Clock,
+        super::super::hash_inner as hash,
         super::super::instruction,
         super::super::keccak_hasher_inner as keccak,
         super::super::message_inner as message,
         super::super::nonce_inner as nonce,
+        super::super::pubkey::{self as pubkey, Pubkey},
         super::super::sdk_ids::{
             system_program,
             sysvar::{self, clock},
@@ -289,8 +291,6 @@ pub mod solana_sdk {
             solana_account::{self as account, state_traits as account_utils},
             solana_signer::{self as signer, signers},
         },
-        solana_hash as hash,
-        super::super::pubkey::{self as pubkey, Pubkey},
     };
 
     pub mod signature {

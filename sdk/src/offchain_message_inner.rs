@@ -1,11 +1,11 @@
 //! Off-chain message container for storing non-transaction messages.
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 use {
-    num_enum::{IntoPrimitive, TryFromPrimitive},
-    solana_hash::Hash,
-    solana_sanitize::SanitizeError,
     crate::signature_inner::Signature,
     crate::signer_inner::Signer,
+    num_enum::{IntoPrimitive, TryFromPrimitive},
+    solana_program::hash_inner::Hash,
+    solana_program::sanitize_inner::SanitizeError,
 };
 
 /// Check if given bytes contain only printable ASCII characters
@@ -35,10 +35,10 @@ pub enum MessageFormat {
 pub mod v0 {
     use {
         super::{is_printable_ascii, is_utf8, MessageFormat, OffchainMessage as Base},
-        solana_hash::Hash,
         crate::packet_inner::PACKET_DATA_SIZE,
-        solana_sanitize::SanitizeError,
-        solana_sha256_hasher::Hasher,
+        solana_program::hash::Hash,
+        solana_program::sanitize_inner::SanitizeError,
+        solana_program::sha256_hasher_inner::Hasher,
     };
 
     /// OffchainMessage Version 0.

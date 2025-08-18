@@ -48,12 +48,9 @@ serde_derive = { workspace = true }
 sha2 = { workspace = true }
 siphasher = { workspace = true }
 solana-epoch-info = { workspace = true, features = ["serde"] }
-solana-hash = { workspace = true }
 solana-logger = { workspace = true, optional = true }
 solana-program = { workspace = true }
-solana-sanitize = { workspace = true }
 solana-sdk-macro = { workspace = true }
-solana-sha256-hasher = { workspace = true, features = ["sha2"] }
 thiserror = { workspace = true }
 uriparse = { workspace = true }
 

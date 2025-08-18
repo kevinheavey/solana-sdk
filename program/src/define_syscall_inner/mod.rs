@@ -1,5 +1,3 @@
-#![no_std]
-
 pub mod definitions;
 
 #[cfg(target_feature = "static-syscalls")]

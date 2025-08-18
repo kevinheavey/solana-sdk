@@ -1,5 +1,8 @@
 use {
+    super::super::super::hash_inner::Hash,
     super::super::super::instruction_inner::{BorrowedAccountMeta, BorrowedInstruction},
+    super::super::super::pubkey::Pubkey,
+    super::super::super::sanitize_inner::Sanitize,
     super::super::super::sdk_ids::{ed25519_program, secp256k1_program, secp256r1_program},
     super::super::{
         super::transaction_error_inner::SanitizeMessageError,
@@ -8,9 +11,6 @@ use {
         v0::{self, LoadedAddresses},
         AccountKeys, AddressLoader, MessageHeader, SanitizedVersionedMessage, VersionedMessage,
     },
-    solana_hash::Hash,
-    super::super::super::pubkey::Pubkey,
-    solana_sanitize::Sanitize,
     std::{borrow::Cow, collections::HashSet, convert::TryFrom},
 };
 

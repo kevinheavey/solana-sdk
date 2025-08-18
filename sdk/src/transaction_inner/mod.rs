@@ -117,15 +117,15 @@ use {
         compiled_instruction::CompiledInstruction, inline_nonce::is_advance_nonce_instruction_data,
         Message,
     },
+    solana_program::pubkey::Pubkey,
+    solana_program::sanitize_inner::{Sanitize, SanitizeError},
     solana_program::sdk_ids::system_program,
     solana_program::transaction_error_inner::{TransactionError, TransactionResult as Result},
-    solana_program::pubkey::Pubkey,
-    solana_sanitize::{Sanitize, SanitizeError},
     std::result,
 };
 use {
     crate::signer_inner::{signers::Signers, SignerError},
-    solana_hash::Hash,
+    solana_program::hash_inner::Hash,
 };
 use {
     serde_derive::{Deserialize, Serialize},

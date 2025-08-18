@@ -35,9 +35,9 @@ use {
     super::account_info::AccountInfo,
     super::instruction_error_inner::InstructionError,
     super::instruction_inner::{AccountMeta, Instruction},
+    super::sanitize_inner::SanitizeError,
     super::serialize_utils_inner::{read_pubkey, read_slice, read_u16, read_u8},
     solana_program_error::ProgramError,
-    solana_sanitize::SanitizeError,
 };
 #[cfg(not(target_os = "solana"))]
 use {

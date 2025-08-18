@@ -1,7 +1,6 @@
 use {core::fmt, solana_program_error::ProgramError};
 
-#[cfg_attr(feature = "serde", derive(serde_derive::Serialize))]
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, serde_derive::Serialize)]
 pub enum AddressError {
     /// Length of the seed is too long for address generation
     MaxSeedLengthExceeded,
@@ -46,18 +45,14 @@ impl From<AddressError> for ProgramError {
     }
 }
 
-#[cfg_attr(feature = "serde", derive(serde_derive::Serialize))]
-#[cfg(feature = "decode")]
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, serde_derive::Serialize)]
 pub enum ParseAddressError {
     WrongSize,
     Invalid,
 }
 
-#[cfg(feature = "decode")]
 impl core::error::Error for ParseAddressError {}
 
-#[cfg(feature = "decode")]
 impl fmt::Display for ParseAddressError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
@@ -67,7 +62,6 @@ impl fmt::Display for ParseAddressError {
     }
 }
 
-#[cfg(feature = "decode")]
 impl From<core::convert::Infallible> for ParseAddressError {
     fn from(_: core::convert::Infallible) -> Self {
         unreachable!("Infallible uninhabited");

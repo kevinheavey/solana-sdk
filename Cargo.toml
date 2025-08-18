@@ -1,26 +1,18 @@
 [workspace]
 members = [
-    "address",
-    "atomic-u64",
-    "bn254",
-    "cluster-type",
     "commitment-config",
-    "define-syscall",
     "epoch-info",
     "file-download",
     "frozen-abi",
     "frozen-abi-macro",
-    "hash",
     "logger",
     "poh-config",
     "precompile-error",
     "program",
     "program-error",
     "reward-info",
-    "sanitize",
     "sdk",
     "sdk-macro",
-    "sha256-hasher",
     "signer-store",
     "validator-exit",
 ]
@@ -39,6 +31,7 @@ level = "warn"
 check-cfg = [
     'cfg(target_os, values("solana"))',
     'cfg(feature, values("frozen-abi", "no-entrypoint"))',
+    'cfg(target_feature, values("static-syscalls"))'
 ]
 
 [workspace.metadata.release]
@@ -130,27 +123,20 @@ sha2 = "0.10.8"
 sha3 = "0.10.8"
 signal-hook = "0.3.17"
 siphasher = "0.3.11"
-solana-address = { path = "address", version = "1.0.0" }
-solana-atomic-u64 = { path = "atomic-u64", version = "3.0.0" }
 solana-bn254 = { path = "bn254", version = "3.0.0" }
-solana-cluster-type = { path = "cluster-type", version = "3.0.0" }
 solana-commitment-config = { path = "commitment-config", version = "3.0.0" }
-solana-define-syscall = { path = "define-syscall", version = "3.0.0" }
 solana-epoch-info = { path = "epoch-info", version = "3.0.0" }
 solana-file-download = { path = "file-download", version = "3.0.0" }
 solana-frozen-abi = { path = "frozen-abi", version = "3.0.0" }
 solana-frozen-abi-macro = { path = "frozen-abi-macro", version = "3.0.0" }
-solana-hash = { path = "hash", version = "3.0.0", default-features = false }
 solana-logger = { path = "logger", version = "3.0.0" }
 solana-poh-config = { path = "poh-config", version = "3.0.0" }
 solana-precompile-error = { path = "precompile-error", version = "3.0.0" }
 solana-program = { path = "program", version = "3.0.0", default-features = false }
 solana-program-error = { path = "program-error", version = "3.0.0" }
 solana-reward-info = { path = "reward-info", version = "3.0.0" }
-solana-sanitize = { path = "sanitize", version = "3.0.0" }
 solana-sdk = { path = "sdk", version = "2.2.1" }
 solana-sdk-macro = { path = "sdk-macro", version = "3.0.0" }
-solana-sha256-hasher = { path = "sha256-hasher", version = "3.0.0" }
 solana-signer-store = { path = "signer-store", version = "0.1.0" }
 solana-validator-exit = { path = "validator-exit", version = "3.0.0" }
 static_assertions = "1.1.0"

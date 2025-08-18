@@ -13,15 +13,15 @@
 
 use serde_derive::{Deserialize, Serialize};
 use {
+    super::super::hash_inner::Hash,
     super::super::instruction_inner::Instruction,
+    super::super::pubkey::Pubkey,
+    super::super::sanitize_inner::{Sanitize, SanitizeError},
     super::super::sdk_ids::bpf_loader_upgradeable,
     super::{
         super::short_vec, compiled_instruction::CompiledInstruction, compiled_keys::CompiledKeys,
         inline_nonce::advance_nonce_account_instruction, MessageHeader,
     },
-    solana_hash::Hash,
-    super::super::pubkey::Pubkey,
-    solana_sanitize::{Sanitize, SanitizeError},
     std::{collections::HashSet, convert::TryFrom},
 };
 
@@ -425,7 +425,7 @@ impl Message {
     /// Compute the blake3 hash of a raw transaction message.
     #[cfg(not(target_os = "solana"))]
     pub fn hash_raw_message(message_bytes: &[u8]) -> Hash {
-        use {blake3::traits::digest::Digest, solana_hash::HASH_BYTES};
+        use {super::super::hash_inner::HASH_BYTES, blake3::traits::digest::Digest};
         let mut hasher = blake3::Hasher::new();
         hasher.update(b"solana-tx-message-v1");
         hasher.update(message_bytes);
