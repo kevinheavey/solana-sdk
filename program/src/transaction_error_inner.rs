@@ -1,6 +1,6 @@
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 use serde_derive::{Deserialize, Serialize};
-use {core::fmt, solana_instruction_error::InstructionError, solana_sanitize::SanitizeError};
+use {super::instruction_error_inner::InstructionError, core::fmt, solana_sanitize::SanitizeError};
 
 pub type TransactionResult<T> = Result<T, TransactionError>;
 

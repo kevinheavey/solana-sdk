@@ -3,7 +3,7 @@
 use {
     super::{Account, AccountSharedData},
     bincode::ErrorKind,
-    solana_instruction_error::InstructionError,
+    solana_program::instruction_error_inner::InstructionError,
     std::cell::Ref,
 };
 

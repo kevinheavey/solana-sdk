@@ -1,11 +1,4 @@
-#![no_std]
-#![cfg_attr(feature = "frozen-abi", feature(min_specialization))]
-#[cfg(feature = "num-traits")]
 use num_traits::ToPrimitive;
-#[cfg(feature = "frozen-abi")]
-use solana_frozen_abi_macro::{AbiEnumVisitor, AbiExample};
-#[cfg(feature = "frozen-abi")]
-extern crate std;
 pub use solana_program_error::{
     ACCOUNT_ALREADY_INITIALIZED, ACCOUNT_BORROW_FAILED, ACCOUNT_DATA_TOO_SMALL,
     ACCOUNT_NOT_RENT_EXEMPT, ARITHMETIC_OVERFLOW, BORSH_IO_ERROR,
@@ -25,12 +18,7 @@ use {core::fmt, solana_program_error::ProgramError};
 /// an error be consistent across software versions.  For example, it is
 /// dangerous to include error strings from 3rd party crates because they could
 /// change at any time and changes to them are difficult to detect.
-#[cfg_attr(feature = "frozen-abi", derive(AbiExample, AbiEnumVisitor))]
-#[cfg_attr(
-    feature = "serde",
-    derive(serde_derive::Serialize, serde_derive::Deserialize)
-)]
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(Debug, PartialEq, Eq, Clone, serde_derive::Serialize, serde_derive::Deserialize)]
 pub enum InstructionError {
     /// Deprecated! Use CustomError instead!
     /// The program instruction returned an error
@@ -345,7 +333,6 @@ impl fmt::Display for InstructionError {
     }
 }
 
-#[cfg(feature = "num-traits")]
 impl<T> From<T> for InstructionError
 where
     T: ToPrimitive,

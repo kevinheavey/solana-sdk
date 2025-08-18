@@ -12,7 +12,6 @@ members = [
     "frozen-abi",
     "frozen-abi-macro",
     "hash",
-    "instruction-error",
     "logger",
     "nonce",
     "package-metadata",
@@ -148,7 +147,6 @@ solana-file-download = { path = "file-download", version = "3.0.0" }
 solana-frozen-abi = { path = "frozen-abi", version = "3.0.0" }
 solana-frozen-abi-macro = { path = "frozen-abi-macro", version = "3.0.0" }
 solana-hash = { path = "hash", version = "3.0.0", default-features = false }
-solana-instruction-error = { path = "instruction-error", version = "2.0.0" }
 solana-logger = { path = "logger", version = "3.0.0" }
 solana-nonce = { path = "nonce", version = "3.0.0" }
 solana-package-metadata = { path = "package-metadata", version = "3.0.0" }

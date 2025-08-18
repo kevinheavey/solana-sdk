@@ -2503,18 +2503,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-instruction-error"
-version = "2.0.0"
-dependencies = [
- "num-traits",
- "serde",
- "serde_derive",
- "solana-frozen-abi",
- "solana-frozen-abi-macro",
- "solana-program-error",
-]
-
-[[package]]
 name = "solana-logger"
 version = "3.0.0"
 dependencies = [
@@ -2599,7 +2587,6 @@ dependencies = [
  "solana-frozen-abi",
  "solana-frozen-abi-macro",
  "solana-hash",
- "solana-instruction-error",
  "solana-logger",
  "solana-nonce",
  "solana-program-error",
@@ -2668,7 +2655,6 @@ dependencies = [
  "solana-frozen-abi",
  "solana-frozen-abi-macro",
  "solana-hash",
- "solana-instruction-error",
  "solana-logger",
  "solana-program",
  "solana-pubkey",

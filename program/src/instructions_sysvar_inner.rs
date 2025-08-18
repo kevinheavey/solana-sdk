@@ -31,19 +31,19 @@
 #![allow(clippy::arithmetic_side_effects)]
 
 pub use super::sdk_ids::sysvar::instructions::{check_id, id, ID};
-#[cfg(not(target_os = "solana"))]
-use {
-    bitflags::bitflags,
-    super::instruction_inner::BorrowedInstruction,
-    super::serialize_utils_inner::{append_slice, append_u16, append_u8},
-};
 use {
     super::account_info::AccountInfo,
+    super::instruction_error_inner::InstructionError,
     super::instruction_inner::{AccountMeta, Instruction},
-    solana_instruction_error::InstructionError,
+    super::serialize_utils_inner::{read_pubkey, read_slice, read_u16, read_u8},
     solana_program_error::ProgramError,
     solana_sanitize::SanitizeError,
-    super::serialize_utils_inner::{read_pubkey, read_slice, read_u16, read_u8},
+};
+#[cfg(not(target_os = "solana"))]
+use {
+    super::instruction_inner::BorrowedInstruction,
+    super::serialize_utils_inner::{append_slice, append_u16, append_u8},
+    bitflags::bitflags,
 };
 
 /// Instructions sysvar, dummy type.

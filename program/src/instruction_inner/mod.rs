@@ -16,7 +16,7 @@
 use solana_pubkey::Pubkey;
 pub mod account_meta;
 pub use account_meta::AccountMeta;
-pub use solana_instruction_error as error;
+pub use super::instruction_error_inner as error;
 pub mod syscalls;
 
 /// A directive for a single invocation of a Solana program.
