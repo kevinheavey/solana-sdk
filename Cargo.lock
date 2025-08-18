@@ -2533,13 +2533,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-borsh"
-version = "3.0.0"
-dependencies = [
- "borsh",
-]
-
-[[package]]
 name = "solana-clock"
 version = "3.0.0"
 dependencies = [
@@ -2880,6 +2873,7 @@ dependencies = [
  "bincode",
  "bitflags 2.8.0",
  "blake3",
+ "borsh",
  "bytemuck",
  "bytemuck_derive",
  "lazy_static",
@@ -2891,7 +2885,6 @@ dependencies = [
  "sha3",
  "solana-account-info",
  "solana-blake3-hasher",
- "solana-borsh",
  "solana-clock",
  "solana-define-syscall",
  "solana-epoch-rewards",

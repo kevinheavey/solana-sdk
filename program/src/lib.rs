@@ -492,6 +492,7 @@ pub mod sysvar;
 
 pub mod address_lookup_table_interface_inner;
 pub mod big_mod_exp_inner;
+pub mod borsh_inner;
 pub mod cpi_inner;
 pub mod example_mocks_inner;
 pub mod instructions_sysvar_inner;
@@ -509,7 +510,7 @@ pub use keccak_hasher_inner as keccak;
 pub use solana_blake3_hasher as blake3;
 #[cfg(feature = "borsh")]
 #[deprecated(since = "2.1.0", note = "Use `solana-borsh` crate instead")]
-pub use solana_borsh::v1 as borsh1;
+pub use borsh_inner::v1 as borsh1;
 #[deprecated(since = "2.1.0", note = "Use `solana-epoch-rewards` crate instead")]
 pub use solana_epoch_rewards as epoch_rewards;
 #[deprecated(since = "2.1.0", note = "Use `solana-fee-calculator` crate instead")]

@@ -3,7 +3,7 @@
 //!
 //! [borsh]: https://borsh.io/
 use {
-    crate::macros::{
+    super::macros::{
         impl_get_instance_packed_len, impl_get_packed_len_v1, impl_try_from_slice_unchecked,
     },
     borsh::io,
@@ -12,9 +12,3 @@ use {
 impl_get_packed_len_v1!(borsh);
 impl_try_from_slice_unchecked!(borsh, io);
 impl_get_instance_packed_len!(borsh, io);
-
-#[cfg(test)]
-mod tests {
-    use {crate::macros::impl_tests, borsh::io};
-    impl_tests!(borsh, io);
-}
