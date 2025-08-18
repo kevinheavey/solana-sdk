@@ -1,17 +1,11 @@
-#![cfg_attr(feature = "frozen-abi", feature(min_specialization))]
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
-#[cfg(feature = "serde")]
 use serde_derive::{Deserialize, Serialize};
-#[cfg(feature = "frozen-abi")]
-use solana_frozen_abi_macro::{AbiEnumVisitor, AbiExample};
 use {core::fmt, solana_instruction_error::InstructionError, solana_sanitize::SanitizeError};
 
 pub type TransactionResult<T> = Result<T, TransactionError>;
 
 /// Reasons a transaction might be rejected.
-#[cfg_attr(feature = "frozen-abi", derive(AbiExample, AbiEnumVisitor))]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(Debug, PartialEq, Eq, Clone, Serialize, Deserialize)]
 pub enum TransactionError {
     /// An account is already being processed in another transaction in a way
     /// that does not support parallelism

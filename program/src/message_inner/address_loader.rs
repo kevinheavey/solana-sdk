@@ -1,6 +1,6 @@
 use {
+    super::super::super::transaction_error_inner::AddressLoaderError,
     super::v0::{LoadedAddresses, MessageAddressTableLookup},
-    solana_transaction_error::AddressLoaderError,
 };
 
 pub trait AddressLoader: Clone {

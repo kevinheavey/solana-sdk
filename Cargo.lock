@@ -2982,7 +2982,6 @@ dependencies = [
  "solana-stable-layout",
  "solana-system-interface",
  "solana-sysvar-id",
- "solana-transaction-error",
  "thiserror",
 ]
 
@@ -3104,7 +3103,6 @@ dependencies = [
  "solana-serde-varint",
  "solana-sha256-hasher",
  "solana-short-vec",
- "solana-transaction-error",
  "thiserror",
  "uriparse",
 ]
@@ -3262,18 +3260,6 @@ version = "3.0.0"
 dependencies = [
  "solana-pubkey",
  "solana-sdk-ids",
-]
-
-[[package]]
-name = "solana-transaction-error"
-version = "3.0.0"
-dependencies = [
- "serde",
- "serde_derive",
- "solana-frozen-abi",
- "solana-frozen-abi-macro",
- "solana-instruction-error",
- "solana-sanitize",
 ]
 
 [[package]]

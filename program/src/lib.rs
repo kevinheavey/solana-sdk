@@ -495,6 +495,7 @@ pub mod cpi_inner;
 pub mod example_mocks_inner;
 pub mod message_inner;
 pub mod sysvar_inner;
+pub mod transaction_error_inner;
 
 #[deprecated(since = "2.2.0", note = "Use `solana-big-mod-exp` crate instead")]
 pub use solana_big_mod_exp as big_mod_exp;

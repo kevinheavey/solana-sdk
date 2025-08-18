@@ -24,17 +24,10 @@ default = [
     "borsh",
     "full",  # functionality that is not compatible or needed for on-chain programs
 ]
-full = [
-    "solana-pubkey/rand",
-    "dep:solana-transaction-error",
-]
+full = ["solana-pubkey/rand"]
 borsh = ["solana-program/borsh"]
 dev-context-only-utils = ["solana-program/dev-context-only-utils"]
-frozen-abi = [
-    "solana-program/frozen-abi",
-    "solana-short-vec/frozen-abi",
-    "solana-transaction-error/frozen-abi",
-]
+frozen-abi = ["solana-program/frozen-abi", "solana-short-vec/frozen-abi"]
 
 [dependencies]
 bincode = { workspace = true }
@@ -75,14 +68,13 @@ solana-sdk-macro = { workspace = true }
 solana-serde-varint = { workspace = true }
 solana-sha256-hasher = { workspace = true, features = ["sha2"] }
 solana-short-vec = { workspace = true }
-solana-transaction-error = { workspace = true, features = [
-    "serde",
-], optional = true }
 thiserror = { workspace = true }
 uriparse = { workspace = true }
 
 [dev-dependencies]
-solana-instructions-sysvar = { workspace = true, features = ["dev-context-only-utils"] }
+solana-instructions-sysvar = { workspace = true, features = [
+    "dev-context-only-utils",
+] }
 solana-program = { workspace = true, features = ["dev-context-only-utils"] }
 solana-sdk = { path = ".", features = ["dev-context-only-utils"] }
 

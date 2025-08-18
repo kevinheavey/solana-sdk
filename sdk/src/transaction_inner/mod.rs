@@ -120,7 +120,7 @@ use {
     solana_pubkey::Pubkey,
     solana_sanitize::{Sanitize, SanitizeError},
     solana_sdk_ids::system_program,
-    solana_transaction_error::{TransactionError, TransactionResult as Result},
+    solana_program::transaction_error_inner::{TransactionError, TransactionResult as Result},
     std::result,
 };
 use {

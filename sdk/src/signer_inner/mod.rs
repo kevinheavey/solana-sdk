@@ -4,7 +4,7 @@ use {
     core::fmt,
     solana_pubkey::Pubkey,
     crate::signature_inner::Signature,
-    solana_transaction_error::TransactionError,
+    solana_program::transaction_error_inner::TransactionError,
     std::{
         error,
         fs::{self, File, OpenOptions},

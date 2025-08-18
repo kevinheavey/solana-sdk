@@ -9,7 +9,7 @@ use {
         VersionedMessage,
     },
     solana_pubkey::Pubkey,
-    solana_transaction_error::{TransactionError, TransactionResult as Result},
+    solana_program::transaction_error_inner::{TransactionError, TransactionResult as Result},
     std::collections::HashSet,
 };
 use {super::Transaction, solana_sanitize::Sanitize};

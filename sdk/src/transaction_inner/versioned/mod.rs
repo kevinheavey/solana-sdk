@@ -4,7 +4,9 @@ use crate::signer_inner::{signers::Signers, SignerError};
 use {
     super::Transaction,
     crate::signature_inner::Signature,
-    solana_program::message_inner::{inline_nonce::is_advance_nonce_instruction_data, VersionedMessage},
+    solana_program::message_inner::{
+        inline_nonce::is_advance_nonce_instruction_data, VersionedMessage,
+    },
     solana_sanitize::SanitizeError,
     solana_sdk_ids::system_program,
     std::cmp::Ordering,
@@ -160,14 +162,14 @@ impl VersionedTransaction {
     /// Verify the transaction and hash its message
     pub fn verify_and_hash_message(
         &self,
-    ) -> solana_transaction_error::TransactionResult<solana_hash::Hash> {
+    ) -> solana_program::transaction_error_inner::TransactionResult<solana_hash::Hash> {
         let message_bytes = self.message.serialize();
         if !self
             ._verify_with_results(&message_bytes)
             .iter()
             .all(|verify_result| *verify_result)
         {
-            Err(solana_transaction_error::TransactionError::SignatureFailure)
+            Err(solana_program::transaction_error_inner::TransactionError::SignatureFailure)
         } else {
             Ok(VersionedMessage::hash_raw_message(&message_bytes))
         }
