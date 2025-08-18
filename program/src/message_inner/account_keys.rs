@@ -4,7 +4,7 @@ use {
         super::{compiled_instruction::CompiledInstruction, CompileError},
         v0::LoadedAddresses,
     },
-    solana_pubkey::Pubkey,
+    super::super::super::pubkey::Pubkey,
     std::{collections::BTreeMap, iter::zip, ops::Index},
 };
 

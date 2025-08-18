@@ -3,7 +3,7 @@
 use {
     solana_program_error::ProgramError,
     super::program_memory::sol_memset,
-    solana_pubkey::Pubkey,
+    super::pubkey_inner::Pubkey,
     std::{
         cell::{Ref, RefCell, RefMut},
         fmt,
@@ -286,7 +286,7 @@ impl<'a, T: Account> IntoAccountInfo<'a> for &'a mut (Pubkey, T) {
 /// ```
 /// use solana_program_error::ProgramResult;
 /// use solana_account_info::{AccountInfo, next_account_info};
-/// use solana_pubkey::Pubkey;
+/// use super::pubkey::Pubkey;
 /// # use solana_program_error::ProgramError;
 ///
 /// pub fn process_instruction(
@@ -335,7 +335,7 @@ pub fn next_account_info<'a, 'b, I: Iterator<Item = &'a AccountInfo<'b>>>(
 /// ```
 /// use solana_program_error::ProgramResult;
 /// use solana_account_info::{AccountInfo, next_account_info, next_account_infos};
-/// use solana_pubkey::Pubkey;
+/// use super::pubkey::Pubkey;
 /// # use solana_program_error::ProgramError;
 ///
 /// pub fn process_instruction(

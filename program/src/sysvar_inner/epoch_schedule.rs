@@ -20,7 +20,7 @@
 //! # use solana_epoch_schedule::EpochSchedule;
 //! # use solana_msg::msg;
 //! # use solana_program_error::{ProgramError, ProgramResult};
-//! # use solana_pubkey::Pubkey;
+//! # use super::pubkey::Pubkey;
 //! # use super::sdk_ids::sysvar::epoch_schedule;
 //! # use solana_sysvar::Sysvar;
 //! fn process_instruction(
@@ -56,7 +56,7 @@
 //! # use solana_epoch_schedule::EpochSchedule;
 //! # use solana_msg::msg;
 //! # use solana_program_error::{ProgramError, ProgramResult};
-//! # use solana_pubkey::Pubkey;
+//! # use super::pubkey::Pubkey;
 //! # use super::sdk_ids::sysvar::epoch_schedule;
 //! # use solana_sysvar::{Sysvar, SysvarSerialize};
 //! fn process_instruction(

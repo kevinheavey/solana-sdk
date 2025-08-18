@@ -2,7 +2,7 @@
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 use {
     core::fmt,
-    solana_pubkey::Pubkey,
+    solana_program::pubkey::Pubkey,
     crate::signature_inner::Signature,
     solana_program::transaction_error_inner::TransactionError,
     std::{

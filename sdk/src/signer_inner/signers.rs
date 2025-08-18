@@ -1,6 +1,6 @@
 use {
     super::{Signer, SignerError},
-    solana_pubkey::Pubkey,
+    solana_program::pubkey::Pubkey,
     crate::signature_inner::Signature,
 };
 

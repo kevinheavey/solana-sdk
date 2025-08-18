@@ -15,7 +15,7 @@
 //! use solana_msg::msg;
 //! use solana_sysvar::Sysvar;
 //! use solana_program_error::ProgramResult;
-//! use solana_pubkey::Pubkey;
+//! use super::pubkey::Pubkey;
 //!
 //! fn process_instruction(
 //!     program_id: &Pubkey,
@@ -38,7 +38,7 @@
 //! use solana_msg::msg;
 //! use solana_sysvar::{Sysvar, SysvarSerialize};
 //! use solana_program_error::ProgramResult;
-//! use solana_pubkey::Pubkey;
+//! use super::pubkey::Pubkey;
 //!
 //! fn process_instruction(
 //!     program_id: &Pubkey,
@@ -83,7 +83,7 @@ pub mod __private {
     pub use {super::super::program_entrypoint_inner::SUCCESS, solana_program_error::ProgramError};
 }
 use {super::sysvar_id_inner::SysvarId, super::account_info::AccountInfo};
-use {solana_program_error::ProgramError, solana_pubkey::Pubkey};
+use {solana_program_error::ProgramError, super::pubkey::Pubkey};
 
 pub mod clock;
 pub mod epoch_rewards;

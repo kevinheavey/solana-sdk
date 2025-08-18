@@ -1,6 +1,6 @@
 use {
     super::versioned::sanitized::SanitizedVersionedTransaction, crate::signature_inner::Signature,
-    solana_program::message_inner::VersionedMessage, solana_pubkey::Pubkey,
+    solana_program::message_inner::VersionedMessage, solana_program::pubkey::Pubkey,
 };
 
 /// Simple vote transaction meets these conditions:

@@ -1,6 +1,6 @@
 use {
     super::super::super::compiled_instruction::CompiledInstruction, super::VersionedMessage,
-    solana_pubkey::Pubkey, solana_sanitize::SanitizeError,
+    super::super::super::super::pubkey::Pubkey, solana_sanitize::SanitizeError,
 };
 
 /// Wraps a sanitized `VersionedMessage` to provide a safe API

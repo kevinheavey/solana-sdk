@@ -31,7 +31,7 @@
 //! # use solana_epoch_rewards::EpochRewards;
 //! # use solana_msg::msg;
 //! # use solana_program_error::{ProgramError, ProgramResult};
-//! # use solana_pubkey::Pubkey;
+//! # use super::pubkey::Pubkey;
 //! # use solana_sysvar::Sysvar;
 //! # use super::sdk_ids::sysvar::epoch_rewards;
 //! fn process_instruction(
@@ -74,7 +74,7 @@
 //! # use solana_epoch_rewards::EpochRewards;
 //! # use solana_msg::msg;
 //! # use solana_program_error::{ProgramError, ProgramResult};
-//! # use solana_pubkey::Pubkey;
+//! # use super::pubkey::Pubkey;
 //! # use solana_sysvar::{Sysvar, SysvarSerialize};
 //! # use super::sdk_ids::sysvar::epoch_rewards;
 //! #

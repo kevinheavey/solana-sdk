@@ -3,7 +3,7 @@
 use {
     super::state::{Data, DurableNonce, State},
     solana_hash::Hash,
-    solana_pubkey::Pubkey,
+    super::super::pubkey::Pubkey,
     std::collections::HashSet,
 };
 

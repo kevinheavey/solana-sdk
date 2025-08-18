@@ -3,7 +3,7 @@
 use {
     super::super::instruction_inner::{AccountMeta, Instruction},
     super::stable_vec::StableVec,
-    solana_pubkey::Pubkey,
+    super::super::pubkey::Pubkey,
     std::fmt::Debug,
 };
 
@@ -20,7 +20,7 @@ use {
 ///
 /// ```
 /// # use solana_instruction::Instruction;
-/// # use solana_pubkey::Pubkey;
+/// # use super::pubkey::Pubkey;
 /// # use solana_stable_layout::stable_instruction::StableInstruction;
 /// # let program_id = Pubkey::default();
 /// # let accounts = Vec::default();

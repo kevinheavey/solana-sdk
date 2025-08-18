@@ -2528,14 +2528,15 @@ dependencies = [
  "memoffset",
  "num-bigint",
  "num-traits",
+ "rand",
  "serde",
  "serde_derive",
  "sha3",
+ "solana-address",
  "solana-define-syscall",
  "solana-hash",
  "solana-logger",
  "solana-program-error",
- "solana-pubkey",
  "solana-sanitize",
  "solana-sdk-macro",
  "solana-sha256-hasher",
@@ -2550,14 +2551,6 @@ dependencies = [
  "num_enum",
  "serde",
  "serde_derive",
-]
-
-[[package]]
-name = "solana-pubkey"
-version = "3.0.0"
-dependencies = [
- "rand",
- "solana-address",
 ]
 
 [[package]]
@@ -2600,7 +2593,6 @@ dependencies = [
  "solana-hash",
  "solana-logger",
  "solana-program",
- "solana-pubkey",
  "solana-sanitize",
  "solana-sdk",
  "solana-sdk-macro",

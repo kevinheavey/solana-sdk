@@ -15,7 +15,7 @@
 
 use {
     super::account_info_inner::AccountInfo, super::instruction_inner::Instruction,
-    solana_program_error::ProgramResult, solana_pubkey::Pubkey,
+    solana_program_error::ProgramResult, super::pubkey::Pubkey,
 };
 #[cfg(target_os = "solana")]
 pub mod syscalls;
@@ -102,7 +102,7 @@ pub mod syscalls;
 /// use solana_account_info::{next_account_info, AccountInfo};
 /// use solana_program_entrypoint::entrypoint;
 /// use solana_program_error::ProgramResult;
-/// use solana_pubkey::Pubkey;
+/// use super::pubkey::Pubkey;
 /// use super::sdk_ids::system_program;
 /// use solana_system_interface::instruction as system_instruction;
 ///
@@ -194,7 +194,7 @@ pub fn invoke_unchecked(instruction: &Instruction, account_infos: &[AccountInfo]
 /// use solana_account_info::{next_account_info, AccountInfo};
 /// use solana_program_entrypoint::entrypoint;
 /// use solana_program_error::ProgramResult;
-/// use solana_pubkey::Pubkey;
+/// use super::pubkey::Pubkey;
 /// use super::sdk_ids::system_program;
 /// use solana_system_interface::instruction as system_instruction;
 ///

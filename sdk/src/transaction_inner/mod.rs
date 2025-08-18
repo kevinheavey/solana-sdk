@@ -61,7 +61,7 @@
 //! use solana_instruction::Instruction;
 //! use solana_keypair::Keypair;
 //! use solana_message::Message;
-//! use solana_pubkey::Pubkey;
+//! use solana_program::pubkey::Pubkey;
 //! use solana_rpc_client::rpc_client::RpcClient;
 //! use solana_signer::Signer;
 //! use solana_transaction::Transaction;
@@ -119,7 +119,7 @@ use {
     },
     solana_program::sdk_ids::system_program,
     solana_program::transaction_error_inner::{TransactionError, TransactionResult as Result},
-    solana_pubkey::Pubkey,
+    solana_program::pubkey::Pubkey,
     solana_sanitize::{Sanitize, SanitizeError},
     std::result,
 };
@@ -218,7 +218,7 @@ impl Transaction {
     /// use solana_instruction::Instruction;
     /// use solana_keypair::Keypair;
     /// use solana_message::Message;
-    /// use solana_pubkey::Pubkey;
+    /// use solana_program::pubkey::Pubkey;
     /// use solana_rpc_client::rpc_client::RpcClient;
     /// use solana_signer::Signer;
     /// use solana_transaction::Transaction;
@@ -296,7 +296,7 @@ impl Transaction {
     /// use solana_instruction::Instruction;
     /// use solana_keypair::Keypair;
     /// use solana_message::Message;
-    /// use solana_pubkey::Pubkey;
+    /// use solana_program::pubkey::Pubkey;
     /// use solana_rpc_client::rpc_client::RpcClient;
     /// use solana_signer::Signer;
     /// use solana_transaction::Transaction;
@@ -374,7 +374,7 @@ impl Transaction {
     /// use solana_instruction::Instruction;
     /// use solana_keypair::Keypair;
     /// use solana_message::Message;
-    /// use solana_pubkey::Pubkey;
+    /// use solana_program::pubkey::Pubkey;
     /// use solana_rpc_client::rpc_client::RpcClient;
     /// use solana_signer::Signer;
     /// use solana_transaction::Transaction;
@@ -449,7 +449,7 @@ impl Transaction {
     /// use solana_instruction::Instruction;
     /// use solana_keypair::Keypair;
     /// use solana_message::Message;
-    /// use solana_pubkey::Pubkey;
+    /// use solana_program::pubkey::Pubkey;
     /// use solana_rpc_client::rpc_client::RpcClient;
     /// use solana_signer::Signer;
     /// use solana_transaction::Transaction;
@@ -656,7 +656,7 @@ impl Transaction {
     /// use solana_instruction::Instruction;
     /// use solana_keypair::Keypair;
     /// use solana_message::Message;
-    /// use solana_pubkey::Pubkey;
+    /// use solana_program::pubkey::Pubkey;
     /// use solana_rpc_client::rpc_client::RpcClient;
     /// use solana_signer::Signer;
     /// use solana_transaction::Transaction;
@@ -793,7 +793,7 @@ impl Transaction {
     /// use solana_instruction::Instruction;
     /// use solana_keypair::Keypair;
     /// use solana_message::Message;
-    /// use solana_pubkey::Pubkey;
+    /// use solana_program::pubkey::Pubkey;
     /// use solana_rpc_client::rpc_client::RpcClient;
     /// use solana_signer::Signer;
     /// use solana_transaction::Transaction;

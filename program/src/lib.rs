@@ -287,7 +287,7 @@
 //! use solana_program_entrypoint::entrypoint;
 //! use solana_program_error::ProgramResult;
 //! use solana_cpi::invoke;
-//! use solana_pubkey::Pubkey;
+//! use super::pubkey::Pubkey;
 //! use solana_system_interface::instruction::transfer;
 //!
 //! entrypoint!(process_instruction);
@@ -332,7 +332,7 @@
 //! use solana_program_entrypoint::entrypoint;
 //! use solana_program_error::ProgramResult;
 //! use solana_cpi::invoke_signed;
-//! use solana_pubkey::Pubkey;
+//! use super::pubkey::Pubkey;
 //! use solana_system_interface::instruction::create_account;
 //!
 //! entrypoint!(process_instruction);
@@ -502,8 +502,8 @@ pub mod epoch_schedule_inner;
 pub mod epoch_stake_inner;
 pub mod example_mocks_inner;
 pub mod fee_calculator_inner;
-pub mod instruction_inner;
 pub mod instruction_error_inner;
+pub mod instruction_inner;
 pub mod instructions_sysvar_inner;
 pub mod keccak_hasher_inner;
 pub mod last_restart_slot_inner;
@@ -515,6 +515,7 @@ pub mod program_entrypoint_inner;
 pub mod program_memory_inner;
 pub mod program_option_inner;
 pub mod program_pack_inner;
+pub mod pubkey_inner;
 pub mod rent_inner;
 pub mod sdk_ids;
 pub mod secp256k1_recover_inner;
@@ -538,10 +539,14 @@ pub use blake3_hasher_inner as blake3;
 pub use borsh_inner::v1 as borsh1;
 #[deprecated(since = "2.1.0", note = "Use `solana-epoch-rewards` crate instead")]
 pub use epoch_rewards_inner as epoch_rewards;
+#[deprecated(since = "2.1.0", note = "Use `solana-fee-calculator` crate instead")]
+pub use fee_calculator_inner as fee_calculator;
 #[deprecated(since = "2.2.0", note = "Use `solana-keccak-hasher` crate instead")]
 pub use keccak_hasher_inner as keccak;
 #[deprecated(since = "2.1.0", note = "Use `solana-last-restart-slot` crate instead")]
 pub use last_restart_slot_inner as last_restart_slot;
+#[deprecated(since = "2.1.0", note = "Use `solana-program-memory` crate instead")]
+pub use program_memory_inner as program_memory;
 #[deprecated(since = "2.1.0", note = "Use `solana-program-pack` crate instead")]
 pub use program_pack_inner as program_pack;
 #[deprecated(since = "2.1.0", note = "Use `solana-secp256k1-recover` crate instead")]
@@ -552,10 +557,6 @@ pub use serde_varint_inner as serde_varint;
 pub use serialize_utils_inner as serialize_utils;
 #[deprecated(since = "2.1.0", note = "Use `solana-short-vec` crate instead")]
 pub use short_vec_inner as short_vec;
-#[deprecated(since = "2.1.0", note = "Use `solana-fee-calculator` crate instead")]
-pub use fee_calculator_inner as fee_calculator;
-#[deprecated(since = "2.1.0", note = "Use `solana-program-memory` crate instead")]
-pub use program_memory_inner as program_memory;
 #[deprecated(since = "2.1.0", note = "Use `solana-stable-layout` crate instead")]
 pub use stable_layout_inner as stable_layout;
 #[cfg(not(target_os = "solana"))]
@@ -564,8 +565,7 @@ pub use {
     account_info_inner::{self as account_info, debug_account_data},
     clock_inner as clock, native_token_inner as native_token,
     program_entrypoint_inner::{self as entrypoint},
-    program_option_inner as program_option, rent_inner as rent,
-    solana_pubkey as pubkey,
+    program_option_inner as program_option, pubkey_inner as pubkey, rent_inner as rent,
 };
 /// The [config native program][np].
 ///
@@ -576,7 +576,7 @@ pub mod config {
     }
 }
 
-pub use solana_pubkey::{declare_deprecated_id, declare_id, pubkey};
+pub use pubkey::pubkey;
 
 /// Convenience macro for doing integer division where the operation's safety
 /// can be checked at compile-time.

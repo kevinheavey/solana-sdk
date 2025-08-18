@@ -1,4 +1,4 @@
-use solana_pubkey::Pubkey;
+use super::super::pubkey::Pubkey;
 
 /// Describes a single account read or written by a program during instruction
 /// execution.
@@ -33,7 +33,7 @@ impl AccountMeta {
     /// # Examples
     ///
     /// ```
-    /// # use solana_pubkey::Pubkey;
+    /// # use super::pubkey::Pubkey;
     /// # use solana_instruction::{AccountMeta, Instruction};
     /// # use borsh::{BorshSerialize, BorshDeserialize};
     /// #
@@ -67,7 +67,7 @@ impl AccountMeta {
     /// # Examples
     ///
     /// ```
-    /// # use solana_pubkey::Pubkey;
+    /// # use super::pubkey::Pubkey;
     /// # use solana_instruction::{AccountMeta, Instruction};
     /// # use borsh::{BorshSerialize, BorshDeserialize};
     /// #

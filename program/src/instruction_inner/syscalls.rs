@@ -3,7 +3,7 @@ use super::Instruction;
 pub use {
     crate::{AccountMeta, ProcessedSiblingInstruction},
     solana_define_syscall::{define_syscall, definitions::sol_get_stack_height},
-    solana_pubkey::Pubkey,
+    super::pubkey::Pubkey,
 };
 
 #[cfg(target_os = "solana")]
@@ -25,7 +25,7 @@ pub fn get_processed_sibling_instruction(index: usize) -> Option<Instruction> {
     #[cfg(target_os = "solana")]
     {
         let mut meta = ProcessedSiblingInstruction::default();
-        let mut program_id = solana_pubkey::Pubkey::default();
+        let mut program_id = super::pubkey::Pubkey::default();
 
         if 1 == unsafe {
             sol_get_processed_sibling_instruction(

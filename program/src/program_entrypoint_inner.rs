@@ -4,7 +4,7 @@ extern crate alloc;
 use {
     alloc::vec::Vec,
     super::account_info::AccountInfo,
-    solana_pubkey::Pubkey,
+    super::pubkey::Pubkey,
     std::{
         alloc::Layout,
         mem::{size_of, MaybeUninit},
@@ -21,7 +21,7 @@ pub use {
     solana_define_syscall::definitions::{sol_log_ as __log, sol_panic_ as __panic},
     crate::msg as __msg,
     solana_program_error::ProgramResult,
-    solana_pubkey::Pubkey as __Pubkey,
+    super::pubkey::Pubkey as __Pubkey,
 };
 
 /// User implemented function to process an instruction
@@ -106,7 +106,7 @@ pub const NON_DUP_MARKER: u8 = u8::MAX;
 ///     use solana_program_entrypoint::entrypoint;
 ///     use solana_program_entrypoint::ProgramResult;
 ///     use solana_msg::msg;
-///     use solana_pubkey::Pubkey;
+///     use super::pubkey::Pubkey;
 ///
 ///     entrypoint!(process_instruction);
 ///

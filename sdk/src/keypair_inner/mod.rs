@@ -3,7 +3,7 @@
 use {
     ed25519_dalek::Signer as DalekSigner,
     rand::rngs::OsRng,
-    solana_pubkey::Pubkey,
+    super::pubkey::Pubkey,
     crate::seed_phrase_inner::generate_seed_from_seed_phrase_and_passphrase,
     crate::signature_inner::{error::Error as SignatureError, Signature},
     crate::signer_inner::{EncodableKey, EncodableKeypair, Signer, SignerError},

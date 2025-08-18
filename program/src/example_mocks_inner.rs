@@ -111,7 +111,7 @@ pub mod solana_rpc_client_nonce_utils {
 }
 
 pub mod solana_account {
-    use solana_pubkey::Pubkey;
+    use super::super::pubkey::Pubkey;
     #[derive(Clone)]
     pub struct Account {
         pub lamports: u64,
@@ -145,7 +145,7 @@ pub mod solana_signature {
 }
 
 pub mod solana_signer {
-    use {solana_pubkey::Pubkey, thiserror::Error};
+    use {super::super::pubkey::Pubkey, thiserror::Error};
 
     #[derive(Error, Debug)]
     #[error("mock-error")]
@@ -166,7 +166,7 @@ pub mod solana_signer {
 }
 
 pub mod solana_keypair {
-    use {super::solana_signer::Signer, solana_pubkey::Pubkey};
+    use {super::solana_signer::Signer, super::super::pubkey::Pubkey};
     pub struct Keypair;
 
     impl Keypair {
@@ -189,7 +189,7 @@ pub mod solana_transaction {
         super::solana_signer::{signers::Signers, SignerError},
         serde_derive::Serialize,
         solana_hash::Hash,
-        solana_pubkey::Pubkey,
+        super::super::pubkey::Pubkey,
     };
 
     pub mod versioned {
@@ -290,7 +290,7 @@ pub mod solana_sdk {
             solana_signer::{self as signer, signers},
         },
         solana_hash as hash,
-        solana_pubkey::{self as pubkey, Pubkey},
+        super::super::pubkey::{self as pubkey, Pubkey},
     };
 
     pub mod signature {

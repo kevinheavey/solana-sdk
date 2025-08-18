@@ -8,7 +8,7 @@ use {
     super::super::sdk_ids::system_program,
     super::{inline_nonce::is_advance_nonce_instruction_data, MessageHeader},
     core::fmt,
-    solana_pubkey::Pubkey,
+    super::super::pubkey::Pubkey,
     std::collections::BTreeMap,
 };
 

@@ -13,7 +13,7 @@
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 #![allow(clippy::arithmetic_side_effects)]
 
-use solana_pubkey::Pubkey;
+use super::pubkey::Pubkey;
 pub mod account_meta;
 pub use account_meta::AccountMeta;
 pub use super::instruction_error_inner as error;
@@ -99,7 +99,7 @@ impl Instruction {
     /// # Examples
     ///
     /// ```
-    /// # use solana_pubkey::Pubkey;
+    /// # use super::pubkey::Pubkey;
     /// # use solana_instruction::{AccountMeta, Instruction};
     /// # use serde::{Serialize, Deserialize};
     /// #
@@ -150,7 +150,7 @@ impl Instruction {
     /// # Examples
     ///
     /// ```
-    /// # use solana_pubkey::Pubkey;
+    /// # use super::pubkey::Pubkey;
     /// # use solana_instruction::{AccountMeta, Instruction};
     /// #
     /// # use borsh::{io::Error, BorshSerialize, BorshDeserialize};

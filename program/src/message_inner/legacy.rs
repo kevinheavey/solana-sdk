@@ -20,7 +20,7 @@ use {
         inline_nonce::advance_nonce_account_instruction, MessageHeader,
     },
     solana_hash::Hash,
-    solana_pubkey::Pubkey,
+    super::super::pubkey::Pubkey,
     solana_sanitize::{Sanitize, SanitizeError},
     std::{collections::HashSet, convert::TryFrom},
 };
@@ -135,7 +135,7 @@ impl Message {
     /// use solana_instruction::Instruction;
     /// use solana_keypair::Keypair;
     /// use solana_message::Message;
-    /// use solana_pubkey::Pubkey;
+    /// use super::pubkey::Pubkey;
     /// use solana_rpc_client::rpc_client::RpcClient;
     /// use solana_signer::Signer;
     /// use solana_transaction::Transaction;
@@ -206,7 +206,7 @@ impl Message {
     /// use solana_instruction::Instruction;
     /// use solana_keypair::Keypair;
     /// use solana_message::Message;
-    /// use solana_pubkey::Pubkey;
+    /// use super::pubkey::Pubkey;
     /// use solana_rpc_client::rpc_client::RpcClient;
     /// use solana_signer::Signer;
     /// use solana_transaction::Transaction;
@@ -303,7 +303,7 @@ impl Message {
     /// use solana_instruction::Instruction;
     /// use solana_keypair::Keypair;
     /// use solana_message::Message;
-    /// use solana_pubkey::Pubkey;
+    /// use super::pubkey::Pubkey;
     /// use solana_rpc_client::rpc_client::RpcClient;
     /// use solana_signer::Signer;
     /// use solana_transaction::Transaction;

@@ -2,7 +2,7 @@ use {
     super::super::slot_hashes::{get_entries, SlotHashes, MAX_ENTRIES},
     super::error::AddressLookupError,
     super::super::clock_inner::Slot,
-    solana_pubkey::Pubkey,
+    super::super::pubkey::Pubkey,
     std::borrow::Cow,
 };
 

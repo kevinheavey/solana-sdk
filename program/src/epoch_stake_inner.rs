@@ -4,7 +4,7 @@
 //! current epoch or the stake for a specific vote account using the
 //! `sol_get_epoch_stake` syscall.
 
-use solana_pubkey::Pubkey;
+use super::pubkey::Pubkey;
 
 fn get_epoch_stake(var_addr: *const u8) -> u64 {
     #[cfg(target_os = "solana")]

@@ -21,7 +21,7 @@
 //! # use solana_msg::msg;
 //! # use solana_sysvar::Sysvar;
 //! # use solana_program_error::{ProgramError, ProgramResult};
-//! # use solana_pubkey::Pubkey;
+//! # use super::pubkey::Pubkey;
 //! # use solana_rent::Rent;
 //! # use super::sdk_ids::sysvar::rent;
 //! fn process_instruction(
@@ -57,7 +57,7 @@
 //! # use solana_msg::msg;
 //! # use solana_sysvar::{Sysvar, SysvarSerialize};
 //! # use solana_program_error::{ProgramError, ProgramResult};
-//! # use solana_pubkey::Pubkey;
+//! # use super::pubkey::Pubkey;
 //! # use solana_rent::Rent;
 //! # use super::sdk_ids::sysvar::rent;
 //! #

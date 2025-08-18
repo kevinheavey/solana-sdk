@@ -20,7 +20,7 @@
 //! # use solana_msg::msg;
 //! # use solana_sysvar::Sysvar;
 //! # use solana_program_error::ProgramResult;
-//! # use solana_pubkey::Pubkey;
+//! # use super::pubkey::Pubkey;
 //! # use solana_last_restart_slot::LastRestartSlot;
 //!
 //! fn process_instruction(

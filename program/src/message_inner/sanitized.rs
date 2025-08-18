@@ -9,7 +9,7 @@ use {
         AccountKeys, AddressLoader, MessageHeader, SanitizedVersionedMessage, VersionedMessage,
     },
     solana_hash::Hash,
-    solana_pubkey::Pubkey,
+    super::super::super::pubkey::Pubkey,
     solana_sanitize::Sanitize,
     std::{borrow::Cow, collections::HashSet, convert::TryFrom},
 };

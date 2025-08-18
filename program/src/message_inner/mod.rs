@@ -119,6 +119,6 @@ pub struct MessageHeader {
 /// As used by the `crate::v0` message format.
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub struct AddressLookupTableAccount {
-    pub key: solana_pubkey::Pubkey,
-    pub addresses: Vec<solana_pubkey::Pubkey>,
+    pub key: super::pubkey::Pubkey,
+    pub addresses: Vec<super::pubkey::Pubkey>,
 }

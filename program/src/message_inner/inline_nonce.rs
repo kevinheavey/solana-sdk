@@ -3,7 +3,7 @@
 use {
     super::super::instruction_inner::{AccountMeta, Instruction},
     super::super::sdk_ids::{system_program, sysvar},
-    solana_pubkey::Pubkey,
+    super::super::pubkey::Pubkey,
 };
 
 /// Inlined `SystemInstruction::AdvanceNonceAccount` instruction data to avoid

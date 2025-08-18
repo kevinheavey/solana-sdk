@@ -8,7 +8,7 @@ use {
     super::account_info::{debug_account_data::*, AccountInfo},
     super::clock::{Epoch, INITIAL_RENT_EPOCH},
     solana_program::instruction_error_inner::LamportsError,
-    solana_pubkey::Pubkey,
+    solana_program::pubkey::Pubkey,
     solana_program::sdk_ids::{bpf_loader, bpf_loader_deprecated, bpf_loader_upgradeable, loader_v4},
     std::{
         cell::{Ref, RefCell},
@@ -47,7 +47,7 @@ mod account_serialize {
         super::super::clock::Epoch,
         super::ReadableAccount,
         serde::{ser::Serializer, Serialize},
-        solana_pubkey::Pubkey,
+        solana_program::pubkey::Pubkey,
     };
     #[repr(C)]
     #[derive(serde_derive::Serialize)]

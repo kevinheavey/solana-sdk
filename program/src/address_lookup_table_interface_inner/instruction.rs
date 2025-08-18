@@ -1,4 +1,4 @@
-use {super::super::clock_inner::Slot, solana_pubkey::Pubkey, super::super::sdk_ids::address_lookup_table::id};
+use {super::super::clock_inner::Slot, super::super::pubkey::Pubkey, super::super::sdk_ids::address_lookup_table::id};
 
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum ProgramInstruction {

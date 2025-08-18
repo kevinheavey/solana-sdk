@@ -8,7 +8,7 @@ use {
         AddressLoader, LegacyMessage, SanitizedMessage, SanitizedVersionedMessage,
         VersionedMessage,
     },
-    solana_pubkey::Pubkey,
+    solana_program::pubkey::Pubkey,
     solana_program::transaction_error_inner::{TransactionError, TransactionResult as Result},
     std::collections::HashSet,
 };

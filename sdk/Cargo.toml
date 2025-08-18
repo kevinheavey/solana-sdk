@@ -24,7 +24,7 @@ default = [
     "borsh",
     "full",  # functionality that is not compatible or needed for on-chain programs
 ]
-full = ["solana-pubkey/rand"]
+full = []
 borsh = ["solana-program/borsh"]
 dev-context-only-utils = ["solana-program/dev-context-only-utils"]
 
@@ -51,9 +51,6 @@ solana-epoch-info = { workspace = true, features = ["serde"] }
 solana-hash = { workspace = true }
 solana-logger = { workspace = true, optional = true }
 solana-program = { workspace = true }
-solana-pubkey = { workspace = true, default-features = false, features = [
-    "std",
-] }
 solana-sanitize = { workspace = true }
 solana-sdk-macro = { workspace = true }
 solana-sha256-hasher = { workspace = true, features = ["sha2"] }

@@ -24,7 +24,7 @@ use {
         AccountKeys,
     },
     solana_hash::Hash,
-    solana_pubkey::Pubkey,
+    super::super::super::super::pubkey::Pubkey,
     solana_sanitize::SanitizeError,
     std::collections::HashSet,
 };
@@ -201,7 +201,7 @@ impl Message {
     /// use solana_instruction::{AccountMeta, Instruction};
     /// use solana_keypair::Keypair;
     /// use solana_message::{AddressLookupTableAccount, VersionedMessage, v0};
-    /// use solana_pubkey::Pubkey;
+    /// use super::pubkey::Pubkey;
     /// use solana_rpc_client::rpc_client::RpcClient;
     /// use solana_signer::Signer;
     /// use solana_transaction::versioned::VersionedTransaction;

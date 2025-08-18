@@ -118,23 +118,6 @@ pub use solana_program::program_memory;
 pub use solana_program::serde_varint_inner as serde_varint;
 #[deprecated(since = "2.1.0", note = "Use `solana-short-vec` crate instead")]
 pub use solana_program::short_vec;
-#[deprecated(since = "2.1.0", note = "Use `solana_pubkey::pubkey` instead")]
-/// Convenience macro to define a static public key.
-///
-/// Input: a single literal base58 string representation of a Pubkey
-///
-/// # Example
-///
-/// ```
-/// use std::str::FromStr;
-/// use solana_program::{pubkey, pubkey::Pubkey};
-///
-/// static ID: Pubkey = pubkey!("My11111111111111111111111111111111111111111");
-///
-/// let my_id = Pubkey::from_str("My11111111111111111111111111111111111111111").unwrap();
-/// assert_eq!(ID, my_id);
-/// ```
-pub use solana_pubkey::pubkey;
 #[deprecated(since = "2.1.0", note = "Use `solana-sanitize` crate instead")]
 pub use solana_sanitize as sanitize;
 /// Same as `declare_id` except report that this id has been deprecated.

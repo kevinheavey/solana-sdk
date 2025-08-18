@@ -20,8 +20,9 @@
 
 /// Re-export types required for macros
 pub use {
-    solana_pubkey::{declare_deprecated_id, declare_id, Pubkey},
+    super::pubkey::Pubkey,
     super::sdk_ids::sysvar::{check_id, id, ID},
+    super::{declare_deprecated_id, declare_id},
 };
 
 /// A type that holds sysvar data and has an associated sysvar `Pubkey`.

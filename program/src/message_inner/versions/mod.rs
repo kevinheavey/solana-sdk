@@ -7,7 +7,7 @@ use {
         v0::MessageAddressTableLookup,
     },
     solana_hash::Hash,
-    solana_pubkey::Pubkey,
+    super::super::super::pubkey::Pubkey,
     solana_sanitize::{Sanitize, SanitizeError},
     std::collections::HashSet,
 };

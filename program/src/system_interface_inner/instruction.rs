@@ -39,7 +39,7 @@
 //! [`Instruction`]:
 //! https://docs.rs/solana-instruction/latest/solana_instruction/struct.Instruction.html
 
-use solana_pubkey::Pubkey;
+use super::super::pubkey::Pubkey;
 use {
     super::super::instruction_inner::{AccountMeta, Instruction},
     super::program::ID,
@@ -323,7 +323,7 @@ pub enum SystemInstruction {
 /// use solana_cpi::invoke_signed;
 /// use solana_program_entrypoint::entrypoint;
 /// use solana_program_error::ProgramResult;
-/// use solana_pubkey::Pubkey;
+/// use super::pubkey::Pubkey;
 /// use solana_system_interface::{instruction, program};
 /// use solana_sysvar::{rent::Rent, Sysvar};
 ///
@@ -464,7 +464,7 @@ pub fn create_account_with_seed(
 /// ```
 /// # use solana_example_mocks::{solana_sdk, solana_rpc_client};
 /// use solana_rpc_client::rpc_client::RpcClient;
-/// use solana_pubkey::Pubkey;
+/// use super::pubkey::Pubkey;
 /// use solana_sdk::{
 ///     signature::{Keypair, Signer},
 ///     transaction::Transaction,
@@ -536,7 +536,7 @@ pub fn create_account_with_seed(
 /// use solana_cpi::invoke_signed;
 /// use solana_program_entrypoint::entrypoint;
 /// use solana_program_error::ProgramResult;
-/// use solana_pubkey::Pubkey;
+/// use super::pubkey::Pubkey;
 /// use solana_system_interface::{instruction, program};
 /// use solana_sysvar::{rent::Rent, Sysvar};
 ///
@@ -655,7 +655,7 @@ pub fn assign_with_seed(
 /// ```
 /// # use solana_example_mocks::{solana_sdk, solana_rpc_client};
 /// use solana_rpc_client::rpc_client::RpcClient;
-/// use solana_pubkey::Pubkey;
+/// use super::pubkey::Pubkey;
 /// use solana_sdk::{
 ///     signature::{Keypair, Signer},
 ///     transaction::Transaction,
@@ -727,7 +727,7 @@ pub fn assign_with_seed(
 /// use solana_cpi::invoke_signed;
 /// use solana_program_entrypoint::entrypoint;
 /// use solana_program_error::ProgramResult;
-/// use solana_pubkey::Pubkey;
+/// use super::pubkey::Pubkey;
 /// use solana_system_interface::{instruction, program};
 /// use solana_sysvar::{rent::Rent, Sysvar};
 ///
@@ -852,7 +852,7 @@ pub fn transfer_with_seed(
 /// ```
 /// # use solana_example_mocks::{solana_sdk, solana_rpc_client};
 /// use solana_rpc_client::rpc_client::RpcClient;
-/// use solana_pubkey::Pubkey;
+/// use super::pubkey::Pubkey;
 /// use solana_sdk::{
 ///     signature::{Keypair, Signer},
 ///     transaction::Transaction,
@@ -924,7 +924,7 @@ pub fn transfer_with_seed(
 /// use solana_cpi::invoke_signed;
 /// use solana_program_entrypoint::entrypoint;
 /// use solana_program_error::ProgramResult;
-/// use solana_pubkey::Pubkey;
+/// use super::pubkey::Pubkey;
 /// use solana_system_interface::{instruction, program};
 /// use solana_sysvar::{rent::Rent, Sysvar};
 ///
@@ -1036,7 +1036,7 @@ pub fn allocate_with_seed(
 /// ```
 /// # use solana_example_mocks::{solana_sdk, solana_rpc_client};
 /// use solana_rpc_client::rpc_client::RpcClient;
-/// use solana_pubkey::Pubkey;
+/// use super::pubkey::Pubkey;
 /// use solana_sdk::{
 ///     signature::{Keypair, Signer},
 ///     transaction::Transaction,
@@ -1095,7 +1095,7 @@ pub fn allocate_with_seed(
 /// use solana_cpi::invoke_signed;
 /// use solana_program_entrypoint::entrypoint;
 /// use solana_program_error::ProgramResult;
-/// use solana_pubkey::Pubkey;
+/// use super::pubkey::Pubkey;
 /// use solana_system_interface::{instruction, program};
 ///
 /// /// # Accounts
@@ -1371,7 +1371,7 @@ pub fn create_nonce_account(
 /// # use solana_example_mocks::solana_rpc_client_nonce_utils;
 /// # use solana_sdk::account::Account;
 /// use solana_rpc_client::rpc_client::RpcClient;
-/// use solana_pubkey::Pubkey;
+/// use super::pubkey::Pubkey;
 /// use solana_sdk::{
 ///     message::Message,
 ///     signature::{Keypair, Signer},
@@ -1488,7 +1488,7 @@ pub fn advance_nonce_account(nonce_pubkey: &Pubkey, authorized_pubkey: &Pubkey) 
 /// # use solana_example_mocks::solana_sdk;
 /// # use solana_example_mocks::solana_rpc_client;
 /// use solana_rpc_client::rpc_client::RpcClient;
-/// use solana_pubkey::Pubkey;
+/// use super::pubkey::Pubkey;
 /// use solana_sdk::{
 ///     signature::{Keypair, Signer},
 ///     transaction::Transaction,
@@ -1571,7 +1571,7 @@ pub fn withdraw_nonce_account(
 /// # use solana_example_mocks::solana_sdk;
 /// # use solana_example_mocks::solana_rpc_client;
 /// use solana_rpc_client::rpc_client::RpcClient;
-/// use solana_pubkey::Pubkey;
+/// use super::pubkey::Pubkey;
 /// use solana_sdk::{
 ///     signature::{Keypair, Signer},
 ///     transaction::Transaction,
