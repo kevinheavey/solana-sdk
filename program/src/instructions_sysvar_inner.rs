@@ -30,8 +30,6 @@
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 #![allow(clippy::arithmetic_side_effects)]
 
-#[cfg(feature = "dev-context-only-utils")]
-use qualifier_attr::qualifiers;
 pub use solana_sdk_ids::sysvar::instructions::{check_id, id, ID};
 #[cfg(not(target_os = "solana"))]
 use {
@@ -107,7 +105,6 @@ bitflags! {
 // - A = number of accounts in a particular instruction
 // - D = data_len
 #[cfg(not(target_os = "solana"))]
-#[cfg_attr(feature = "dev-context-only-utils", qualifiers(pub))]
 fn serialize_instructions(instructions: &[BorrowedInstruction]) -> Vec<u8> {
     // 64 bytes is a reasonable guess, calculating exactly is slower in benchmarks
     let mut data = Vec::with_capacity(instructions.len() * (32 * 2));
@@ -185,7 +182,6 @@ pub fn store_current_index_checked(
     Ok(())
 }
 
-#[cfg_attr(feature = "dev-context-only-utils", qualifiers(pub))]
 fn deserialize_instruction(index: usize, data: &[u8]) -> Result<Instruction, SanitizeError> {
     const IS_SIGNER_BIT: usize = 0;
     const IS_WRITABLE_BIT: usize = 1;
@@ -237,7 +233,6 @@ fn deserialize_instruction(index: usize, data: &[u8]) -> Result<Instruction, San
 ///
 /// Unsafe because the sysvar accounts address is not checked; only used
 /// internally after such a check.
-#[cfg_attr(feature = "dev-context-only-utils", qualifiers(pub))]
 fn load_instruction_at(index: usize, data: &[u8]) -> Result<Instruction, SanitizeError> {
     deserialize_instruction(index, data)
 }

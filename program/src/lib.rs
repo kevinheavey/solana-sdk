@@ -493,6 +493,7 @@ pub mod sysvar;
 pub mod address_lookup_table_interface_inner;
 pub mod cpi_inner;
 pub mod example_mocks_inner;
+pub mod instructions_sysvar_inner;
 pub mod message_inner;
 pub mod sysvar_inner;
 pub mod transaction_error_inner;
