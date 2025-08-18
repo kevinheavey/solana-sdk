@@ -129,7 +129,7 @@ use {
 };
 use {
     serde_derive::{Deserialize, Serialize},
-    solana_short_vec as short_vec,
+    solana_program::short_vec,
 };
 
 pub mod sanitized;

@@ -14,9 +14,3 @@ targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
 serde = { workspace = true }
-
-[dev-dependencies]
-bincode = { workspace = true }
-rand = { workspace = true }
-serde_derive = { workspace = true }
-solana-short-vec = { workspace = true }

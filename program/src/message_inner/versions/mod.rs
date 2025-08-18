@@ -1,8 +1,8 @@
 use {
     super::{
         super::{
-            compiled_instruction::CompiledInstruction, legacy::Message as LegacyMessage,
-            MessageHeader,
+            super::short_vec, compiled_instruction::CompiledInstruction,
+            legacy::Message as LegacyMessage, MessageHeader,
         },
         v0::MessageAddressTableLookup,
     },
@@ -258,10 +258,10 @@ impl<'de> serde::Deserialize<'de> for VersionedMessage {
                         struct RemainingLegacyMessage {
                             pub num_readonly_signed_accounts: u8,
                             pub num_readonly_unsigned_accounts: u8,
-                            #[serde(with = "solana_short_vec")]
+                            #[serde(with = "short_vec")]
                             pub account_keys: Vec<Pubkey>,
                             pub recent_blockhash: Hash,
-                            #[serde(with = "solana_short_vec")]
+                            #[serde(with = "short_vec")]
                             pub instructions: Vec<CompiledInstruction>,
                         }
 

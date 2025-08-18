@@ -507,6 +507,7 @@ pub mod native_token_inner;
 pub mod program_entrypoint_inner;
 pub mod rent_inner;
 pub mod secp256k1_recover_inner;
+pub mod short_vec_inner;
 pub mod sysvar_inner;
 pub mod transaction_error_inner;
 
@@ -536,7 +537,7 @@ pub use solana_serde_varint as serde_varint;
 #[deprecated(since = "2.1.0", note = "Use `solana-serialize-utils` crate instead")]
 pub use solana_serialize_utils as serialize_utils;
 #[deprecated(since = "2.1.0", note = "Use `solana-short-vec` crate instead")]
-pub use solana_short_vec as short_vec;
+pub use short_vec_inner as short_vec;
 #[deprecated(since = "2.1.0", note = "Use `solana-stable-layout` crate instead")]
 pub use solana_stable_layout as stable_layout;
 #[cfg(not(target_os = "solana"))]

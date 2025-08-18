@@ -44,7 +44,6 @@ members = [
     "serde-varint",
     "serialize-utils",
     "sha256-hasher",
-    "short-vec",
     "signer-store",
     "slot-hashes",
     "slot-history",
@@ -203,7 +202,6 @@ solana-secp256r1-program = { path = "secp256r1-program", version = "3.0.0", defa
 solana-serde-varint = { path = "serde-varint", version = "3.0.0" }
 solana-serialize-utils = { path = "serialize-utils", version = "3.0.0" }
 solana-sha256-hasher = { path = "sha256-hasher", version = "3.0.0" }
-solana-short-vec = { path = "short-vec", version = "3.0.0" }
 solana-signer-store = { path = "signer-store", version = "0.1.0" }
 solana-slot-hashes = { path = "slot-hashes", version = "3.0.0" }
 solana-slot-history = { path = "slot-history", version = "3.0.0" }

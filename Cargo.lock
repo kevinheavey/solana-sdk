@@ -254,12 +254,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7c02d123df017efcdfbd739ef81735b36c5ba83ec3c59c80a9d7ecc718f92e50"
 
 [[package]]
-name = "assert_matches"
-version = "1.5.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9b34d609dfbaf33d6889b2b7106d3ca345eacad44200913df5ba02bfd31d2ba9"
-
-[[package]]
 name = "async-compression"
 version = "0.4.18"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2821,7 +2815,6 @@ dependencies = [
  "solana-serde-varint",
  "solana-serialize-utils",
  "solana-sha256-hasher",
- "solana-short-vec",
  "solana-slot-hashes",
  "solana-slot-history",
  "solana-stable-layout",
@@ -2920,7 +2913,6 @@ dependencies = [
  "solana-sdk-macro",
  "solana-serde-varint",
  "solana-sha256-hasher",
- "solana-short-vec",
  "thiserror",
  "uriparse",
 ]
@@ -2956,11 +2948,7 @@ dependencies = [
 name = "solana-serde-varint"
 version = "3.0.0"
 dependencies = [
- "bincode",
- "rand",
  "serde",
- "serde_derive",
- "solana-short-vec",
 ]
 
 [[package]]
@@ -2984,18 +2972,6 @@ dependencies = [
  "solana-define-syscall",
  "solana-hash",
  "solana-sha256-hasher",
-]
-
-[[package]]
-name = "solana-short-vec"
-version = "3.0.0"
-dependencies = [
- "assert_matches",
- "bincode",
- "serde",
- "serde_json",
- "solana-frozen-abi",
- "solana-frozen-abi-macro",
 ]
 
 [[package]]

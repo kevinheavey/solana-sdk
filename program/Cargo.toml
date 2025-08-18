@@ -37,7 +37,6 @@ frozen-abi = [
     "solana-hash/frozen-abi",
     "solana-instruction/frozen-abi",
     "solana-pubkey/frozen-abi",
-    "solana-short-vec/frozen-abi",
 ]
 
 [dependencies]
@@ -84,7 +83,6 @@ solana-sdk-macro = { workspace = true }
 solana-serde-varint = { workspace = true }
 solana-serialize-utils = { workspace = true }
 solana-sha256-hasher = { workspace = true, features = ["sha2"] }
-solana-short-vec = { workspace = true }
 solana-slot-hashes = { workspace = true, features = ["serde", "sysvar"] }
 solana-slot-history = { workspace = true, features = ["serde", "sysvar"] }
 solana-stable-layout = { workspace = true }

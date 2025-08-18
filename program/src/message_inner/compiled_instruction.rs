@@ -1,5 +1,6 @@
 use serde_derive::{Deserialize, Serialize};
 use {solana_pubkey::Pubkey, solana_sanitize::Sanitize};
+use super::super::short_vec;
 
 /// A compact encoding of an instruction.
 ///
@@ -14,10 +15,10 @@ pub struct CompiledInstruction {
     /// Index into the transaction keys array indicating the program account that executes this instruction.
     pub program_id_index: u8,
     /// Ordered indices into the transaction keys array indicating which accounts to pass to the program.
-    #[serde(with = "solana_short_vec")]
+    #[serde(with = "short_vec")]
     pub accounts: Vec<u8>,
     /// The program input data.
-    #[serde(with = "solana_short_vec")]
+    #[serde(with = "short_vec")]
     pub data: Vec<u8>,
 }
 

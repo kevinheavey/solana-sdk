@@ -162,7 +162,7 @@ pub use serde_inner as deserialize_utils;
 #[deprecated(since = "2.1.0", note = "Use `solana-serde-varint` crate instead")]
 pub use solana_serde_varint as serde_varint;
 #[deprecated(since = "2.1.0", note = "Use `solana-short-vec` crate instead")]
-pub use solana_short_vec as short_vec;
+pub use solana_program::short_vec;
 #[deprecated(since = "2.2.0", note = "Use `solana-time-utils` crate instead")]
 pub use time_utils_inner as timing;
 #[cfg(feature = "full")]

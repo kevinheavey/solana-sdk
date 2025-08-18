@@ -14,7 +14,7 @@
 use serde_derive::{Deserialize, Serialize};
 use {
     super::{
-        compiled_instruction::CompiledInstruction, compiled_keys::CompiledKeys,
+        super::short_vec, compiled_instruction::CompiledInstruction, compiled_keys::CompiledKeys,
         inline_nonce::advance_nonce_account_instruction, MessageHeader,
     },
     solana_hash::Hash,
@@ -68,7 +68,7 @@ pub struct Message {
     pub header: MessageHeader,
 
     /// All the account keys used by this transaction.
-    #[serde(with = "solana_short_vec")]
+    #[serde(with = "short_vec")]
     pub account_keys: Vec<Pubkey>,
 
     /// The id of a recent ledger entry.
@@ -76,7 +76,7 @@ pub struct Message {
 
     /// Programs that will be executed in sequence and committed in one atomic transaction if all
     /// succeed.
-    #[serde(with = "solana_short_vec")]
+    #[serde(with = "short_vec")]
     pub instructions: Vec<CompiledInstruction>,
 }
 

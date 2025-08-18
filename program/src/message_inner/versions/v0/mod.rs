@@ -14,6 +14,7 @@ use serde_derive::{Deserialize, Serialize};
 use {
     super::super::{
         super::{
+            super::short_vec,
             compiled_instruction::CompiledInstruction,
             compiled_keys::{CompileError, CompiledKeys},
             AddressLookupTableAccount, MessageHeader,
@@ -37,10 +38,10 @@ pub struct MessageAddressTableLookup {
     /// Address lookup table account key
     pub account_key: Pubkey,
     /// List of indexes used to load writable account addresses
-    #[serde(with = "solana_short_vec")]
+    #[serde(with = "short_vec")]
     pub writable_indexes: Vec<u8>,
     /// List of indexes used to load readonly account addresses
-    #[serde(with = "solana_short_vec")]
+    #[serde(with = "short_vec")]
     pub readonly_indexes: Vec<u8>,
 }
 
@@ -59,7 +60,7 @@ pub struct Message {
     pub header: MessageHeader,
 
     /// List of accounts loaded by this transaction.
-    #[serde(with = "solana_short_vec")]
+    #[serde(with = "short_vec")]
     pub account_keys: Vec<Pubkey>,
 
     /// The blockhash of a recent block.
@@ -78,12 +79,12 @@ pub struct Message {
     ///   1) message `account_keys`
     ///   2) ordered list of keys loaded from `writable` lookup table indexes
     ///   3) ordered list of keys loaded from `readable` lookup table indexes
-    #[serde(with = "solana_short_vec")]
+    #[serde(with = "short_vec")]
     pub instructions: Vec<CompiledInstruction>,
 
     /// List of address table lookups used to load additional accounts
     /// for this transaction.
-    #[serde(with = "solana_short_vec")]
+    #[serde(with = "short_vec")]
     pub address_table_lookups: Vec<MessageAddressTableLookup>,
 }
 

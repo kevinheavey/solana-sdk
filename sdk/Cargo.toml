@@ -27,7 +27,7 @@ default = [
 full = ["solana-pubkey/rand"]
 borsh = ["solana-program/borsh"]
 dev-context-only-utils = ["solana-program/dev-context-only-utils"]
-frozen-abi = ["solana-program/frozen-abi", "solana-short-vec/frozen-abi"]
+frozen-abi = ["solana-program/frozen-abi"]
 
 [dependencies]
 bincode = { workspace = true }
@@ -67,7 +67,6 @@ solana-sdk-ids = { workspace = true }
 solana-sdk-macro = { workspace = true }
 solana-serde-varint = { workspace = true }
 solana-sha256-hasher = { workspace = true, features = ["sha2"] }
-solana-short-vec = { workspace = true }
 thiserror = { workspace = true }
 uriparse = { workspace = true }
 
