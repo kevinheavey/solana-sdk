@@ -45,7 +45,6 @@ members = [
     "serialize-utils",
     "sha256-hasher",
     "signer-store",
-    "slot-history",
     "stable-layout",
     "system-interface",
     "sysvar-id",
@@ -202,7 +201,6 @@ solana-serde-varint = { path = "serde-varint", version = "3.0.0" }
 solana-serialize-utils = { path = "serialize-utils", version = "3.0.0" }
 solana-sha256-hasher = { path = "sha256-hasher", version = "3.0.0" }
 solana-signer-store = { path = "signer-store", version = "0.1.0" }
-solana-slot-history = { path = "slot-history", version = "3.0.0" }
 solana-stable-layout = { path = "stable-layout", version = "3.0.0" }
 solana-system-interface = { path = "system-interface", version = "2.0" }
 solana-sysvar-id = { path = "sysvar-id", version = "3.0.0" }

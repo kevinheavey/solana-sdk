@@ -9,18 +9,13 @@
 #![allow(clippy::arithmetic_side_effects)]
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 
-#[cfg(feature = "sysvar")]
 pub mod sysvar;
 
 use bv::{BitVec, BitsMut};
 
 /// A bitvector indicating which slots are present in the past epoch.
 #[repr(C)]
-#[cfg_attr(
-    feature = "serde",
-    derive(serde_derive::Deserialize, serde_derive::Serialize)
-)]
-#[derive(Clone, PartialEq, Eq)]
+#[derive(Clone, PartialEq, Eq, serde_derive::Deserialize, serde_derive::Serialize)]
 pub struct SlotHistory {
     pub bits: BitVec<u64>,
     pub next_slot: u64,

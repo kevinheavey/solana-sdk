@@ -50,10 +50,10 @@
 use super::Sysvar;
 use super::SysvarSerialize;
 pub use {
+    super::super::slot_history_inner::SlotHistory,
     solana_account_info::AccountInfo,
     solana_program_error::ProgramError,
     solana_sdk_ids::sysvar::slot_history::{check_id, id, ID},
-    solana_slot_history::SlotHistory,
 };
 impl Sysvar for SlotHistory {}
 impl SysvarSerialize for SlotHistory {

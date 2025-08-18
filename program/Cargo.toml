@@ -43,6 +43,7 @@ frozen-abi = [
 borsh = { workspace = true, optional = true }
 bytemuck = { workspace = true }
 bytemuck_derive = { workspace = true }
+bv = { workspace = true }
 memoffset = { workspace = true }
 serde = { workspace = true }
 serde_derive = { workspace = true }
@@ -83,7 +84,6 @@ solana-sdk-macro = { workspace = true }
 solana-serde-varint = { workspace = true }
 solana-serialize-utils = { workspace = true }
 solana-sha256-hasher = { workspace = true, features = ["sha2"] }
-solana-slot-history = { workspace = true, features = ["serde", "sysvar"] }
 solana-stable-layout = { workspace = true }
 solana-system-interface = { workspace = true, features = ["bincode"] }
 solana-sysvar-id = { workspace = true }
