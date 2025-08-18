@@ -27,7 +27,6 @@ default = [
 full = ["solana-pubkey/rand"]
 borsh = ["solana-program/borsh"]
 dev-context-only-utils = ["solana-program/dev-context-only-utils"]
-frozen-abi = ["solana-program/frozen-abi"]
 
 [dependencies]
 bincode = { workspace = true }
@@ -49,8 +48,6 @@ serde_derive = { workspace = true }
 sha2 = { workspace = true }
 siphasher = { workspace = true }
 solana-epoch-info = { workspace = true, features = ["serde"] }
-solana-frozen-abi = { workspace = true, optional = true }
-solana-frozen-abi-macro = { workspace = true, optional = true }
 solana-hash = { workspace = true }
 solana-logger = { workspace = true, optional = true }
 solana-program = { workspace = true }
