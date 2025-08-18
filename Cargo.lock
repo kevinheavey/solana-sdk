@@ -3068,22 +3068,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-packet"
-version = "3.0.0"
-dependencies = [
- "bincode",
- "bitflags 2.8.0",
- "cfg_eval",
- "serde",
- "serde_derive",
- "serde_with",
- "solana-frozen-abi",
- "solana-frozen-abi-macro",
- "solana-packet",
- "static_assertions",
-]
-
-[[package]]
 name = "solana-poh-config"
 version = "3.0.0"
 dependencies = [
@@ -3231,6 +3215,7 @@ name = "solana-sdk"
 version = "2.3.0"
 dependencies = [
  "bincode",
+ "bitflags 2.8.0",
  "bs58",
  "derivation-path",
  "ed25519-dalek",
@@ -3258,7 +3243,6 @@ dependencies = [
  "solana-instructions-sysvar",
  "solana-logger",
  "solana-message",
- "solana-packet",
  "solana-program",
  "solana-program-memory",
  "solana-pubkey",

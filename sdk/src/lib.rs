@@ -69,6 +69,7 @@ mod hard_forks_inner;
 pub mod inflation_inner;
 mod keypair_inner;
 pub mod offchain_message_inner;
+pub mod packet_inner;
 pub mod presigner_inner;
 mod seed_derivable_inner;
 mod seed_phrase_inner;

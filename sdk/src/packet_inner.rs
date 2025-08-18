@@ -1,14 +1,6 @@
 //! The definition of a Solana network packet.
-#![cfg_attr(feature = "frozen-abi", feature(min_specialization))]
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 
-#[cfg(feature = "frozen-abi")]
-use solana_frozen_abi_macro::AbiExample;
-#[cfg(feature = "bincode")]
-use {
-    bincode::{Options, Result},
-    std::io::Write,
-};
 use {
     bitflags::bitflags,
     std::{
@@ -17,35 +9,14 @@ use {
         slice::SliceIndex,
     },
 };
-#[cfg(feature = "serde")]
-use {
-    serde_derive::{Deserialize, Serialize},
-    serde_with::{serde_as, Bytes},
-};
-
-#[cfg(test)]
-static_assertions::const_assert_eq!(PACKET_DATA_SIZE, 1232);
 /// Maximum over-the-wire size of a Transaction
 ///   1280 is IPv6 minimum MTU
 ///   40 bytes is the size of the IPv6 header
 ///   8 bytes is the size of the fragment header
 pub const PACKET_DATA_SIZE: usize = 1280 - 40 - 8;
 
-#[cfg(feature = "bincode")]
-pub trait Encode {
-    fn encode<W: Write>(&self, writer: W) -> Result<()>;
-}
-
-#[cfg(feature = "bincode")]
-impl<T: ?Sized + serde::Serialize> Encode for T {
-    fn encode<W: Write>(&self, writer: W) -> Result<()> {
-        bincode::serialize_into::<W, T>(writer, self)
-    }
-}
-
 bitflags! {
     #[repr(C)]
-    #[cfg_attr(feature = "serde", derive(Deserialize, Serialize))]
     #[derive(Copy, Clone, Debug, PartialEq, Eq)]
     pub struct PacketFlags: u8 {
         const DISCARD        = 0b0000_0001;
@@ -63,8 +34,6 @@ bitflags! {
     }
 }
 
-#[cfg_attr(feature = "frozen-abi", derive(AbiExample))]
-#[cfg_attr(feature = "serde", derive(Deserialize, Serialize))]
 #[derive(Clone, Debug, PartialEq, Eq)]
 #[repr(C)]
 pub struct Meta {
@@ -72,21 +41,6 @@ pub struct Meta {
     pub addr: IpAddr,
     pub port: u16,
     pub flags: PacketFlags,
-}
-
-#[cfg(feature = "frozen-abi")]
-impl ::solana_frozen_abi::abi_example::AbiExample for PacketFlags {
-    fn example() -> Self {
-        Self::empty()
-    }
-}
-
-#[cfg(feature = "frozen-abi")]
-impl ::solana_frozen_abi::abi_example::TransparentAsHelper for PacketFlags {}
-
-#[cfg(feature = "frozen-abi")]
-impl ::solana_frozen_abi::abi_example::EvenAsOpaque for PacketFlags {
-    const TYPE_NAME_MATCHER: &'static str = "::_::InternalBitFlags";
 }
 
 // serde_as is used as a work around because array isn't supported by serde
@@ -117,15 +71,10 @@ impl ::solana_frozen_abi::abi_example::EvenAsOpaque for PacketFlags {
 //
 // We use the cfg_eval crate as advised by the serde_with guide:
 // https://docs.rs/serde_with/latest/serde_with/guide/serde_as/index.html#gating-serde_as-on-features
-#[cfg_attr(feature = "serde", cfg_eval::cfg_eval, serde_as)]
-#[cfg_attr(feature = "frozen-abi", derive(AbiExample))]
-#[cfg_attr(feature = "serde", derive(Deserialize, Serialize))]
-#[derive(Clone, Eq)]
 #[repr(C)]
 pub struct Packet {
     // Bytes past Packet.meta.size are not valid to read from.
     // Use Packet.data(index) to read from the buffer.
-    #[cfg_attr(feature = "serde", serde_as(as = "Bytes"))]
     buffer: [u8; PACKET_DATA_SIZE],
     meta: Meta,
 }
@@ -172,43 +121,6 @@ impl Packet {
     #[inline]
     pub fn meta_mut(&mut self) -> &mut Meta {
         &mut self.meta
-    }
-
-    #[cfg(feature = "bincode")]
-    pub fn from_data<T: Encode>(dest: Option<&SocketAddr>, data: T) -> Result<Self> {
-        let mut packet = Self::default();
-        Self::populate_packet(&mut packet, dest, &data)?;
-        Ok(packet)
-    }
-
-    #[cfg(feature = "bincode")]
-    pub fn populate_packet<T: Encode>(
-        &mut self,
-        dest: Option<&SocketAddr>,
-        data: &T,
-    ) -> Result<()> {
-        debug_assert!(!self.meta.discard());
-        let mut wr = std::io::Cursor::new(self.buffer_mut());
-        <T as Encode>::encode(data, &mut wr)?;
-        self.meta.size = wr.position() as usize;
-        if let Some(dest) = dest {
-            self.meta.set_socket_addr(dest);
-        }
-        Ok(())
-    }
-
-    #[cfg(feature = "bincode")]
-    pub fn deserialize_slice<T, I>(&self, index: I) -> Result<T>
-    where
-        T: serde::de::DeserializeOwned,
-        I: SliceIndex<[u8], Output = [u8]>,
-    {
-        let bytes = self.data(index).ok_or(bincode::ErrorKind::SizeLimit)?;
-        bincode::options()
-            .with_limit(PACKET_DATA_SIZE as u64)
-            .with_fixint_encoding()
-            .reject_trailing_bytes()
-            .deserialize(bytes)
     }
 }
 
@@ -310,49 +222,5 @@ impl Default for Meta {
             port: 0,
             flags: PacketFlags::empty(),
         }
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_deserialize_slice() {
-        let p = Packet::from_data(None, u32::MAX).unwrap();
-        assert_eq!(p.deserialize_slice(..).ok(), Some(u32::MAX));
-        assert_eq!(p.deserialize_slice(0..4).ok(), Some(u32::MAX));
-        assert_eq!(
-            p.deserialize_slice::<u16, _>(0..4)
-                .map_err(|e| e.to_string()),
-            Err("Slice had bytes remaining after deserialization".to_string()),
-        );
-        assert_eq!(
-            p.deserialize_slice::<u32, _>(0..0)
-                .map_err(|e| e.to_string()),
-            Err("io error: unexpected end of file".to_string()),
-        );
-        assert_eq!(
-            p.deserialize_slice::<u32, _>(0..1)
-                .map_err(|e| e.to_string()),
-            Err("io error: unexpected end of file".to_string()),
-        );
-        assert_eq!(
-            p.deserialize_slice::<u32, _>(0..5)
-                .map_err(|e| e.to_string()),
-            Err("the size limit has been reached".to_string()),
-        );
-        #[allow(clippy::reversed_empty_ranges)]
-        let reversed_empty_range = 4..0;
-        assert_eq!(
-            p.deserialize_slice::<u32, _>(reversed_empty_range)
-                .map_err(|e| e.to_string()),
-            Err("the size limit has been reached".to_string()),
-        );
-        assert_eq!(
-            p.deserialize_slice::<u32, _>(4..5)
-                .map_err(|e| e.to_string()),
-            Err("the size limit has been reached".to_string()),
-        );
     }
 }
