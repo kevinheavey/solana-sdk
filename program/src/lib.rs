@@ -508,6 +508,7 @@ pub mod program_entrypoint_inner;
 pub mod rent_inner;
 pub mod secp256k1_recover_inner;
 pub mod serde_varint_inner;
+pub mod serialize_utils_inner;
 pub mod short_vec_inner;
 pub mod slot_hashes_inner;
 pub mod slot_history_inner;
@@ -539,7 +540,7 @@ pub use secp256k1_recover_inner as secp256k1_recover;
 #[deprecated(since = "2.1.0", note = "Use `solana-serde-varint` crate instead")]
 pub use serde_varint_inner as serde_varint;
 #[deprecated(since = "2.1.0", note = "Use `solana-serialize-utils` crate instead")]
-pub use solana_serialize_utils as serialize_utils;
+pub use serialize_utils_inner as serialize_utils;
 #[deprecated(since = "2.1.0", note = "Use `solana-short-vec` crate instead")]
 pub use short_vec_inner as short_vec;
 #[deprecated(since = "2.1.0", note = "Use `solana-stable-layout` crate instead")]

@@ -35,7 +35,7 @@ pub use solana_sdk_ids::sysvar::instructions::{check_id, id, ID};
 use {
     bitflags::bitflags,
     solana_instruction::BorrowedInstruction,
-    solana_serialize_utils::{append_slice, append_u16, append_u8},
+    super::serialize_utils_inner::{append_slice, append_u16, append_u8},
 };
 use {
     solana_account_info::AccountInfo,
@@ -43,7 +43,7 @@ use {
     solana_instruction_error::InstructionError,
     solana_program_error::ProgramError,
     solana_sanitize::SanitizeError,
-    solana_serialize_utils::{read_pubkey, read_slice, read_u16, read_u8},
+    super::serialize_utils_inner::{read_pubkey, read_slice, read_u16, read_u8},
 };
 
 /// Instructions sysvar, dummy type.

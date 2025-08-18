@@ -2779,7 +2779,6 @@ dependencies = [
  "solana-sanitize",
  "solana-sdk-ids",
  "solana-sdk-macro",
- "solana-serialize-utils",
  "solana-sha256-hasher",
  "solana-stable-layout",
  "solana-sysvar-id",
@@ -2904,19 +2903,6 @@ dependencies = [
  "openssl",
  "solana-instruction",
  "solana-sdk-ids",
-]
-
-[[package]]
-name = "solana-serialize-utils"
-version = "3.0.0"
-dependencies = [
- "bincode",
- "borsh",
- "rand",
- "serde",
- "solana-instruction-error",
- "solana-pubkey",
- "solana-sanitize",
 ]
 
 [[package]]
