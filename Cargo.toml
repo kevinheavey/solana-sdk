@@ -1,7 +1,6 @@
 [workspace]
 members = [
     "commitment-config",
-    "epoch-info",
     "file-download",
     "frozen-abi",
     "frozen-abi-macro",
@@ -124,7 +123,6 @@ signal-hook = "0.3.17"
 siphasher = "0.3.11"
 solana-bn254 = { path = "bn254", version = "3.0.0" }
 solana-commitment-config = { path = "commitment-config", version = "3.0.0" }
-solana-epoch-info = { path = "epoch-info", version = "3.0.0" }
 solana-file-download = { path = "file-download", version = "3.0.0" }
 solana-frozen-abi = { path = "frozen-abi", version = "3.0.0" }
 solana-frozen-abi-macro = { path = "frozen-abi-macro", version = "3.0.0" }

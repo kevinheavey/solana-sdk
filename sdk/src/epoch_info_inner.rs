@@ -4,12 +4,7 @@
 //!
 //! [`getEpochInfo`]: https://solana.com/docs/rpc/http/getepochinfo
 
-#[cfg_attr(
-    feature = "serde",
-    derive(serde_derive::Deserialize, serde_derive::Serialize),
-    serde(rename_all = "camelCase")
-)]
-#[derive(Clone, Debug, Eq, PartialEq)]
+#[derive(Clone, Debug, Eq, PartialEq, serde_derive::Deserialize, serde_derive::Serialize)]
 pub struct EpochInfo {
     /// The current epoch
     pub epoch: u64,

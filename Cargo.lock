@@ -2159,14 +2159,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-epoch-info"
-version = "3.0.0"
-dependencies = [
- "serde",
- "serde_derive",
-]
-
-[[package]]
 name = "solana-file-download"
 version = "3.0.0"
 dependencies = [
@@ -2298,8 +2290,6 @@ dependencies = [
  "serde_derive",
  "sha2",
  "siphasher",
- "solana-epoch-info",
- "solana-logger",
  "solana-program",
  "solana-sdk",
  "solana-sdk-macro",

@@ -53,6 +53,7 @@ pub use solana_program::{
 };
 pub mod entrypoint;
 pub mod entrypoint_deprecated;
+pub mod epoch_info_inner;
 pub mod example_mocks;
 pub mod hash;
 pub mod log;
@@ -111,7 +112,7 @@ pub use offchain_message_inner as offchain_message;
 #[deprecated(since = "2.2.0", note = "Use `solana-serde` crate instead")]
 pub use serde_inner as deserialize_utils;
 #[deprecated(since = "2.2.0", note = "Use `solana-epoch-info` crate instead")]
-pub use solana_epoch_info as epoch_info;
+pub use epoch_info_inner as epoch_info;
 #[deprecated(since = "2.1.0", note = "Use `solana-program-memory` crate instead")]
 pub use solana_program::program_memory;
 #[deprecated(since = "2.1.0", note = "Use `solana-sanitize` crate instead")]
