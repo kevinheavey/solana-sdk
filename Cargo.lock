@@ -3267,6 +3267,7 @@ dependencies = [
  "solana-epoch-info",
  "solana-frozen-abi",
  "solana-frozen-abi-macro",
+ "solana-hard-forks",
  "solana-hash",
  "solana-instruction",
  "solana-instruction-error",
@@ -3284,7 +3285,6 @@ dependencies = [
  "solana-serde-varint",
  "solana-sha256-hasher",
  "solana-short-vec",
- "solana-shred-version",
  "solana-signature",
  "solana-signer",
  "solana-sysvar",
@@ -3405,15 +3405,6 @@ dependencies = [
  "serde_json",
  "solana-frozen-abi",
  "solana-frozen-abi-macro",
-]
-
-[[package]]
-name = "solana-shred-version"
-version = "3.0.0"
-dependencies = [
- "solana-hard-forks",
- "solana-hash",
- "solana-sha256-hasher",
 ]
 
 [[package]]

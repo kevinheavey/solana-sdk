@@ -60,7 +60,7 @@ pub mod native_loader;
 pub mod pubkey;
 #[cfg(feature = "full")]
 #[deprecated(since = "2.2.0", note = "Use `solana-shred-version` crate instead")]
-pub use solana_shred_version as shred_version;
+pub use shred_version_inner as shred_version;
 pub mod account_inner;
 mod derivation_path_inner;
 pub mod epoch_rewards_hasher_inner;
@@ -72,6 +72,7 @@ pub mod presigner_inner;
 mod seed_derivable_inner;
 mod seed_phrase_inner;
 pub mod serde_inner;
+pub mod shred_version_inner;
 pub mod signature;
 pub mod signer;
 pub mod transaction;
