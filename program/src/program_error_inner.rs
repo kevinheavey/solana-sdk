@@ -1,12 +1,8 @@
 //! The [`ProgramError`] type and related definitions.
 
 #![allow(clippy::arithmetic_side_effects)]
-#![cfg_attr(docsrs, feature(doc_auto_cfg))]
-#![no_std]
-#[cfg(feature = "borsh")]
 use borsh::io::Error as BorshIoError;
 use core::{convert::TryFrom, fmt};
-#[cfg(feature = "serde")]
 use serde_derive::{Deserialize, Serialize};
 
 pub type ProgramResult = core::result::Result<(), ProgramError>;
@@ -52,8 +48,7 @@ pub const INCORRECT_AUTHORITY: u64 = to_builtin!(26);
 //   until the feature is activated
 
 /// Reasons the program may fail
-#[cfg_attr(feature = "serde", derive(Deserialize, Serialize))]
-#[derive(Clone, Debug, Eq, PartialEq)]
+#[derive(Clone, Debug, Eq, PartialEq, Deserialize, Serialize)]
 pub enum ProgramError {
     /// Allows on-chain programs to implement program-specific error types and see them returned
     /// by the Solana runtime. A program-specific error may be any type that is represented as
@@ -309,7 +304,6 @@ impl From<u64> for ProgramError {
     }
 }
 
-#[cfg(feature = "borsh")]
 impl From<BorshIoError> for ProgramError {
     fn from(_error: BorshIoError) -> Self {
         Self::BorshIoError

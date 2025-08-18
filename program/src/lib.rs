@@ -516,6 +516,7 @@ pub mod msg_inner;
 pub mod native_token_inner;
 pub mod nonce_inner;
 pub mod program_entrypoint_inner;
+pub mod program_error_inner;
 pub mod program_memory_inner;
 pub mod program_option_inner;
 pub mod program_pack_inner;

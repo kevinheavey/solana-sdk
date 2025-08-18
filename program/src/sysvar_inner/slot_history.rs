@@ -51,9 +51,9 @@ use super::Sysvar;
 use super::SysvarSerialize;
 pub use {
     super::super::account_info::AccountInfo,
-    super::super::slot_history_inner::SlotHistory,
-    solana_program_error::ProgramError,
+    super::super::program_error_inner::ProgramError,
     super::super::sdk_ids::sysvar::slot_history::{check_id, id, ID},
+    super::super::slot_history_inner::SlotHistory,
 };
 impl Sysvar for SlotHistory {}
 impl SysvarSerialize for SlotHistory {

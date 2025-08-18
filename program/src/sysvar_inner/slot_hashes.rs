@@ -3,7 +3,7 @@
 //! The _slot hashes sysvar_ provides access to the [`SlotHashes`] type.
 //!
 //! The [`SysvarSerialize::from_account_info`] and [`Sysvar::get`] methods always return
-//! [`solana_program_error::ProgramError::UnsupportedSysvar`] because this sysvar account is too large
+//! [`super::super::program_error_inner::ProgramError::UnsupportedSysvar`] because this sysvar account is too large
 //! to process on-chain. Thus this sysvar cannot be accessed on chain, though
 //! one can still use the [`SysvarId::id`], [`SysvarId::check_id`] and
 //! [`SysvarSerialize::size_of`] methods in an on-chain program, and it can be accessed
@@ -67,9 +67,9 @@ impl SysvarSerialize for SlotHashes {
     }
     fn from_account_info(
         _account_info: &AccountInfo,
-    ) -> Result<Self, solana_program_error::ProgramError> {
+    ) -> Result<Self, super::super::program_error_inner::ProgramError> {
         // This sysvar is too large to bincode::deserialize in-program
-        Err(solana_program_error::ProgramError::UnsupportedSysvar)
+        Err(super::super::program_error_inner::ProgramError::UnsupportedSysvar)
     }
 }
 
@@ -94,14 +94,14 @@ pub struct PodSlotHashes {
 
 impl PodSlotHashes {
     /// Fetch all of the raw sysvar data using the `sol_get_sysvar` syscall.
-    pub fn fetch() -> Result<Self, solana_program_error::ProgramError> {
+    pub fn fetch() -> Result<Self, super::super::program_error_inner::ProgramError> {
         // Allocate an uninitialized buffer for the raw sysvar data.
         let sysvar_len = SYSVAR_LEN;
         let mut data = vec![0; sysvar_len];
 
         // Ensure the created buffer is aligned to 8.
         if data.as_ptr().align_offset(8) != 0 {
-            return Err(solana_program_error::ProgramError::InvalidAccountData);
+            return Err(super::super::program_error_inner::ProgramError::InvalidAccountData);
         }
 
         // Populate the buffer by fetching all sysvar data using the
@@ -123,7 +123,7 @@ impl PodSlotHashes {
             .and_then(|bytes| bytes.try_into().ok())
             .map(u64::from_le_bytes)
             .and_then(|length| length.checked_mul(std::mem::size_of::<PodSlotHash>() as u64))
-            .ok_or(solana_program_error::ProgramError::InvalidAccountData)?;
+            .ok_or(super::super::program_error_inner::ProgramError::InvalidAccountData)?;
 
         let slot_hashes_start = U64_SIZE;
         let slot_hashes_end = slot_hashes_start.saturating_add(length as usize);
@@ -137,16 +137,16 @@ impl PodSlotHashes {
 
     /// Return the `SlotHashes` sysvar data as a slice of `PodSlotHash`.
     /// Returns a slice of only the initialized sysvar data.
-    pub fn as_slice(&self) -> Result<&[PodSlotHash], solana_program_error::ProgramError> {
+    pub fn as_slice(&self) -> Result<&[PodSlotHash], super::super::program_error_inner::ProgramError> {
         self.data
             .get(self.slot_hashes_start..self.slot_hashes_end)
             .and_then(|data| bytemuck::try_cast_slice(data).ok())
-            .ok_or(solana_program_error::ProgramError::InvalidAccountData)
+            .ok_or(super::super::program_error_inner::ProgramError::InvalidAccountData)
     }
 
     /// Given a slot, get its corresponding hash in the `SlotHashes` sysvar
     /// data. Returns `None` if the slot is not found.
-    pub fn get(&self, slot: &Slot) -> Result<Option<Hash>, solana_program_error::ProgramError> {
+    pub fn get(&self, slot: &Slot) -> Result<Option<Hash>, super::super::program_error_inner::ProgramError> {
         self.as_slice().map(|pod_hashes| {
             pod_hashes
                 .binary_search_by(|PodSlotHash { slot: this, .. }| slot.cmp(this))
@@ -160,7 +160,7 @@ impl PodSlotHashes {
     pub fn position(
         &self,
         slot: &Slot,
-    ) -> Result<Option<usize>, solana_program_error::ProgramError> {
+    ) -> Result<Option<usize>, super::super::program_error_inner::ProgramError> {
         self.as_slice().map(|pod_hashes| {
             pod_hashes
                 .binary_search_by(|PodSlotHash { slot: this, .. }| slot.cmp(this))

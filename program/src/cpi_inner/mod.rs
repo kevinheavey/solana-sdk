@@ -15,7 +15,7 @@
 
 use {
     super::account_info_inner::AccountInfo, super::instruction_inner::Instruction,
-    solana_program_error::ProgramResult, super::pubkey::Pubkey,
+    super::program_error_inner::ProgramResult, super::pubkey::Pubkey,
 };
 #[cfg(target_os = "solana")]
 pub mod syscalls;

@@ -7,7 +7,7 @@ use {
     super::super::program_memory::stubs,
     base64::{prelude::BASE64_STANDARD, Engine},
     super::super::instruction_inner::{error::UNSUPPORTED_SYSVAR, Instruction},
-    solana_program_error::ProgramResult,
+    super::super::program_error_inner::ProgramResult,
     super::super::pubkey::Pubkey,
     std::sync::{Arc, RwLock},
 };

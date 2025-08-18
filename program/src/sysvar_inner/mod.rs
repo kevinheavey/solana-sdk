@@ -80,10 +80,13 @@
 pub mod __private {
     #[cfg(target_os = "solana")]
     pub use solana_define_syscall::definitions;
-    pub use {super::super::program_entrypoint_inner::SUCCESS, solana_program_error::ProgramError};
+    pub use {
+        super::super::program_entrypoint_inner::SUCCESS,
+        super::super::program_error_inner::ProgramError,
+    };
 }
-use {super::sysvar_id_inner::SysvarId, super::account_info::AccountInfo};
-use {solana_program_error::ProgramError, super::pubkey::Pubkey};
+use {super::account_info::AccountInfo, super::sysvar_id_inner::SysvarId};
+use {super::program_error_inner::ProgramError, super::pubkey::Pubkey};
 
 pub mod clock;
 pub mod epoch_rewards;
@@ -186,11 +189,11 @@ pub fn get_sysvar(
     sysvar_id: &Pubkey,
     offset: u64,
     length: u64,
-) -> Result<(), solana_program_error::ProgramError> {
+) -> Result<(), super::program_error_inner::ProgramError> {
     // Check that the provided destination buffer is large enough to hold the
     // requested data.
     if dst.len() < length as usize {
-        return Err(solana_program_error::ProgramError::InvalidArgument);
+        return Err(super::program_error_inner::ProgramError::InvalidArgument);
     }
 
     let sysvar_id = sysvar_id as *const _ as *const u8;
@@ -206,9 +209,11 @@ pub fn get_sysvar(
 
     match result {
         super::program_entrypoint_inner::SUCCESS => Ok(()),
-        OFFSET_LENGTH_EXCEEDS_SYSVAR => Err(solana_program_error::ProgramError::InvalidArgument),
-        SYSVAR_NOT_FOUND => Err(solana_program_error::ProgramError::UnsupportedSysvar),
+        OFFSET_LENGTH_EXCEEDS_SYSVAR => {
+            Err(super::program_error_inner::ProgramError::InvalidArgument)
+        }
+        SYSVAR_NOT_FOUND => Err(super::program_error_inner::ProgramError::UnsupportedSysvar),
         // Unexpected errors are folded into `UnsupportedSysvar`.
-        _ => Err(solana_program_error::ProgramError::UnsupportedSysvar),
+        _ => Err(super::program_error_inner::ProgramError::UnsupportedSysvar),
     }
 }

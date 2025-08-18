@@ -1,7 +1,7 @@
 //! Account information.
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 use {
-    solana_program_error::ProgramError,
+    super::program_error_inner::ProgramError,
     super::program_memory::sol_memset,
     super::pubkey_inner::Pubkey,
     std::{

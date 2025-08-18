@@ -19,9 +19,9 @@ pub use {
     super::account_info::MAX_PERMITTED_DATA_INCREASE,
     // Re-exporting for custom_panic
     super::define_syscall_inner::definitions::{sol_log_ as __log, sol_panic_ as __panic},
+    super::program_error_inner::ProgramResult,
     super::pubkey::Pubkey as __Pubkey,
     crate::msg as __msg,
-    solana_program_error::ProgramResult,
 };
 
 /// User implemented function to process an instruction

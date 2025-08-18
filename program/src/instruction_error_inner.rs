@@ -1,5 +1,4 @@
-use num_traits::ToPrimitive;
-pub use solana_program_error::{
+pub use super::program_error_inner::{
     ACCOUNT_ALREADY_INITIALIZED, ACCOUNT_BORROW_FAILED, ACCOUNT_DATA_TOO_SMALL,
     ACCOUNT_NOT_RENT_EXEMPT, ARITHMETIC_OVERFLOW, BORSH_IO_ERROR,
     BUILTIN_PROGRAMS_MUST_CONSUME_COMPUTE_UNITS, CUSTOM_ZERO, ILLEGAL_OWNER, IMMUTABLE,
@@ -9,7 +8,8 @@ pub use solana_program_error::{
     MAX_INSTRUCTION_TRACE_LENGTH_EXCEEDED, MAX_SEED_LENGTH_EXCEEDED, MISSING_REQUIRED_SIGNATURES,
     NOT_ENOUGH_ACCOUNT_KEYS, UNINITIALIZED_ACCOUNT, UNSUPPORTED_SYSVAR,
 };
-use {core::fmt, solana_program_error::ProgramError};
+use num_traits::ToPrimitive;
+use {super::program_error_inner::ProgramError, core::fmt};
 
 /// Reasons the runtime might have rejected an instruction.
 ///
@@ -370,7 +370,7 @@ where
             INCORRECT_AUTHORITY => Self::IncorrectAuthority,
             _ => {
                 // A valid custom error has no bits set in the upper 32
-                if error >> solana_program_error::BUILTIN_BIT_SHIFT == 0 {
+                if error >> super::program_error_inner::BUILTIN_BIT_SHIFT == 0 {
                     Self::Custom(error as u32)
                 } else {
                     Self::InvalidError

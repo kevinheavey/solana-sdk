@@ -6,7 +6,7 @@
 //!
 //! [spl]: https://github.com/solana-labs/solana-program-library
 
-use solana_program_error::ProgramError;
+use super::program_error_inner::ProgramError;
 
 /// Check if a program account state is initialized
 pub trait IsInitialized {

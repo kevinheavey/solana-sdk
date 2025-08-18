@@ -2262,20 +2262,8 @@ dependencies = [
  "serde_derive",
  "sha2",
  "sha3",
- "solana-logger",
- "solana-program-error",
  "solana-sdk-macro",
  "thiserror",
-]
-
-[[package]]
-name = "solana-program-error"
-version = "3.0.0"
-dependencies = [
- "borsh",
- "num_enum",
- "serde",
- "serde_derive",
 ]
 
 [[package]]

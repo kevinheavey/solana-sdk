@@ -1,4 +1,4 @@
-use {core::fmt, solana_program_error::ProgramError};
+use {core::fmt, super::super::program_error_inner::ProgramError};
 
 #[derive(Debug, Clone, PartialEq, Eq, serde_derive::Serialize)]
 pub enum AddressError {

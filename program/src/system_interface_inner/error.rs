@@ -1,6 +1,6 @@
 use {
     num_traits::{FromPrimitive, ToPrimitive},
-    solana_program_error::{ProgramError, ToStr},
+    super::super::program_error_inner::{ProgramError, ToStr},
 };
 
 #[derive(Clone, Debug, PartialEq, Eq, serde_derive::Deserialize, serde_derive::Serialize)]

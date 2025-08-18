@@ -10,5 +10,5 @@ pub use {
         MISSING_REQUIRED_SIGNATURES, NOT_ENOUGH_ACCOUNT_KEYS, UNINITIALIZED_ACCOUNT,
         UNSUPPORTED_SYSVAR,
     },
-    solana_program_error::ProgramError,
+    super::program_error_inner::ProgramError,
 };
