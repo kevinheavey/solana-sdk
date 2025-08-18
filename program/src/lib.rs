@@ -507,6 +507,7 @@ pub mod last_restart_slot_inner;
 pub mod message_inner;
 pub mod native_token_inner;
 pub mod program_entrypoint_inner;
+pub mod program_option_inner;
 pub mod program_pack_inner;
 pub mod rent_inner;
 pub mod secp256k1_recover_inner;
@@ -556,9 +557,9 @@ pub use {
     account_info_inner::{self as account_info, debug_account_data},
     clock_inner as clock, native_token_inner as native_token,
     program_entrypoint_inner::{self as entrypoint},
-    rent_inner as rent,
+    program_option_inner as program_option, rent_inner as rent,
     solana_msg::msg,
-    solana_program_option as program_option, solana_pubkey as pubkey,
+    solana_pubkey as pubkey,
 };
 /// The [config native program][np].
 ///

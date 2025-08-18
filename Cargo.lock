@@ -2742,7 +2742,6 @@ dependencies = [
  "solana-nonce",
  "solana-program-error",
  "solana-program-memory",
- "solana-program-option",
  "solana-pubkey",
  "solana-sanitize",
  "solana-sdk-ids",
@@ -2767,10 +2766,6 @@ version = "3.0.0"
 dependencies = [
  "solana-define-syscall",
 ]
-
-[[package]]
-name = "solana-program-option"
-version = "3.0.0"
 
 [[package]]
 name = "solana-pubkey"
