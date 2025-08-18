@@ -2761,15 +2761,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-keccak-hasher"
-version = "3.0.0"
-dependencies = [
- "sha3",
- "solana-define-syscall",
- "solana-hash",
-]
-
-[[package]]
 name = "solana-last-restart-slot"
 version = "3.0.0"
 dependencies = [
@@ -2909,6 +2900,7 @@ dependencies = [
  "memoffset",
  "serde",
  "serde_derive",
+ "sha3",
  "solana-account-info",
  "solana-big-mod-exp",
  "solana-blake3-hasher",
@@ -2924,7 +2916,6 @@ dependencies = [
  "solana-hash",
  "solana-instruction",
  "solana-instruction-error",
- "solana-keccak-hasher",
  "solana-last-restart-slot",
  "solana-logger",
  "solana-msg",

@@ -494,11 +494,14 @@ pub mod address_lookup_table_interface_inner;
 pub mod cpi_inner;
 pub mod example_mocks_inner;
 pub mod instructions_sysvar_inner;
+pub mod keccak_hasher_inner;
 pub mod message_inner;
 pub mod native_token_inner;
 pub mod sysvar_inner;
 pub mod transaction_error_inner;
 
+#[deprecated(since = "2.2.0", note = "Use `solana-keccak-hasher` crate instead")]
+pub use keccak_hasher_inner as keccak;
 #[deprecated(since = "2.2.0", note = "Use `solana-big-mod-exp` crate instead")]
 pub use solana_big_mod_exp as big_mod_exp;
 #[deprecated(since = "2.2.0", note = "Use `solana-blake3-hasher` crate instead")]
@@ -510,8 +513,6 @@ pub use solana_borsh::v1 as borsh1;
 pub use solana_epoch_rewards as epoch_rewards;
 #[deprecated(since = "2.1.0", note = "Use `solana-fee-calculator` crate instead")]
 pub use solana_fee_calculator as fee_calculator;
-#[deprecated(since = "2.2.0", note = "Use `solana-keccak-hasher` crate instead")]
-pub use solana_keccak_hasher as keccak;
 #[deprecated(since = "2.1.0", note = "Use `solana-last-restart-slot` crate instead")]
 pub use solana_last_restart_slot as last_restart_slot;
 #[deprecated(since = "2.1.0", note = "Use `solana-program-memory` crate instead")]
