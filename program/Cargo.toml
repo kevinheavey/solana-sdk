@@ -50,7 +50,6 @@ memoffset = { workspace = true }
 serde = { workspace = true }
 serde_derive = { workspace = true }
 solana-account-info = { workspace = true, features = ["bincode"] }
-solana-big-mod-exp = { workspace = true }
 solana-blake3-hasher = { workspace = true, features = ["blake3"] }
 solana-borsh = { workspace = true, optional = true }
 solana-clock = { workspace = true, features = ["serde", "sysvar"] }
@@ -108,6 +107,8 @@ bincode = { workspace = true }
 bitflags = { workspace = true }
 blake3 = { workspace = true, features = ["traits-preview"] }
 lazy_static = { workspace = true }
+num-bigint = { workspace = true }
+num-traits = { workspace = true }
 sha3 = { workspace = true }
 solana-logger = { workspace = true }
 solana-nonce = { workspace = true }

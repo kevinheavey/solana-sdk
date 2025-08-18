@@ -2496,20 +2496,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-big-mod-exp"
-version = "3.0.0"
-dependencies = [
- "array-bytes",
- "criterion",
- "num-bigint",
- "num-traits",
- "serde",
- "serde_derive",
- "serde_json",
- "solana-define-syscall",
-]
-
-[[package]]
 name = "solana-bincode"
 version = "3.0.0"
 dependencies = [
@@ -2898,11 +2884,12 @@ dependencies = [
  "bytemuck_derive",
  "lazy_static",
  "memoffset",
+ "num-bigint",
+ "num-traits",
  "serde",
  "serde_derive",
  "sha3",
  "solana-account-info",
- "solana-big-mod-exp",
  "solana-blake3-hasher",
  "solana-borsh",
  "solana-clock",
