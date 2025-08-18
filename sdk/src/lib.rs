@@ -66,6 +66,7 @@ pub mod signer;
 pub mod transaction;
 pub mod account_inner;
 mod derivation_path_inner;
+pub mod epoch_rewards_hasher_inner;
 mod keypair_inner;
 mod seed_derivable_inner;
 mod seed_phrase_inner;
@@ -85,7 +86,7 @@ pub use solana_epoch_info as epoch_info;
     since = "2.2.0",
     note = "Use `solana-epoch-rewards-hasher` crate instead"
 )]
-pub use solana_epoch_rewards_hasher as epoch_rewards_hasher;
+pub use epoch_rewards_hasher_inner as epoch_rewards_hasher;
 #[deprecated(since = "2.2.0", note = "Use `solana-fee-structure` crate instead")]
 pub use solana_fee_structure as fee;
 #[deprecated(since = "2.1.0", note = "Use `solana-inflation` crate instead")]

@@ -2760,15 +2760,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-epoch-rewards-hasher"
-version = "3.0.0"
-dependencies = [
- "siphasher",
- "solana-hash",
- "solana-pubkey",
-]
-
-[[package]]
 name = "solana-epoch-schedule"
 version = "3.0.0"
 dependencies = [
@@ -3313,10 +3304,10 @@ dependencies = [
  "serde_bytes",
  "serde_derive",
  "sha2",
+ "siphasher",
  "solana-account-info",
  "solana-clock",
  "solana-epoch-info",
- "solana-epoch-rewards-hasher",
  "solana-fee-structure",
  "solana-frozen-abi",
  "solana-frozen-abi-macro",

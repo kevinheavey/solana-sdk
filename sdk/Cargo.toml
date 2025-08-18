@@ -60,6 +60,7 @@ pbkdf2 = { workspace = true }
 rand = { workspace = true }
 sha2 = { workspace = true }
 serde_bytes = { workspace = true }
+siphasher = { workspace = true }
 solana-account-info = { workspace = true }
 solana-clock = { workspace = true }
 solana-frozen-abi = { workspace = true, optional = true }
@@ -70,7 +71,6 @@ solana-sysvar = { workspace = true, features = ["bincode"] }
 serde = { workspace = true }
 serde_derive = { workspace = true }
 solana-epoch-info = { workspace = true, features = ["serde"] }
-solana-epoch-rewards-hasher = { workspace = true }
 solana-fee-structure = { workspace = true, features = ["serde"] }
 solana-hash = { workspace = true }
 solana-inflation = { workspace = true, features = ["serde"] }
