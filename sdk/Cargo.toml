@@ -33,9 +33,7 @@ full = [
     "dep:solana-transaction-error",
 ]
 borsh = ["solana-program/borsh"]
-dev-context-only-utils = [
-    "solana-program/dev-context-only-utils",
-]
+dev-context-only-utils = ["solana-program/dev-context-only-utils"]
 frozen-abi = [
     "solana-program/frozen-abi",
     "solana-short-vec/frozen-abi",
@@ -46,34 +44,31 @@ frozen-abi = [
 [dependencies]
 bincode = { workspace = true }
 bs58 = { workspace = true }
+derivation-path = { workspace = true }
 ed25519-dalek = { workspace = true, features = ["rand_core"] }
 ed25519-dalek-bip32 = { workspace = true }
-derivation-path = { workspace = true }
-qstring = { workspace = true }
-uriparse = { workspace = true }
 five8 = { workspace = true }
 hmac = { workspace = true }
 num_enum = { workspace = true }
 pbkdf2 = { workspace = true }
+qstring = { workspace = true }
 rand = { workspace = true }
-sha2 = { workspace = true }
+serde = { workspace = true }
 serde_bytes = { workspace = true }
+serde_derive = { workspace = true }
+sha2 = { workspace = true }
 siphasher = { workspace = true }
 solana-account-info = { workspace = true }
 solana-clock = { workspace = true }
+solana-epoch-info = { workspace = true, features = ["serde"] }
 solana-frozen-abi = { workspace = true, optional = true }
 solana-frozen-abi-macro = { workspace = true, optional = true }
-solana-instruction-error = { workspace = true }
-solana-logger = { workspace = true, optional = true }
-solana-sha256-hasher = { workspace = true, features = ["sha2"] }
-solana-packet = { workspace = true }
-solana-sysvar = { workspace = true, features = ["bincode"] }
-serde = { workspace = true }
-serde_derive = { workspace = true }
-solana-epoch-info = { workspace = true, features = ["serde"] }
 solana-hash = { workspace = true }
 solana-instruction = { workspace = true, features = ["serde"] }
+solana-instruction-error = { workspace = true }
+solana-logger = { workspace = true, optional = true }
 solana-message = { workspace = true, features = ["bincode", "blake3", "serde"] }
+solana-packet = { workspace = true }
 solana-presigner = { workspace = true, optional = true }
 solana-program = { workspace = true }
 solana-program-memory = { workspace = true }
@@ -85,6 +80,7 @@ solana-sdk-ids = { workspace = true }
 solana-sdk-macro = { workspace = true }
 solana-serde = { workspace = true }
 solana-serde-varint = { workspace = true }
+solana-sha256-hasher = { workspace = true, features = ["sha2"] }
 solana-short-vec = { workspace = true }
 solana-shred-version = { workspace = true, optional = true }
 solana-signature = { workspace = true, features = [
@@ -94,11 +90,13 @@ solana-signature = { workspace = true, features = [
     "verify",
 ], optional = true }
 solana-signer = { workspace = true, optional = true }
+solana-sysvar = { workspace = true, features = ["bincode"] }
 solana-time-utils = { workspace = true }
 solana-transaction-error = { workspace = true, features = [
     "serde",
 ], optional = true }
 thiserror = { workspace = true }
+uriparse = { workspace = true }
 
 [dev-dependencies]
 solana-instructions-sysvar = { workspace = true, features = ["dev-context-only-utils"] }
