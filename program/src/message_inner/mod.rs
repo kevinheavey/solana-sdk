@@ -1,5 +1,4 @@
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
-#![cfg_attr(feature = "frozen-abi", feature(min_specialization))]
 //! Sequences of [`Instruction`]s executed within a single transaction.
 //!
 //! [`Instruction`]: https://docs.rs/solana-instruction/latest/solana_instruction/struct.Instruction.html
@@ -44,10 +43,7 @@ mod compiled_keys;
 pub mod inline_nonce;
 pub mod inner_instruction;
 pub mod legacy;
-#[cfg(feature = "serde")]
 use serde_derive::{Deserialize, Serialize};
-#[cfg(feature = "frozen-abi")]
-use solana_frozen_abi_macro::AbiExample;
 
 #[cfg(not(target_os = "solana"))]
 #[path = ""]
@@ -100,13 +96,8 @@ pub const MESSAGE_HEADER_LENGTH: usize = 3;
 /// access the same read-write accounts are processed sequentially.
 ///
 /// [PoH]: https://docs.solanalabs.com/consensus/synchronization
-#[cfg_attr(feature = "frozen-abi", derive(AbiExample))]
-#[cfg_attr(
-    feature = "serde",
-    derive(Deserialize, Serialize),
-    serde(rename_all = "camelCase")
-)]
-#[derive(Default, Debug, PartialEq, Eq, Clone, Copy)]
+#[derive(Default, Debug, PartialEq, Eq, Clone, Copy, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct MessageHeader {
     /// The number of signatures required for this message to be considered
     /// valid. The signers of those signatures must match the first

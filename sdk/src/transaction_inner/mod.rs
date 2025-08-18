@@ -113,7 +113,7 @@
 use {
     crate::signature_inner::Signature,
     solana_instruction::Instruction,
-    solana_message::{
+    solana_program::message_inner::{
         compiled_instruction::CompiledInstruction, inline_nonce::is_advance_nonce_instruction_data,
         Message,
     },

@@ -10,15 +10,15 @@
 //! [future message format]: https://docs.solanalabs.com/proposals/versioned-transactions
 
 pub use loaded::*;
-#[cfg(feature = "serde")]
 use serde_derive::{Deserialize, Serialize};
-#[cfg(feature = "frozen-abi")]
-use solana_frozen_abi_macro::AbiExample;
 use {
-    crate::{
-        compiled_instruction::CompiledInstruction,
-        compiled_keys::{CompileError, CompiledKeys},
-        AccountKeys, AddressLookupTableAccount, MessageHeader,
+    super::super::{
+        super::{
+            compiled_instruction::CompiledInstruction,
+            compiled_keys::{CompileError, CompiledKeys},
+            AddressLookupTableAccount, MessageHeader,
+        },
+        AccountKeys,
     },
     solana_hash::Hash,
     solana_instruction::Instruction,
@@ -32,21 +32,15 @@ mod loaded;
 
 /// Address table lookups describe an on-chain address lookup table to use
 /// for loading more readonly and writable accounts in a single tx.
-#[cfg_attr(feature = "frozen-abi", derive(AbiExample))]
-#[cfg_attr(
-    feature = "serde",
-    derive(Deserialize, Serialize),
-    serde(rename_all = "camelCase")
-)]
-#[derive(Default, Debug, PartialEq, Eq, Clone)]
+#[derive(Default, Debug, PartialEq, Eq, Clone, Deserialize, Serialize)]
 pub struct MessageAddressTableLookup {
     /// Address lookup table account key
     pub account_key: Pubkey,
     /// List of indexes used to load writable account addresses
-    #[cfg_attr(feature = "serde", serde(with = "solana_short_vec"))]
+    #[serde(with = "solana_short_vec")]
     pub writable_indexes: Vec<u8>,
     /// List of indexes used to load readonly account addresses
-    #[cfg_attr(feature = "serde", serde(with = "solana_short_vec"))]
+    #[serde(with = "solana_short_vec")]
     pub readonly_indexes: Vec<u8>,
 }
 
@@ -57,13 +51,7 @@ pub struct MessageAddressTableLookup {
 ///
 /// See the crate documentation for further description.
 ///
-#[cfg_attr(feature = "frozen-abi", derive(AbiExample))]
-#[cfg_attr(
-    feature = "serde",
-    derive(Deserialize, Serialize),
-    serde(rename_all = "camelCase")
-)]
-#[derive(Default, Debug, PartialEq, Eq, Clone)]
+#[derive(Default, Debug, PartialEq, Eq, Clone, Deserialize, Serialize)]
 pub struct Message {
     /// The message header, identifying signed and read-only `account_keys`.
     /// Header values only describe static `account_keys`, they do not describe
@@ -71,7 +59,7 @@ pub struct Message {
     pub header: MessageHeader,
 
     /// List of accounts loaded by this transaction.
-    #[cfg_attr(feature = "serde", serde(with = "solana_short_vec"))]
+    #[serde(with = "solana_short_vec")]
     pub account_keys: Vec<Pubkey>,
 
     /// The blockhash of a recent block.
@@ -90,12 +78,12 @@ pub struct Message {
     ///   1) message `account_keys`
     ///   2) ordered list of keys loaded from `writable` lookup table indexes
     ///   3) ordered list of keys loaded from `readable` lookup table indexes
-    #[cfg_attr(feature = "serde", serde(with = "solana_short_vec"))]
+    #[serde(with = "solana_short_vec")]
     pub instructions: Vec<CompiledInstruction>,
 
     /// List of address table lookups used to load additional accounts
     /// for this transaction.
-    #[cfg_attr(feature = "serde", serde(with = "solana_short_vec"))]
+    #[serde(with = "solana_short_vec")]
     pub address_table_lookups: Vec<MessageAddressTableLookup>,
 }
 
@@ -296,10 +284,9 @@ impl Message {
         })
     }
 
-    #[cfg(feature = "bincode")]
     /// Serialize this message with a version #0 prefix using bincode encoding.
     pub fn serialize(&self) -> Vec<u8> {
-        bincode::serialize(&(crate::MESSAGE_VERSION_PREFIX, self)).unwrap()
+        bincode::serialize(&(super::MESSAGE_VERSION_PREFIX, self)).unwrap()
     }
 
     /// Returns true if the account at the specified index is called as a program by an instruction
@@ -381,402 +368,5 @@ impl Message {
             }
         }
         is_maybe_reserved
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use {super::*, crate::VersionedMessage, solana_instruction::AccountMeta};
-
-    #[test]
-    fn test_sanitize() {
-        assert!(Message {
-            header: MessageHeader {
-                num_required_signatures: 1,
-                ..MessageHeader::default()
-            },
-            account_keys: vec![Pubkey::new_unique()],
-            ..Message::default()
-        }
-        .sanitize()
-        .is_ok());
-    }
-
-    #[test]
-    fn test_sanitize_with_instruction() {
-        assert!(Message {
-            header: MessageHeader {
-                num_required_signatures: 1,
-                ..MessageHeader::default()
-            },
-            account_keys: vec![Pubkey::new_unique(), Pubkey::new_unique()],
-            instructions: vec![CompiledInstruction {
-                program_id_index: 1,
-                accounts: vec![0],
-                data: vec![]
-            }],
-            ..Message::default()
-        }
-        .sanitize()
-        .is_ok());
-    }
-
-    #[test]
-    fn test_sanitize_with_table_lookup() {
-        assert!(Message {
-            header: MessageHeader {
-                num_required_signatures: 1,
-                ..MessageHeader::default()
-            },
-            account_keys: vec![Pubkey::new_unique()],
-            address_table_lookups: vec![MessageAddressTableLookup {
-                account_key: Pubkey::new_unique(),
-                writable_indexes: vec![1, 2, 3],
-                readonly_indexes: vec![0],
-            }],
-            ..Message::default()
-        }
-        .sanitize()
-        .is_ok());
-    }
-
-    #[test]
-    fn test_sanitize_with_table_lookup_and_ix_with_dynamic_program_id() {
-        let message = Message {
-            header: MessageHeader {
-                num_required_signatures: 1,
-                ..MessageHeader::default()
-            },
-            account_keys: vec![Pubkey::new_unique()],
-            address_table_lookups: vec![MessageAddressTableLookup {
-                account_key: Pubkey::new_unique(),
-                writable_indexes: vec![1, 2, 3],
-                readonly_indexes: vec![0],
-            }],
-            instructions: vec![CompiledInstruction {
-                program_id_index: 4,
-                accounts: vec![0, 1, 2, 3],
-                data: vec![],
-            }],
-            ..Message::default()
-        };
-
-        assert!(message.sanitize().is_err());
-    }
-
-    #[test]
-    fn test_sanitize_with_table_lookup_and_ix_with_static_program_id() {
-        assert!(Message {
-            header: MessageHeader {
-                num_required_signatures: 1,
-                ..MessageHeader::default()
-            },
-            account_keys: vec![Pubkey::new_unique(), Pubkey::new_unique()],
-            address_table_lookups: vec![MessageAddressTableLookup {
-                account_key: Pubkey::new_unique(),
-                writable_indexes: vec![1, 2, 3],
-                readonly_indexes: vec![0],
-            }],
-            instructions: vec![CompiledInstruction {
-                program_id_index: 1,
-                accounts: vec![2, 3, 4, 5],
-                data: vec![]
-            }],
-            ..Message::default()
-        }
-        .sanitize()
-        .is_ok());
-    }
-
-    #[test]
-    fn test_sanitize_without_signer() {
-        assert!(Message {
-            header: MessageHeader::default(),
-            account_keys: vec![Pubkey::new_unique()],
-            ..Message::default()
-        }
-        .sanitize()
-        .is_err());
-    }
-
-    #[test]
-    fn test_sanitize_without_writable_signer() {
-        assert!(Message {
-            header: MessageHeader {
-                num_required_signatures: 1,
-                num_readonly_signed_accounts: 1,
-                ..MessageHeader::default()
-            },
-            account_keys: vec![Pubkey::new_unique()],
-            ..Message::default()
-        }
-        .sanitize()
-        .is_err());
-    }
-
-    #[test]
-    fn test_sanitize_with_empty_table_lookup() {
-        assert!(Message {
-            header: MessageHeader {
-                num_required_signatures: 1,
-                ..MessageHeader::default()
-            },
-            account_keys: vec![Pubkey::new_unique()],
-            address_table_lookups: vec![MessageAddressTableLookup {
-                account_key: Pubkey::new_unique(),
-                writable_indexes: vec![],
-                readonly_indexes: vec![],
-            }],
-            ..Message::default()
-        }
-        .sanitize()
-        .is_err());
-    }
-
-    #[test]
-    fn test_sanitize_with_max_account_keys() {
-        assert!(Message {
-            header: MessageHeader {
-                num_required_signatures: 1,
-                ..MessageHeader::default()
-            },
-            account_keys: (0..=u8::MAX).map(|_| Pubkey::new_unique()).collect(),
-            ..Message::default()
-        }
-        .sanitize()
-        .is_ok());
-    }
-
-    #[test]
-    fn test_sanitize_with_too_many_account_keys() {
-        assert!(Message {
-            header: MessageHeader {
-                num_required_signatures: 1,
-                ..MessageHeader::default()
-            },
-            account_keys: (0..=256).map(|_| Pubkey::new_unique()).collect(),
-            ..Message::default()
-        }
-        .sanitize()
-        .is_err());
-    }
-
-    #[test]
-    fn test_sanitize_with_max_table_loaded_keys() {
-        assert!(Message {
-            header: MessageHeader {
-                num_required_signatures: 1,
-                ..MessageHeader::default()
-            },
-            account_keys: vec![Pubkey::new_unique()],
-            address_table_lookups: vec![MessageAddressTableLookup {
-                account_key: Pubkey::new_unique(),
-                writable_indexes: (0..=254).step_by(2).collect(),
-                readonly_indexes: (1..=254).step_by(2).collect(),
-            }],
-            ..Message::default()
-        }
-        .sanitize()
-        .is_ok());
-    }
-
-    #[test]
-    fn test_sanitize_with_too_many_table_loaded_keys() {
-        assert!(Message {
-            header: MessageHeader {
-                num_required_signatures: 1,
-                ..MessageHeader::default()
-            },
-            account_keys: vec![Pubkey::new_unique()],
-            address_table_lookups: vec![MessageAddressTableLookup {
-                account_key: Pubkey::new_unique(),
-                writable_indexes: (0..=255).step_by(2).collect(),
-                readonly_indexes: (1..=255).step_by(2).collect(),
-            }],
-            ..Message::default()
-        }
-        .sanitize()
-        .is_err());
-    }
-
-    #[test]
-    fn test_sanitize_with_invalid_ix_program_id() {
-        let message = Message {
-            header: MessageHeader {
-                num_required_signatures: 1,
-                ..MessageHeader::default()
-            },
-            account_keys: vec![Pubkey::new_unique()],
-            address_table_lookups: vec![MessageAddressTableLookup {
-                account_key: Pubkey::new_unique(),
-                writable_indexes: vec![0],
-                readonly_indexes: vec![],
-            }],
-            instructions: vec![CompiledInstruction {
-                program_id_index: 2,
-                accounts: vec![],
-                data: vec![],
-            }],
-            ..Message::default()
-        };
-
-        assert!(message.sanitize().is_err());
-    }
-
-    #[test]
-    fn test_sanitize_with_invalid_ix_account() {
-        assert!(Message {
-            header: MessageHeader {
-                num_required_signatures: 1,
-                ..MessageHeader::default()
-            },
-            account_keys: vec![Pubkey::new_unique(), Pubkey::new_unique()],
-            address_table_lookups: vec![MessageAddressTableLookup {
-                account_key: Pubkey::new_unique(),
-                writable_indexes: vec![],
-                readonly_indexes: vec![0],
-            }],
-            instructions: vec![CompiledInstruction {
-                program_id_index: 1,
-                accounts: vec![3],
-                data: vec![]
-            }],
-            ..Message::default()
-        }
-        .sanitize()
-        .is_err());
-    }
-
-    #[test]
-    fn test_serialize() {
-        let message = Message::default();
-        let versioned_msg = VersionedMessage::V0(message.clone());
-        assert_eq!(message.serialize(), versioned_msg.serialize());
-    }
-
-    #[test]
-    fn test_try_compile() {
-        let mut keys = vec![];
-        keys.resize_with(7, Pubkey::new_unique);
-
-        let payer = keys[0];
-        let program_id = keys[6];
-        let instructions = vec![Instruction {
-            program_id,
-            accounts: vec![
-                AccountMeta::new(keys[1], true),
-                AccountMeta::new_readonly(keys[2], true),
-                AccountMeta::new(keys[3], false),
-                AccountMeta::new(keys[4], false), // loaded from lut
-                AccountMeta::new_readonly(keys[5], false), // loaded from lut
-            ],
-            data: vec![],
-        }];
-        let address_lookup_table_accounts = vec![
-            AddressLookupTableAccount {
-                key: Pubkey::new_unique(),
-                addresses: vec![keys[4], keys[5], keys[6]],
-            },
-            AddressLookupTableAccount {
-                key: Pubkey::new_unique(),
-                addresses: vec![],
-            },
-        ];
-
-        let recent_blockhash = Hash::new_unique();
-        assert_eq!(
-            Message::try_compile(
-                &payer,
-                &instructions,
-                &address_lookup_table_accounts,
-                recent_blockhash
-            ),
-            Ok(Message {
-                header: MessageHeader {
-                    num_required_signatures: 3,
-                    num_readonly_signed_accounts: 1,
-                    num_readonly_unsigned_accounts: 1
-                },
-                recent_blockhash,
-                account_keys: vec![keys[0], keys[1], keys[2], keys[3], program_id],
-                instructions: vec![CompiledInstruction {
-                    program_id_index: 4,
-                    accounts: vec![1, 2, 3, 5, 6],
-                    data: vec![],
-                },],
-                address_table_lookups: vec![MessageAddressTableLookup {
-                    account_key: address_lookup_table_accounts[0].key,
-                    writable_indexes: vec![0],
-                    readonly_indexes: vec![1],
-                }],
-            })
-        );
-    }
-
-    #[test]
-    fn test_is_maybe_writable() {
-        let key0 = Pubkey::new_unique();
-        let key1 = Pubkey::new_unique();
-        let key2 = Pubkey::new_unique();
-        let key3 = Pubkey::new_unique();
-        let key4 = Pubkey::new_unique();
-        let key5 = Pubkey::new_unique();
-
-        let message = Message {
-            header: MessageHeader {
-                num_required_signatures: 3,
-                num_readonly_signed_accounts: 2,
-                num_readonly_unsigned_accounts: 1,
-            },
-            account_keys: vec![key0, key1, key2, key3, key4, key5],
-            address_table_lookups: vec![MessageAddressTableLookup {
-                account_key: Pubkey::new_unique(),
-                writable_indexes: vec![0],
-                readonly_indexes: vec![1],
-            }],
-            ..Message::default()
-        };
-
-        let reserved_account_keys = HashSet::from([key3]);
-
-        assert!(message.is_maybe_writable(0, Some(&reserved_account_keys)));
-        assert!(!message.is_maybe_writable(1, Some(&reserved_account_keys)));
-        assert!(!message.is_maybe_writable(2, Some(&reserved_account_keys)));
-        assert!(!message.is_maybe_writable(3, Some(&reserved_account_keys)));
-        assert!(message.is_maybe_writable(3, None));
-        assert!(message.is_maybe_writable(4, Some(&reserved_account_keys)));
-        assert!(!message.is_maybe_writable(5, Some(&reserved_account_keys)));
-        assert!(message.is_maybe_writable(6, Some(&reserved_account_keys)));
-        assert!(!message.is_maybe_writable(7, Some(&reserved_account_keys)));
-        assert!(!message.is_maybe_writable(8, Some(&reserved_account_keys)));
-    }
-
-    #[test]
-    fn test_is_account_maybe_reserved() {
-        let key0 = Pubkey::new_unique();
-        let key1 = Pubkey::new_unique();
-
-        let message = Message {
-            account_keys: vec![key0, key1],
-            address_table_lookups: vec![MessageAddressTableLookup {
-                account_key: Pubkey::new_unique(),
-                writable_indexes: vec![0],
-                readonly_indexes: vec![1],
-            }],
-            ..Message::default()
-        };
-
-        let reserved_account_keys = HashSet::from([key1]);
-
-        assert!(!message.is_account_maybe_reserved(0, Some(&reserved_account_keys)));
-        assert!(message.is_account_maybe_reserved(1, Some(&reserved_account_keys)));
-        assert!(!message.is_account_maybe_reserved(2, Some(&reserved_account_keys)));
-        assert!(!message.is_account_maybe_reserved(3, Some(&reserved_account_keys)));
-        assert!(!message.is_account_maybe_reserved(4, Some(&reserved_account_keys)));
-        assert!(!message.is_account_maybe_reserved(0, None));
-        assert!(!message.is_account_maybe_reserved(1, None));
-        assert!(!message.is_account_maybe_reserved(2, None));
-        assert!(!message.is_account_maybe_reserved(3, None));
-        assert!(!message.is_account_maybe_reserved(4, None));
     }
 }

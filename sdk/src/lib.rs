@@ -35,7 +35,7 @@
 extern crate self as solana_sdk;
 
 #[deprecated(since = "2.2.0", note = "Use `solana-message` crate instead")]
-pub use solana_message as message;
+pub use solana_program::message_inner as message;
 #[cfg(feature = "borsh")]
 pub use solana_program::borsh1;
 #[cfg(not(target_os = "solana"))]
@@ -106,7 +106,7 @@ pub use solana_epoch_info as epoch_info;
     since = "2.2.0",
     note = "Use `solana_message::inner_instruction` instead"
 )]
-pub use solana_message::inner_instruction;
+pub use message::inner_instruction;
 #[cfg(feature = "full")]
 #[deprecated(since = "2.2.0", note = "Use `solana-offchain-message` crate instead")]
 pub use offchain_message_inner as offchain_message;

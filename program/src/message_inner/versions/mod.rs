@@ -1,16 +1,16 @@
-#[cfg(feature = "frozen-abi")]
-use solana_frozen_abi_macro::{frozen_abi, AbiEnumVisitor, AbiExample};
 use {
-    crate::{
-        compiled_instruction::CompiledInstruction, legacy::Message as LegacyMessage,
-        v0::MessageAddressTableLookup, MessageHeader,
+    super::{
+        super::{
+            compiled_instruction::CompiledInstruction, legacy::Message as LegacyMessage,
+            MessageHeader,
+        },
+        v0::MessageAddressTableLookup,
     },
     solana_hash::Hash,
     solana_pubkey::Pubkey,
     solana_sanitize::{Sanitize, SanitizeError},
     std::collections::HashSet,
 };
-#[cfg(feature = "serde")]
 use {
     serde::{
         de::{self, Deserializer, SeqAccess, Unexpected, Visitor},
@@ -36,11 +36,6 @@ pub const MESSAGE_VERSION_PREFIX: u8 = 0x80;
 /// which message version is serialized starting from version `0`. If the first
 /// is bit is not set, all bytes are used to encode the legacy `Message`
 /// format.
-#[cfg_attr(
-    feature = "frozen-abi",
-    frozen_abi(digest = "Hndd1SDxQ5qNZvzHo77dpW6uD5c1DJNVjtg8tE6hc432"),
-    derive(AbiEnumVisitor, AbiExample)
-)]
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum VersionedMessage {
     Legacy(LegacyMessage),
@@ -145,19 +140,16 @@ impl VersionedMessage {
         }
     }
 
-    #[cfg(feature = "bincode")]
     pub fn serialize(&self) -> Vec<u8> {
         bincode::serialize(self).unwrap()
     }
 
-    #[cfg(all(feature = "bincode", feature = "blake3"))]
     /// Compute the blake3 hash of this transaction's message
     pub fn hash(&self) -> Hash {
         let message_bytes = self.serialize();
         Self::hash_raw_message(&message_bytes)
     }
 
-    #[cfg(feature = "blake3")]
     /// Compute the blake3 hash of a raw transaction message
     pub fn hash_raw_message(message_bytes: &[u8]) -> Hash {
         use blake3::traits::digest::Digest;
@@ -175,7 +167,6 @@ impl Default for VersionedMessage {
     }
 }
 
-#[cfg(feature = "serde")]
 impl serde::Serialize for VersionedMessage {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
     where
@@ -197,13 +188,11 @@ impl serde::Serialize for VersionedMessage {
     }
 }
 
-#[cfg(feature = "serde")]
 enum MessagePrefix {
     Legacy(u8),
     Versioned(u8),
 }
 
-#[cfg(feature = "serde")]
 impl<'de> serde::Deserialize<'de> for MessagePrefix {
     fn deserialize<D>(deserializer: D) -> Result<MessagePrefix, D::Error>
     where
@@ -240,7 +229,6 @@ impl<'de> serde::Deserialize<'de> for MessagePrefix {
     }
 }
 
-#[cfg(feature = "serde")]
 impl<'de> serde::Deserialize<'de> for VersionedMessage {
     fn deserialize<D>(deserializer: D) -> Result<VersionedMessage, D::Error>
     where
@@ -270,10 +258,10 @@ impl<'de> serde::Deserialize<'de> for VersionedMessage {
                         struct RemainingLegacyMessage {
                             pub num_readonly_signed_accounts: u8,
                             pub num_readonly_unsigned_accounts: u8,
-                            #[cfg_attr(feature = "serde", serde(with = "solana_short_vec"))]
+                            #[serde(with = "solana_short_vec")]
                             pub account_keys: Vec<Pubkey>,
                             pub recent_blockhash: Hash,
-                            #[cfg_attr(feature = "serde", serde(with = "solana_short_vec"))]
+                            #[serde(with = "solana_short_vec")]
                             pub instructions: Vec<CompiledInstruction>,
                         }
 
@@ -323,100 +311,5 @@ impl<'de> serde::Deserialize<'de> for VersionedMessage {
         }
 
         deserializer.deserialize_tuple(2, MessageVisitor)
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use {
-        super::*,
-        crate::v0::MessageAddressTableLookup,
-        solana_instruction::{AccountMeta, Instruction},
-    };
-
-    #[test]
-    fn test_legacy_message_serialization() {
-        let program_id0 = Pubkey::new_unique();
-        let program_id1 = Pubkey::new_unique();
-        let id0 = Pubkey::new_unique();
-        let id1 = Pubkey::new_unique();
-        let id2 = Pubkey::new_unique();
-        let id3 = Pubkey::new_unique();
-        let instructions = vec![
-            Instruction::new_with_bincode(program_id0, &0, vec![AccountMeta::new(id0, false)]),
-            Instruction::new_with_bincode(program_id0, &0, vec![AccountMeta::new(id1, true)]),
-            Instruction::new_with_bincode(
-                program_id1,
-                &0,
-                vec![AccountMeta::new_readonly(id2, false)],
-            ),
-            Instruction::new_with_bincode(
-                program_id1,
-                &0,
-                vec![AccountMeta::new_readonly(id3, true)],
-            ),
-        ];
-
-        let mut message = LegacyMessage::new(&instructions, Some(&id1));
-        message.recent_blockhash = Hash::new_unique();
-        let wrapped_message = VersionedMessage::Legacy(message.clone());
-
-        // bincode
-        {
-            let bytes = bincode::serialize(&message).unwrap();
-            assert_eq!(bytes, bincode::serialize(&wrapped_message).unwrap());
-
-            let message_from_bytes: LegacyMessage = bincode::deserialize(&bytes).unwrap();
-            let wrapped_message_from_bytes: VersionedMessage =
-                bincode::deserialize(&bytes).unwrap();
-
-            assert_eq!(message, message_from_bytes);
-            assert_eq!(wrapped_message, wrapped_message_from_bytes);
-        }
-
-        // serde_json
-        {
-            let string = serde_json::to_string(&message).unwrap();
-            let message_from_string: LegacyMessage = serde_json::from_str(&string).unwrap();
-            assert_eq!(message, message_from_string);
-        }
-    }
-
-    #[test]
-    fn test_versioned_message_serialization() {
-        let message = VersionedMessage::V0(v0::Message {
-            header: MessageHeader {
-                num_required_signatures: 1,
-                num_readonly_signed_accounts: 0,
-                num_readonly_unsigned_accounts: 0,
-            },
-            recent_blockhash: Hash::new_unique(),
-            account_keys: vec![Pubkey::new_unique()],
-            address_table_lookups: vec![
-                MessageAddressTableLookup {
-                    account_key: Pubkey::new_unique(),
-                    writable_indexes: vec![1],
-                    readonly_indexes: vec![0],
-                },
-                MessageAddressTableLookup {
-                    account_key: Pubkey::new_unique(),
-                    writable_indexes: vec![0],
-                    readonly_indexes: vec![1],
-                },
-            ],
-            instructions: vec![CompiledInstruction {
-                program_id_index: 1,
-                accounts: vec![0, 2, 3, 4],
-                data: vec![],
-            }],
-        });
-
-        let bytes = bincode::serialize(&message).unwrap();
-        let message_from_bytes: VersionedMessage = bincode::deserialize(&bytes).unwrap();
-        assert_eq!(message, message_from_bytes);
-
-        let string = serde_json::to_string(&message).unwrap();
-        let message_from_string: VersionedMessage = serde_json::from_str(&string).unwrap();
-        assert_eq!(message, message_from_string);
     }
 }

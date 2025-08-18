@@ -184,21 +184,21 @@ pub mod solana_keypair {
 
 pub mod solana_transaction {
     use {
+        super::super::message_inner::Message,
         super::solana_signer::{signers::Signers, SignerError},
         serde_derive::Serialize,
         solana_hash::Hash,
         solana_instruction::Instruction,
-        solana_message::Message,
         solana_pubkey::Pubkey,
     };
 
     pub mod versioned {
         use {
+            super::super::super::message_inner::VersionedMessage,
             super::super::{
                 solana_signature::Signature,
                 solana_signer::{signers::Signers, SignerError},
             },
-            solana_message::VersionedMessage,
         };
         pub struct VersionedTransaction {
             pub signatures: Vec<Signature>,
@@ -275,13 +275,14 @@ pub mod solana_transaction {
 /// programs.
 pub mod solana_sdk {
     pub use {
+        super::super::message_inner as message,
         super::{
             solana_account::{self as account, state_traits as account_utils},
             solana_signer::{self as signer, signers},
         },
         solana_clock::Clock,
         solana_hash as hash, solana_instruction as instruction, solana_keccak_hasher as keccak,
-        solana_message as message, solana_nonce as nonce,
+        solana_nonce as nonce,
         solana_pubkey::{self as pubkey, Pubkey},
         solana_sdk_ids::{
             system_program,
@@ -302,8 +303,8 @@ pub mod solana_sdk {
 
     pub mod address_lookup_table {
         pub use {
+            super::super::super::message_inner::AddressLookupTableAccount,
             solana_address_lookup_table_interface::{error, instruction, program, state},
-            solana_message::AddressLookupTableAccount,
         };
     }
 }

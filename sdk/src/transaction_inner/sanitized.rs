@@ -2,7 +2,7 @@ use {
     super::versioned::{sanitized::SanitizedVersionedTransaction, VersionedTransaction},
     crate::signature_inner::Signature,
     solana_hash::Hash,
-    solana_message::{
+    solana_program::message_inner::{
         legacy,
         v0::{self, LoadedAddresses},
         AddressLoader, LegacyMessage, SanitizedMessage, SanitizedVersionedMessage,

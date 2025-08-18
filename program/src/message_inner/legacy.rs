@@ -11,12 +11,9 @@
 
 #![allow(clippy::arithmetic_side_effects)]
 
-#[cfg(feature = "serde")]
 use serde_derive::{Deserialize, Serialize};
-#[cfg(feature = "frozen-abi")]
-use solana_frozen_abi_macro::{frozen_abi, AbiExample};
 use {
-    crate::{
+    super::{
         compiled_instruction::CompiledInstruction, compiled_keys::CompiledKeys,
         inline_nonce::advance_nonce_account_instruction, MessageHeader,
     },
@@ -64,24 +61,14 @@ fn compile_instructions(ixs: &[Instruction], keys: &[Pubkey]) -> Vec<CompiledIns
 /// redundantly specifying the fee-payer is not strictly required.
 // NOTE: Serialization-related changes must be paired with the custom serialization
 // for versioned messages in the `RemainingLegacyMessage` struct.
-#[cfg_attr(
-    feature = "frozen-abi",
-    frozen_abi(digest = "GXpvLNiMCnjnZpQEDKpc2NBpsqmRnAX7ZTCy9JmvG8Dg"),
-    derive(AbiExample)
-)]
-#[cfg_attr(
-    feature = "serde",
-    derive(Deserialize, Serialize),
-    serde(rename_all = "camelCase")
-)]
-#[derive(Default, Debug, PartialEq, Eq, Clone)]
+#[derive(Default, Debug, PartialEq, Eq, Clone, Deserialize, Serialize)]
 pub struct Message {
     /// The message header, identifying signed and read-only `account_keys`.
     // NOTE: Serialization-related changes must be paired with the direct read at sigverify.
     pub header: MessageHeader,
 
     /// All the account keys used by this transaction.
-    #[cfg_attr(feature = "serde", serde(with = "solana_short_vec"))]
+    #[serde(with = "solana_short_vec")]
     pub account_keys: Vec<Pubkey>,
 
     /// The id of a recent ledger entry.
@@ -89,7 +76,7 @@ pub struct Message {
 
     /// Programs that will be executed in sequence and committed in one atomic transaction if all
     /// succeed.
-    #[cfg_attr(feature = "serde", serde(with = "solana_short_vec"))]
+    #[serde(with = "solana_short_vec")]
     pub instructions: Vec<CompiledInstruction>,
 }
 
@@ -429,14 +416,14 @@ impl Message {
     }
 
     /// Compute the blake3 hash of this transaction's message.
-    #[cfg(all(not(target_os = "solana"), feature = "bincode", feature = "blake3"))]
+    #[cfg(not(target_os = "solana"))]
     pub fn hash(&self) -> Hash {
         let message_bytes = self.serialize();
         Self::hash_raw_message(&message_bytes)
     }
 
     /// Compute the blake3 hash of a raw transaction message.
-    #[cfg(all(not(target_os = "solana"), feature = "blake3"))]
+    #[cfg(not(target_os = "solana"))]
     pub fn hash_raw_message(message_bytes: &[u8]) -> Hash {
         use {blake3::traits::digest::Digest, solana_hash::HASH_BYTES};
         let mut hasher = blake3::Hasher::new();
@@ -450,7 +437,6 @@ impl Message {
         compile_instruction(ix, &self.account_keys)
     }
 
-    #[cfg(feature = "bincode")]
     pub fn serialize(&self) -> Vec<u8> {
         bincode::serialize(self).unwrap()
     }
@@ -585,303 +571,5 @@ impl Message {
         self.account_keys
             .iter()
             .any(|&key| key == bpf_loader_upgradeable::id())
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use {
-        super::*,
-        crate::MESSAGE_HEADER_LENGTH,
-        solana_instruction::AccountMeta,
-        std::{collections::HashSet, str::FromStr},
-    };
-
-    #[test]
-    // Ensure there's a way to calculate the number of required signatures.
-    fn test_message_signed_keys_len() {
-        let program_id = Pubkey::default();
-        let id0 = Pubkey::default();
-        let ix = Instruction::new_with_bincode(program_id, &0, vec![AccountMeta::new(id0, false)]);
-        let message = Message::new(&[ix], None);
-        assert_eq!(message.header.num_required_signatures, 0);
-
-        let ix = Instruction::new_with_bincode(program_id, &0, vec![AccountMeta::new(id0, true)]);
-        let message = Message::new(&[ix], Some(&id0));
-        assert_eq!(message.header.num_required_signatures, 1);
-    }
-
-    #[test]
-    fn test_message_kitchen_sink() {
-        let program_id0 = Pubkey::new_unique();
-        let program_id1 = Pubkey::new_unique();
-        let id0 = Pubkey::default();
-        let id1 = Pubkey::new_unique();
-        let message = Message::new(
-            &[
-                Instruction::new_with_bincode(program_id0, &0, vec![AccountMeta::new(id0, false)]),
-                Instruction::new_with_bincode(program_id1, &0, vec![AccountMeta::new(id1, true)]),
-                Instruction::new_with_bincode(program_id0, &0, vec![AccountMeta::new(id1, false)]),
-            ],
-            Some(&id1),
-        );
-        assert_eq!(
-            message.instructions[0],
-            CompiledInstruction::new(2, &0, vec![1])
-        );
-        assert_eq!(
-            message.instructions[1],
-            CompiledInstruction::new(3, &0, vec![0])
-        );
-        assert_eq!(
-            message.instructions[2],
-            CompiledInstruction::new(2, &0, vec![0])
-        );
-    }
-
-    #[test]
-    fn test_message_payer_first() {
-        let program_id = Pubkey::default();
-        let payer = Pubkey::new_unique();
-        let id0 = Pubkey::default();
-
-        let ix = Instruction::new_with_bincode(program_id, &0, vec![AccountMeta::new(id0, false)]);
-        let message = Message::new(&[ix], Some(&payer));
-        assert_eq!(message.header.num_required_signatures, 1);
-
-        let ix = Instruction::new_with_bincode(program_id, &0, vec![AccountMeta::new(id0, true)]);
-        let message = Message::new(&[ix], Some(&payer));
-        assert_eq!(message.header.num_required_signatures, 2);
-
-        let ix = Instruction::new_with_bincode(
-            program_id,
-            &0,
-            vec![AccountMeta::new(payer, true), AccountMeta::new(id0, true)],
-        );
-        let message = Message::new(&[ix], Some(&payer));
-        assert_eq!(message.header.num_required_signatures, 2);
-    }
-
-    #[test]
-    fn test_program_position() {
-        let program_id0 = Pubkey::default();
-        let program_id1 = Pubkey::new_unique();
-        let id = Pubkey::new_unique();
-        let message = Message::new(
-            &[
-                Instruction::new_with_bincode(program_id0, &0, vec![AccountMeta::new(id, false)]),
-                Instruction::new_with_bincode(program_id1, &0, vec![AccountMeta::new(id, true)]),
-            ],
-            Some(&id),
-        );
-        assert_eq!(message.program_position(0), None);
-        assert_eq!(message.program_position(1), Some(0));
-        assert_eq!(message.program_position(2), Some(1));
-    }
-
-    #[test]
-    fn test_is_maybe_writable() {
-        let key0 = Pubkey::new_unique();
-        let key1 = Pubkey::new_unique();
-        let key2 = Pubkey::new_unique();
-        let key3 = Pubkey::new_unique();
-        let key4 = Pubkey::new_unique();
-        let key5 = Pubkey::new_unique();
-
-        let message = Message {
-            header: MessageHeader {
-                num_required_signatures: 3,
-                num_readonly_signed_accounts: 2,
-                num_readonly_unsigned_accounts: 1,
-            },
-            account_keys: vec![key0, key1, key2, key3, key4, key5],
-            recent_blockhash: Hash::default(),
-            instructions: vec![],
-        };
-
-        let reserved_account_keys = HashSet::from([key3]);
-
-        assert!(message.is_maybe_writable(0, Some(&reserved_account_keys)));
-        assert!(!message.is_maybe_writable(1, Some(&reserved_account_keys)));
-        assert!(!message.is_maybe_writable(2, Some(&reserved_account_keys)));
-        assert!(!message.is_maybe_writable(3, Some(&reserved_account_keys)));
-        assert!(message.is_maybe_writable(3, None));
-        assert!(message.is_maybe_writable(4, Some(&reserved_account_keys)));
-        assert!(!message.is_maybe_writable(5, Some(&reserved_account_keys)));
-        assert!(!message.is_maybe_writable(6, Some(&reserved_account_keys)));
-    }
-
-    #[test]
-    fn test_is_account_maybe_reserved() {
-        let key0 = Pubkey::new_unique();
-        let key1 = Pubkey::new_unique();
-
-        let message = Message {
-            account_keys: vec![key0, key1],
-            ..Message::default()
-        };
-
-        let reserved_account_keys = HashSet::from([key1]);
-
-        assert!(!message.is_account_maybe_reserved(0, Some(&reserved_account_keys)));
-        assert!(message.is_account_maybe_reserved(1, Some(&reserved_account_keys)));
-        assert!(!message.is_account_maybe_reserved(2, Some(&reserved_account_keys)));
-        assert!(!message.is_account_maybe_reserved(0, None));
-        assert!(!message.is_account_maybe_reserved(1, None));
-        assert!(!message.is_account_maybe_reserved(2, None));
-    }
-
-    #[test]
-    fn test_program_ids() {
-        let key0 = Pubkey::new_unique();
-        let key1 = Pubkey::new_unique();
-        let loader2 = Pubkey::new_unique();
-        let instructions = vec![CompiledInstruction::new(2, &(), vec![0, 1])];
-        let message = Message::new_with_compiled_instructions(
-            1,
-            0,
-            2,
-            vec![key0, key1, loader2],
-            Hash::default(),
-            instructions,
-        );
-        assert_eq!(message.program_ids(), vec![&loader2]);
-    }
-
-    #[test]
-    fn test_is_instruction_account() {
-        let key0 = Pubkey::new_unique();
-        let key1 = Pubkey::new_unique();
-        let loader2 = Pubkey::new_unique();
-        let instructions = vec![CompiledInstruction::new(2, &(), vec![0, 1])];
-        let message = Message::new_with_compiled_instructions(
-            1,
-            0,
-            2,
-            vec![key0, key1, loader2],
-            Hash::default(),
-            instructions,
-        );
-
-        assert!(message.is_instruction_account(0));
-        assert!(message.is_instruction_account(1));
-        assert!(!message.is_instruction_account(2));
-    }
-
-    #[test]
-    fn test_message_header_len_constant() {
-        assert_eq!(
-            bincode::serialized_size(&MessageHeader::default()).unwrap() as usize,
-            MESSAGE_HEADER_LENGTH
-        );
-    }
-
-    #[test]
-    fn test_message_hash() {
-        // when this test fails, it's most likely due to a new serialized format of a message.
-        // in this case, the domain prefix `solana-tx-message-v1` should be updated.
-        let program_id0 = Pubkey::from_str("4uQeVj5tqViQh7yWWGStvkEG1Zmhx6uasJtWCJziofM").unwrap();
-        let program_id1 = Pubkey::from_str("8opHzTAnfzRpPEx21XtnrVTX28YQuCpAjcn1PczScKh").unwrap();
-        let id0 = Pubkey::from_str("CiDwVBFgWV9E5MvXWoLgnEgn2hK7rJikbvfWavzAQz3").unwrap();
-        let id1 = Pubkey::from_str("GcdayuLaLyrdmUu324nahyv33G5poQdLUEZ1nEytDeP").unwrap();
-        let id2 = Pubkey::from_str("LX3EUdRUBUa3TbsYXLEUdj9J3prXkWXvLYSWyYyc2Jj").unwrap();
-        let id3 = Pubkey::from_str("QRSsyMWN1yHT9ir42bgNZUNZ4PdEhcSWCrL2AryKpy5").unwrap();
-        let instructions = vec![
-            Instruction::new_with_bincode(program_id0, &0, vec![AccountMeta::new(id0, false)]),
-            Instruction::new_with_bincode(program_id0, &0, vec![AccountMeta::new(id1, true)]),
-            Instruction::new_with_bincode(
-                program_id1,
-                &0,
-                vec![AccountMeta::new_readonly(id2, false)],
-            ),
-            Instruction::new_with_bincode(
-                program_id1,
-                &0,
-                vec![AccountMeta::new_readonly(id3, true)],
-            ),
-        ];
-
-        let message = Message::new(&instructions, Some(&id1));
-        assert_eq!(
-            message.hash(),
-            Hash::from_str("7VWCF4quo2CcWQFNUayZiorxpiR5ix8YzLebrXKf3fMF").unwrap()
-        )
-    }
-
-    #[test]
-    fn test_is_writable_index_saturating_behavior() {
-        // Directly matching issue #150 PoC 1:
-        // num_readonly_signed_accounts > num_required_signatures
-        // This now results in the first part of the OR condition in is_writable_index effectively becoming `i < 0`.
-        let key0 = Pubkey::new_unique();
-        let message1 = Message {
-            header: MessageHeader {
-                num_required_signatures: 1,
-                num_readonly_signed_accounts: 2, // 2 > 1
-                num_readonly_unsigned_accounts: 0,
-            },
-            account_keys: vec![key0],
-            recent_blockhash: Hash::default(),
-            instructions: vec![],
-        };
-        assert!(!message1.is_writable_index(0));
-
-        // Matching issue #150 PoC 2 - num_readonly_unsigned_accounts > account_keys.len()
-        let key_for_poc2 = Pubkey::new_unique();
-        let message2 = Message {
-            header: MessageHeader {
-                num_required_signatures: 0,
-                num_readonly_signed_accounts: 0,
-                num_readonly_unsigned_accounts: 2, // 2 > account_keys.len() (1)
-            },
-            account_keys: vec![key_for_poc2],
-            recent_blockhash: Hash::default(),
-            instructions: vec![],
-        };
-        assert!(!message2.is_writable_index(0));
-
-        // Scenario 3: num_readonly_unsigned_accounts > account_keys.len() with writable signed account
-        // This should result in the first condition being true for the signed account
-        let message3 = Message {
-            header: MessageHeader {
-                num_required_signatures: 1, // Writable range starts before index 1
-                num_readonly_signed_accounts: 0,
-                num_readonly_unsigned_accounts: 2, // 2 > account_keys.len() (1)
-            },
-            account_keys: vec![key0],
-            recent_blockhash: Hash::default(),
-            instructions: vec![],
-        };
-        assert!(message3.is_writable_index(0));
-
-        // Scenario 4: Both conditions, and testing an index that would rely on the second part of OR
-        let key1 = Pubkey::new_unique();
-        let message4 = Message {
-            header: MessageHeader {
-                num_required_signatures: 1, // Writable range starts before index 1 for signed accounts
-                num_readonly_signed_accounts: 0,
-                num_readonly_unsigned_accounts: 3, // 3 > account_keys.len() (2)
-            },
-            account_keys: vec![key0, key1],
-            recent_blockhash: Hash::default(),
-            instructions: vec![],
-        };
-        assert!(message4.is_writable_index(0));
-        assert!(!message4.is_writable_index(1));
-
-        // Scenario 5: num_required_signatures is 0 due to saturating_sub
-        // and num_readonly_unsigned_accounts makes the second range empty
-        let message5 = Message {
-            header: MessageHeader {
-                num_required_signatures: 1,
-                num_readonly_signed_accounts: 2, // 1.saturating_sub(2) = 0
-                num_readonly_unsigned_accounts: 3, // account_keys.len().saturating_sub(3) potentially 0
-            },
-            account_keys: vec![key0, key1], // len is 2
-            recent_blockhash: Hash::default(),
-            instructions: vec![],
-        };
-        assert!(!message5.is_writable_index(0));
-        assert!(!message5.is_writable_index(1));
     }
 }

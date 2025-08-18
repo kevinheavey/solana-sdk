@@ -2972,38 +2972,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-message"
-version = "3.0.0"
-dependencies = [
- "anyhow",
- "bincode",
- "bitflags 2.8.0",
- "blake3",
- "borsh",
- "itertools 0.12.1",
- "lazy_static",
- "serde",
- "serde_derive",
- "serde_json",
- "solana-address-lookup-table-interface",
- "solana-frozen-abi",
- "solana-frozen-abi-macro",
- "solana-hash",
- "solana-instruction",
- "solana-instruction-error",
- "solana-logger",
- "solana-message",
- "solana-nonce",
- "solana-pubkey",
- "solana-sanitize",
- "solana-sdk-ids",
- "solana-short-vec",
- "solana-system-interface",
- "solana-transaction-error",
- "static_assertions",
-]
-
-[[package]]
 name = "solana-msg"
 version = "3.0.0"
 dependencies = [
@@ -3069,6 +3037,9 @@ dependencies = [
 name = "solana-program"
 version = "3.0.0"
 dependencies = [
+ "bincode",
+ "blake3",
+ "lazy_static",
  "memoffset",
  "serde",
  "serde_derive",
@@ -3092,7 +3063,7 @@ dependencies = [
  "solana-instructions-sysvar",
  "solana-keccak-hasher",
  "solana-last-restart-slot",
- "solana-message",
+ "solana-logger",
  "solana-msg",
  "solana-native-token",
  "solana-nonce",
@@ -3103,6 +3074,7 @@ dependencies = [
  "solana-program-pack",
  "solana-pubkey",
  "solana-rent",
+ "solana-sanitize",
  "solana-sdk-ids",
  "solana-secp256k1-recover",
  "solana-serde-varint",
@@ -3115,6 +3087,7 @@ dependencies = [
  "solana-system-interface",
  "solana-sysvar",
  "solana-sysvar-id",
+ "solana-transaction-error",
  "thiserror",
 ]
 
@@ -3226,7 +3199,6 @@ dependencies = [
  "solana-instruction-error",
  "solana-instructions-sysvar",
  "solana-logger",
- "solana-message",
  "solana-program",
  "solana-program-memory",
  "solana-pubkey",

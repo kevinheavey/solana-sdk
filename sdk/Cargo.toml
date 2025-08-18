@@ -64,7 +64,6 @@ solana-hash = { workspace = true }
 solana-instruction = { workspace = true, features = ["serde"] }
 solana-instruction-error = { workspace = true }
 solana-logger = { workspace = true, optional = true }
-solana-message = { workspace = true, features = ["bincode", "blake3", "serde"] }
 solana-program = { workspace = true }
 solana-program-memory = { workspace = true }
 solana-pubkey = { workspace = true, default-features = false, features = [

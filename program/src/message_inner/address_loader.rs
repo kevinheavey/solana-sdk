@@ -1,5 +1,5 @@
 use {
-    crate::v0::{LoadedAddresses, MessageAddressTableLookup},
+    super::v0::{LoadedAddresses, MessageAddressTableLookup},
     solana_transaction_error::AddressLoaderError,
 };
 
