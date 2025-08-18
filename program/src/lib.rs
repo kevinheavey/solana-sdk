@@ -495,6 +495,7 @@ pub mod big_mod_exp_inner;
 pub mod blake3_hasher_inner;
 pub mod borsh_inner;
 pub mod cpi_inner;
+pub mod epoch_rewards_inner;
 pub mod example_mocks_inner;
 pub mod instructions_sysvar_inner;
 pub mod keccak_hasher_inner;
@@ -513,7 +514,7 @@ pub use blake3_hasher_inner as blake3;
 #[deprecated(since = "2.1.0", note = "Use `solana-borsh` crate instead")]
 pub use borsh_inner::v1 as borsh1;
 #[deprecated(since = "2.1.0", note = "Use `solana-epoch-rewards` crate instead")]
-pub use solana_epoch_rewards as epoch_rewards;
+pub use epoch_rewards_inner as epoch_rewards;
 #[deprecated(since = "2.1.0", note = "Use `solana-fee-calculator` crate instead")]
 pub use solana_fee_calculator as fee_calculator;
 #[deprecated(since = "2.1.0", note = "Use `solana-last-restart-slot` crate instead")]

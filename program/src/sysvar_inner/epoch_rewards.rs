@@ -158,7 +158,7 @@ use super::Sysvar;
 use super::SysvarSerialize;
 use crate::impl_sysvar_get;
 pub use {
-    solana_epoch_rewards::EpochRewards,
+    super::super::epoch_rewards_inner::EpochRewards,
     solana_sdk_ids::sysvar::epoch_rewards::{check_id, id, ID},
 };
 

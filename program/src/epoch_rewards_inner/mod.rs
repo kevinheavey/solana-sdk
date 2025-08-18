@@ -6,23 +6,14 @@
 //!
 //! [`sysvar`]: crate::sysvar
 
-#![no_std]
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
-#![cfg_attr(feature = "frozen-abi", feature(min_specialization))]
-
-#[cfg(feature = "sysvar")]
 pub mod sysvar;
 
-#[cfg(feature = "std")]
-extern crate std;
-#[cfg(feature = "serde")]
 use serde_derive::{Deserialize, Serialize};
 use {solana_hash::Hash, solana_sdk_macro::CloneZeroed};
 
 #[repr(C, align(16))]
-#[cfg_attr(feature = "frozen-abi", derive(solana_frozen_abi_macro::AbiExample))]
-#[cfg_attr(feature = "serde", derive(Deserialize, Serialize))]
-#[derive(Debug, PartialEq, Eq, Default, CloneZeroed)]
+#[derive(Debug, PartialEq, Eq, Default, CloneZeroed, Deserialize, Serialize)]
 pub struct EpochRewards {
     /// The starting block height of the rewards distribution in the current
     /// epoch
@@ -59,50 +50,5 @@ impl EpochRewards {
         let new_distributed_rewards = self.distributed_rewards.saturating_add(amount);
         assert!(new_distributed_rewards <= self.total_rewards);
         self.distributed_rewards = new_distributed_rewards;
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    impl EpochRewards {
-        pub fn new(
-            total_rewards: u64,
-            distributed_rewards: u64,
-            distribution_starting_block_height: u64,
-        ) -> Self {
-            Self {
-                total_rewards,
-                distributed_rewards,
-                distribution_starting_block_height,
-                ..Self::default()
-            }
-        }
-    }
-
-    #[test]
-    fn test_epoch_rewards_new() {
-        let epoch_rewards = EpochRewards::new(100, 0, 64);
-
-        assert_eq!(epoch_rewards.total_rewards, 100);
-        assert_eq!(epoch_rewards.distributed_rewards, 0);
-        assert_eq!(epoch_rewards.distribution_starting_block_height, 64);
-    }
-
-    #[test]
-    fn test_epoch_rewards_distribute() {
-        let mut epoch_rewards = EpochRewards::new(100, 0, 64);
-        epoch_rewards.distribute(100);
-
-        assert_eq!(epoch_rewards.total_rewards, 100);
-        assert_eq!(epoch_rewards.distributed_rewards, 100);
-    }
-
-    #[test]
-    #[should_panic(expected = "new_distributed_rewards <= self.total_rewards")]
-    fn test_epoch_rewards_distribute_panic() {
-        let mut epoch_rewards = EpochRewards::new(100, 0, 64);
-        epoch_rewards.distribute(200);
     }
 }

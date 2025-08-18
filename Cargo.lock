@@ -2590,21 +2590,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-epoch-rewards"
-version = "3.0.0"
-dependencies = [
- "serde",
- "serde_derive",
- "solana-epoch-rewards",
- "solana-frozen-abi",
- "solana-frozen-abi-macro",
- "solana-hash",
- "solana-sdk-ids",
- "solana-sdk-macro",
- "solana-sysvar-id",
-]
-
-[[package]]
 name = "solana-epoch-schedule"
 version = "3.0.0"
 dependencies = [
@@ -2876,7 +2861,6 @@ dependencies = [
  "solana-account-info",
  "solana-clock",
  "solana-define-syscall",
- "solana-epoch-rewards",
  "solana-epoch-schedule",
  "solana-epoch-stake",
  "solana-fee-calculator",
