@@ -79,6 +79,7 @@ pub mod signature;
 pub mod signature_inner;
 pub mod signer;
 pub mod signer_inner;
+pub mod time_utils_inner;
 pub mod transaction;
 mod transaction_inner;
 pub mod transport;
@@ -163,7 +164,7 @@ pub use solana_serde_varint as serde_varint;
 #[deprecated(since = "2.1.0", note = "Use `solana-short-vec` crate instead")]
 pub use solana_short_vec as short_vec;
 #[deprecated(since = "2.2.0", note = "Use `solana-time-utils` crate instead")]
-pub use solana_time_utils as timing;
+pub use time_utils_inner as timing;
 #[cfg(feature = "full")]
 #[deprecated(
     since = "2.2.0",

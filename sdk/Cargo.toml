@@ -77,7 +77,6 @@ solana-serde-varint = { workspace = true }
 solana-sha256-hasher = { workspace = true, features = ["sha2"] }
 solana-short-vec = { workspace = true }
 solana-sysvar = { workspace = true, features = ["bincode"] }
-solana-time-utils = { workspace = true }
 solana-transaction-error = { workspace = true, features = [
     "serde",
 ], optional = true }

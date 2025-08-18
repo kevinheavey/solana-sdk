@@ -3254,7 +3254,6 @@ dependencies = [
  "solana-sha256-hasher",
  "solana-short-vec",
  "solana-sysvar",
- "solana-time-utils",
  "solana-transaction-error",
  "thiserror",
  "uriparse",
@@ -3468,10 +3467,6 @@ dependencies = [
  "solana-pubkey",
  "solana-sdk-ids",
 ]
-
-[[package]]
-name = "solana-time-utils"
-version = "3.0.0"
 
 [[package]]
 name = "solana-transaction-error"
