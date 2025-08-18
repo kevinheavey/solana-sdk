@@ -34,10 +34,13 @@
 // Allows macro expansion of `use ::solana_sdk::*` to work within this crate
 extern crate self as solana_sdk;
 
-#[deprecated(since = "2.2.0", note = "Use `solana-message` crate instead")]
-pub use solana_program::message_inner as message;
+#[cfg(feature = "full")]
+#[deprecated(since = "2.2.0", note = "Use `solana-signer` crate instead")]
+pub use crate::signer_inner::signers;
 #[cfg(feature = "borsh")]
 pub use solana_program::borsh1;
+#[deprecated(since = "2.2.0", note = "Use `solana-message` crate instead")]
+pub use solana_program::message_inner as message;
 #[cfg(not(target_os = "solana"))]
 pub use solana_program::program_stubs;
 pub use solana_program::{
@@ -48,9 +51,6 @@ pub use solana_program::{
     program_error, program_option, program_pack, rent, secp256k1_program, serialize_utils,
     slot_hashes, slot_history, stable_layout, syscalls, sysvar, unchecked_div_by_const,
 };
-#[cfg(feature = "full")]
-#[deprecated(since = "2.2.0", note = "Use `solana-signer` crate instead")]
-pub use crate::signer_inner::signers;
 pub mod entrypoint;
 pub mod entrypoint_deprecated;
 pub mod example_mocks;
@@ -100,8 +100,6 @@ pub use epoch_rewards_hasher_inner as epoch_rewards_hasher;
 pub use fee_structure_inner as fee;
 #[deprecated(since = "2.1.0", note = "Use `solana-inflation` crate instead")]
 pub use inflation_inner as inflation;
-#[deprecated(since = "2.2.0", note = "Use `solana-epoch-info` crate instead")]
-pub use solana_epoch_info as epoch_info;
 #[deprecated(
     since = "2.2.0",
     note = "Use `solana_message::inner_instruction` instead"
@@ -110,6 +108,14 @@ pub use message::inner_instruction;
 #[cfg(feature = "full")]
 #[deprecated(since = "2.2.0", note = "Use `solana-offchain-message` crate instead")]
 pub use offchain_message_inner as offchain_message;
+#[deprecated(since = "2.2.0", note = "Use `solana-serde` crate instead")]
+pub use serde_inner as deserialize_utils;
+#[deprecated(since = "2.2.0", note = "Use `solana-epoch-info` crate instead")]
+pub use solana_epoch_info as epoch_info;
+#[deprecated(since = "2.1.0", note = "Use `solana-serde-varint` crate instead")]
+pub use solana_program::serde_varint_inner as serde_varint;
+#[deprecated(since = "2.1.0", note = "Use `solana-short-vec` crate instead")]
+pub use solana_program::short_vec;
 #[deprecated(since = "2.1.0", note = "Use `solana-program-memory` crate instead")]
 pub use solana_program_memory as program_memory;
 #[deprecated(since = "2.1.0", note = "Use `solana_pubkey::pubkey` instead")]
@@ -157,12 +163,6 @@ pub use solana_sdk_macro::declare_deprecated_id;
 pub use solana_sdk_macro::declare_id;
 /// Convenience macro to define multiple static public keys.
 pub use solana_sdk_macro::pubkeys;
-#[deprecated(since = "2.2.0", note = "Use `solana-serde` crate instead")]
-pub use serde_inner as deserialize_utils;
-#[deprecated(since = "2.1.0", note = "Use `solana-serde-varint` crate instead")]
-pub use solana_serde_varint as serde_varint;
-#[deprecated(since = "2.1.0", note = "Use `solana-short-vec` crate instead")]
-pub use solana_program::short_vec;
 #[deprecated(since = "2.2.0", note = "Use `solana-time-utils` crate instead")]
 pub use time_utils_inner as timing;
 #[cfg(feature = "full")]

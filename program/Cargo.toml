@@ -82,7 +82,6 @@ solana-pubkey = { workspace = true, features = [
 ] }
 solana-sdk-ids = { workspace = true }
 solana-sdk-macro = { workspace = true }
-solana-serde-varint = { workspace = true }
 solana-serialize-utils = { workspace = true }
 solana-sha256-hasher = { workspace = true, features = ["sha2"] }
 solana-stable-layout = { workspace = true }

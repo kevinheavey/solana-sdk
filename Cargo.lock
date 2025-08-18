@@ -2779,7 +2779,6 @@ dependencies = [
  "solana-sanitize",
  "solana-sdk-ids",
  "solana-sdk-macro",
- "solana-serde-varint",
  "solana-serialize-utils",
  "solana-sha256-hasher",
  "solana-stable-layout",
@@ -2875,7 +2874,6 @@ dependencies = [
  "solana-sdk",
  "solana-sdk-ids",
  "solana-sdk-macro",
- "solana-serde-varint",
  "solana-sha256-hasher",
  "thiserror",
  "uriparse",
@@ -2906,13 +2904,6 @@ dependencies = [
  "openssl",
  "solana-instruction",
  "solana-sdk-ids",
-]
-
-[[package]]
-name = "solana-serde-varint"
-version = "3.0.0"
-dependencies = [
- "serde",
 ]
 
 [[package]]
