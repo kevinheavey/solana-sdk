@@ -12,7 +12,6 @@ members = [
     "define-syscall",
     "ed25519-program",
     "epoch-info",
-    "epoch-schedule",
     "epoch-stake",
     "fee-calculator",
     "file-download",
@@ -57,7 +56,6 @@ members = [
     "system-interface",
     "sysvar-id",
     "validator-exit",
-    "vote-interface",
 ]
 
 resolver = "2"
@@ -177,7 +175,6 @@ solana-compute-budget-interface = { path = "compute-budget-interface", version =
 solana-define-syscall = { path = "define-syscall", version = "3.0.0" }
 solana-ed25519-program = { path = "ed25519-program", version = "3.0.0" }
 solana-epoch-info = { path = "epoch-info", version = "3.0.0" }
-solana-epoch-schedule = { path = "epoch-schedule", version = "3.0.0" }
 solana-epoch-stake = { path = "epoch-stake", version = "3.0.0" }
 solana-fee-calculator = { path = "fee-calculator", version = "3.0.0" }
 solana-file-download = { path = "file-download", version = "3.0.0" }
@@ -223,7 +220,6 @@ solana-stable-layout = { path = "stable-layout", version = "3.0.0" }
 solana-system-interface = { path = "system-interface", version = "2.0" }
 solana-sysvar-id = { path = "sysvar-id", version = "3.0.0" }
 solana-validator-exit = { path = "validator-exit", version = "3.0.0" }
-solana-vote-interface = { path = "vote-interface", version = "3.0.0" }
 static_assertions = "1.1.0"
 strum = "0.24"
 strum_macros = "0.24"

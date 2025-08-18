@@ -123,7 +123,7 @@ use super::Sysvar;
 use super::SysvarSerialize;
 use crate::impl_sysvar_get;
 pub use {
-    solana_epoch_schedule::EpochSchedule,
+    super::super::epoch_schedule_inner::EpochSchedule,
     solana_sdk_ids::sysvar::epoch_schedule::{check_id, id, ID},
 };
 

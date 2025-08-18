@@ -496,6 +496,7 @@ pub mod blake3_hasher_inner;
 pub mod borsh_inner;
 pub mod cpi_inner;
 pub mod epoch_rewards_inner;
+pub mod epoch_schedule_inner;
 pub mod example_mocks_inner;
 pub mod instructions_sysvar_inner;
 pub mod keccak_hasher_inner;

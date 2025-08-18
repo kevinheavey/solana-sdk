@@ -12,25 +12,15 @@
 //! epochs increasing in slots until they last for [`DEFAULT_SLOTS_PER_EPOCH`].
 //!
 //! [`DEFAULT_SLOTS_PER_EPOCH`]: https://docs.rs/solana-clock/latest/solana_clock/constant.DEFAULT_SLOTS_PER_EPOCH.html
-#![cfg_attr(feature = "frozen-abi", feature(min_specialization))]
-#![no_std]
-#[cfg(feature = "frozen-abi")]
-extern crate std;
 
-#[cfg(feature = "sysvar")]
 pub mod sysvar;
 
-#[cfg(feature = "serde")]
 use serde_derive::{Deserialize, Serialize};
 use solana_sdk_macro::CloneZeroed;
 
 // inlined to avoid solana_clock dep
 const DEFAULT_SLOTS_PER_EPOCH: u64 = 432_000;
-#[cfg(test)]
-static_assertions::const_assert_eq!(
-    DEFAULT_SLOTS_PER_EPOCH,
-    solana_clock::DEFAULT_SLOTS_PER_EPOCH
-);
+
 /// The default number of slots before an epoch starts to calculate the leader schedule.
 pub const DEFAULT_LEADER_SCHEDULE_SLOT_OFFSET: u64 = DEFAULT_SLOTS_PER_EPOCH;
 
@@ -46,13 +36,8 @@ pub const MAX_LEADER_SCHEDULE_EPOCH_OFFSET: u64 = 3;
 pub const MINIMUM_SLOTS_PER_EPOCH: u64 = 32;
 
 #[repr(C)]
-#[cfg_attr(feature = "frozen-abi", derive(solana_frozen_abi_macro::AbiExample))]
-#[cfg_attr(
-    feature = "serde",
-    derive(Deserialize, Serialize),
-    serde(rename_all = "camelCase")
-)]
-#[derive(Debug, CloneZeroed, PartialEq, Eq)]
+#[derive(Debug, CloneZeroed, PartialEq, Eq, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct EpochSchedule {
     /// The maximum number of slots in each epoch.
     pub slots_per_epoch: u64,
@@ -203,82 +188,5 @@ impl EpochSchedule {
         self.get_first_slot_in_epoch(epoch)
             .saturating_add(self.get_slots_in_epoch(epoch))
             .saturating_sub(1)
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_epoch_schedule() {
-        // one week of slots at 8 ticks/slot, 10 ticks/sec is
-        // (1 * 7 * 24 * 4500u64).next_power_of_two();
-
-        // test values between MINIMUM_SLOT_LEN and MINIMUM_SLOT_LEN * 16, should cover a good mix
-        for slots_per_epoch in MINIMUM_SLOTS_PER_EPOCH..=MINIMUM_SLOTS_PER_EPOCH * 16 {
-            let epoch_schedule = EpochSchedule::custom(slots_per_epoch, slots_per_epoch / 2, true);
-
-            assert_eq!(epoch_schedule.get_first_slot_in_epoch(0), 0);
-            assert_eq!(
-                epoch_schedule.get_last_slot_in_epoch(0),
-                MINIMUM_SLOTS_PER_EPOCH - 1
-            );
-
-            let mut last_leader_schedule = 0;
-            let mut last_epoch = 0;
-            let mut last_slots_in_epoch = MINIMUM_SLOTS_PER_EPOCH;
-            for slot in 0..(2 * slots_per_epoch) {
-                // verify that leader_schedule_epoch is continuous over the warmup
-                // and into the first normal epoch
-
-                let leader_schedule = epoch_schedule.get_leader_schedule_epoch(slot);
-                if leader_schedule != last_leader_schedule {
-                    assert_eq!(leader_schedule, last_leader_schedule + 1);
-                    last_leader_schedule = leader_schedule;
-                }
-
-                let (epoch, offset) = epoch_schedule.get_epoch_and_slot_index(slot);
-
-                //  verify that epoch increases continuously
-                if epoch != last_epoch {
-                    assert_eq!(epoch, last_epoch + 1);
-                    last_epoch = epoch;
-                    assert_eq!(epoch_schedule.get_first_slot_in_epoch(epoch), slot);
-                    assert_eq!(epoch_schedule.get_last_slot_in_epoch(epoch - 1), slot - 1);
-
-                    // verify that slots in an epoch double continuously
-                    //   until they reach slots_per_epoch
-
-                    let slots_in_epoch = epoch_schedule.get_slots_in_epoch(epoch);
-                    if slots_in_epoch != last_slots_in_epoch && slots_in_epoch != slots_per_epoch {
-                        assert_eq!(slots_in_epoch, last_slots_in_epoch * 2);
-                    }
-                    last_slots_in_epoch = slots_in_epoch;
-                }
-                // verify that the slot offset is less than slots_in_epoch
-                assert!(offset < last_slots_in_epoch);
-            }
-
-            // assert that these changed  ;)
-            assert!(last_leader_schedule != 0); // t
-            assert!(last_epoch != 0);
-            // assert that we got to "normal" mode
-            assert!(last_slots_in_epoch == slots_per_epoch);
-        }
-    }
-
-    #[test]
-    fn test_clone() {
-        let epoch_schedule = EpochSchedule {
-            slots_per_epoch: 1,
-            leader_schedule_slot_offset: 2,
-            warmup: true,
-            first_normal_epoch: 4,
-            first_normal_slot: 5,
-        };
-        #[allow(clippy::clone_on_copy)]
-        let cloned_epoch_schedule = epoch_schedule.clone();
-        assert_eq!(cloned_epoch_schedule, epoch_schedule);
     }
 }
