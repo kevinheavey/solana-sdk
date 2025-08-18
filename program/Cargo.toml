@@ -81,7 +81,6 @@ solana-pubkey = { workspace = true, features = [
 ] }
 solana-sdk-ids = { workspace = true }
 solana-sdk-macro = { workspace = true }
-solana-secp256k1-recover = { workspace = true }
 solana-serde-varint = { workspace = true }
 solana-serialize-utils = { workspace = true }
 solana-sha256-hasher = { workspace = true, features = ["sha2"] }
@@ -97,6 +96,7 @@ base64 = { workspace = true }
 bincode = { workspace = true }
 bitflags = { workspace = true }
 blake3 = { workspace = true, features = ["traits-preview"] }
+k256 = { workspace = true }
 lazy_static = { workspace = true }
 num-bigint = { workspace = true }
 num-traits = { workspace = true }

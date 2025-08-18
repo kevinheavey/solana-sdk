@@ -110,12 +110,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "anyhow"
-version = "1.0.98"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e16d2d3311acee920a9eb8d33b8cbc1787ce4a264e85f964c2404b969bdcd487"
-
-[[package]]
 name = "arbitrary"
 version = "1.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2796,6 +2790,7 @@ dependencies = [
  "borsh",
  "bytemuck",
  "bytemuck_derive",
+ "k256",
  "lazy_static",
  "memoffset",
  "num-bigint",
@@ -2823,7 +2818,6 @@ dependencies = [
  "solana-sanitize",
  "solana-sdk-ids",
  "solana-sdk-macro",
- "solana-secp256k1-recover",
  "solana-serde-varint",
  "solana-serialize-utils",
  "solana-sha256-hasher",
@@ -2946,21 +2940,6 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn 2.0.98",
-]
-
-[[package]]
-name = "solana-secp256k1-recover"
-version = "3.0.0"
-dependencies = [
- "anyhow",
- "borsh",
- "k256",
- "rand",
- "solana-define-syscall",
- "solana-frozen-abi",
- "solana-frozen-abi-macro",
- "solana-program",
- "thiserror",
 ]
 
 [[package]]

@@ -1,4 +1,3 @@
-#![cfg_attr(feature = "frozen-abi", feature(min_specialization))]
 //! Public key recovery from [secp256k1] ECDSA signatures.
 //!
 //! [secp256k1]: https://en.bitcoin.it/wiki/Secp256k1
@@ -25,8 +24,6 @@
 //! [sp]: https://docs.rs/solana-program/latest/solana_program/secp256k1_program/
 //! [`ecrecover`]: https://docs.soliditylang.org/en/v0.8.14/units-and-global-variables.html?highlight=ecrecover#mathematical-and-cryptographic-functions
 
-#[cfg(feature = "borsh")]
-use borsh::{BorshDeserialize, BorshSchema, BorshSerialize};
 use {core::convert::TryFrom, thiserror::Error};
 
 #[derive(Debug, Clone, PartialEq, Eq, Error)]
@@ -64,12 +61,6 @@ pub const SECP256K1_SIGNATURE_LENGTH: usize = 64;
 pub const SECP256K1_PUBLIC_KEY_LENGTH: usize = 64;
 
 #[repr(transparent)]
-#[cfg_attr(feature = "frozen-abi", derive(solana_frozen_abi_macro::AbiExample))]
-#[cfg_attr(
-    feature = "borsh",
-    derive(BorshSerialize, BorshDeserialize, BorshSchema),
-    borsh(crate = "borsh")
-)]
 #[derive(Clone, Copy, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub struct Secp256k1Pubkey(pub [u8; SECP256K1_PUBLIC_KEY_LENGTH]);
 

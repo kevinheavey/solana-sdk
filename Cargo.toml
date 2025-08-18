@@ -40,7 +40,6 @@ members = [
     "sdk",
     "sdk-ids",
     "sdk-macro",
-    "secp256k1-recover",
     "secp256r1-program",
     "serde-varint",
     "serialize-utils",
@@ -200,7 +199,6 @@ solana-sanitize = { path = "sanitize", version = "3.0.0" }
 solana-sdk = { path = "sdk", version = "2.2.1" }
 solana-sdk-ids = { path = "sdk-ids", version = "3.0.0" }
 solana-sdk-macro = { path = "sdk-macro", version = "3.0.0" }
-solana-secp256k1-recover = { path = "secp256k1-recover", version = "3.0.0" }
 solana-secp256r1-program = { path = "secp256r1-program", version = "3.0.0", default-features = false }
 solana-serde-varint = { path = "serde-varint", version = "3.0.0" }
 solana-serialize-utils = { path = "serialize-utils", version = "3.0.0" }

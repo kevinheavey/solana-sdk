@@ -506,6 +506,7 @@ pub mod message_inner;
 pub mod native_token_inner;
 pub mod program_entrypoint_inner;
 pub mod rent_inner;
+pub mod secp256k1_recover_inner;
 pub mod sysvar_inner;
 pub mod transaction_error_inner;
 
@@ -529,7 +530,7 @@ pub use solana_program_memory as program_memory;
 #[deprecated(since = "2.1.0", note = "Use `solana-program-pack` crate instead")]
 pub use solana_program_pack as program_pack;
 #[deprecated(since = "2.1.0", note = "Use `solana-secp256k1-recover` crate instead")]
-pub use solana_secp256k1_recover as secp256k1_recover;
+pub use secp256k1_recover_inner as secp256k1_recover;
 #[deprecated(since = "2.1.0", note = "Use `solana-serde-varint` crate instead")]
 pub use solana_serde_varint as serde_varint;
 #[deprecated(since = "2.1.0", note = "Use `solana-serialize-utils` crate instead")]
