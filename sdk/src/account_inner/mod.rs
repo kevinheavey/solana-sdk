@@ -5,8 +5,8 @@ use serde::ser::{Serialize, Serializer};
 
 use solana_program::sysvar_inner::SysvarSerialize;
 use {
+    super::account_info::{debug_account_data::*, AccountInfo},
     super::clock::{Epoch, INITIAL_RENT_EPOCH},
-    solana_account_info::{debug_account_data::*, AccountInfo},
     solana_instruction_error::LamportsError,
     solana_pubkey::Pubkey,
     solana_sdk_ids::{bpf_loader, bpf_loader_deprecated, bpf_loader_upgradeable, loader_v4},
@@ -726,7 +726,7 @@ pub fn to_account<S: SysvarSerialize, T: WritableAccount>(
 
 /// Return the information required to construct an `AccountInfo`.  Used by the
 /// `AccountInfo` conversion implementations.
-impl solana_account_info::Account for Account {
+impl super::account_info::Account for Account {
     fn get(&mut self) -> (&mut u64, &mut [u8], &Pubkey, bool) {
         (
             &mut self.lamports,

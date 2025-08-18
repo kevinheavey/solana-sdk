@@ -490,6 +490,7 @@ pub mod slot_history;
 pub mod syscalls;
 pub mod sysvar;
 
+pub mod account_info_inner;
 pub mod address_lookup_table_interface_inner;
 pub mod big_mod_exp_inner;
 pub mod blake3_hasher_inner;
@@ -554,7 +555,7 @@ pub use {
     native_token_inner as native_token,
     program_entrypoint_inner::{self as entrypoint},
     rent_inner as rent,
-    solana_account_info::{self as account_info, debug_account_data},
+    account_info_inner::{self as account_info, debug_account_data},
     clock_inner as clock,
     solana_msg::msg,
     solana_program_option as program_option, solana_pubkey as pubkey,

@@ -82,7 +82,7 @@ pub mod __private {
     pub use solana_define_syscall::definitions;
     pub use {super::super::program_entrypoint_inner::SUCCESS, solana_program_error::ProgramError};
 }
-use {super::sysvar_id_inner::SysvarId, solana_account_info::AccountInfo};
+use {super::sysvar_id_inner::SysvarId, super::account_info::AccountInfo};
 use {solana_program_error::ProgramError, solana_pubkey::Pubkey};
 
 pub mod clock;

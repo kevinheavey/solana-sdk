@@ -4,7 +4,7 @@
 
 use {
     base64::{prelude::BASE64_STANDARD, Engine},
-    solana_account_info::AccountInfo,
+    super::super::account_info::AccountInfo,
     solana_instruction::{error::UNSUPPORTED_SYSVAR, Instruction},
     solana_program_error::ProgramResult,
     solana_program_memory::stubs,

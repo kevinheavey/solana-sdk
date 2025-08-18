@@ -203,7 +203,7 @@ pub fn check_type_assumptions() {
         }
     }
 
-    solana_account_info::check_type_assumptions();
+    super::account_info::check_type_assumptions();
 }
 
 #[cfg(test)]

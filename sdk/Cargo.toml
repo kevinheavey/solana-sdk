@@ -48,7 +48,6 @@ serde_bytes = { workspace = true }
 serde_derive = { workspace = true }
 sha2 = { workspace = true }
 siphasher = { workspace = true }
-solana-account-info = { workspace = true }
 solana-epoch-info = { workspace = true, features = ["serde"] }
 solana-frozen-abi = { workspace = true, optional = true }
 solana-frozen-abi-macro = { workspace = true, optional = true }

@@ -45,8 +45,8 @@
 //! # Ok::<(), anyhow::Error>(())
 //! ```
 use bytemuck_derive::{Pod, Zeroable};
+use {super::super::account_info::AccountInfo, super::SysvarSerialize};
 use {super::super::clock_inner::Slot, super::Sysvar, solana_hash::Hash};
-use {super::SysvarSerialize, solana_account_info::AccountInfo};
 
 const U64_SIZE: usize = std::mem::size_of::<u64>();
 

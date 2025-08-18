@@ -3,7 +3,7 @@
 extern crate alloc;
 use {
     alloc::vec::Vec,
-    solana_account_info::AccountInfo,
+    super::account_info::AccountInfo,
     solana_pubkey::Pubkey,
     std::{
         alloc::Layout,
@@ -15,8 +15,8 @@ use {
 // need to re-export msg for custom_heap_default macro, `AccountInfo` and `Pubkey` for
 // entrypoint_no_alloc macro
 pub use {
-    solana_account_info::AccountInfo as __AccountInfo,
-    solana_account_info::MAX_PERMITTED_DATA_INCREASE,
+    super::account_info::AccountInfo as __AccountInfo,
+    super::account_info::MAX_PERMITTED_DATA_INCREASE,
     // Re-exporting for custom_panic
     solana_define_syscall::definitions::{sol_log_ as __log, sol_panic_ as __panic},
     solana_msg::msg as __msg,
