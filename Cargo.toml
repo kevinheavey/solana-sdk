@@ -148,7 +148,7 @@ wasm-bindgen = "0.2.100"
 
 [profile.release]
 split-debuginfo = "unpacked"
-lto = "thin"
+lto = false
 
 # Enable basic optimizations for unittests
 [profile.test]
