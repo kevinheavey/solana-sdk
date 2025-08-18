@@ -1,8 +1,8 @@
 use {
+    super::super::slot_hashes::{get_entries, SlotHashes, MAX_ENTRIES},
     super::error::AddressLookupError,
     solana_clock::Slot,
     solana_pubkey::Pubkey,
-    solana_slot_hashes::{get_entries, SlotHashes, MAX_ENTRIES},
     std::borrow::Cow,
 };
 

@@ -6,7 +6,6 @@
 //!
 //! [`solana_program::sysvar::slot_hashes`]: https://docs.rs/solana-program/latest/solana_program/sysvar/slot_hashes/index.html
 
-#[cfg(feature = "sysvar")]
 pub mod sysvar;
 
 use {
@@ -35,11 +34,7 @@ pub fn set_entries_for_tests_only(entries: usize) {
 pub type SlotHash = (u64, Hash);
 
 #[repr(C)]
-#[cfg_attr(
-    feature = "serde",
-    derive(serde_derive::Deserialize, serde_derive::Serialize)
-)]
-#[derive(PartialEq, Eq, Debug, Default)]
+#[derive(PartialEq, Eq, Debug, Default, serde_derive::Deserialize, serde_derive::Serialize)]
 pub struct SlotHashes(Vec<SlotHash>);
 
 impl SlotHashes {

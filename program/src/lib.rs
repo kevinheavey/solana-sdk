@@ -508,6 +508,7 @@ pub mod program_entrypoint_inner;
 pub mod rent_inner;
 pub mod secp256k1_recover_inner;
 pub mod short_vec_inner;
+pub mod slot_hashes_inner;
 pub mod sysvar_inner;
 pub mod transaction_error_inner;
 

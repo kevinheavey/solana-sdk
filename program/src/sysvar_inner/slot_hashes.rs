@@ -54,7 +54,7 @@ const SYSVAR_LEN: usize = 20_488; // golden, update if MAX_ENTRIES changes
 
 pub use {
     solana_sdk_ids::sysvar::slot_hashes::{check_id, id, ID},
-    solana_slot_hashes::SlotHashes,
+    super::super::slot_hashes_inner::SlotHashes,
     solana_sysvar_id::SysvarId,
 };
 

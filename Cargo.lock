@@ -2815,7 +2815,6 @@ dependencies = [
  "solana-serde-varint",
  "solana-serialize-utils",
  "solana-sha256-hasher",
- "solana-slot-hashes",
  "solana-slot-history",
  "solana-stable-layout",
  "solana-system-interface",
@@ -2983,18 +2982,6 @@ dependencies = [
  "num-derive",
  "num-traits",
  "rand",
-]
-
-[[package]]
-name = "solana-slot-hashes"
-version = "3.0.0"
-dependencies = [
- "serde",
- "serde_derive",
- "solana-hash",
- "solana-sdk-ids",
- "solana-sha256-hasher",
- "solana-sysvar-id",
 ]
 
 [[package]]

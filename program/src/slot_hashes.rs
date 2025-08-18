@@ -1,1 +1,1 @@
-pub use {solana_clock::Slot, solana_slot_hashes::*};
+pub use {solana_clock::Slot, super::slot_hashes_inner::*};
