@@ -507,6 +507,7 @@ pub mod last_restart_slot_inner;
 pub mod message_inner;
 pub mod native_token_inner;
 pub mod program_entrypoint_inner;
+pub mod program_pack_inner;
 pub mod rent_inner;
 pub mod secp256k1_recover_inner;
 pub mod serde_varint_inner;
@@ -533,12 +534,8 @@ pub use epoch_rewards_inner as epoch_rewards;
 pub use keccak_hasher_inner as keccak;
 #[deprecated(since = "2.1.0", note = "Use `solana-last-restart-slot` crate instead")]
 pub use last_restart_slot_inner as last_restart_slot;
-#[deprecated(since = "2.1.0", note = "Use `solana-fee-calculator` crate instead")]
-pub use solana_fee_calculator as fee_calculator;
-#[deprecated(since = "2.1.0", note = "Use `solana-program-memory` crate instead")]
-pub use solana_program_memory as program_memory;
 #[deprecated(since = "2.1.0", note = "Use `solana-program-pack` crate instead")]
-pub use solana_program_pack as program_pack;
+pub use program_pack_inner as program_pack;
 #[deprecated(since = "2.1.0", note = "Use `solana-secp256k1-recover` crate instead")]
 pub use secp256k1_recover_inner as secp256k1_recover;
 #[deprecated(since = "2.1.0", note = "Use `solana-serde-varint` crate instead")]
@@ -547,16 +544,19 @@ pub use serde_varint_inner as serde_varint;
 pub use serialize_utils_inner as serialize_utils;
 #[deprecated(since = "2.1.0", note = "Use `solana-short-vec` crate instead")]
 pub use short_vec_inner as short_vec;
+#[deprecated(since = "2.1.0", note = "Use `solana-fee-calculator` crate instead")]
+pub use solana_fee_calculator as fee_calculator;
+#[deprecated(since = "2.1.0", note = "Use `solana-program-memory` crate instead")]
+pub use solana_program_memory as program_memory;
 #[deprecated(since = "2.1.0", note = "Use `solana-stable-layout` crate instead")]
 pub use stable_layout_inner as stable_layout;
 #[cfg(not(target_os = "solana"))]
 pub use sysvar_inner::program_stubs;
 pub use {
-    native_token_inner as native_token,
+    account_info_inner::{self as account_info, debug_account_data},
+    clock_inner as clock, native_token_inner as native_token,
     program_entrypoint_inner::{self as entrypoint},
     rent_inner as rent,
-    account_info_inner::{self as account_info, debug_account_data},
-    clock_inner as clock,
     solana_msg::msg,
     solana_program_option as program_option, solana_pubkey as pubkey,
 };

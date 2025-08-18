@@ -2743,7 +2743,6 @@ dependencies = [
  "solana-program-error",
  "solana-program-memory",
  "solana-program-option",
- "solana-program-pack",
  "solana-pubkey",
  "solana-sanitize",
  "solana-sdk-ids",
@@ -2772,13 +2771,6 @@ dependencies = [
 [[package]]
 name = "solana-program-option"
 version = "3.0.0"
-
-[[package]]
-name = "solana-program-pack"
-version = "3.0.0"
-dependencies = [
- "solana-program-error",
-]
 
 [[package]]
 name = "solana-pubkey"

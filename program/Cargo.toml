@@ -71,7 +71,6 @@ solana-msg = { workspace = true }
 solana-program-error = { workspace = true, features = ["serde"] }
 solana-program-memory = { workspace = true }
 solana-program-option = { workspace = true }
-solana-program-pack = { workspace = true }
 solana-pubkey = { workspace = true, features = [
     "bytemuck",
     "curve25519",
