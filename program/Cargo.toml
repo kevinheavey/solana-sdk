@@ -29,7 +29,7 @@ dev-context-only-utils = []
 borsh = { workspace = true, optional = true }
 bytemuck = { workspace = true }
 bytemuck_derive = { workspace = true }
-bv = { workspace = true }
+bv = { workspace = true, features = ["serde"] }
 curve25519-dalek = { workspace = true }
 five8 = { workspace = true }
 five8_const = { workspace = true }
