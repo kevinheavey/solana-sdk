@@ -2,7 +2,6 @@
 members = [
     "account-info",
     "address",
-    "address-lookup-table-interface",
     "atomic-u64",
     "big-mod-exp",
     "bincode",
@@ -177,7 +176,6 @@ signal-hook = "0.3.17"
 siphasher = "0.3.11"
 solana-account-info = { path = "account-info", version = "3.0.0" }
 solana-address = { path = "address", version = "1.0.0" }
-solana-address-lookup-table-interface = { path = "address-lookup-table-interface", version = "3.0.0" }
 solana-atomic-u64 = { path = "atomic-u64", version = "3.0.0" }
 solana-big-mod-exp = { path = "big-mod-exp", version = "3.0.0" }
 solana-bincode = { path = "bincode", version = "3.0.0" }

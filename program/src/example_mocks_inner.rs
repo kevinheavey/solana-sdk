@@ -303,8 +303,10 @@ pub mod solana_sdk {
 
     pub mod address_lookup_table {
         pub use {
+            super::super::super::address_lookup_table_interface_inner::{
+                error, instruction, program, state,
+            },
             super::super::super::message_inner::AddressLookupTableAccount,
-            solana_address_lookup_table_interface::{error, instruction, program, state},
         };
     }
 }
