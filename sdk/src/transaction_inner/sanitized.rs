@@ -1,5 +1,6 @@
 use {
     super::versioned::{sanitized::SanitizedVersionedTransaction, VersionedTransaction},
+    crate::signature_inner::Signature,
     solana_hash::Hash,
     solana_message::{
         legacy,
@@ -8,7 +9,6 @@ use {
         VersionedMessage,
     },
     solana_pubkey::Pubkey,
-    solana_signature::Signature,
     solana_transaction_error::{TransactionError, TransactionResult as Result},
     std::collections::HashSet,
 };

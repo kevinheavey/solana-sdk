@@ -5,7 +5,7 @@ use {
     rand::rngs::OsRng,
     solana_pubkey::Pubkey,
     crate::seed_phrase_inner::generate_seed_from_seed_phrase_and_passphrase,
-    solana_signature::{error::Error as SignatureError, Signature},
+    crate::signature_inner::{error::Error as SignatureError, Signature},
     crate::signer_inner::{EncodableKey, EncodableKeypair, Signer, SignerError},
     std::{
         error,

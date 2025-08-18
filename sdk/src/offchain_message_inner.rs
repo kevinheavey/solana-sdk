@@ -4,7 +4,7 @@ use {
     num_enum::{IntoPrimitive, TryFromPrimitive},
     solana_hash::Hash,
     solana_sanitize::SanitizeError,
-    solana_signature::Signature,
+    crate::signature_inner::Signature,
     crate::signer_inner::Signer,
 };
 

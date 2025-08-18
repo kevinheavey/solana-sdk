@@ -111,14 +111,7 @@
 //! ```
 
 use {
-    serde_derive::{Deserialize, Serialize},
-    solana_short_vec as short_vec,
-};
-use {
-    solana_hash::Hash,
-    crate::signer_inner::{signers::Signers, SignerError},
-};
-use {
+    crate::signature_inner::Signature,
     solana_instruction::Instruction,
     solana_message::{
         compiled_instruction::CompiledInstruction, inline_nonce::is_advance_nonce_instruction_data,
@@ -127,9 +120,16 @@ use {
     solana_pubkey::Pubkey,
     solana_sanitize::{Sanitize, SanitizeError},
     solana_sdk_ids::system_program,
-    solana_signature::Signature,
     solana_transaction_error::{TransactionError, TransactionResult as Result},
     std::result,
+};
+use {
+    crate::signer_inner::{signers::Signers, SignerError},
+    solana_hash::Hash,
+};
+use {
+    serde_derive::{Deserialize, Serialize},
+    solana_short_vec as short_vec,
 };
 
 pub mod sanitized;

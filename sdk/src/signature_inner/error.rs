@@ -1,8 +1,6 @@
 //! Signature error copied directly from
 //! [RustCrypto's opaque signature error](https://github.com/RustCrypto/traits/tree/master/signature)
 
-#[cfg(feature = "alloc")]
-use alloc::boxed::Box;
 use core::fmt::{self, Debug, Display};
 
 /// Signature errors.
@@ -24,7 +22,6 @@ use core::fmt::{self, Debug, Display};
 #[non_exhaustive]
 pub struct Error {
     /// Source of the error (if applicable).
-    #[cfg(feature = "alloc")]
     source: Option<Box<dyn core::error::Error + Send + Sync + 'static>>,
 }
 
@@ -35,7 +32,6 @@ impl Error {
     /// errors e.g. signature parsing or verification errors. The intended use
     /// cases are for propagating errors related to external signers, e.g.
     /// communication/authentication errors with HSMs, KMS, etc.
-    #[cfg(feature = "alloc")]
     pub fn from_source(
         source: impl Into<Box<dyn core::error::Error + Send + Sync + 'static>>,
     ) -> Self {
@@ -46,12 +42,6 @@ impl Error {
 }
 
 impl Debug for Error {
-    #[cfg(not(feature = "alloc"))]
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        f.write_str("signature::Error {}")
-    }
-
-    #[cfg(feature = "alloc")]
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         f.write_str("signature::Error { source: ")?;
 
@@ -71,7 +61,6 @@ impl Display for Error {
     }
 }
 
-#[cfg(feature = "alloc")]
 impl From<Box<dyn core::error::Error + Send + Sync + 'static>> for Error {
     fn from(source: Box<dyn core::error::Error + Send + Sync + 'static>) -> Error {
         Self::from_source(source)
@@ -80,15 +69,10 @@ impl From<Box<dyn core::error::Error + Send + Sync + 'static>> for Error {
 
 impl core::error::Error for Error {
     fn source(&self) -> Option<&(dyn core::error::Error + 'static)> {
-        #[cfg(feature = "alloc")]
         {
             self.source
                 .as_ref()
                 .map(|source| source.as_ref() as &(dyn core::error::Error + 'static))
-        }
-        #[cfg(not(feature = "alloc"))]
-        {
-            None
         }
     }
 }

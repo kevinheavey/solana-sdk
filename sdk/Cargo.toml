@@ -25,7 +25,6 @@ default = [
     "full",  # functionality that is not compatible or needed for on-chain programs
 ]
 full = [
-    "solana-signature",
     "solana-pubkey/rand",
     "dep:solana-transaction-error",
 ]
@@ -34,7 +33,6 @@ dev-context-only-utils = ["solana-program/dev-context-only-utils"]
 frozen-abi = [
     "solana-program/frozen-abi",
     "solana-short-vec/frozen-abi",
-    "solana-signature/frozen-abi",
     "solana-transaction-error/frozen-abi",
 ]
 
@@ -51,6 +49,7 @@ pbkdf2 = { workspace = true }
 qstring = { workspace = true }
 rand = { workspace = true }
 serde = { workspace = true }
+serde-big-array = { workspace = true }
 serde_bytes = { workspace = true }
 serde_derive = { workspace = true }
 sha2 = { workspace = true }
@@ -77,12 +76,6 @@ solana-sdk-macro = { workspace = true }
 solana-serde-varint = { workspace = true }
 solana-sha256-hasher = { workspace = true, features = ["sha2"] }
 solana-short-vec = { workspace = true }
-solana-signature = { workspace = true, features = [
-    "rand",
-    "serde",
-    "std",
-    "verify",
-], optional = true }
 solana-sysvar = { workspace = true, features = ["bincode"] }
 solana-time-utils = { workspace = true }
 solana-transaction-error = { workspace = true, features = [

@@ -8,6 +8,6 @@
 )]
 pub use crate::keypair_inner::signable::Signable;
 pub use {
+    crate::signature_inner::{ParseSignatureError, Signature, SIGNATURE_BYTES},
     crate::signer::{keypair::*, null_signer::*, presigner::*, *},
-    solana_signature::{ParseSignatureError, Signature, SIGNATURE_BYTES},
 };

@@ -1,7 +1,7 @@
 use {
     super::Keypair,
     solana_pubkey::Pubkey,
-    solana_signature::Signature,
+    crate::signature_inner::Signature,
     crate::signer_inner::Signer,
     std::borrow::{Borrow, Cow},
 };

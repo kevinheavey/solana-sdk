@@ -1,7 +1,7 @@
 use {
     super::{Signer, SignerError},
     solana_pubkey::Pubkey,
-    solana_signature::Signature,
+    crate::signature_inner::Signature,
 };
 
 /// Convenience trait for working with mixed collections of `Signer`s

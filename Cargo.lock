@@ -3242,6 +3242,7 @@ dependencies = [
  "qstring",
  "rand",
  "serde",
+ "serde-big-array",
  "serde_bytes",
  "serde_derive",
  "sha2",
@@ -3268,7 +3269,6 @@ dependencies = [
  "solana-serde-varint",
  "solana-sha256-hasher",
  "solana-short-vec",
- "solana-signature",
  "solana-sysvar",
  "solana-time-utils",
  "solana-transaction-error",
@@ -3362,30 +3362,6 @@ dependencies = [
  "serde_json",
  "solana-frozen-abi",
  "solana-frozen-abi-macro",
-]
-
-[[package]]
-name = "solana-signature"
-version = "3.1.0"
-dependencies = [
- "bincode",
- "bs58",
- "bytemuck",
- "bytemuck_derive",
- "curve25519-dalek",
- "ed25519-dalek",
- "five8",
- "rand",
- "serde",
- "serde-big-array",
- "serde_derive",
- "serde_json",
- "solana-frozen-abi",
- "solana-frozen-abi-macro",
- "solana-pubkey",
- "solana-sanitize",
- "solana-short-vec",
- "solana-signature",
 ]
 
 [[package]]

@@ -75,6 +75,7 @@ mod seed_phrase_inner;
 pub mod serde_inner;
 pub mod shred_version_inner;
 pub mod signature;
+pub mod signature_inner;
 pub mod signer;
 pub mod signer_inner;
 pub mod transaction;

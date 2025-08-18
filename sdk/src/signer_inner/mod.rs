@@ -3,7 +3,7 @@
 use {
     core::fmt,
     solana_pubkey::Pubkey,
-    solana_signature::Signature,
+    crate::signature_inner::Signature,
     solana_transaction_error::TransactionError,
     std::{
         error,
