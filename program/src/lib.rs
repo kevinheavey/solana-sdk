@@ -541,7 +541,6 @@ pub mod transaction_error_inner;
 pub use big_mod_exp_inner as big_mod_exp;
 #[deprecated(since = "2.2.0", note = "Use `solana-blake3-hasher` crate instead")]
 pub use blake3_hasher_inner as blake3;
-#[cfg(feature = "borsh")]
 #[deprecated(since = "2.1.0", note = "Use `solana-borsh` crate instead")]
 pub use borsh_inner::v1 as borsh1;
 #[deprecated(since = "2.1.0", note = "Use `solana-epoch-rewards` crate instead")]

@@ -25,8 +25,8 @@ default = [
     "full",  # functionality that is not compatible or needed for on-chain programs
 ]
 full = []
-borsh = ["solana-program/borsh"]
-dev-context-only-utils = ["solana-program/dev-context-only-utils"]
+borsh = []
+dev-context-only-utils = []
 
 [dependencies]
 bincode = { workspace = true }
@@ -51,10 +51,6 @@ solana-program = { workspace = true }
 solana-sdk-macro = { workspace = true }
 thiserror = { workspace = true }
 uriparse = { workspace = true }
-
-[dev-dependencies]
-solana-program = { workspace = true, features = ["dev-context-only-utils"] }
-solana-sdk = { path = ".", features = ["dev-context-only-utils"] }
 
 [lints]
 workspace = true

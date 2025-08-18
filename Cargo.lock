@@ -2291,7 +2291,6 @@ dependencies = [
  "sha2",
  "siphasher",
  "solana-program",
- "solana-sdk",
  "solana-sdk-macro",
  "thiserror",
  "uriparse",

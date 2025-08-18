@@ -20,13 +20,8 @@ rustdoc-args = ["--cfg=docsrs"]
 [lib]
 crate-type = ["rlib"]
 
-[features]
-default = ["borsh"]
-borsh = ["dep:borsh"]
-dev-context-only-utils = []
-
 [dependencies]
-borsh = { workspace = true, optional = true }
+borsh = { workspace = true }
 bytemuck = { workspace = true }
 bytemuck_derive = { workspace = true }
 bv = { workspace = true, features = ["serde"] }
