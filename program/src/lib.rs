@@ -512,6 +512,7 @@ pub mod serialize_utils_inner;
 pub mod short_vec_inner;
 pub mod slot_hashes_inner;
 pub mod slot_history_inner;
+pub mod stable_layout_inner;
 pub mod system_interface_inner;
 pub mod sysvar_inner;
 pub mod transaction_error_inner;
@@ -544,7 +545,7 @@ pub use serialize_utils_inner as serialize_utils;
 #[deprecated(since = "2.1.0", note = "Use `solana-short-vec` crate instead")]
 pub use short_vec_inner as short_vec;
 #[deprecated(since = "2.1.0", note = "Use `solana-stable-layout` crate instead")]
-pub use solana_stable_layout as stable_layout;
+pub use stable_layout_inner as stable_layout;
 #[cfg(not(target_os = "solana"))]
 pub use sysvar_inner::program_stubs;
 pub use {

@@ -83,7 +83,6 @@ solana-pubkey = { workspace = true, features = [
 solana-sdk-ids = { workspace = true }
 solana-sdk-macro = { workspace = true }
 solana-sha256-hasher = { workspace = true, features = ["sha2"] }
-solana-stable-layout = { workspace = true }
 solana-sysvar-id = { workspace = true }
 
 [target.'cfg(not(target_os = "solana"))'.dependencies]
@@ -99,9 +98,6 @@ solana-logger = { workspace = true }
 solana-nonce = { workspace = true }
 solana-sanitize = { workspace = true }
 thiserror = { workspace = true }
-
-[target.'cfg(target_os = "solana")'.dependencies]
-solana-stable-layout = { workspace = true }
 
 [dev-dependencies]
 solana-pubkey = { workspace = true, features = ["dev-context-only-utils"] }

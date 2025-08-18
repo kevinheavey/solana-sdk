@@ -2780,7 +2780,6 @@ dependencies = [
  "solana-sdk-ids",
  "solana-sdk-macro",
  "solana-sha256-hasher",
- "solana-stable-layout",
  "solana-sysvar-id",
  "thiserror",
 ]
@@ -2924,15 +2923,6 @@ dependencies = [
  "num-derive",
  "num-traits",
  "rand",
-]
-
-[[package]]
-name = "solana-stable-layout"
-version = "3.0.0"
-dependencies = [
- "memoffset",
- "solana-instruction",
- "solana-pubkey",
 ]
 
 [[package]]
