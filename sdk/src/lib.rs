@@ -64,7 +64,10 @@ pub use solana_shred_version as shred_version;
 pub mod signature;
 pub mod signer;
 pub mod transaction;
+mod derivation_path_inner;
 mod keypair_inner;
+mod seed_derivable_inner;
+mod seed_phrase_inner;
 mod transaction_inner;
 pub mod transport;
 

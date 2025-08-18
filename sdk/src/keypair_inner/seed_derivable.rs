@@ -3,8 +3,8 @@
 use {
     super::{keypair_from_seed, keypair_from_seed_phrase_and_passphrase, Keypair},
     ed25519_dalek_bip32::Error as Bip32Error,
-    solana_derivation_path::DerivationPath,
-    solana_seed_derivable::SeedDerivable,
+    crate::derivation_path_inner::DerivationPath,
+    crate::seed_derivable_inner::SeedDerivable,
     std::error,
 };
 

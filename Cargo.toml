@@ -16,7 +16,6 @@ members = [
     "compute-budget-interface",
     "cpi",
     "define-syscall",
-    "derivation-path",
     "ed25519-program",
     "epoch-info",
     "epoch-rewards",
@@ -69,8 +68,6 @@ members = [
     "secp256k1-program",
     "secp256k1-recover",
     "secp256r1-program",
-    "seed-derivable",
-    "seed-phrase",
     "serde",
     "serde-varint",
     "serialize-utils",
@@ -213,7 +210,6 @@ solana-commitment-config = { path = "commitment-config", version = "3.0.0" }
 solana-compute-budget-interface = { path = "compute-budget-interface", version = "3.0.0" }
 solana-cpi = { path = "cpi", version = "3.0.0" }
 solana-define-syscall = { path = "define-syscall", version = "3.0.0" }
-solana-derivation-path = { path = "derivation-path", version = "3.0.0" }
 solana-ed25519-program = { path = "ed25519-program", version = "3.0.0" }
 solana-epoch-info = { path = "epoch-info", version = "3.0.0" }
 solana-epoch-rewards = { path = "epoch-rewards", version = "3.0.0" }
@@ -267,8 +263,6 @@ solana-sdk-macro = { path = "sdk-macro", version = "3.0.0" }
 solana-secp256k1-program = { path = "secp256k1-program", version = "3.0.0" }
 solana-secp256k1-recover = { path = "secp256k1-recover", version = "3.0.0" }
 solana-secp256r1-program = { path = "secp256r1-program", version = "3.0.0", default-features = false }
-solana-seed-derivable = { path = "seed-derivable", version = "3.0.0" }
-solana-seed-phrase = { path = "seed-phrase", version = "3.0.0" }
 solana-serde = { path = "serde", version = "3.0.0" }
 solana-serde-varint = { path = "serde-varint", version = "3.0.0" }
 solana-serialize-utils = { path = "serialize-utils", version = "3.0.0" }

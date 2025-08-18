@@ -1,5 +1,5 @@
 //! The interface by which keys are derived.
-use {solana_derivation_path::DerivationPath, std::error};
+use {crate::derivation_path_inner::DerivationPath, std::error};
 
 /// The `SeedDerivable` trait defines the interface by which cryptographic keys/keypairs are
 /// derived from byte seeds, derivation paths, and passphrases.

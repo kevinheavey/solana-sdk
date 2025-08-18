@@ -29,8 +29,6 @@ full = [
     "solana-pubkey/rand",
     "dep:solana-offchain-message",
     "dep:solana-presigner",
-    "dep:solana-seed-derivable",
-    "dep:solana-seed-phrase",
     "dep:solana-shred-version",
     "dep:solana-signer",
     "dep:solana-transaction-error",
@@ -55,9 +53,14 @@ bincode = { workspace = true }
 bs58 = { workspace = true }
 ed25519-dalek = { workspace = true, features = ["rand_core"] }
 ed25519-dalek-bip32 = { workspace = true }
+derivation-path = { workspace = true }
+qstring = { workspace = true }
+uriparse = { workspace = true }
 five8 = { workspace = true }
+hmac = { workspace = true }
+pbkdf2 = { workspace = true }
 rand = { workspace = true }
-solana-derivation-path = { workspace = true }
+sha2 = { workspace = true }
 serde = { workspace = true }
 serde_derive = { workspace = true }
 solana-account = { workspace = true, features = ["bincode"] }
@@ -78,8 +81,6 @@ solana-pubkey = { workspace = true, default-features = false, features = [
 solana-sanitize = { workspace = true }
 solana-sdk-ids = { workspace = true }
 solana-sdk-macro = { workspace = true }
-solana-seed-derivable = { workspace = true, optional = true }
-solana-seed-phrase = { workspace = true, optional = true }
 solana-serde = { workspace = true }
 solana-serde-varint = { workspace = true }
 solana-short-vec = { workspace = true }

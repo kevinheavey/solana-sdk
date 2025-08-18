@@ -2748,16 +2748,6 @@ name = "solana-define-syscall"
 version = "3.0.0"
 
 [[package]]
-name = "solana-derivation-path"
-version = "3.0.0"
-dependencies = [
- "assert_matches",
- "derivation-path",
- "qstring",
- "uriparse",
-]
-
-[[package]]
 name = "solana-ed25519-program"
 version = "3.0.0"
 dependencies = [
@@ -3364,14 +3354,18 @@ version = "2.3.0"
 dependencies = [
  "bincode",
  "bs58",
+ "derivation-path",
  "ed25519-dalek",
  "ed25519-dalek-bip32",
  "five8",
+ "hmac",
+ "pbkdf2",
+ "qstring",
  "rand",
  "serde",
  "serde_derive",
+ "sha2",
  "solana-account",
- "solana-derivation-path",
  "solana-epoch-info",
  "solana-epoch-rewards-hasher",
  "solana-fee-structure",
@@ -3389,8 +3383,6 @@ dependencies = [
  "solana-sdk",
  "solana-sdk-ids",
  "solana-sdk-macro",
- "solana-seed-derivable",
- "solana-seed-phrase",
  "solana-serde",
  "solana-serde-varint",
  "solana-short-vec",
@@ -3400,6 +3392,7 @@ dependencies = [
  "solana-time-utils",
  "solana-transaction-error",
  "thiserror",
+ "uriparse",
 ]
 
 [[package]]
@@ -3467,22 +3460,6 @@ dependencies = [
  "openssl",
  "solana-instruction",
  "solana-sdk-ids",
-]
-
-[[package]]
-name = "solana-seed-derivable"
-version = "3.0.0"
-dependencies = [
- "solana-derivation-path",
-]
-
-[[package]]
-name = "solana-seed-phrase"
-version = "3.0.0"
-dependencies = [
- "hmac",
- "pbkdf2",
- "sha2",
 ]
 
 [[package]]
