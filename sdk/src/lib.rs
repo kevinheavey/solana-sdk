@@ -65,6 +65,7 @@ pub mod account_inner;
 mod derivation_path_inner;
 pub mod epoch_rewards_hasher_inner;
 pub mod fee_structure_inner;
+pub mod inflation_inner;
 mod keypair_inner;
 mod seed_derivable_inner;
 mod seed_phrase_inner;
@@ -88,10 +89,10 @@ pub use account_inner::state_traits as account_utils;
 pub use epoch_rewards_hasher_inner as epoch_rewards_hasher;
 #[deprecated(since = "2.2.0", note = "Use `solana-fee-structure` crate instead")]
 pub use fee_structure_inner as fee;
+#[deprecated(since = "2.1.0", note = "Use `solana-inflation` crate instead")]
+pub use inflation_inner as inflation;
 #[deprecated(since = "2.2.0", note = "Use `solana-epoch-info` crate instead")]
 pub use solana_epoch_info as epoch_info;
-#[deprecated(since = "2.1.0", note = "Use `solana-inflation` crate instead")]
-pub use solana_inflation as inflation;
 #[deprecated(
     since = "2.2.0",
     note = "Use `solana_message::inner_instruction` instead"

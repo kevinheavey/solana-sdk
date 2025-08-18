@@ -2886,16 +2886,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-inflation"
-version = "3.0.0"
-dependencies = [
- "serde",
- "serde_derive",
- "solana-frozen-abi",
- "solana-frozen-abi-macro",
-]
-
-[[package]]
 name = "solana-instruction"
 version = "3.0.0"
 dependencies = [
@@ -3302,7 +3292,6 @@ dependencies = [
  "solana-frozen-abi",
  "solana-frozen-abi-macro",
  "solana-hash",
- "solana-inflation",
  "solana-instruction",
  "solana-instruction-error",
  "solana-instructions-sysvar",
