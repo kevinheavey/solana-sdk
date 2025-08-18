@@ -27,7 +27,6 @@ default = [
 full = [
     "solana-signature",
     "solana-pubkey/rand",
-    "dep:solana-keypair",
     "dep:solana-offchain-message",
     "dep:solana-presigner",
     "dep:solana-seed-derivable",
@@ -54,6 +53,11 @@ frozen-abi = [
 [dependencies]
 bincode = { workspace = true }
 bs58 = { workspace = true }
+ed25519-dalek = { workspace = true, features = ["rand_core"] }
+ed25519-dalek-bip32 = { workspace = true }
+five8 = { workspace = true }
+rand = { workspace = true }
+solana-derivation-path = { workspace = true }
 serde = { workspace = true }
 serde_derive = { workspace = true }
 solana-account = { workspace = true, features = ["bincode"] }
@@ -63,9 +67,6 @@ solana-fee-structure = { workspace = true, features = ["serde"] }
 solana-hash = { workspace = true }
 solana-inflation = { workspace = true, features = ["serde"] }
 solana-instruction = { workspace = true, features = ["serde"] }
-solana-keypair = { workspace = true, optional = true, features = [
-    "seed-derivable",
-] }
 solana-message = { workspace = true, features = ["bincode", "blake3", "serde"] }
 solana-offchain-message = { workspace = true, optional = true, features = ["verify"] }
 solana-presigner = { workspace = true, optional = true }

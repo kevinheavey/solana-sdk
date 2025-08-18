@@ -64,6 +64,7 @@ pub use solana_shred_version as shred_version;
 pub mod signature;
 pub mod signer;
 pub mod transaction;
+mod keypair_inner;
 mod transaction_inner;
 pub mod transport;
 

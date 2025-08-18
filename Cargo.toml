@@ -8,7 +8,6 @@ members = [
     "big-mod-exp",
     "bincode",
     "blake3-hasher",
-    "bls-signatures",
     "bn254",
     "borsh",
     "clock",
@@ -31,7 +30,6 @@ members = [
     "file-download",
     "frozen-abi",
     "frozen-abi-macro",
-    "genesis-config",
     "hard-forks",
     "hash",
     "inflation",
@@ -39,7 +37,6 @@ members = [
     "instruction-error",
     "instructions-sysvar",
     "keccak-hasher",
-    "keypair",
     "loader-v2-interface",
     "loader-v3-interface",
     "loader-v4-interface",
@@ -63,7 +60,6 @@ members = [
     "program-option",
     "program-pack",
     "pubkey",
-    "quic-definitions",
     "rent",
     "reward-info",
     "sanitize",
@@ -209,7 +205,6 @@ solana-atomic-u64 = { path = "atomic-u64", version = "3.0.0" }
 solana-big-mod-exp = { path = "big-mod-exp", version = "3.0.0" }
 solana-bincode = { path = "bincode", version = "3.0.0" }
 solana-blake3-hasher = { path = "blake3-hasher", version = "3.0.0" }
-solana-bls-signatures = { path = "bls-signatures", version = "0.1.1" }
 solana-bn254 = { path = "bn254", version = "3.0.0" }
 solana-borsh = { path = "borsh", version = "3.0.0" }
 solana-clock = { path = "clock", version = "3.0.0" }
@@ -232,7 +227,6 @@ solana-fee-structure = { path = "fee-structure", version = "3.0.0" }
 solana-file-download = { path = "file-download", version = "3.0.0" }
 solana-frozen-abi = { path = "frozen-abi", version = "3.0.0" }
 solana-frozen-abi-macro = { path = "frozen-abi-macro", version = "3.0.0" }
-solana-genesis-config = { path = "genesis-config", version = "3.0.0" }
 solana-hard-forks = { path = "hard-forks", version = "3.0.0", default-features = false }
 solana-hash = { path = "hash", version = "3.0.0", default-features = false }
 solana-inflation = { path = "inflation", version = "3.0.0" }
@@ -240,7 +234,6 @@ solana-instruction = { path = "instruction", version = "3.0.0", default-features
 solana-instruction-error = { path = "instruction-error", version = "2.0.0" }
 solana-instructions-sysvar = { path = "instructions-sysvar", version = "3.0.0" }
 solana-keccak-hasher = { path = "keccak-hasher", version = "3.0.0" }
-solana-keypair = { path = "keypair", version = "3.0.0" }
 solana-last-restart-slot = { path = "last-restart-slot", version = "3.0.0" }
 solana-loader-v2-interface = { path = "loader-v2-interface", version = "3.0.0" }
 solana-loader-v3-interface = { path = "loader-v3-interface", version = "6.0.0" }
@@ -265,7 +258,6 @@ solana-program-memory = { path = "program-memory", version = "3.0.0" }
 solana-program-option = { path = "program-option", version = "3.0.0" }
 solana-program-pack = { path = "program-pack", version = "3.0.0" }
 solana-pubkey = { path = "pubkey", version = "3.0.0", default-features = false }
-solana-quic-definitions = { path = "quic-definitions", version = "3.0.0" }
 solana-rent = { path = "rent", version = "3.0.0", default-features = false }
 solana-reward-info = { path = "reward-info", version = "3.0.0" }
 solana-sanitize = { path = "sanitize", version = "3.0.0" }

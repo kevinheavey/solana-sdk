@@ -6,7 +6,7 @@
     since = "2.2.0",
     note = "Use solana_keypair::signable::Signable instead."
 )]
-pub use solana_keypair::signable::Signable;
+pub use crate::keypair_inner::signable::Signable;
 pub use {
     crate::signer::{keypair::*, null_signer::*, presigner::*, *},
     solana_signature::{ParseSignatureError, Signature, SIGNATURE_BYTES},

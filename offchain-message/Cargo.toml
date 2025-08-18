@@ -29,6 +29,5 @@ solana-signature = { workspace = true }
 solana-signer = { workspace = true }
 
 [dev-dependencies]
-solana-keypair = { workspace = true }
 solana-offchain-message = { path = ".", features = ["dev-context-only-utils"] }
 static_assertions = { workspace = true }

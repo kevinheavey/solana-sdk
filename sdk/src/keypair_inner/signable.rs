@@ -1,5 +1,5 @@
 use {
-    crate::Keypair,
+    super::Keypair,
     solana_pubkey::Pubkey,
     solana_signature::Signature,
     solana_signer::Signer,
