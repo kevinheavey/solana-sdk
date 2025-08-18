@@ -59,7 +59,6 @@ borsh = { workspace = true }
 itertools = { workspace = true }
 serde_json = { workspace = true }
 solana-address-lookup-table-interface = { workspace = true, features = ["bincode", "bytemuck"] }
-solana-example-mocks = { path = "../example-mocks" }
 solana-instruction = { workspace = true, features = ["borsh"] }
 solana-instruction-error = { workspace = true }
 solana-message = { path = ".", features = ["dev-context-only-utils"] }

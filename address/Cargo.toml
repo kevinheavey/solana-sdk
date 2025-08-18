@@ -70,7 +70,6 @@ solana-address = { path = ".", features = [
     "syscalls"
 ] }
 solana-cpi = { path = "../cpi" }
-solana-example-mocks = { path = "../example-mocks" }
 solana-hash = { workspace = true }
 solana-instruction = { path = "../instruction", features = ["borsh"] }
 solana-program-error = { workspace = true, features = ["borsh"] }

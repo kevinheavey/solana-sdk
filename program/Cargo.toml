@@ -31,8 +31,6 @@ borsh = [
 ]
 dev-context-only-utils = [
     "solana-instructions-sysvar/dev-context-only-utils",
-    "dep:solana-system-interface",
-    "solana-system-interface/bincode",
 ]
 frozen-abi = [
     "dep:solana-frozen-abi",
@@ -50,6 +48,8 @@ frozen-abi = [
 
 [dependencies]
 memoffset = { workspace = true }
+serde = { workspace = true }
+serde_derive = { workspace = true }
 solana-account-info = { workspace = true, features = ["bincode"] }
 solana-big-mod-exp = { workspace = true }
 solana-blake3-hasher = { workspace = true, features = ["blake3"] }
@@ -95,12 +95,15 @@ solana-short-vec = { workspace = true }
 solana-slot-hashes = { workspace = true, features = ["serde", "sysvar"] }
 solana-slot-history = { workspace = true, features = ["serde", "sysvar"] }
 solana-stable-layout = { workspace = true }
-solana-system-interface = { optional = true, workspace = true, features = ["bincode"] }
+solana-system-interface = { workspace = true, features = ["bincode"] }
 solana-sysvar = { workspace = true, features = ["bincode", "bytemuck"] }
 solana-sysvar-id = { workspace = true }
 
 [target.'cfg(not(target_os = "solana"))'.dependencies]
-solana-example-mocks = { workspace = true }
+solana-address-lookup-table-interface = { workspace = true }
+solana-message = { workspace = true }
+solana-nonce = { workspace = true }
+thiserror = { workspace = true }
 
 [target.'cfg(target_os = "solana")'.dependencies]
 solana-define-syscall = { workspace = true }

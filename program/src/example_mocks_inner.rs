@@ -166,7 +166,7 @@ pub mod solana_signer {
 }
 
 pub mod solana_keypair {
-    use {crate::solana_signer::Signer, solana_pubkey::Pubkey};
+    use {super::solana_signer::Signer, solana_pubkey::Pubkey};
     pub struct Keypair;
 
     impl Keypair {
@@ -184,7 +184,7 @@ pub mod solana_keypair {
 
 pub mod solana_transaction {
     use {
-        crate::solana_signer::{signers::Signers, SignerError},
+        super::solana_signer::{signers::Signers, SignerError},
         serde_derive::Serialize,
         solana_hash::Hash,
         solana_instruction::Instruction,
@@ -194,7 +194,7 @@ pub mod solana_transaction {
 
     pub mod versioned {
         use {
-            crate::{
+            super::super::{
                 solana_signature::Signature,
                 solana_signer::{signers::Signers, SignerError},
             },
@@ -275,7 +275,7 @@ pub mod solana_transaction {
 /// programs.
 pub mod solana_sdk {
     pub use {
-        crate::{
+        super::{
             solana_account::{self as account, state_traits as account_utils},
             solana_signer::{self as signer, signers},
         },
@@ -291,13 +291,13 @@ pub mod solana_sdk {
     };
 
     pub mod signature {
-        pub use crate::{
+        pub use super::super::{
             solana_keypair::Keypair, solana_signature::Signature, solana_signer::Signer,
         };
     }
 
     pub mod transaction {
-        pub use crate::solana_transaction::{versioned::VersionedTransaction, Transaction};
+        pub use super::super::solana_transaction::{versioned::VersionedTransaction, Transaction};
     }
 
     pub mod address_lookup_table {

@@ -2556,7 +2556,6 @@ dependencies = [
  "solana-atomic-u64",
  "solana-cpi",
  "solana-define-syscall",
- "solana-example-mocks",
  "solana-frozen-abi",
  "solana-frozen-abi-macro",
  "solana-hash",
@@ -2778,25 +2777,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-example-mocks"
-version = "3.0.0"
-dependencies = [
- "serde",
- "serde_derive",
- "solana-address-lookup-table-interface",
- "solana-clock",
- "solana-hash",
- "solana-instruction",
- "solana-keccak-hasher",
- "solana-message",
- "solana-nonce",
- "solana-pubkey",
- "solana-sdk-ids",
- "solana-system-interface",
- "thiserror",
-]
-
-[[package]]
 name = "solana-fee-calculator"
 version = "3.0.0"
 dependencies = [
@@ -3006,7 +2986,6 @@ dependencies = [
  "serde_derive",
  "serde_json",
  "solana-address-lookup-table-interface",
- "solana-example-mocks",
  "solana-frozen-abi",
  "solana-frozen-abi-macro",
  "solana-hash",
@@ -3091,7 +3070,10 @@ name = "solana-program"
 version = "3.0.0"
 dependencies = [
  "memoffset",
+ "serde",
+ "serde_derive",
  "solana-account-info",
+ "solana-address-lookup-table-interface",
  "solana-big-mod-exp",
  "solana-blake3-hasher",
  "solana-borsh",
@@ -3101,7 +3083,6 @@ dependencies = [
  "solana-epoch-rewards",
  "solana-epoch-schedule",
  "solana-epoch-stake",
- "solana-example-mocks",
  "solana-fee-calculator",
  "solana-frozen-abi",
  "solana-frozen-abi-macro",
@@ -3111,8 +3092,10 @@ dependencies = [
  "solana-instructions-sysvar",
  "solana-keccak-hasher",
  "solana-last-restart-slot",
+ "solana-message",
  "solana-msg",
  "solana-native-token",
+ "solana-nonce",
  "solana-program-entrypoint",
  "solana-program-error",
  "solana-program-memory",
@@ -3132,6 +3115,7 @@ dependencies = [
  "solana-system-interface",
  "solana-sysvar",
  "solana-sysvar-id",
+ "thiserror",
 ]
 
 [[package]]
@@ -3401,7 +3385,6 @@ dependencies = [
  "serde_derive",
  "solana-account-info",
  "solana-cpi",
- "solana-example-mocks",
  "solana-frozen-abi",
  "solana-frozen-abi-macro",
  "solana-instruction",
@@ -3437,7 +3420,6 @@ dependencies = [
  "solana-define-syscall",
  "solana-epoch-rewards",
  "solana-epoch-schedule",
- "solana-example-mocks",
  "solana-fee-calculator",
  "solana-frozen-abi",
  "solana-frozen-abi-macro",

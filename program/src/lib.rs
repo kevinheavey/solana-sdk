@@ -490,6 +490,8 @@ pub mod slot_history;
 pub mod syscalls;
 pub mod sysvar;
 
+pub mod example_mocks_inner;
+
 #[deprecated(since = "2.2.0", note = "Use `solana-big-mod-exp` crate instead")]
 pub use solana_big_mod_exp as big_mod_exp;
 #[deprecated(since = "2.2.0", note = "Use `solana-blake3-hasher` crate instead")]
@@ -671,7 +673,7 @@ macro_rules! unchecked_div_by_const {
 // `solana_sdk`.
 #[deprecated(since = "2.2.0", note = "Use solana-example-mocks instead")]
 #[cfg(not(target_os = "solana"))]
-pub use solana_example_mocks as example_mocks;
+pub use example_mocks_inner as example_mocks;
 
 #[cfg(test)]
 mod tests {
