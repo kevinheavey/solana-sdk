@@ -8,7 +8,7 @@ use {
         inline_nonce::is_advance_nonce_instruction_data, VersionedMessage,
     },
     solana_sanitize::SanitizeError,
-    solana_sdk_ids::system_program,
+    solana_program::sdk_ids::system_program,
     std::cmp::Ordering,
 };
 use {

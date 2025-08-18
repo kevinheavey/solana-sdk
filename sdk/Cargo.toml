@@ -60,7 +60,6 @@ solana-pubkey = { workspace = true, default-features = false, features = [
     "std",
 ] }
 solana-sanitize = { workspace = true }
-solana-sdk-ids = { workspace = true }
 solana-sdk-macro = { workspace = true }
 solana-sha256-hasher = { workspace = true, features = ["sha2"] }
 thiserror = { workspace = true }

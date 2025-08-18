@@ -21,7 +21,7 @@ use {
     solana_instruction::Instruction,
     solana_pubkey::Pubkey,
     solana_sanitize::{Sanitize, SanitizeError},
-    solana_sdk_ids::bpf_loader_upgradeable,
+    super::super::sdk_ids::bpf_loader_upgradeable,
     std::{collections::HashSet, convert::TryFrom},
 };
 

@@ -1,7 +1,7 @@
 //! This sysvar is deprecated and unused.
 use super::SysvarSerialize;
 use serde_derive::{Deserialize, Serialize};
-pub use solana_sdk_ids::sysvar::rewards::{check_id, id, ID};
+pub use super::super::sdk_ids::sysvar::rewards::{check_id, id, ID};
 use {super::Sysvar, super::super::impl_sysvar_id};
 
 impl_sysvar_id!(Rewards);

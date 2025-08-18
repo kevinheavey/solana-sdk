@@ -20,4 +20,4 @@
 //! [`bpf_loader_deprecated`]: crate::bpf_loader_deprecated
 //! [`entrypoint_deprecated`]: mod@crate::entrypoint_deprecated
 //! [ubpfl]: https://docs.rs/solana-loader-v3-interface/latest/solana_loader_v3_interface/index.html
-pub use solana_sdk_ids::bpf_loader::{check_id, id, ID};
+pub use super::sdk_ids::bpf_loader::{check_id, id, ID};

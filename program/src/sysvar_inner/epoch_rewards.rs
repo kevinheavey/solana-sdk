@@ -33,7 +33,7 @@
 //! # use solana_program_error::{ProgramError, ProgramResult};
 //! # use solana_pubkey::Pubkey;
 //! # use solana_sysvar::Sysvar;
-//! # use solana_sdk_ids::sysvar::epoch_rewards;
+//! # use super::sdk_ids::sysvar::epoch_rewards;
 //! fn process_instruction(
 //!     program_id: &Pubkey,
 //!     accounts: &[AccountInfo],
@@ -76,7 +76,7 @@
 //! # use solana_program_error::{ProgramError, ProgramResult};
 //! # use solana_pubkey::Pubkey;
 //! # use solana_sysvar::{Sysvar, SysvarSerialize};
-//! # use solana_sdk_ids::sysvar::epoch_rewards;
+//! # use super::sdk_ids::sysvar::epoch_rewards;
 //! #
 //! fn process_instruction(
 //!     program_id: &Pubkey,
@@ -123,7 +123,7 @@
 //! # use solana_example_mocks::solana_rpc_client;
 //! # use solana_rpc_client::rpc_client::RpcClient;
 //! # use solana_account::Account;
-//! # use solana_sdk_ids::sysvar::epoch_rewards;
+//! # use super::sdk_ids::sysvar::epoch_rewards;
 //! # use anyhow::Result;
 //! #
 //! fn print_sysvar_epoch_rewards(client: &RpcClient) -> Result<()> {
@@ -138,7 +138,7 @@
 //! #   client.set_get_account_response(epoch_rewards::ID, Account {
 //! #       lamports: 1120560,
 //! #       data,
-//! #       owner: solana_sdk_ids::system_program::ID,
+//! #       owner: super::sdk_ids::system_program::ID,
 //! #       executable: false,
 //! # });
 //! #
@@ -159,7 +159,7 @@ use super::SysvarSerialize;
 use crate::impl_sysvar_get;
 pub use {
     super::super::epoch_rewards_inner::EpochRewards,
-    solana_sdk_ids::sysvar::epoch_rewards::{check_id, id, ID},
+    super::super::sdk_ids::sysvar::epoch_rewards::{check_id, id, ID},
 };
 
 impl Sysvar for EpochRewards {

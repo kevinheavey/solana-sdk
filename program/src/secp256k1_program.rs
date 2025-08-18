@@ -6,4 +6,4 @@
 //! program's usage can be found in [`solana_sdk::secp256k1_instruction`].
 //!
 //! [`solana_sdk::secp256k1_instruction`]: https://docs.rs/solana-sdk/latest/solana_sdk/secp256k1_instruction/index.html
-pub use solana_sdk_ids::secp256k1_program::{check_id, id, ID};
+pub use super::sdk_ids::secp256k1_program::{check_id, id, ID};

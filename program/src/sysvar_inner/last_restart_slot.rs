@@ -41,7 +41,7 @@ use super::SysvarSerialize;
 use crate::impl_sysvar_get;
 pub use {
     super::super::last_restart_slot_inner::LastRestartSlot,
-    solana_sdk_ids::sysvar::last_restart_slot::{check_id, id, ID},
+    super::super::sdk_ids::sysvar::last_restart_slot::{check_id, id, ID},
 };
 
 impl Sysvar for LastRestartSlot {

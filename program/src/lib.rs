@@ -435,29 +435,29 @@
 //!   - Invokable by programs? no
 //!
 //! - __ed25519 Program__: Verifies an ed25519 signature.
-//!   - ID: [`solana_sdk_ids::ed25519_program::ID`](https://docs.rs/solana-sdk-ids/latest/solana_sdk_ids/ed25519_program/constant.ID.html)
+//!   - ID: [`super::sdk_ids::ed25519_program::ID`](https://docs.rs/solana-sdk-ids/latest/solana_sdk_ids/ed25519_program/constant.ID.html)
 //!   - Instruction: [`solana_ed25519_program::new_ed25519_instruction_with_signature`](https://docs.rs/solana-ed25519-program/latest/solana_ed25519_program/fn.new_ed25519_instruction_with_signature.html)
 //!   - Invokable by programs? no
 //!
 //! - __secp256k1 Program__: Verifies secp256k1 public key recovery operations.
-//!   - ID: [`solana_sdk_ids::secp256k1_program::ID`](https://docs.rs/solana-sdk-ids/latest/solana_sdk_ids/secp256k1_program/constant.ID.html)
+//!   - ID: [`super::sdk_ids::secp256k1_program::ID`](https://docs.rs/solana-sdk-ids/latest/solana_sdk_ids/secp256k1_program/constant.ID.html)
 //!   - Instruction: [`solana_secp256k1_program::new_secp256k1_instruction_with_signature`](https://docs.rs/solana-secp256k1-program/latest/solana_secp256k1_program/fn.new_secp256k1_instruction_with_signature.html)
 //!   - Invokable by programs? no
 //!
 //! - __BPF Loader__: Deploys, and executes immutable programs on the chain.
-//!   - ID: [`solana_sdk_ids::bpf_loader::ID`](https://docs.rs/solana-sdk-ids/latest/solana_sdk_ids/bpf_loader/constant.ID.html)
+//!   - ID: [`super::sdk_ids::bpf_loader::ID`](https://docs.rs/solana-sdk-ids/latest/solana_sdk_ids/bpf_loader/constant.ID.html)
 //!   - Instruction: [`solana_loader_v2_interface::instruction`](https://docs.rs/solana-loader-v2-interface/latest/solana_loader_v2_interface/instruction/index.html)
 //!   - Invokable by programs? yes
 //!
 //! - __Upgradable BPF Loader__: Deploys, upgrades, and executes upgradable
 //!   programs on the chain.
-//!   - ID: [`solana_sdk_ids::bpf_loader_upgradeable::ID`](https://docs.rs/solana-sdk-ids/latest/solana_sdk_ids/bpf_loader_upgradeable/constant.ID.html)
+//!   - ID: [`super::sdk_ids::bpf_loader_upgradeable::ID`](https://docs.rs/solana-sdk-ids/latest/solana_sdk_ids/bpf_loader_upgradeable/constant.ID.html)
 //!   - Instruction: [`solana_loader_v3_interface::instruction`](https://docs.rs/solana-loader-v3-interface/latest/solana_loader_v3_interface/instruction/index.html)
 //!   - Invokable by programs? yes
 //!
 //! - __Deprecated BPF Loader__: Deploys, and executes immutable programs on the
 //!   chain.
-//!   - ID: [`solana_sdk_ids::bpf_loader_deprecated::ID`](https://docs.rs/solana-sdk-ids/latest/solana_sdk_ids/bpf_loader_deprecated/constant.ID.html)
+//!   - ID: [`super::sdk_ids::bpf_loader_deprecated::ID`](https://docs.rs/solana-sdk-ids/latest/solana_sdk_ids/bpf_loader_deprecated/constant.ID.html)
 //!   - Instruction: [`solana_loader_v2_interface::instruction`](https://docs.rs/solana-loader-v2-interface/latest/solana_loader_v2_interface/instruction/index.html)
 //!   - Invokable by programs? yes
 //!
@@ -512,6 +512,7 @@ pub mod program_memory_inner;
 pub mod program_option_inner;
 pub mod program_pack_inner;
 pub mod rent_inner;
+pub mod sdk_ids;
 pub mod secp256k1_recover_inner;
 pub mod serde_varint_inner;
 pub mod serialize_utils_inner;
@@ -567,7 +568,7 @@ pub use {
 /// [np]: https://docs.solanalabs.com/runtime/programs#config-program
 pub mod config {
     pub mod program {
-        pub use solana_sdk_ids::config::{check_id, id, ID};
+        pub use super::super::sdk_ids::config::{check_id, id, ID};
     }
 }
 

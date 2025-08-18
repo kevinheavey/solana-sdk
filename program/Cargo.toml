@@ -74,7 +74,6 @@ solana-pubkey = { workspace = true, features = [
     "serde",
     "std",
 ] }
-solana-sdk-ids = { workspace = true }
 solana-sdk-macro = { workspace = true }
 solana-sha256-hasher = { workspace = true, features = ["sha2"] }
 

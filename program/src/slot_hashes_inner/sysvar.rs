@@ -1,4 +1,4 @@
-pub use solana_sdk_ids::sysvar::slot_hashes::{check_id, id, ID};
-use {super::SlotHashes, super::super::impl_sysvar_id};
+pub use super::super::sdk_ids::sysvar::slot_hashes::{check_id, id, ID};
+use {super::super::impl_sysvar_id, super::SlotHashes};
 
 impl_sysvar_id!(SlotHashes);

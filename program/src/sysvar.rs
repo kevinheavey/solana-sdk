@@ -8,7 +8,7 @@ pub use {
         clock, epoch_rewards, epoch_schedule, fees, last_restart_slot, recent_blockhashes, rent,
         rewards, slot_hashes, slot_history, Sysvar, SysvarSerialize,
     },
-    solana_sdk_ids::sysvar::{check_id, id, ID},
+    super::sdk_ids::sysvar::{check_id, id, ID},
 };
 
 pub mod instructions {
@@ -24,5 +24,5 @@ pub mod instructions {
     #[deprecated(since = "2.2.0", note = "Use solana-instruction crate instead")]
     pub use solana_instruction::{BorrowedAccountMeta, BorrowedInstruction};
     #[deprecated(since = "2.2.0", note = "Use solana-sdk-ids crate instead")]
-    pub use solana_sdk_ids::sysvar::instructions::{check_id, id, ID};
+    pub use super::super::sdk_ids::sysvar::instructions::{check_id, id, ID};
 }

@@ -20,7 +20,7 @@
 #![allow(clippy::arithmetic_side_effects)]
 use super::SysvarSerialize;
 use serde_derive::{Deserialize, Serialize};
-pub use solana_sdk_ids::sysvar::recent_blockhashes::{check_id, id, ID};
+pub use super::super::sdk_ids::sysvar::recent_blockhashes::{check_id, id, ID};
 use {
     super::Sysvar,
     solana_fee_calculator::FeeCalculator,

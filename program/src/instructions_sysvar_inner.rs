@@ -30,7 +30,7 @@
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 #![allow(clippy::arithmetic_side_effects)]
 
-pub use solana_sdk_ids::sysvar::instructions::{check_id, id, ID};
+pub use super::sdk_ids::sysvar::instructions::{check_id, id, ID};
 #[cfg(not(target_os = "solana"))]
 use {
     bitflags::bitflags,

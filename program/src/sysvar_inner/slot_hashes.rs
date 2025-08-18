@@ -21,7 +21,7 @@
 //! # use solana_example_mocks::solana_rpc_client;
 //! # use solana_account::Account;
 //! # use solana_rpc_client::rpc_client::RpcClient;
-//! # use solana_sdk_ids::sysvar::slot_hashes;
+//! # use super::sdk_ids::sysvar::slot_hashes;
 //! # use solana_slot_hashes::SlotHashes;
 //! # use anyhow::Result;
 //! #
@@ -29,7 +29,7 @@
 //! #   client.set_get_account_response(slot_hashes::ID, Account {
 //! #       lamports: 1009200,
 //! #       data: vec![1, 0, 0, 0, 0, 0, 0, 0, 86, 190, 235, 7, 0, 0, 0, 0, 133, 242, 94, 158, 223, 253, 207, 184, 227, 194, 235, 27, 176, 98, 73, 3, 175, 201, 224, 111, 21, 65, 73, 27, 137, 73, 229, 19, 255, 192, 193, 126],
-//! #       owner: solana_sdk_ids::system_program::ID,
+//! #       owner: super::sdk_ids::system_program::ID,
 //! #       executable: false,
 //! # });
 //! #
@@ -55,7 +55,7 @@ const SYSVAR_LEN: usize = 20_488; // golden, update if MAX_ENTRIES changes
 pub use {
     super::super::slot_hashes_inner::SlotHashes,
     super::super::sysvar_id_inner::SysvarId,
-    solana_sdk_ids::sysvar::slot_hashes::{check_id, id, ID},
+    super::super::sdk_ids::sysvar::slot_hashes::{check_id, id, ID},
 };
 
 impl Sysvar for SlotHashes {}

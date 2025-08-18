@@ -8,7 +8,7 @@ use {
     core::fmt,
     solana_instruction::Instruction,
     solana_pubkey::Pubkey,
-    solana_sdk_ids::system_program,
+    super::super::sdk_ids::system_program,
     std::collections::BTreeMap,
 };
 

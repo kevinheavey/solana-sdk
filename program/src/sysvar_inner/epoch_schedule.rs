@@ -21,7 +21,7 @@
 //! # use solana_msg::msg;
 //! # use solana_program_error::{ProgramError, ProgramResult};
 //! # use solana_pubkey::Pubkey;
-//! # use solana_sdk_ids::sysvar::epoch_schedule;
+//! # use super::sdk_ids::sysvar::epoch_schedule;
 //! # use solana_sysvar::Sysvar;
 //! fn process_instruction(
 //!     program_id: &Pubkey,
@@ -57,7 +57,7 @@
 //! # use solana_msg::msg;
 //! # use solana_program_error::{ProgramError, ProgramResult};
 //! # use solana_pubkey::Pubkey;
-//! # use solana_sdk_ids::sysvar::epoch_schedule;
+//! # use super::sdk_ids::sysvar::epoch_schedule;
 //! # use solana_sysvar::{Sysvar, SysvarSerialize};
 //! fn process_instruction(
 //!     program_id: &Pubkey,
@@ -97,14 +97,14 @@
 //! # use solana_example_mocks::solana_rpc_client;
 //! # use solana_rpc_client::rpc_client::RpcClient;
 //! # use solana_account::Account;
-//! # use solana_sdk_ids::sysvar::epoch_schedule;
+//! # use super::sdk_ids::sysvar::epoch_schedule;
 //! # use anyhow::Result;
 //! #
 //! fn print_sysvar_epoch_schedule(client: &RpcClient) -> Result<()> {
 //! #   client.set_get_account_response(epoch_schedule::ID, Account {
 //! #       lamports: 1120560,
 //! #       data: vec![0, 32, 0, 0, 0, 0, 0, 0, 0, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//! #       owner: solana_sdk_ids::system_program::ID,
+//! #       owner: super::sdk_ids::system_program::ID,
 //! #       executable: false,
 //! # });
 //! #
@@ -124,7 +124,7 @@ use super::SysvarSerialize;
 use crate::impl_sysvar_get;
 pub use {
     super::super::epoch_schedule_inner::EpochSchedule,
-    solana_sdk_ids::sysvar::epoch_schedule::{check_id, id, ID},
+    super::super::sdk_ids::sysvar::epoch_schedule::{check_id, id, ID},
 };
 
 impl Sysvar for EpochSchedule {

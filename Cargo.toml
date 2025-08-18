@@ -6,9 +6,7 @@ members = [
     "bn254",
     "cluster-type",
     "commitment-config",
-    "compute-budget-interface",
     "define-syscall",
-    "ed25519-program",
     "epoch-info",
     "fee-calculator",
     "file-download",
@@ -17,7 +15,6 @@ members = [
     "hash",
     "instruction",
     "instruction-error",
-    "loader-v2-interface",
     "logger",
     "nonce",
     "package-metadata",
@@ -30,9 +27,7 @@ members = [
     "reward-info",
     "sanitize",
     "sdk",
-    "sdk-ids",
     "sdk-macro",
-    "secp256r1-program",
     "sha256-hasher",
     "signer-store",
     "validator-exit",
@@ -149,9 +144,7 @@ solana-bincode = { path = "bincode", version = "3.0.0" }
 solana-bn254 = { path = "bn254", version = "3.0.0" }
 solana-cluster-type = { path = "cluster-type", version = "3.0.0" }
 solana-commitment-config = { path = "commitment-config", version = "3.0.0" }
-solana-compute-budget-interface = { path = "compute-budget-interface", version = "3.0.0" }
 solana-define-syscall = { path = "define-syscall", version = "3.0.0" }
-solana-ed25519-program = { path = "ed25519-program", version = "3.0.0" }
 solana-epoch-info = { path = "epoch-info", version = "3.0.0" }
 solana-fee-calculator = { path = "fee-calculator", version = "3.0.0" }
 solana-file-download = { path = "file-download", version = "3.0.0" }
@@ -160,7 +153,6 @@ solana-frozen-abi-macro = { path = "frozen-abi-macro", version = "3.0.0" }
 solana-hash = { path = "hash", version = "3.0.0", default-features = false }
 solana-instruction = { path = "instruction", version = "3.0.0", default-features = false }
 solana-instruction-error = { path = "instruction-error", version = "2.0.0" }
-solana-loader-v2-interface = { path = "loader-v2-interface", version = "3.0.0" }
 solana-logger = { path = "logger", version = "3.0.0" }
 solana-nonce = { path = "nonce", version = "3.0.0" }
 solana-package-metadata = { path = "package-metadata", version = "3.0.0" }
@@ -173,9 +165,7 @@ solana-pubkey = { path = "pubkey", version = "3.0.0", default-features = false }
 solana-reward-info = { path = "reward-info", version = "3.0.0" }
 solana-sanitize = { path = "sanitize", version = "3.0.0" }
 solana-sdk = { path = "sdk", version = "2.2.1" }
-solana-sdk-ids = { path = "sdk-ids", version = "3.0.0" }
 solana-sdk-macro = { path = "sdk-macro", version = "3.0.0" }
-solana-secp256r1-program = { path = "secp256r1-program", version = "3.0.0", default-features = false }
 solana-sha256-hasher = { path = "sha256-hasher", version = "3.0.0" }
 solana-signer-store = { path = "signer-store", version = "0.1.0" }
 solana-validator-exit = { path = "validator-exit", version = "3.0.0" }

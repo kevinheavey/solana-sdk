@@ -9,7 +9,7 @@ use {
     super::clock::{Epoch, INITIAL_RENT_EPOCH},
     solana_instruction_error::LamportsError,
     solana_pubkey::Pubkey,
-    solana_sdk_ids::{bpf_loader, bpf_loader_deprecated, bpf_loader_upgradeable, loader_v4},
+    solana_program::sdk_ids::{bpf_loader, bpf_loader_deprecated, bpf_loader_upgradeable, loader_v4},
     std::{
         cell::{Ref, RefCell},
         fmt,
@@ -686,7 +686,7 @@ pub fn create_account_with_fields<S: SysvarSerialize>(
     (lamports, rent_epoch): InheritableAccountFields,
 ) -> Account {
     let data_len = S::size_of().max(bincode::serialized_size(sysvar).unwrap() as usize);
-    let mut account = Account::new(lamports, data_len, &solana_sdk_ids::sysvar::id());
+    let mut account = Account::new(lamports, data_len, &solana_program::sdk_ids::sysvar::id());
     to_account::<S, Account>(sysvar, &mut account).unwrap();
     account.rent_epoch = rent_epoch;
     account

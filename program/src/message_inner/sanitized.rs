@@ -1,16 +1,16 @@
 use {
+    super::super::super::sdk_ids::{ed25519_program, secp256k1_program, secp256r1_program},
     super::super::{
+        super::transaction_error_inner::SanitizeMessageError,
         compiled_instruction::CompiledInstruction,
         legacy,
         v0::{self, LoadedAddresses},
         AccountKeys, AddressLoader, MessageHeader, SanitizedVersionedMessage, VersionedMessage,
-        super::transaction_error_inner::SanitizeMessageError
     },
     solana_hash::Hash,
     solana_instruction::{BorrowedAccountMeta, BorrowedInstruction},
     solana_pubkey::Pubkey,
     solana_sanitize::Sanitize,
-    solana_sdk_ids::{ed25519_program, secp256k1_program, secp256r1_program},
     std::{borrow::Cow, collections::HashSet, convert::TryFrom},
 };
 
@@ -313,7 +313,9 @@ impl SanitizedMessage {
             .get(NONCED_TX_MARKER_IX_INDEX as usize)
             .filter(
                 |ix| match self.account_keys().get(ix.program_id_index as usize) {
-                    Some(program_id) => solana_sdk_ids::system_program::check_id(program_id),
+                    Some(program_id) => {
+                        super::super::super::sdk_ids::system_program::check_id(program_id)
+                    }
                     _ => false,
                 },
             )

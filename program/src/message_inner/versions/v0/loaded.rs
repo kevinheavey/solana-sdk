@@ -1,8 +1,8 @@
 use serde_derive::{Deserialize, Serialize};
 use {
+    super::super::super::super::super::sdk_ids::bpf_loader_upgradeable,
     super::{super::v0, AccountKeys},
     solana_pubkey::Pubkey,
-    solana_sdk_ids::bpf_loader_upgradeable,
     std::{borrow::Cow, collections::HashSet},
 };
 
