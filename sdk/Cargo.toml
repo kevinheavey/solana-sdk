@@ -35,12 +35,10 @@ full = [
 ]
 borsh = ["solana-program/borsh"]
 dev-context-only-utils = [
-    "solana-account/dev-context-only-utils",
     "solana-program/dev-context-only-utils",
 ]
 frozen-abi = [
     "solana-fee-structure/frozen-abi",
-    "solana-account/frozen-abi",
     "solana-inflation/frozen-abi",
     "solana-program/frozen-abi",
     "solana-short-vec/frozen-abi",
@@ -61,9 +59,16 @@ hmac = { workspace = true }
 pbkdf2 = { workspace = true }
 rand = { workspace = true }
 sha2 = { workspace = true }
+serde_bytes = { workspace = true }
+solana-account-info = { workspace = true }
+solana-clock = { workspace = true }
+solana-frozen-abi = { workspace = true, optional = true }
+solana-frozen-abi-macro = { workspace = true, optional = true }
+solana-instruction-error = { workspace = true }
+solana-logger = { workspace = true, optional = true }
+solana-sysvar = { workspace = true, features = ["bincode"] }
 serde = { workspace = true }
 serde_derive = { workspace = true }
-solana-account = { workspace = true, features = ["bincode"] }
 solana-epoch-info = { workspace = true, features = ["serde"] }
 solana-epoch-rewards-hasher = { workspace = true }
 solana-fee-structure = { workspace = true, features = ["serde"] }

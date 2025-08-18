@@ -1,6 +1,5 @@
 [workspace]
 members = [
-    "account",
     "account-info",
     "address",
     "address-lookup-table-interface",
@@ -23,7 +22,6 @@ members = [
     "epoch-schedule",
     "epoch-stake",
     "example-mocks",
-    "feature-gate-interface",
     "fee-calculator",
     "fee-structure",
     "file-download",
@@ -44,7 +42,6 @@ members = [
     "msg",
     "native-token",
     "nonce",
-    "nonce-account",
     "offchain-message",
     "package-metadata",
     "package-metadata-macro",
@@ -194,7 +191,6 @@ sha2 = "0.10.8"
 sha3 = "0.10.8"
 signal-hook = "0.3.17"
 siphasher = "0.3.11"
-solana-account = { path = "account", version = "3.0.0" }
 solana-account-info = { path = "account-info", version = "3.0.0" }
 solana-address = { path = "address", version = "1.0.0" }
 solana-address-lookup-table-interface = { path = "address-lookup-table-interface", version = "3.0.0" }
@@ -217,7 +213,6 @@ solana-epoch-rewards-hasher = { path = "epoch-rewards-hasher", version = "3.0.0"
 solana-epoch-schedule = { path = "epoch-schedule", version = "3.0.0" }
 solana-epoch-stake = { path = "epoch-stake", version = "3.0.0" }
 solana-example-mocks = { path = "example-mocks", version = "3.0.0" }
-solana-feature-gate-interface = { path = "feature-gate-interface", version = "3.0.0" }
 solana-fee-calculator = { path = "fee-calculator", version = "3.0.0" }
 solana-fee-structure = { path = "fee-structure", version = "3.0.0" }
 solana-file-download = { path = "file-download", version = "3.0.0" }
@@ -239,7 +234,6 @@ solana-message = { path = "message", version = "3.0.0" }
 solana-msg = { path = "msg", version = "3.0.0" }
 solana-native-token = { path = "native-token", version = "3.0.0" }
 solana-nonce = { path = "nonce", version = "3.0.0" }
-solana-nonce-account = { path = "nonce-account", version = "3.0.0" }
 solana-offchain-message = { path = "offchain-message", version = "3.0.0" }
 solana-package-metadata = { path = "package-metadata", version = "3.0.0" }
 solana-package-metadata-macro = { path = "package-metadata-macro", version = "3.0.0" }

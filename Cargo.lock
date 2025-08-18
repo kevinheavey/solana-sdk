@@ -2532,27 +2532,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-account"
-version = "3.0.0"
-dependencies = [
- "bincode",
- "qualifier_attr",
- "serde",
- "serde_bytes",
- "serde_derive",
- "solana-account",
- "solana-account-info",
- "solana-clock",
- "solana-frozen-abi",
- "solana-frozen-abi-macro",
- "solana-instruction-error",
- "solana-logger",
- "solana-pubkey",
- "solana-sdk-ids",
- "solana-sysvar",
-]
-
-[[package]]
 name = "solana-account-info"
 version = "3.0.0"
 dependencies = [
@@ -2830,26 +2809,6 @@ dependencies = [
  "solana-sdk-ids",
  "solana-system-interface",
  "thiserror",
-]
-
-[[package]]
-name = "solana-feature-gate-interface"
-version = "3.0.0"
-dependencies = [
- "bincode",
- "serde",
- "serde_derive",
- "solana-account",
- "solana-account-info",
- "solana-feature-gate-interface",
- "solana-instruction",
- "solana-program-error",
- "solana-pubkey",
- "solana-rent",
- "solana-sdk-ids",
- "solana-system-interface",
- "strum",
- "strum_macros",
 ]
 
 [[package]]
@@ -3135,18 +3094,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-nonce-account"
-version = "3.0.0"
-dependencies = [
- "solana-account",
- "solana-fee-calculator",
- "solana-hash",
- "solana-nonce",
- "solana-pubkey",
- "solana-sdk-ids",
-]
-
-[[package]]
 name = "solana-offchain-message"
 version = "3.0.0"
 dependencies = [
@@ -3363,16 +3310,22 @@ dependencies = [
  "qstring",
  "rand",
  "serde",
+ "serde_bytes",
  "serde_derive",
  "sha2",
- "solana-account",
+ "solana-account-info",
+ "solana-clock",
  "solana-epoch-info",
  "solana-epoch-rewards-hasher",
  "solana-fee-structure",
+ "solana-frozen-abi",
+ "solana-frozen-abi-macro",
  "solana-hash",
  "solana-inflation",
  "solana-instruction",
+ "solana-instruction-error",
  "solana-instructions-sysvar",
+ "solana-logger",
  "solana-message",
  "solana-offchain-message",
  "solana-presigner",
@@ -3389,6 +3342,7 @@ dependencies = [
  "solana-shred-version",
  "solana-signature",
  "solana-signer",
+ "solana-sysvar",
  "solana-time-utils",
  "solana-transaction-error",
  "thiserror",

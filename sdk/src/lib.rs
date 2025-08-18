@@ -64,6 +64,7 @@ pub use solana_shred_version as shred_version;
 pub mod signature;
 pub mod signer;
 pub mod transaction;
+pub mod account_inner;
 mod derivation_path_inner;
 mod keypair_inner;
 mod seed_derivable_inner;
@@ -72,12 +73,12 @@ mod transaction_inner;
 pub mod transport;
 
 #[deprecated(since = "2.1.0", note = "Use `solana-account` crate instead")]
-pub use solana_account as account;
+pub use account_inner as account;
 #[deprecated(
     since = "2.1.0",
     note = "Use `solana_account::state_traits` crate instead"
 )]
-pub use solana_account::state_traits as account_utils;
+pub use account_inner::state_traits as account_utils;
 #[deprecated(since = "2.2.0", note = "Use `solana-epoch-info` crate instead")]
 pub use solana_epoch_info as epoch_info;
 #[deprecated(

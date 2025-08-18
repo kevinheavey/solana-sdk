@@ -1,5 +1,5 @@
 //! The native loader native program.
-use solana_account::{
+use crate::account_inner::{
     Account, AccountSharedData, InheritableAccountFields, DUMMY_INHERITABLE_ACCOUNT_FIELDS,
 };
 pub use solana_sdk_ids::native_loader::{check_id, id, ID};

@@ -1,7 +1,7 @@
 //! Useful extras for `Account` state.
 
 use {
-    crate::{Account, AccountSharedData},
+    super::{Account, AccountSharedData},
     bincode::ErrorKind,
     solana_instruction_error::InstructionError,
     std::cell::Ref,
