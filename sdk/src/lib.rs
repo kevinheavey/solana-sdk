@@ -64,6 +64,7 @@ pub use solana_shred_version as shred_version;
 pub mod signature;
 pub mod signer;
 pub mod transaction;
+mod transaction_inner;
 pub mod transport;
 
 #[deprecated(since = "2.1.0", note = "Use `solana-account` crate instead")]
@@ -152,6 +153,6 @@ pub use solana_time_utils as timing;
     since = "2.2.0",
     note = "Use `solana_transaction::simple_vote_transaction_checker` instead"
 )]
-pub use solana_transaction::simple_vote_transaction_checker;
+pub use transaction_inner::simple_vote_transaction_checker;
 
 pub extern crate bs58;

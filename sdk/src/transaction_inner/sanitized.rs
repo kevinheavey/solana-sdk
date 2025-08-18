@@ -1,5 +1,5 @@
 use {
-    crate::versioned::{sanitized::SanitizedVersionedTransaction, VersionedTransaction},
+    super::versioned::{sanitized::SanitizedVersionedTransaction, VersionedTransaction},
     solana_hash::Hash,
     solana_message::{
         legacy,
@@ -12,8 +12,7 @@ use {
     solana_transaction_error::{TransactionError, TransactionResult as Result},
     std::collections::HashSet,
 };
-#[cfg(feature = "blake3")]
-use {crate::Transaction, solana_sanitize::Sanitize};
+use {super::Transaction, solana_sanitize::Sanitize};
 
 /// Maximum number of accounts that a transaction may lock.
 /// 128 was chosen because it is the minimum number of accounts
@@ -87,7 +86,6 @@ impl SanitizedTransaction {
         })
     }
 
-    #[cfg(feature = "blake3")]
     /// Create a sanitized transaction from an un-sanitized versioned
     /// transaction.  If the input transaction uses address tables, attempt to
     /// lookup the address for each table index.
@@ -118,7 +116,6 @@ impl SanitizedTransaction {
     }
 
     /// Create a sanitized transaction from a legacy transaction
-    #[cfg(feature = "blake3")]
     pub fn try_from_legacy_transaction(
         tx: Transaction,
         reserved_account_keys: &HashSet<Pubkey>,
@@ -137,7 +134,6 @@ impl SanitizedTransaction {
     }
 
     /// Create a sanitized transaction from a legacy transaction. Used for tests only.
-    #[cfg(feature = "blake3")]
     pub fn from_transaction_for_tests(tx: Transaction) -> Self {
         let empty_key_set = HashSet::default();
         Self::try_from_legacy_transaction(tx, &empty_key_set).unwrap()
@@ -253,12 +249,10 @@ impl SanitizedTransaction {
     }
 
     /// If the transaction uses a durable nonce, return the pubkey of the nonce account
-    #[cfg(feature = "bincode")]
     pub fn get_durable_nonce(&self) -> Option<&Pubkey> {
         self.message.get_durable_nonce()
     }
 
-    #[cfg(feature = "verify")]
     /// Return the serialized message data to sign.
     fn message_data(&self) -> Vec<u8> {
         match &self.message {
@@ -267,7 +261,6 @@ impl SanitizedTransaction {
         }
     }
 
-    #[cfg(feature = "verify")]
     /// Verify the transaction signatures
     pub fn verify(&self) -> Result<()> {
         let message_bytes = self.message_data();
@@ -309,139 +302,6 @@ impl SanitizedTransaction {
             message_hash: Hash::new_unique(),
             signatures,
             is_simple_vote_tx,
-        }
-    }
-}
-
-#[cfg(test)]
-#[allow(clippy::arithmetic_side_effects)]
-mod tests {
-    use {
-        super::*,
-        solana_keypair::Keypair,
-        solana_message::{MessageHeader, SimpleAddressLoader},
-        solana_signer::Signer,
-        solana_vote_interface::{instruction, state::Vote},
-    };
-
-    #[test]
-    fn test_try_create_simple_vote_tx() {
-        let bank_hash = Hash::default();
-        let block_hash = Hash::default();
-        let empty_key_set = HashSet::default();
-        let vote_keypair = Keypair::new();
-        let node_keypair = Keypair::new();
-        let auth_keypair = Keypair::new();
-        let votes = Vote::new(vec![1, 2, 3], bank_hash);
-        let vote_ix = instruction::vote(&vote_keypair.pubkey(), &auth_keypair.pubkey(), votes);
-        let mut vote_tx = Transaction::new_with_payer(&[vote_ix], Some(&node_keypair.pubkey()));
-        vote_tx.partial_sign(&[&node_keypair], block_hash);
-        vote_tx.partial_sign(&[&auth_keypair], block_hash);
-
-        // single legacy vote ix, 2 signatures
-        {
-            let vote_transaction = SanitizedTransaction::try_create(
-                VersionedTransaction::from(vote_tx.clone()),
-                MessageHash::Compute,
-                None,
-                SimpleAddressLoader::Disabled,
-                &empty_key_set,
-            )
-            .unwrap();
-            assert!(vote_transaction.is_simple_vote_transaction());
-        }
-
-        {
-            // call side says it is not a vote
-            let vote_transaction = SanitizedTransaction::try_create(
-                VersionedTransaction::from(vote_tx.clone()),
-                MessageHash::Compute,
-                Some(false),
-                SimpleAddressLoader::Disabled,
-                &empty_key_set,
-            )
-            .unwrap();
-            assert!(!vote_transaction.is_simple_vote_transaction());
-        }
-
-        // single legacy vote ix, 3 signatures
-        vote_tx.signatures.push(Signature::default());
-        vote_tx.message.header.num_required_signatures = 3;
-        {
-            let vote_transaction = SanitizedTransaction::try_create(
-                VersionedTransaction::from(vote_tx.clone()),
-                MessageHash::Compute,
-                None,
-                SimpleAddressLoader::Disabled,
-                &empty_key_set,
-            )
-            .unwrap();
-            assert!(!vote_transaction.is_simple_vote_transaction());
-        }
-
-        {
-            // call site says it is simple vote
-            let vote_transaction = SanitizedTransaction::try_create(
-                VersionedTransaction::from(vote_tx),
-                MessageHash::Compute,
-                Some(true),
-                SimpleAddressLoader::Disabled,
-                &empty_key_set,
-            )
-            .unwrap();
-            assert!(vote_transaction.is_simple_vote_transaction());
-        }
-    }
-
-    #[test]
-    fn test_try_new_from_fields() {
-        let legacy_message = SanitizedMessage::try_from_legacy_message(
-            legacy::Message {
-                header: MessageHeader {
-                    num_required_signatures: 2,
-                    num_readonly_signed_accounts: 1,
-                    num_readonly_unsigned_accounts: 1,
-                },
-                account_keys: vec![
-                    Pubkey::new_unique(),
-                    Pubkey::new_unique(),
-                    Pubkey::new_unique(),
-                ],
-                ..legacy::Message::default()
-            },
-            &HashSet::default(),
-        )
-        .unwrap();
-
-        for is_simple_vote_tx in [false, true] {
-            // Not enough signatures
-            assert!(SanitizedTransaction::try_new_from_fields(
-                legacy_message.clone(),
-                Hash::new_unique(),
-                is_simple_vote_tx,
-                vec![],
-            )
-            .is_err());
-            // Too many signatures
-            assert!(SanitizedTransaction::try_new_from_fields(
-                legacy_message.clone(),
-                Hash::new_unique(),
-                is_simple_vote_tx,
-                vec![
-                    Signature::default(),
-                    Signature::default(),
-                    Signature::default()
-                ],
-            )
-            .is_err());
-            // Correct number of signatures.
-            assert!(SanitizedTransaction::try_new_from_fields(
-                legacy_message.clone(),
-                Hash::new_unique(),
-                is_simple_vote_tx,
-                vec![Signature::default(), Signature::default()]
-            )
-            .is_ok());
         }
     }
 }

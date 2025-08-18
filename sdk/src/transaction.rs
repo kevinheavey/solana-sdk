@@ -1,6 +1,6 @@
 #![cfg(feature = "full")]
 #[deprecated(since = "2.2.0", note = "Use solana_transaction crate instead")]
-pub use solana_transaction::{
+pub use crate::transaction_inner::{
     sanitized::{MessageHash, SanitizedTransaction, TransactionAccountLocks, MAX_TX_ACCOUNT_LOCKS},
     uses_durable_nonce,
     versioned::{

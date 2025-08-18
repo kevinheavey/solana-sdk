@@ -1,16 +1,14 @@
 //! Defines a transaction which supports multiple versions of messages.
 
-#[cfg(feature = "bincode")]
 use solana_signer::{signers::Signers, SignerError};
 use {
-    crate::Transaction,
+    super::Transaction,
     solana_message::{inline_nonce::is_advance_nonce_instruction_data, VersionedMessage},
     solana_sanitize::SanitizeError,
     solana_sdk_ids::system_program,
     solana_signature::Signature,
     std::cmp::Ordering,
 };
-#[cfg(feature = "serde")]
 use {
     serde_derive::{Deserialize, Serialize},
     solana_short_vec as short_vec,
@@ -18,23 +16,14 @@ use {
 
 pub mod sanitized;
 
-/// Type that serializes to the string "legacy"
-#[cfg_attr(
-    feature = "serde",
-    derive(Deserialize, Serialize),
-    serde(rename_all = "camelCase")
-)]
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub enum Legacy {
     Legacy,
 }
 
-#[cfg_attr(
-    feature = "serde",
-    derive(Deserialize, Serialize),
-    serde(rename_all = "camelCase", untagged)
-)]
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase", untagged)]
 pub enum TransactionVersion {
     Legacy(Legacy),
     Number(u8),
@@ -47,11 +36,10 @@ impl TransactionVersion {
 // NOTE: Serialization-related changes must be paired with the direct read at sigverify.
 /// An atomic transaction
 #[cfg_attr(feature = "frozen-abi", derive(solana_frozen_abi_macro::AbiExample))]
-#[cfg_attr(feature = "serde", derive(Deserialize, Serialize))]
-#[derive(Debug, PartialEq, Default, Eq, Clone)]
+#[derive(Debug, PartialEq, Default, Eq, Clone, Deserialize, Serialize)]
 pub struct VersionedTransaction {
     /// List of signatures
-    #[cfg_attr(feature = "serde", serde(with = "short_vec"))]
+    #[serde(with = "short_vec")]
     pub signatures: Vec<Signature>,
     /// Message to sign.
     pub message: VersionedMessage,
@@ -69,7 +57,6 @@ impl From<Transaction> for VersionedTransaction {
 impl VersionedTransaction {
     /// Signs a versioned message and if successful, returns a signed
     /// transaction.
-    #[cfg(feature = "bincode")]
     pub fn try_new<T: Signers + ?Sized>(
         message: VersionedMessage,
         keypairs: &T,
@@ -170,7 +157,6 @@ impl VersionedTransaction {
         }
     }
 
-    #[cfg(feature = "verify")]
     /// Verify the transaction and hash its message
     pub fn verify_and_hash_message(
         &self,
@@ -187,14 +173,12 @@ impl VersionedTransaction {
         }
     }
 
-    #[cfg(feature = "verify")]
     /// Verify the transaction and return a list of verification results
     pub fn verify_with_results(&self) -> Vec<bool> {
         let message_bytes = self.message.serialize();
         self._verify_with_results(&message_bytes)
     }
 
-    #[cfg(feature = "verify")]
     fn _verify_with_results(&self, message_bytes: &[u8]) -> Vec<bool> {
         self.signatures
             .iter()
@@ -208,7 +192,7 @@ impl VersionedTransaction {
         let message = &self.message;
         message
             .instructions()
-            .get(crate::NONCED_TX_MARKER_IX_INDEX as usize)
+            .get(super::NONCED_TX_MARKER_IX_INDEX as usize)
             .filter(|instruction| {
                 // Is system program
                 matches!(
@@ -217,157 +201,5 @@ impl VersionedTransaction {
                 ) && is_advance_nonce_instruction_data(&instruction.data)
             })
             .is_some()
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use {
-        super::*,
-        solana_hash::Hash,
-        solana_instruction::{AccountMeta, Instruction},
-        solana_keypair::Keypair,
-        solana_message::Message as LegacyMessage,
-        solana_pubkey::Pubkey,
-        solana_signer::Signer,
-        solana_system_interface::instruction as system_instruction,
-    };
-
-    #[test]
-    fn test_try_new() {
-        let keypair0 = Keypair::new();
-        let keypair1 = Keypair::new();
-        let keypair2 = Keypair::new();
-
-        let message = VersionedMessage::Legacy(LegacyMessage::new(
-            &[Instruction::new_with_bytes(
-                Pubkey::new_unique(),
-                &[],
-                vec![
-                    AccountMeta::new_readonly(keypair1.pubkey(), true),
-                    AccountMeta::new_readonly(keypair2.pubkey(), false),
-                ],
-            )],
-            Some(&keypair0.pubkey()),
-        ));
-
-        assert_eq!(
-            VersionedTransaction::try_new(message.clone(), &[&keypair0]),
-            Err(SignerError::NotEnoughSigners)
-        );
-
-        assert_eq!(
-            VersionedTransaction::try_new(message.clone(), &[&keypair0, &keypair0]),
-            Err(SignerError::KeypairPubkeyMismatch)
-        );
-
-        assert_eq!(
-            VersionedTransaction::try_new(message.clone(), &[&keypair1, &keypair2]),
-            Err(SignerError::KeypairPubkeyMismatch)
-        );
-
-        match VersionedTransaction::try_new(message.clone(), &[&keypair0, &keypair1]) {
-            Ok(tx) => assert_eq!(tx.verify_with_results(), vec![true; 2]),
-            Err(err) => assert_eq!(Some(err), None),
-        }
-
-        match VersionedTransaction::try_new(message, &[&keypair1, &keypair0]) {
-            Ok(tx) => assert_eq!(tx.verify_with_results(), vec![true; 2]),
-            Err(err) => assert_eq!(Some(err), None),
-        }
-    }
-
-    fn nonced_transfer_tx() -> (Pubkey, Pubkey, VersionedTransaction) {
-        let from_keypair = Keypair::new();
-        let from_pubkey = from_keypair.pubkey();
-        let nonce_keypair = Keypair::new();
-        let nonce_pubkey = nonce_keypair.pubkey();
-        let instructions = [
-            system_instruction::advance_nonce_account(&nonce_pubkey, &nonce_pubkey),
-            system_instruction::transfer(&from_pubkey, &nonce_pubkey, 42),
-        ];
-        let message = LegacyMessage::new(&instructions, Some(&nonce_pubkey));
-        let tx = Transaction::new(&[&from_keypair, &nonce_keypair], message, Hash::default());
-        (from_pubkey, nonce_pubkey, tx.into())
-    }
-
-    #[test]
-    fn tx_uses_nonce_ok() {
-        let (_, _, tx) = nonced_transfer_tx();
-        assert!(tx.uses_durable_nonce());
-    }
-
-    #[test]
-    fn tx_uses_nonce_empty_ix_fail() {
-        assert!(!VersionedTransaction::default().uses_durable_nonce());
-    }
-
-    #[test]
-    fn tx_uses_nonce_bad_prog_id_idx_fail() {
-        let (_, _, mut tx) = nonced_transfer_tx();
-        match &mut tx.message {
-            VersionedMessage::Legacy(message) => {
-                message.instructions.get_mut(0).unwrap().program_id_index = 255u8;
-            }
-            VersionedMessage::V0(_) => unreachable!(),
-        };
-        assert!(!tx.uses_durable_nonce());
-    }
-
-    #[test]
-    fn tx_uses_nonce_first_prog_id_not_nonce_fail() {
-        let from_keypair = Keypair::new();
-        let from_pubkey = from_keypair.pubkey();
-        let nonce_keypair = Keypair::new();
-        let nonce_pubkey = nonce_keypair.pubkey();
-        let instructions = [
-            system_instruction::transfer(&from_pubkey, &nonce_pubkey, 42),
-            system_instruction::advance_nonce_account(&nonce_pubkey, &nonce_pubkey),
-        ];
-        let message = LegacyMessage::new(&instructions, Some(&from_pubkey));
-        let tx = Transaction::new(&[&from_keypair, &nonce_keypair], message, Hash::default());
-        let tx = VersionedTransaction::from(tx);
-        assert!(!tx.uses_durable_nonce());
-    }
-
-    #[test]
-    fn tx_uses_nonce_wrong_first_nonce_ix_fail() {
-        let from_keypair = Keypair::new();
-        let from_pubkey = from_keypair.pubkey();
-        let nonce_keypair = Keypair::new();
-        let nonce_pubkey = nonce_keypair.pubkey();
-        let instructions = [
-            system_instruction::withdraw_nonce_account(
-                &nonce_pubkey,
-                &nonce_pubkey,
-                &from_pubkey,
-                42,
-            ),
-            system_instruction::transfer(&from_pubkey, &nonce_pubkey, 42),
-        ];
-        let message = LegacyMessage::new(&instructions, Some(&nonce_pubkey));
-        let tx = Transaction::new(&[&from_keypair, &nonce_keypair], message, Hash::default());
-        let tx = VersionedTransaction::from(tx);
-        assert!(!tx.uses_durable_nonce());
-    }
-
-    #[test]
-    fn test_sanitize_signatures_inner() {
-        assert_eq!(
-            VersionedTransaction::sanitize_signatures_inner(1, 1, 0),
-            Err(SanitizeError::IndexOutOfBounds)
-        );
-        assert_eq!(
-            VersionedTransaction::sanitize_signatures_inner(1, 1, 2),
-            Err(SanitizeError::InvalidValue)
-        );
-        assert_eq!(
-            VersionedTransaction::sanitize_signatures_inner(2, 1, 2),
-            Err(SanitizeError::IndexOutOfBounds)
-        );
-        assert_eq!(
-            VersionedTransaction::sanitize_signatures_inner(1, 1, 1),
-            Ok(())
-        );
     }
 }

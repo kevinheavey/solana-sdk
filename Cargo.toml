@@ -11,7 +11,6 @@ members = [
     "bls-signatures",
     "bn254",
     "borsh",
-    "client-traits",
     "clock",
     "cluster-type",
     "commitment-config",
@@ -71,8 +70,6 @@ members = [
     "sdk",
     "sdk-ids",
     "sdk-macro",
-    "sdk-wasm-js",
-    "sdk-wasm-js-tests",
     "secp256k1-program",
     "secp256k1-recover",
     "secp256r1-program",
@@ -91,12 +88,9 @@ members = [
     "slot-history",
     "stable-layout",
     "system-interface",
-    "system-transaction",
-    "system-wasm-js",
     "sysvar",
     "sysvar-id",
     "time-utils",
-    "transaction",
     "transaction-error",
     "validator-exit",
     "vote-interface",
@@ -218,7 +212,6 @@ solana-blake3-hasher = { path = "blake3-hasher", version = "3.0.0" }
 solana-bls-signatures = { path = "bls-signatures", version = "0.1.1" }
 solana-bn254 = { path = "bn254", version = "3.0.0" }
 solana-borsh = { path = "borsh", version = "3.0.0" }
-solana-client-traits = { path = "client-traits", version = "3.0.0" }
 solana-clock = { path = "clock", version = "3.0.0" }
 solana-cluster-type = { path = "cluster-type", version = "3.0.0" }
 solana-commitment-config = { path = "commitment-config", version = "3.0.0" }
@@ -279,7 +272,6 @@ solana-sanitize = { path = "sanitize", version = "3.0.0" }
 solana-sdk = { path = "sdk", version = "2.2.1" }
 solana-sdk-ids = { path = "sdk-ids", version = "3.0.0" }
 solana-sdk-macro = { path = "sdk-macro", version = "3.0.0" }
-solana-sdk-wasm-js = { path = "sdk-wasm-js", version = "1.0.0" }
 solana-secp256k1-program = { path = "secp256k1-program", version = "3.0.0" }
 solana-secp256k1-recover = { path = "secp256k1-recover", version = "3.0.0" }
 solana-secp256r1-program = { path = "secp256r1-program", version = "3.0.0", default-features = false }
@@ -298,12 +290,9 @@ solana-slot-hashes = { path = "slot-hashes", version = "3.0.0" }
 solana-slot-history = { path = "slot-history", version = "3.0.0" }
 solana-stable-layout = { path = "stable-layout", version = "3.0.0" }
 solana-system-interface = { path = "system-interface", version = "2.0" }
-solana-system-transaction = { path = "system-transaction", version = "3.0.0" }
-solana-system-wasm-js = { path = "system-wasm-js", version = "1.0" }
 solana-sysvar = { path = "sysvar", version = "3.0.0" }
 solana-sysvar-id = { path = "sysvar-id", version = "3.0.0" }
 solana-time-utils = { path = "time-utils", version = "3.0.0" }
-solana-transaction = { path = "transaction", version = "3.0.0" }
 solana-transaction-error = { path = "transaction-error", version = "3.0.0" }
 solana-validator-exit = { path = "validator-exit", version = "3.0.0" }
 solana-vote-interface = { path = "vote-interface", version = "3.0.0" }

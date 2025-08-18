@@ -1,5 +1,5 @@
 use {
-    crate::versioned::VersionedTransaction, solana_message::SanitizedVersionedMessage,
+    super::VersionedTransaction, solana_message::SanitizedVersionedMessage,
     solana_sanitize::SanitizeError, solana_signature::Signature,
 };
 
