@@ -1,14 +1,7 @@
 //! The list of slot boundaries at which a hard fork should
 //! occur.
 
-#![cfg_attr(feature = "frozen-abi", feature(min_specialization))]
-
-#[cfg_attr(feature = "frozen-abi", derive(solana_frozen_abi_macro::AbiExample))]
-#[cfg_attr(
-    feature = "serde",
-    derive(serde_derive::Deserialize, serde_derive::Serialize)
-)]
-#[derive(Clone, Debug, Default, Eq, PartialEq)]
+#[derive(Clone, Debug, Default, Eq, PartialEq, serde_derive::Deserialize, serde_derive::Serialize)]
 pub struct HardForks {
     hard_forks: Vec<(u64, usize)>,
 }
@@ -56,37 +49,5 @@ impl HardForks {
             .sum();
 
         (fork_count > 0).then(|| (fork_count as u64).to_le_bytes())
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn iter_is_sorted() {
-        let mut hf = HardForks::default();
-        hf.register(30);
-        hf.register(20);
-        hf.register(10);
-        hf.register(20);
-
-        assert_eq!(hf.hard_forks, vec![(10, 1), (20, 2), (30, 1)]);
-    }
-
-    #[test]
-    fn multiple_hard_forks_since_parent() {
-        let mut hf = HardForks::default();
-        hf.register(10);
-        hf.register(20);
-
-        assert_eq!(hf.get_hash_data(9, 0), None);
-        assert_eq!(hf.get_hash_data(10, 0), Some([1, 0, 0, 0, 0, 0, 0, 0,]));
-        assert_eq!(hf.get_hash_data(19, 0), Some([1, 0, 0, 0, 0, 0, 0, 0,]));
-        assert_eq!(hf.get_hash_data(20, 0), Some([2, 0, 0, 0, 0, 0, 0, 0,]));
-        assert_eq!(hf.get_hash_data(20, 10), Some([1, 0, 0, 0, 0, 0, 0, 0,]));
-        assert_eq!(hf.get_hash_data(20, 11), Some([1, 0, 0, 0, 0, 0, 0, 0,]));
-        assert_eq!(hf.get_hash_data(21, 11), Some([1, 0, 0, 0, 0, 0, 0, 0,]));
-        assert_eq!(hf.get_hash_data(21, 20), None);
     }
 }

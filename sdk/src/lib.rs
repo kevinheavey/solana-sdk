@@ -65,6 +65,7 @@ pub mod account_inner;
 mod derivation_path_inner;
 pub mod epoch_rewards_hasher_inner;
 pub mod fee_structure_inner;
+mod hard_forks_inner;
 pub mod inflation_inner;
 mod keypair_inner;
 pub mod offchain_message_inner;

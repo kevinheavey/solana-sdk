@@ -2,7 +2,7 @@
 //!
 //! [shred]: https://solana.com/docs/terminology#shred
 
-use {solana_hard_forks::HardForks, solana_hash::Hash, solana_sha256_hasher::hashv};
+use {crate::hard_forks_inner::HardForks, solana_hash::Hash, solana_sha256_hasher::hashv};
 
 pub fn version_from_hash(hash: &Hash) -> u16 {
     let hash = hash.as_ref();
