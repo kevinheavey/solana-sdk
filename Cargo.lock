@@ -2817,15 +2817,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-fee-structure"
-version = "3.0.0"
-dependencies = [
- "serde",
- "serde_derive",
- "solana-frozen-abi",
-]
-
-[[package]]
 name = "solana-file-download"
 version = "3.0.0"
 dependencies = [
@@ -3308,7 +3299,6 @@ dependencies = [
  "solana-account-info",
  "solana-clock",
  "solana-epoch-info",
- "solana-fee-structure",
  "solana-frozen-abi",
  "solana-frozen-abi-macro",
  "solana-hash",

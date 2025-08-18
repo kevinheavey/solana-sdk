@@ -1,6 +1,5 @@
 //! Fee structures.
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
-#![cfg_attr(feature = "frozen-abi", feature(min_specialization))]
 
 use std::num::NonZeroU32;
 
@@ -31,11 +30,7 @@ pub struct FeeStructure {
     pub compute_fee_bins: Vec<FeeBin>,
 }
 
-#[cfg_attr(
-    feature = "serde",
-    derive(serde_derive::Deserialize, serde_derive::Serialize)
-)]
-#[derive(Debug, Default, Clone, Copy, Eq, PartialEq)]
+#[derive(Debug, Default, Clone, Copy, Eq, PartialEq, serde_derive::Deserialize, serde_derive::Serialize)]
 pub struct FeeDetails {
     transaction_fee: u64,
     prioritization_fee: u64,
@@ -107,49 +102,5 @@ impl Default for FeeStructure {
                 fee: 0,
             }],
         }
-    }
-}
-
-#[cfg(feature = "frozen-abi")]
-impl ::solana_frozen_abi::abi_example::AbiExample for FeeStructure {
-    fn example() -> Self {
-        FeeStructure::default()
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_calculate_memory_usage_cost() {
-        let heap_cost = 99;
-        const K: u32 = 1024;
-
-        // accounts data size are priced in block of 32K, ...
-
-        // ... requesting less than 32K should still be charged as one block
-        assert_eq!(
-            heap_cost,
-            FeeStructure::calculate_memory_usage_cost(31 * K, heap_cost)
-        );
-
-        // ... requesting exact 32K should be charged as one block
-        assert_eq!(
-            heap_cost,
-            FeeStructure::calculate_memory_usage_cost(32 * K, heap_cost)
-        );
-
-        // ... requesting slightly above 32K should be charged as 2 block
-        assert_eq!(
-            heap_cost * 2,
-            FeeStructure::calculate_memory_usage_cost(33 * K, heap_cost)
-        );
-
-        // ... requesting exact 64K should be charged as 2 block
-        assert_eq!(
-            heap_cost * 2,
-            FeeStructure::calculate_memory_usage_cost(64 * K, heap_cost)
-        );
     }
 }

@@ -61,15 +61,16 @@ pub mod pubkey;
 #[cfg(feature = "full")]
 #[deprecated(since = "2.2.0", note = "Use `solana-shred-version` crate instead")]
 pub use solana_shred_version as shred_version;
-pub mod signature;
-pub mod signer;
-pub mod transaction;
 pub mod account_inner;
 mod derivation_path_inner;
 pub mod epoch_rewards_hasher_inner;
+pub mod fee_structure_inner;
 mod keypair_inner;
 mod seed_derivable_inner;
 mod seed_phrase_inner;
+pub mod signature;
+pub mod signer;
+pub mod transaction;
 mod transaction_inner;
 pub mod transport;
 
@@ -80,15 +81,15 @@ pub use account_inner as account;
     note = "Use `solana_account::state_traits` crate instead"
 )]
 pub use account_inner::state_traits as account_utils;
-#[deprecated(since = "2.2.0", note = "Use `solana-epoch-info` crate instead")]
-pub use solana_epoch_info as epoch_info;
 #[deprecated(
     since = "2.2.0",
     note = "Use `solana-epoch-rewards-hasher` crate instead"
 )]
 pub use epoch_rewards_hasher_inner as epoch_rewards_hasher;
 #[deprecated(since = "2.2.0", note = "Use `solana-fee-structure` crate instead")]
-pub use solana_fee_structure as fee;
+pub use fee_structure_inner as fee;
+#[deprecated(since = "2.2.0", note = "Use `solana-epoch-info` crate instead")]
+pub use solana_epoch_info as epoch_info;
 #[deprecated(since = "2.1.0", note = "Use `solana-inflation` crate instead")]
 pub use solana_inflation as inflation;
 #[deprecated(

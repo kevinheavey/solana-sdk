@@ -38,7 +38,6 @@ dev-context-only-utils = [
     "solana-program/dev-context-only-utils",
 ]
 frozen-abi = [
-    "solana-fee-structure/frozen-abi",
     "solana-inflation/frozen-abi",
     "solana-program/frozen-abi",
     "solana-short-vec/frozen-abi",
@@ -71,7 +70,6 @@ solana-sysvar = { workspace = true, features = ["bincode"] }
 serde = { workspace = true }
 serde_derive = { workspace = true }
 solana-epoch-info = { workspace = true, features = ["serde"] }
-solana-fee-structure = { workspace = true, features = ["serde"] }
 solana-hash = { workspace = true }
 solana-inflation = { workspace = true, features = ["serde"] }
 solana-instruction = { workspace = true, features = ["serde"] }
