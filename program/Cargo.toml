@@ -68,7 +68,6 @@ solana-instruction-error = { workspace = true, features = [
     "num-traits",
     "serde",
 ] }
-solana-last-restart-slot = { workspace = true, features = ["serde", "sysvar"] }
 solana-msg = { workspace = true }
 solana-program-entrypoint = { workspace = true }
 solana-program-error = { workspace = true, features = ["serde"] }

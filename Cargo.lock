@@ -2671,17 +2671,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-last-restart-slot"
-version = "3.0.0"
-dependencies = [
- "serde",
- "serde_derive",
- "solana-sdk-ids",
- "solana-sdk-macro",
- "solana-sysvar-id",
-]
-
-[[package]]
 name = "solana-loader-v2-interface"
 version = "3.0.0"
 dependencies = [
@@ -2823,7 +2812,6 @@ dependencies = [
  "solana-hash",
  "solana-instruction",
  "solana-instruction-error",
- "solana-last-restart-slot",
  "solana-logger",
  "solana-msg",
  "solana-nonce",

@@ -501,6 +501,7 @@ pub mod epoch_stake_inner;
 pub mod example_mocks_inner;
 pub mod instructions_sysvar_inner;
 pub mod keccak_hasher_inner;
+pub mod last_restart_slot_inner;
 pub mod message_inner;
 pub mod native_token_inner;
 pub mod sysvar_inner;
@@ -520,7 +521,7 @@ pub use epoch_rewards_inner as epoch_rewards;
 #[deprecated(since = "2.1.0", note = "Use `solana-fee-calculator` crate instead")]
 pub use solana_fee_calculator as fee_calculator;
 #[deprecated(since = "2.1.0", note = "Use `solana-last-restart-slot` crate instead")]
-pub use solana_last_restart_slot as last_restart_slot;
+pub use last_restart_slot_inner as last_restart_slot;
 #[deprecated(since = "2.1.0", note = "Use `solana-program-memory` crate instead")]
 pub use solana_program_memory as program_memory;
 #[deprecated(since = "2.1.0", note = "Use `solana-program-pack` crate instead")]
