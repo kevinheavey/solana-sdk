@@ -27,7 +27,6 @@ default = [
 full = [
     "solana-signature",
     "solana-pubkey/rand",
-    "dep:solana-offchain-message",
     "dep:solana-presigner",
     "dep:solana-shred-version",
     "dep:solana-signer",
@@ -54,6 +53,7 @@ qstring = { workspace = true }
 uriparse = { workspace = true }
 five8 = { workspace = true }
 hmac = { workspace = true }
+num_enum = { workspace = true }
 pbkdf2 = { workspace = true }
 rand = { workspace = true }
 sha2 = { workspace = true }
@@ -65,6 +65,8 @@ solana-frozen-abi = { workspace = true, optional = true }
 solana-frozen-abi-macro = { workspace = true, optional = true }
 solana-instruction-error = { workspace = true }
 solana-logger = { workspace = true, optional = true }
+solana-sha256-hasher = { workspace = true, features = ["sha2"] }
+solana-packet = { workspace = true }
 solana-sysvar = { workspace = true, features = ["bincode"] }
 serde = { workspace = true }
 serde_derive = { workspace = true }
@@ -72,7 +74,6 @@ solana-epoch-info = { workspace = true, features = ["serde"] }
 solana-hash = { workspace = true }
 solana-instruction = { workspace = true, features = ["serde"] }
 solana-message = { workspace = true, features = ["bincode", "blake3", "serde"] }
-solana-offchain-message = { workspace = true, optional = true, features = ["verify"] }
 solana-presigner = { workspace = true, optional = true }
 solana-program = { workspace = true }
 solana-program-memory = { workspace = true }

@@ -8,13 +8,6 @@ use {
     solana_signer::Signer,
 };
 
-#[cfg(test)]
-static_assertions::const_assert_eq!(OffchainMessage::HEADER_LEN, 17);
-#[cfg(test)]
-static_assertions::const_assert_eq!(v0::OffchainMessage::MAX_LEN, 65515);
-#[cfg(test)]
-static_assertions::const_assert_eq!(v0::OffchainMessage::MAX_LEN_LEDGER, 1212);
-
 /// Check if given bytes contain only printable ASCII characters
 pub fn is_printable_ascii(data: &[u8]) -> bool {
     for &char in data {
@@ -234,7 +227,6 @@ impl OffchainMessage {
         Ok(signer.sign_message(&self.serialize()?))
     }
 
-    #[cfg(feature = "verify")]
     /// Verify that the message signature is valid for the given public key
     pub fn verify(
         &self,

@@ -67,6 +67,7 @@ pub mod epoch_rewards_hasher_inner;
 pub mod fee_structure_inner;
 pub mod inflation_inner;
 mod keypair_inner;
+pub mod offchain_message_inner;
 mod seed_derivable_inner;
 mod seed_phrase_inner;
 pub mod signature;
@@ -100,7 +101,7 @@ pub use solana_epoch_info as epoch_info;
 pub use solana_message::inner_instruction;
 #[cfg(feature = "full")]
 #[deprecated(since = "2.2.0", note = "Use `solana-offchain-message` crate instead")]
-pub use solana_offchain_message as offchain_message;
+pub use offchain_message_inner as offchain_message;
 #[deprecated(since = "2.1.0", note = "Use `solana-program-memory` crate instead")]
 pub use solana_program_memory as program_memory;
 #[deprecated(since = "2.1.0", note = "Use `solana_pubkey::pubkey` instead")]

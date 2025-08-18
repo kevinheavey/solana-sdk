@@ -3066,22 +3066,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-offchain-message"
-version = "3.0.0"
-dependencies = [
- "num_enum",
- "solana-hash",
- "solana-offchain-message",
- "solana-packet",
- "solana-pubkey",
- "solana-sanitize",
- "solana-sha256-hasher",
- "solana-signature",
- "solana-signer",
- "static_assertions",
-]
-
-[[package]]
 name = "solana-package-metadata"
 version = "3.0.0"
 dependencies = [
@@ -3278,6 +3262,7 @@ dependencies = [
  "ed25519-dalek-bip32",
  "five8",
  "hmac",
+ "num_enum",
  "pbkdf2",
  "qstring",
  "rand",
@@ -3297,7 +3282,7 @@ dependencies = [
  "solana-instructions-sysvar",
  "solana-logger",
  "solana-message",
- "solana-offchain-message",
+ "solana-packet",
  "solana-presigner",
  "solana-program",
  "solana-program-memory",
@@ -3308,6 +3293,7 @@ dependencies = [
  "solana-sdk-macro",
  "solana-serde",
  "solana-serde-varint",
+ "solana-sha256-hasher",
  "solana-short-vec",
  "solana-shred-version",
  "solana-signature",
