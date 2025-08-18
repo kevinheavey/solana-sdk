@@ -27,7 +27,6 @@ default = [
 full = [
     "solana-signature",
     "solana-pubkey/rand",
-    "dep:solana-presigner",
     "dep:solana-shred-version",
     "dep:solana-signer",
     "dep:solana-transaction-error",
@@ -69,7 +68,6 @@ solana-instruction-error = { workspace = true }
 solana-logger = { workspace = true, optional = true }
 solana-message = { workspace = true, features = ["bincode", "blake3", "serde"] }
 solana-packet = { workspace = true }
-solana-presigner = { workspace = true, optional = true }
 solana-program = { workspace = true }
 solana-program-memory = { workspace = true }
 solana-pubkey = { workspace = true, default-features = false, features = [

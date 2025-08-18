@@ -3119,15 +3119,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-presigner"
-version = "3.0.0"
-dependencies = [
- "solana-pubkey",
- "solana-signature",
- "solana-signer",
-]
-
-[[package]]
 name = "solana-program"
 version = "3.0.0"
 dependencies = [
@@ -3283,7 +3274,6 @@ dependencies = [
  "solana-logger",
  "solana-message",
  "solana-packet",
- "solana-presigner",
  "solana-program",
  "solana-program-memory",
  "solana-pubkey",

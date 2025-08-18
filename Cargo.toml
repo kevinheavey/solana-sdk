@@ -44,7 +44,6 @@ members = [
     "packet",
     "poh-config",
     "precompile-error",
-    "presigner",
     "program",
     "program-entrypoint",
     "program-error",
@@ -232,7 +231,6 @@ solana-package-metadata-macro = { path = "package-metadata-macro", version = "3.
 solana-packet = { path = "packet", version = "3.0.0" }
 solana-poh-config = { path = "poh-config", version = "3.0.0" }
 solana-precompile-error = { path = "precompile-error", version = "3.0.0" }
-solana-presigner = { path = "presigner", version = "3.0.0" }
 solana-program = { path = "program", version = "3.0.0", default-features = false }
 solana-program-entrypoint = { path = "program-entrypoint", version = "3.0.0" }
 solana-program-error = { path = "program-error", version = "3.0.0" }
