@@ -4,11 +4,11 @@ use super::{
     AddressLookupTableAccount,
 };
 use {
+    super::super::instruction_inner::Instruction,
+    super::super::sdk_ids::system_program,
     super::{inline_nonce::is_advance_nonce_instruction_data, MessageHeader},
     core::fmt,
-    solana_instruction::Instruction,
     solana_pubkey::Pubkey,
-    super::super::sdk_ids::system_program,
     std::collections::BTreeMap,
 };
 

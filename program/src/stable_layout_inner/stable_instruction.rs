@@ -1,8 +1,8 @@
 //! `Instruction`, with a stable memory layout
 
 use {
+    super::super::instruction_inner::{AccountMeta, Instruction},
     super::stable_vec::StableVec,
-    solana_instruction::{AccountMeta, Instruction},
     solana_pubkey::Pubkey,
     std::fmt::Debug,
 };

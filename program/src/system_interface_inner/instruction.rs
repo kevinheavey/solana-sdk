@@ -41,8 +41,8 @@
 
 use solana_pubkey::Pubkey;
 use {
+    super::super::instruction_inner::{AccountMeta, Instruction},
     super::program::ID,
-    solana_instruction::{AccountMeta, Instruction},
 };
 
 // Inline some constants to avoid dependencies.

@@ -6,7 +6,7 @@ use {
     super::super::account_info::AccountInfo,
     super::super::program_memory::stubs,
     base64::{prelude::BASE64_STANDARD, Engine},
-    solana_instruction::{error::UNSUPPORTED_SYSVAR, Instruction},
+    super::super::instruction_inner::{error::UNSUPPORTED_SYSVAR, Instruction},
     solana_program_error::ProgramResult,
     solana_pubkey::Pubkey,
     std::sync::{Arc, RwLock},

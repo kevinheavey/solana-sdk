@@ -34,12 +34,12 @@ pub use super::sdk_ids::sysvar::instructions::{check_id, id, ID};
 #[cfg(not(target_os = "solana"))]
 use {
     bitflags::bitflags,
-    solana_instruction::BorrowedInstruction,
+    super::instruction_inner::BorrowedInstruction,
     super::serialize_utils_inner::{append_slice, append_u16, append_u8},
 };
 use {
     super::account_info::AccountInfo,
-    solana_instruction::{AccountMeta, Instruction},
+    super::instruction_inner::{AccountMeta, Instruction},
     solana_instruction_error::InstructionError,
     solana_program_error::ProgramError,
     solana_sanitize::SanitizeError,

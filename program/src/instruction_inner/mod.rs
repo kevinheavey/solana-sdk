@@ -12,18 +12,11 @@
 //! schedule execution of transactions.
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 #![allow(clippy::arithmetic_side_effects)]
-#![no_std]
 
-#[cfg(feature = "std")]
-extern crate std;
 use solana_pubkey::Pubkey;
-#[cfg(feature = "std")]
-use std::vec::Vec;
 pub mod account_meta;
-#[cfg(feature = "std")]
 pub use account_meta::AccountMeta;
 pub use solana_instruction_error as error;
-#[cfg(any(feature = "syscalls", target_os = "solana"))]
 pub mod syscalls;
 
 /// A directive for a single invocation of a Solana program.
@@ -85,12 +78,7 @@ pub mod syscalls;
 /// Programs may require signatures from some accounts, in which case they
 /// should be specified as signers during `Instruction` construction. The
 /// program must still validate during execution that the account is a signer.
-#[cfg(feature = "std")]
-#[cfg_attr(
-    feature = "serde",
-    derive(serde_derive::Serialize, serde_derive::Deserialize)
-)]
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(Debug, PartialEq, Eq, Clone, serde_derive::Serialize, serde_derive::Deserialize)]
 pub struct Instruction {
     /// Pubkey of the program that executes this instruction.
     pub program_id: Pubkey,
@@ -100,68 +88,7 @@ pub struct Instruction {
     pub data: Vec<u8>,
 }
 
-#[cfg(feature = "std")]
 impl Instruction {
-    #[cfg(feature = "borsh")]
-    /// Create a new instruction from a value, encoded with [`borsh`].
-    ///
-    /// [`borsh`]: https://docs.rs/borsh/latest/borsh/
-    ///
-    /// `program_id` is the address of the program that will execute the instruction.
-    /// `accounts` contains a description of all accounts that may be accessed by the program.
-    ///
-    /// Borsh serialization is often preferred over bincode as it has a stable
-    /// [specification] and an [implementation in JavaScript][jsb], neither of
-    /// which are true of bincode.
-    ///
-    /// [specification]: https://borsh.io/
-    /// [jsb]: https://github.com/near/borsh-js
-    ///
-    /// # Examples
-    ///
-    /// ```
-    /// # use solana_pubkey::Pubkey;
-    /// # use solana_instruction::{AccountMeta, Instruction};
-    /// # use borsh::{BorshSerialize, BorshDeserialize};
-    /// #
-    /// #[derive(BorshSerialize, BorshDeserialize)]
-    /// # #[borsh(crate = "borsh")]
-    /// pub struct MyInstruction {
-    ///     pub lamports: u64,
-    /// }
-    ///
-    /// pub fn create_instruction(
-    ///     program_id: &Pubkey,
-    ///     from: &Pubkey,
-    ///     to: &Pubkey,
-    ///     lamports: u64,
-    /// ) -> Instruction {
-    ///     let instr = MyInstruction { lamports };
-    ///
-    ///     Instruction::new_with_borsh(
-    ///         *program_id,
-    ///         &instr,
-    ///         vec![
-    ///             AccountMeta::new(*from, true),
-    ///             AccountMeta::new(*to, false),
-    ///         ],
-    ///    )
-    /// }
-    /// ```
-    pub fn new_with_borsh<T: borsh::BorshSerialize>(
-        program_id: Pubkey,
-        data: &T,
-        accounts: Vec<AccountMeta>,
-    ) -> Self {
-        let data = borsh::to_vec(data).unwrap();
-        Self {
-            program_id,
-            accounts,
-            data,
-        }
-    }
-
-    #[cfg(feature = "bincode")]
     /// Create a new instruction from a value, encoded with [`bincode`].
     ///
     /// [`bincode`]: https://docs.rs/bincode/latest/bincode/
@@ -292,7 +219,6 @@ pub struct BorrowedAccountMeta<'a> {
 ///
 /// This struct is used by the runtime when constructing the instructions sysvar. It is not
 /// useful to Solana programs.
-#[cfg(feature = "std")]
 pub struct BorrowedInstruction<'a> {
     pub program_id: &'a Pubkey,
     pub accounts: Vec<BorrowedAccountMeta<'a>>,

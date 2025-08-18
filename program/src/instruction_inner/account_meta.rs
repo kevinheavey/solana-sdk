@@ -17,11 +17,7 @@ use solana_pubkey::Pubkey;
 ///
 /// [`Instruction`]: crate::Instruction
 #[repr(C)]
-#[cfg_attr(
-    feature = "serde",
-    derive(serde_derive::Serialize, serde_derive::Deserialize)
-)]
-#[derive(Debug, Default, PartialEq, Eq, Clone)]
+#[derive(Debug, Default, PartialEq, Eq, Clone, serde_derive::Serialize, serde_derive::Deserialize)]
 pub struct AccountMeta {
     /// An account's public key.
     pub pubkey: Pubkey,

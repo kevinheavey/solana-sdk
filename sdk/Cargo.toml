@@ -52,7 +52,6 @@ solana-epoch-info = { workspace = true, features = ["serde"] }
 solana-frozen-abi = { workspace = true, optional = true }
 solana-frozen-abi-macro = { workspace = true, optional = true }
 solana-hash = { workspace = true }
-solana-instruction = { workspace = true, features = ["serde"] }
 solana-instruction-error = { workspace = true }
 solana-logger = { workspace = true, optional = true }
 solana-program = { workspace = true }

@@ -1,5 +1,4 @@
-#[cfg(feature = "syscalls")]
-use crate::Instruction;
+use super::Instruction;
 #[cfg(target_os = "solana")]
 pub use {
     crate::{AccountMeta, ProcessedSiblingInstruction},
@@ -22,7 +21,6 @@ define_syscall!(fn sol_get_processed_sibling_instruction(index: u64, meta: *mut 
 ///
 /// Then B's processed sibling instruction list is: `[A]`
 /// Then F's processed sibling instruction list is: `[E, C]`
-#[cfg(feature = "syscalls")]
 pub fn get_processed_sibling_instruction(index: usize) -> Option<Instruction> {
     #[cfg(target_os = "solana")]
     {
@@ -72,7 +70,6 @@ pub fn get_processed_sibling_instruction(index: usize) -> Option<Instruction> {
 /// Transaction-level instructions are height
 /// [`crate::TRANSACTION_LEVEL_STACK_HEIGHT`]`, fist invoked inner instruction
 /// is height `TRANSACTION_LEVEL_STACK_HEIGHT + 1`, and so forth.
-#[cfg(feature = "syscalls")]
 pub fn get_stack_height() -> usize {
     #[cfg(target_os = "solana")]
     unsafe {

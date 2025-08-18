@@ -13,15 +13,15 @@
 
 use serde_derive::{Deserialize, Serialize};
 use {
+    super::super::instruction_inner::Instruction,
+    super::super::sdk_ids::bpf_loader_upgradeable,
     super::{
         super::short_vec, compiled_instruction::CompiledInstruction, compiled_keys::CompiledKeys,
         inline_nonce::advance_nonce_account_instruction, MessageHeader,
     },
     solana_hash::Hash,
-    solana_instruction::Instruction,
     solana_pubkey::Pubkey,
     solana_sanitize::{Sanitize, SanitizeError},
-    super::super::sdk_ids::bpf_loader_upgradeable,
     std::{collections::HashSet, convert::TryFrom},
 };
 

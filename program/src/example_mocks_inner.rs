@@ -188,7 +188,7 @@ pub mod solana_transaction {
         super::solana_signer::{signers::Signers, SignerError},
         serde_derive::Serialize,
         solana_hash::Hash,
-        solana_instruction::Instruction,
+        super::super::instruction::Instruction,
         solana_pubkey::Pubkey,
     };
 
@@ -281,7 +281,7 @@ pub mod solana_sdk {
             solana_signer::{self as signer, signers},
         },
         super::super::clock_inner::Clock,
-        solana_hash as hash, solana_instruction as instruction, super::super::keccak_hasher_inner as keccak,
+        solana_hash as hash, super::super::instruction, super::super::keccak_hasher_inner as keccak,
         solana_nonce as nonce,
         solana_pubkey::{self as pubkey, Pubkey},
         super::super::sdk_ids::{

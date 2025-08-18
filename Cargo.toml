@@ -2,7 +2,6 @@
 members = [
     "address",
     "atomic-u64",
-    "bincode",
     "bn254",
     "cluster-type",
     "commitment-config",
@@ -13,7 +12,6 @@ members = [
     "frozen-abi",
     "frozen-abi-macro",
     "hash",
-    "instruction",
     "instruction-error",
     "logger",
     "nonce",
@@ -140,7 +138,6 @@ signal-hook = "0.3.17"
 siphasher = "0.3.11"
 solana-address = { path = "address", version = "1.0.0" }
 solana-atomic-u64 = { path = "atomic-u64", version = "3.0.0" }
-solana-bincode = { path = "bincode", version = "3.0.0" }
 solana-bn254 = { path = "bn254", version = "3.0.0" }
 solana-cluster-type = { path = "cluster-type", version = "3.0.0" }
 solana-commitment-config = { path = "commitment-config", version = "3.0.0" }
@@ -151,7 +148,6 @@ solana-file-download = { path = "file-download", version = "3.0.0" }
 solana-frozen-abi = { path = "frozen-abi", version = "3.0.0" }
 solana-frozen-abi-macro = { path = "frozen-abi-macro", version = "3.0.0" }
 solana-hash = { path = "hash", version = "3.0.0", default-features = false }
-solana-instruction = { path = "instruction", version = "3.0.0", default-features = false }
 solana-instruction-error = { path = "instruction-error", version = "2.0.0" }
 solana-logger = { path = "logger", version = "3.0.0" }
 solana-nonce = { path = "nonce", version = "3.0.0" }

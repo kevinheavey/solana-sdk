@@ -1,9 +1,9 @@
 //! Inlined nonce instruction information to avoid a dependency on bincode and
 //! solana-system-interface
 use {
-    solana_instruction::{AccountMeta, Instruction},
-    solana_pubkey::Pubkey,
+    super::super::instruction_inner::{AccountMeta, Instruction},
     super::super::sdk_ids::{system_program, sysvar},
+    solana_pubkey::Pubkey,
 };
 
 /// Inlined `SystemInstruction::AdvanceNonceAccount` instruction data to avoid

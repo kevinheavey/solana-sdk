@@ -2384,15 +2384,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-bincode"
-version = "3.0.0"
-dependencies = [
- "bincode",
- "serde",
- "solana-instruction-error",
-]
-
-[[package]]
 name = "solana-bn254"
 version = "3.0.0"
 dependencies = [
@@ -2512,22 +2503,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-instruction"
-version = "3.0.0"
-dependencies = [
- "bincode",
- "borsh",
- "serde",
- "serde_derive",
- "solana-define-syscall",
- "solana-frozen-abi",
- "solana-frozen-abi-macro",
- "solana-instruction",
- "solana-instruction-error",
- "solana-pubkey",
-]
-
-[[package]]
 name = "solana-instruction-error"
 version = "2.0.0"
 dependencies = [
@@ -2624,7 +2599,6 @@ dependencies = [
  "solana-frozen-abi",
  "solana-frozen-abi-macro",
  "solana-hash",
- "solana-instruction",
  "solana-instruction-error",
  "solana-logger",
  "solana-nonce",
@@ -2694,7 +2668,6 @@ dependencies = [
  "solana-frozen-abi",
  "solana-frozen-abi-macro",
  "solana-hash",
- "solana-instruction",
  "solana-instruction-error",
  "solana-logger",
  "solana-program",

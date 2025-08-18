@@ -1,4 +1,4 @@
-pub use solana_instruction::{
+pub use super::instruction_inner::{
     error::InstructionError, AccountMeta, Instruction, ProcessedSiblingInstruction,
     TRANSACTION_LEVEL_STACK_HEIGHT,
 };

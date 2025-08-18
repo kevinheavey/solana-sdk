@@ -14,7 +14,7 @@
 //! [`solana_program::program`]: https://docs.rs/solana-program/latest/solana_program/program/
 
 use {
-    super::account_info_inner::AccountInfo, solana_instruction::Instruction,
+    super::account_info_inner::AccountInfo, super::instruction_inner::Instruction,
     solana_program_error::ProgramResult, solana_pubkey::Pubkey,
 };
 #[cfg(target_os = "solana")]

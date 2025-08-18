@@ -501,6 +501,7 @@ pub mod epoch_rewards_inner;
 pub mod epoch_schedule_inner;
 pub mod epoch_stake_inner;
 pub mod example_mocks_inner;
+pub mod instruction_inner;
 pub mod instructions_sysvar_inner;
 pub mod keccak_hasher_inner;
 pub mod last_restart_slot_inner;

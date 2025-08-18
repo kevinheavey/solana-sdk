@@ -112,15 +112,15 @@
 
 use {
     crate::signature_inner::Signature,
-    solana_instruction::Instruction,
+    solana_program::instruction_inner::Instruction,
     solana_program::message_inner::{
         compiled_instruction::CompiledInstruction, inline_nonce::is_advance_nonce_instruction_data,
         Message,
     },
-    solana_pubkey::Pubkey,
-    solana_sanitize::{Sanitize, SanitizeError},
     solana_program::sdk_ids::system_program,
     solana_program::transaction_error_inner::{TransactionError, TransactionResult as Result},
+    solana_pubkey::Pubkey,
+    solana_sanitize::{Sanitize, SanitizeError},
     std::result,
 };
 use {
