@@ -35,7 +35,6 @@ members = [
     "program-option",
     "program-pack",
     "pubkey",
-    "rent",
     "reward-info",
     "sanitize",
     "sdk",
@@ -196,7 +195,6 @@ solana-program-memory = { path = "program-memory", version = "3.0.0" }
 solana-program-option = { path = "program-option", version = "3.0.0" }
 solana-program-pack = { path = "program-pack", version = "3.0.0" }
 solana-pubkey = { path = "pubkey", version = "3.0.0", default-features = false }
-solana-rent = { path = "rent", version = "3.0.0", default-features = false }
 solana-reward-info = { path = "reward-info", version = "3.0.0" }
 solana-sanitize = { path = "sanitize", version = "3.0.0" }
 solana-sdk = { path = "sdk", version = "2.2.1" }

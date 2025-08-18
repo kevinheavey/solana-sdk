@@ -505,6 +505,7 @@ pub mod last_restart_slot_inner;
 pub mod message_inner;
 pub mod native_token_inner;
 pub mod program_entrypoint_inner;
+pub mod rent_inner;
 pub mod sysvar_inner;
 pub mod transaction_error_inner;
 
@@ -542,10 +543,11 @@ pub use sysvar_inner::program_stubs;
 pub use {
     native_token_inner as native_token,
     program_entrypoint_inner::{self as entrypoint},
+    rent_inner as rent,
     solana_account_info::{self as account_info, debug_account_data},
     solana_clock as clock,
     solana_msg::msg,
-    solana_program_option as program_option, solana_pubkey as pubkey, solana_rent as rent,
+    solana_program_option as program_option, solana_pubkey as pubkey,
 };
 /// The [config native program][np].
 ///

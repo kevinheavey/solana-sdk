@@ -37,7 +37,6 @@ frozen-abi = [
     "solana-hash/frozen-abi",
     "solana-instruction/frozen-abi",
     "solana-pubkey/frozen-abi",
-    "solana-rent/frozen-abi",
     "solana-short-vec/frozen-abi",
 ]
 
@@ -80,7 +79,6 @@ solana-pubkey = { workspace = true, features = [
     "serde",
     "std",
 ] }
-solana-rent = { workspace = true, features = ["serde", "sysvar"] }
 solana-sdk-ids = { workspace = true }
 solana-sdk-macro = { workspace = true }
 solana-secp256k1-recover = { workspace = true }

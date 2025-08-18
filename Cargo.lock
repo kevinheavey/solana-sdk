@@ -2820,7 +2820,6 @@ dependencies = [
  "solana-program-option",
  "solana-program-pack",
  "solana-pubkey",
- "solana-rent",
  "solana-sanitize",
  "solana-sdk-ids",
  "solana-sdk-macro",
@@ -2871,21 +2870,6 @@ version = "3.0.0"
 dependencies = [
  "rand",
  "solana-address",
-]
-
-[[package]]
-name = "solana-rent"
-version = "3.0.0"
-dependencies = [
- "serde",
- "serde_derive",
- "solana-clock",
- "solana-frozen-abi",
- "solana-frozen-abi-macro",
- "solana-sdk-ids",
- "solana-sdk-macro",
- "solana-sysvar-id",
- "static_assertions",
 ]
 
 [[package]]

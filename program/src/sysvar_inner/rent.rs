@@ -125,7 +125,7 @@ use super::Sysvar;
 use super::SysvarSerialize;
 use crate::impl_sysvar_get;
 pub use {
-    solana_rent::Rent,
+    super::super::rent_inner::Rent,
     solana_sdk_ids::sysvar::rent::{check_id, id, ID},
 };
 impl Sysvar for Rent {
