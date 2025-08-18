@@ -19,7 +19,7 @@ pub use {
     super::account_info::MAX_PERMITTED_DATA_INCREASE,
     // Re-exporting for custom_panic
     solana_define_syscall::definitions::{sol_log_ as __log, sol_panic_ as __panic},
-    solana_msg::msg as __msg,
+    crate::msg as __msg,
     solana_program_error::ProgramResult,
     solana_pubkey::Pubkey as __Pubkey,
 };

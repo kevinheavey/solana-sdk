@@ -505,6 +505,7 @@ pub mod instructions_sysvar_inner;
 pub mod keccak_hasher_inner;
 pub mod last_restart_slot_inner;
 pub mod message_inner;
+pub mod msg_inner;
 pub mod native_token_inner;
 pub mod program_entrypoint_inner;
 pub mod program_memory_inner;
@@ -559,7 +560,6 @@ pub use {
     clock_inner as clock, native_token_inner as native_token,
     program_entrypoint_inner::{self as entrypoint},
     program_option_inner as program_option, rent_inner as rent,
-    solana_msg::msg,
     solana_pubkey as pubkey,
 };
 /// The [config native program][np].

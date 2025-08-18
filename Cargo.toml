@@ -19,7 +19,6 @@ members = [
     "instruction-error",
     "loader-v2-interface",
     "logger",
-    "msg",
     "nonce",
     "package-metadata",
     "package-metadata-macro",
@@ -163,7 +162,6 @@ solana-instruction = { path = "instruction", version = "3.0.0", default-features
 solana-instruction-error = { path = "instruction-error", version = "2.0.0" }
 solana-loader-v2-interface = { path = "loader-v2-interface", version = "3.0.0" }
 solana-logger = { path = "logger", version = "3.0.0" }
-solana-msg = { path = "msg", version = "3.0.0" }
 solana-nonce = { path = "nonce", version = "3.0.0" }
 solana-package-metadata = { path = "package-metadata", version = "3.0.0" }
 solana-package-metadata-macro = { path = "package-metadata-macro", version = "3.0.0" }

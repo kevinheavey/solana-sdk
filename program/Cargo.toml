@@ -67,7 +67,6 @@ solana-instruction-error = { workspace = true, features = [
     "num-traits",
     "serde",
 ] }
-solana-msg = { workspace = true }
 solana-program-error = { workspace = true, features = ["serde"] }
 solana-pubkey = { workspace = true, features = [
     "bytemuck",

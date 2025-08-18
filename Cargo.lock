@@ -2655,13 +2655,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-msg"
-version = "3.0.0"
-dependencies = [
- "solana-define-syscall",
-]
-
-[[package]]
 name = "solana-nonce"
 version = "3.0.0"
 dependencies = [
@@ -2738,7 +2731,6 @@ dependencies = [
  "solana-instruction",
  "solana-instruction-error",
  "solana-logger",
- "solana-msg",
  "solana-nonce",
  "solana-program-error",
  "solana-pubkey",

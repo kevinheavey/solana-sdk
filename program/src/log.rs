@@ -33,8 +33,8 @@
 //! [`Pubkey`]: crate::pubkey::Pubkey
 //! [`Pubkey::log`]: crate::pubkey::Pubkey::log
 
-use crate::account_info::AccountInfo;
-pub use solana_msg::{msg, sol_log};
+pub use super::msg_inner::sol_log;
+use crate::{account_info::AccountInfo, msg};
 
 /// Print 64-bit values represented as hexadecimal to the log.
 #[inline]
