@@ -2845,10 +2845,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-native-token"
-version = "3.0.0"
-
-[[package]]
 name = "solana-nonce"
 version = "3.0.0"
 dependencies = [
@@ -2932,7 +2928,6 @@ dependencies = [
  "solana-last-restart-slot",
  "solana-logger",
  "solana-msg",
- "solana-native-token",
  "solana-nonce",
  "solana-program-entrypoint",
  "solana-program-error",

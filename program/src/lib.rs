@@ -495,6 +495,7 @@ pub mod cpi_inner;
 pub mod example_mocks_inner;
 pub mod instructions_sysvar_inner;
 pub mod message_inner;
+pub mod native_token_inner;
 pub mod sysvar_inner;
 pub mod transaction_error_inner;
 
@@ -530,10 +531,10 @@ pub use solana_stable_layout as stable_layout;
 #[cfg(not(target_os = "solana"))]
 pub use sysvar_inner::program_stubs;
 pub use {
+    native_token_inner as native_token,
     solana_account_info::{self as account_info, debug_account_data},
     solana_clock as clock,
     solana_msg::msg,
-    solana_native_token as native_token,
     solana_program_entrypoint::{
         self as entrypoint, custom_heap_default, custom_panic_default, entrypoint,
         entrypoint_no_alloc,
