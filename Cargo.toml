@@ -12,7 +12,6 @@ members = [
     "cluster-type",
     "commitment-config",
     "compute-budget-interface",
-    "cpi",
     "define-syscall",
     "ed25519-program",
     "epoch-info",
@@ -186,7 +185,6 @@ solana-clock = { path = "clock", version = "3.0.0" }
 solana-cluster-type = { path = "cluster-type", version = "3.0.0" }
 solana-commitment-config = { path = "commitment-config", version = "3.0.0" }
 solana-compute-budget-interface = { path = "compute-budget-interface", version = "3.0.0" }
-solana-cpi = { path = "cpi", version = "3.0.0" }
 solana-define-syscall = { path = "define-syscall", version = "3.0.0" }
 solana-ed25519-program = { path = "ed25519-program", version = "3.0.0" }
 solana-epoch-info = { path = "epoch-info", version = "3.0.0" }

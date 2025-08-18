@@ -10,11 +10,11 @@
 //! [`invoke_signed`]: invoke_signed
 //! [cpi]: https://solana.com/docs/core/cpi
 
+pub use super::cpi_inner::MAX_RETURN_DATA;
 use crate::{
     account_info::AccountInfo, entrypoint::ProgramResult, instruction::Instruction, pubkey::Pubkey,
     stable_layout::stable_instruction::StableInstruction,
 };
-pub use solana_cpi::MAX_RETURN_DATA;
 
 /// Like [`solana_cpi::invoke`], but with support
 /// for overwriting the `sol_invoke_signed` syscall stub.

@@ -2610,18 +2610,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-cpi"
-version = "3.0.0"
-dependencies = [
- "solana-account-info",
- "solana-define-syscall",
- "solana-instruction",
- "solana-program-error",
- "solana-pubkey",
- "solana-stable-layout",
-]
-
-[[package]]
 name = "solana-define-syscall"
 version = "3.0.0"
 
@@ -2957,7 +2945,6 @@ dependencies = [
  "solana-blake3-hasher",
  "solana-borsh",
  "solana-clock",
- "solana-cpi",
  "solana-define-syscall",
  "solana-epoch-rewards",
  "solana-epoch-schedule",

@@ -56,7 +56,6 @@ solana-big-mod-exp = { workspace = true }
 solana-blake3-hasher = { workspace = true, features = ["blake3"] }
 solana-borsh = { workspace = true, optional = true }
 solana-clock = { workspace = true, features = ["serde", "sysvar"] }
-solana-cpi = { workspace = true }
 solana-epoch-rewards = { workspace = true, features = ["serde", "sysvar"] }
 solana-epoch-schedule = { workspace = true, features = ["serde", "sysvar"] }
 solana-epoch-stake = { workspace = true }
@@ -113,6 +112,7 @@ thiserror = { workspace = true }
 
 [target.'cfg(target_os = "solana")'.dependencies]
 solana-define-syscall = { workspace = true }
+solana-stable-layout = { workspace = true }
 
 [dev-dependencies]
 solana-pubkey = { workspace = true, features = ["dev-context-only-utils"] }
