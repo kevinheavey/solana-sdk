@@ -76,7 +76,6 @@ solana-pubkey = { workspace = true, default-features = false, features = [
 solana-sanitize = { workspace = true }
 solana-sdk-ids = { workspace = true }
 solana-sdk-macro = { workspace = true }
-solana-serde = { workspace = true }
 solana-serde-varint = { workspace = true }
 solana-sha256-hasher = { workspace = true, features = ["sha2"] }
 solana-short-vec = { workspace = true }

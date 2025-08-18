@@ -60,7 +60,6 @@ members = [
     "secp256k1-program",
     "secp256k1-recover",
     "secp256r1-program",
-    "serde",
     "serde-varint",
     "serialize-utils",
     "sha256-hasher",
@@ -247,7 +246,6 @@ solana-sdk-macro = { path = "sdk-macro", version = "3.0.0" }
 solana-secp256k1-program = { path = "secp256k1-program", version = "3.0.0" }
 solana-secp256k1-recover = { path = "secp256k1-recover", version = "3.0.0" }
 solana-secp256r1-program = { path = "secp256r1-program", version = "3.0.0", default-features = false }
-solana-serde = { path = "serde", version = "3.0.0" }
 solana-serde-varint = { path = "serde-varint", version = "3.0.0" }
 solana-serialize-utils = { path = "serialize-utils", version = "3.0.0" }
 solana-sha256-hasher = { path = "sha256-hasher", version = "3.0.0" }

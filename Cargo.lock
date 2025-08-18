@@ -3281,7 +3281,6 @@ dependencies = [
  "solana-sdk",
  "solana-sdk-ids",
  "solana-sdk-macro",
- "solana-serde",
  "solana-serde-varint",
  "solana-sha256-hasher",
  "solana-short-vec",
@@ -3360,15 +3359,6 @@ dependencies = [
  "openssl",
  "solana-instruction",
  "solana-sdk-ids",
-]
-
-[[package]]
-name = "solana-serde"
-version = "3.0.0"
-dependencies = [
- "bincode",
- "serde",
- "serde_derive",
 ]
 
 [[package]]

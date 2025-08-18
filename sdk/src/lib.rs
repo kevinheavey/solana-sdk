@@ -71,6 +71,7 @@ pub mod offchain_message_inner;
 pub mod presigner_inner;
 mod seed_derivable_inner;
 mod seed_phrase_inner;
+pub mod serde_inner;
 pub mod signature;
 pub mod signer;
 pub mod transaction;
@@ -151,7 +152,7 @@ pub use solana_sdk_macro::declare_id;
 /// Convenience macro to define multiple static public keys.
 pub use solana_sdk_macro::pubkeys;
 #[deprecated(since = "2.2.0", note = "Use `solana-serde` crate instead")]
-pub use solana_serde as deserialize_utils;
+pub use serde_inner as deserialize_utils;
 #[deprecated(since = "2.1.0", note = "Use `solana-serde-varint` crate instead")]
 pub use solana_serde_varint as serde_varint;
 #[deprecated(since = "2.1.0", note = "Use `solana-short-vec` crate instead")]
