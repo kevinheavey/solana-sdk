@@ -112,12 +112,12 @@ pub use offchain_message_inner as offchain_message;
 pub use serde_inner as deserialize_utils;
 #[deprecated(since = "2.2.0", note = "Use `solana-epoch-info` crate instead")]
 pub use solana_epoch_info as epoch_info;
+#[deprecated(since = "2.1.0", note = "Use `solana-program-memory` crate instead")]
+pub use solana_program::program_memory;
 #[deprecated(since = "2.1.0", note = "Use `solana-serde-varint` crate instead")]
 pub use solana_program::serde_varint_inner as serde_varint;
 #[deprecated(since = "2.1.0", note = "Use `solana-short-vec` crate instead")]
 pub use solana_program::short_vec;
-#[deprecated(since = "2.1.0", note = "Use `solana-program-memory` crate instead")]
-pub use solana_program_memory as program_memory;
 #[deprecated(since = "2.1.0", note = "Use `solana_pubkey::pubkey` instead")]
 /// Convenience macro to define a static public key.
 ///

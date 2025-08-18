@@ -27,7 +27,6 @@ members = [
     "precompile-error",
     "program",
     "program-error",
-    "program-memory",
     "pubkey",
     "reward-info",
     "sanitize",
@@ -172,7 +171,6 @@ solana-poh-config = { path = "poh-config", version = "3.0.0" }
 solana-precompile-error = { path = "precompile-error", version = "3.0.0" }
 solana-program = { path = "program", version = "3.0.0", default-features = false }
 solana-program-error = { path = "program-error", version = "3.0.0" }
-solana-program-memory = { path = "program-memory", version = "3.0.0" }
 solana-pubkey = { path = "pubkey", version = "3.0.0", default-features = false }
 solana-reward-info = { path = "reward-info", version = "3.0.0" }
 solana-sanitize = { path = "sanitize", version = "3.0.0" }

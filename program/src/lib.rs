@@ -507,6 +507,7 @@ pub mod last_restart_slot_inner;
 pub mod message_inner;
 pub mod native_token_inner;
 pub mod program_entrypoint_inner;
+pub mod program_memory_inner;
 pub mod program_option_inner;
 pub mod program_pack_inner;
 pub mod rent_inner;
@@ -548,7 +549,7 @@ pub use short_vec_inner as short_vec;
 #[deprecated(since = "2.1.0", note = "Use `solana-fee-calculator` crate instead")]
 pub use solana_fee_calculator as fee_calculator;
 #[deprecated(since = "2.1.0", note = "Use `solana-program-memory` crate instead")]
-pub use solana_program_memory as program_memory;
+pub use program_memory_inner as program_memory;
 #[deprecated(since = "2.1.0", note = "Use `solana-stable-layout` crate instead")]
 pub use stable_layout_inner as stable_layout;
 #[cfg(not(target_os = "solana"))]

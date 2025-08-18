@@ -2,7 +2,7 @@
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 use {
     solana_program_error::ProgramError,
-    solana_program_memory::sol_memset,
+    super::program_memory::sol_memset,
     solana_pubkey::Pubkey,
     std::{
         cell::{Ref, RefCell, RefMut},
