@@ -12,7 +12,6 @@ members = [
     "define-syscall",
     "ed25519-program",
     "epoch-info",
-    "epoch-stake",
     "fee-calculator",
     "file-download",
     "frozen-abi",
@@ -175,7 +174,6 @@ solana-compute-budget-interface = { path = "compute-budget-interface", version =
 solana-define-syscall = { path = "define-syscall", version = "3.0.0" }
 solana-ed25519-program = { path = "ed25519-program", version = "3.0.0" }
 solana-epoch-info = { path = "epoch-info", version = "3.0.0" }
-solana-epoch-stake = { path = "epoch-stake", version = "3.0.0" }
 solana-fee-calculator = { path = "fee-calculator", version = "3.0.0" }
 solana-file-download = { path = "file-download", version = "3.0.0" }
 solana-frozen-abi = { path = "frozen-abi", version = "3.0.0" }

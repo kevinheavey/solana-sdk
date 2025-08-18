@@ -2570,14 +2570,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-epoch-stake"
-version = "3.0.0"
-dependencies = [
- "solana-define-syscall",
- "solana-pubkey",
-]
-
-[[package]]
 name = "solana-fee-calculator"
 version = "3.0.0"
 dependencies = [
@@ -2825,7 +2817,6 @@ dependencies = [
  "solana-account-info",
  "solana-clock",
  "solana-define-syscall",
- "solana-epoch-stake",
  "solana-fee-calculator",
  "solana-frozen-abi",
  "solana-frozen-abi-macro",
