@@ -25,7 +25,7 @@ use {
     super::Sysvar,
     solana_fee_calculator::FeeCalculator,
     solana_hash::Hash,
-    solana_sysvar_id::impl_sysvar_id,
+    super::super::impl_sysvar_id,
     std::{cmp::Ordering, collections::BinaryHeap, iter::FromIterator, ops::Deref},
 };
 

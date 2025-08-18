@@ -45,7 +45,7 @@
 //! # Ok::<(), anyhow::Error>(())
 //! ```
 use bytemuck_derive::{Pod, Zeroable};
-use {super::Sysvar, super::super::clock_inner::Slot, solana_hash::Hash};
+use {super::super::clock_inner::Slot, super::Sysvar, solana_hash::Hash};
 use {super::SysvarSerialize, solana_account_info::AccountInfo};
 
 const U64_SIZE: usize = std::mem::size_of::<u64>();
@@ -53,9 +53,9 @@ const U64_SIZE: usize = std::mem::size_of::<u64>();
 const SYSVAR_LEN: usize = 20_488; // golden, update if MAX_ENTRIES changes
 
 pub use {
-    solana_sdk_ids::sysvar::slot_hashes::{check_id, id, ID},
     super::super::slot_hashes_inner::SlotHashes,
-    solana_sysvar_id::SysvarId,
+    super::super::sysvar_id_inner::SysvarId,
+    solana_sdk_ids::sysvar::slot_hashes::{check_id, id, ID},
 };
 
 impl Sysvar for SlotHashes {}

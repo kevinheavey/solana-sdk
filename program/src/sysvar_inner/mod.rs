@@ -82,7 +82,7 @@ pub mod __private {
     pub use solana_define_syscall::definitions;
     pub use {super::super::program_entrypoint_inner::SUCCESS, solana_program_error::ProgramError};
 }
-use {solana_account_info::AccountInfo, solana_sysvar_id::SysvarId};
+use {super::sysvar_id_inner::SysvarId, solana_account_info::AccountInfo};
 use {solana_program_error::ProgramError, solana_pubkey::Pubkey};
 
 pub mod clock;
@@ -164,7 +164,8 @@ macro_rules! impl_sysvar_get {
             let var_addr = &mut var as *mut _ as *mut u8;
 
             #[cfg(target_os = "solana")]
-            let result = unsafe { $crate::sysvar_inner::__private::definitions::$syscall_name(var_addr) };
+            let result =
+                unsafe { $crate::sysvar_inner::__private::definitions::$syscall_name(var_addr) };
 
             #[cfg(not(target_os = "solana"))]
             let result = $crate::sysvar_inner::program_stubs::$syscall_name(var_addr);

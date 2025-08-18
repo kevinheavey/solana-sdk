@@ -2,7 +2,7 @@
 use super::SysvarSerialize;
 use serde_derive::{Deserialize, Serialize};
 pub use solana_sdk_ids::sysvar::rewards::{check_id, id, ID};
-use {super::Sysvar, solana_sysvar_id::impl_sysvar_id};
+use {super::Sysvar, super::super::impl_sysvar_id};
 
 impl_sysvar_id!(Rewards);
 

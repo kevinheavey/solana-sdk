@@ -515,6 +515,7 @@ pub mod slot_hashes_inner;
 pub mod slot_history_inner;
 pub mod stable_layout_inner;
 pub mod system_interface_inner;
+pub mod sysvar_id_inner;
 pub mod sysvar_inner;
 pub mod transaction_error_inner;
 
@@ -568,8 +569,6 @@ pub mod config {
 }
 
 pub use solana_pubkey::{declare_deprecated_id, declare_id, pubkey};
-#[deprecated(since = "2.1.0", note = "Use `solana-sysvar-id` crate instead")]
-pub use solana_sysvar_id::{declare_deprecated_sysvar_id, declare_sysvar_id};
 
 /// Convenience macro for doing integer division where the operation's safety
 /// can be checked at compile-time.

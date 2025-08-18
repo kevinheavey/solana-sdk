@@ -38,12 +38,12 @@ pub trait SysvarId {
 #[macro_export]
 macro_rules! impl_sysvar_id(
     ($type:ty) => {
-        impl $crate::SysvarId for $type {
-            fn id() -> $crate::Pubkey {
+        impl $crate::sysvar_id_inner::SysvarId for $type {
+            fn id() -> $crate::pubkey::Pubkey {
                 id()
             }
 
-            fn check_id(pubkey: &$crate::Pubkey) -> bool {
+            fn check_id(pubkey: &$crate::pubkey::Pubkey) -> bool {
                 check_id(pubkey)
             }
         }
@@ -55,13 +55,13 @@ macro_rules! impl_sysvar_id(
 #[macro_export]
 macro_rules! impl_deprecated_sysvar_id(
     ($type:ty) => {
-        impl $crate::SysvarId for $type {
-            fn id() -> $crate::Pubkey {
+        impl $crate::sysvar_id_inner::SysvarId for $type {
+            fn id() -> $crate::pubkey::Pubkey {
                 #[allow(deprecated)]
                 id()
             }
 
-            fn check_id(pubkey: &$crate::Pubkey) -> bool {
+            fn check_id(pubkey: &$crate::pubkey::Pubkey) -> bool {
                 #[allow(deprecated)]
                 check_id(pubkey)
             }

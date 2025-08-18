@@ -40,7 +40,6 @@ members = [
     "secp256r1-program",
     "sha256-hasher",
     "signer-store",
-    "sysvar-id",
     "validator-exit",
 ]
 
@@ -189,7 +188,6 @@ solana-sdk-macro = { path = "sdk-macro", version = "3.0.0" }
 solana-secp256r1-program = { path = "secp256r1-program", version = "3.0.0", default-features = false }
 solana-sha256-hasher = { path = "sha256-hasher", version = "3.0.0" }
 solana-signer-store = { path = "signer-store", version = "0.1.0" }
-solana-sysvar-id = { path = "sysvar-id", version = "3.0.0" }
 solana-validator-exit = { path = "validator-exit", version = "3.0.0" }
 static_assertions = "1.1.0"
 strum = "0.24"

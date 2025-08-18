@@ -2761,7 +2761,6 @@ dependencies = [
  "solana-sdk-ids",
  "solana-sdk-macro",
  "solana-sha256-hasher",
- "solana-sysvar-id",
  "thiserror",
 ]
 
@@ -2903,14 +2902,6 @@ dependencies = [
  "num-derive",
  "num-traits",
  "rand",
-]
-
-[[package]]
-name = "solana-sysvar-id"
-version = "3.0.0"
-dependencies = [
- "solana-pubkey",
- "solana-sdk-ids",
 ]
 
 [[package]]

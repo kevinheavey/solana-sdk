@@ -82,7 +82,6 @@ solana-pubkey = { workspace = true, features = [
 solana-sdk-ids = { workspace = true }
 solana-sdk-macro = { workspace = true }
 solana-sha256-hasher = { workspace = true, features = ["sha2"] }
-solana-sysvar-id = { workspace = true }
 
 [target.'cfg(not(target_os = "solana"))'.dependencies]
 base64 = { workspace = true }
