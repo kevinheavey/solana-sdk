@@ -1,13 +1,12 @@
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 //! The Solana [`Account`] type.
 
-
 use serde::ser::{Serialize, Serializer};
 
 use solana_program::sysvar_inner::SysvarSerialize;
 use {
+    super::clock::{Epoch, INITIAL_RENT_EPOCH},
     solana_account_info::{debug_account_data::*, AccountInfo},
-    solana_clock::{Epoch, INITIAL_RENT_EPOCH},
     solana_instruction_error::LamportsError,
     solana_pubkey::Pubkey,
     solana_sdk_ids::{bpf_loader, bpf_loader_deprecated, bpf_loader_upgradeable, loader_v4},
@@ -45,9 +44,9 @@ pub struct Account {
 
 mod account_serialize {
     use {
+        super::super::clock::Epoch,
         super::ReadableAccount,
         serde::{ser::Serializer, Serialize},
-        solana_clock::Epoch,
         solana_pubkey::Pubkey,
     };
     #[repr(C)]
@@ -82,7 +81,6 @@ mod account_serialize {
     }
 }
 
-
 impl Serialize for Account {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
     where
@@ -91,7 +89,6 @@ impl Serialize for Account {
         account_serialize::serialize_account(self, serializer)
     }
 }
-
 
 impl Serialize for AccountSharedData {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
@@ -427,7 +424,6 @@ fn shared_new_ref<T: WritableAccount>(
     Rc::new(RefCell::new(shared_new::<T>(lamports, space, owner)))
 }
 
-
 fn shared_new_data<T: serde::Serialize, U: WritableAccount>(
     lamports: u64,
     state: &T,
@@ -443,7 +439,6 @@ fn shared_new_data<T: serde::Serialize, U: WritableAccount>(
     ))
 }
 
-
 fn shared_new_ref_data<T: serde::Serialize, U: WritableAccount>(
     lamports: u64,
     state: &T,
@@ -453,7 +448,6 @@ fn shared_new_ref_data<T: serde::Serialize, U: WritableAccount>(
         lamports, state, owner,
     )?))
 }
-
 
 fn shared_new_data_with_space<T: serde::Serialize, U: WritableAccount>(
     lamports: u64,
@@ -468,7 +462,6 @@ fn shared_new_data_with_space<T: serde::Serialize, U: WritableAccount>(
     Ok(account)
 }
 
-
 fn shared_new_ref_data_with_space<T: serde::Serialize, U: WritableAccount>(
     lamports: u64,
     state: &T,
@@ -480,13 +473,11 @@ fn shared_new_ref_data_with_space<T: serde::Serialize, U: WritableAccount>(
     )?))
 }
 
-
 fn shared_deserialize_data<T: serde::de::DeserializeOwned, U: ReadableAccount>(
     account: &U,
 ) -> Result<T, bincode::Error> {
     bincode::deserialize(account.data())
 }
-
 
 fn shared_serialize_data<T: serde::Serialize, U: WritableAccount>(
     account: &mut U,
@@ -505,7 +496,7 @@ impl Account {
     pub fn new_ref(lamports: u64, space: usize, owner: &Pubkey) -> Rc<RefCell<Self>> {
         shared_new_ref(lamports, space, owner)
     }
-    
+
     pub fn new_data<T: serde::Serialize>(
         lamports: u64,
         state: &T,
@@ -513,7 +504,7 @@ impl Account {
     ) -> Result<Self, bincode::Error> {
         shared_new_data(lamports, state, owner)
     }
-    
+
     pub fn new_ref_data<T: serde::Serialize>(
         lamports: u64,
         state: &T,
@@ -521,7 +512,7 @@ impl Account {
     ) -> Result<RefCell<Self>, bincode::Error> {
         shared_new_ref_data(lamports, state, owner)
     }
-    
+
     pub fn new_data_with_space<T: serde::Serialize>(
         lamports: u64,
         state: &T,
@@ -530,7 +521,7 @@ impl Account {
     ) -> Result<Self, bincode::Error> {
         shared_new_data_with_space(lamports, state, space, owner)
     }
-    
+
     pub fn new_ref_data_with_space<T: serde::Serialize>(
         lamports: u64,
         state: &T,
@@ -542,11 +533,11 @@ impl Account {
     pub fn new_rent_epoch(lamports: u64, space: usize, owner: &Pubkey, rent_epoch: Epoch) -> Self {
         shared_new_rent_epoch(lamports, space, owner, rent_epoch)
     }
-    
+
     pub fn deserialize_data<T: serde::de::DeserializeOwned>(&self) -> Result<T, bincode::Error> {
         shared_deserialize_data(self)
     }
-    
+
     pub fn serialize_data<T: serde::Serialize>(&mut self, state: &T) -> Result<(), bincode::Error> {
         shared_serialize_data(self, state)
     }
@@ -640,7 +631,7 @@ impl AccountSharedData {
     pub fn new_ref(lamports: u64, space: usize, owner: &Pubkey) -> Rc<RefCell<Self>> {
         shared_new_ref(lamports, space, owner)
     }
-    
+
     pub fn new_data<T: serde::Serialize>(
         lamports: u64,
         state: &T,
@@ -648,7 +639,7 @@ impl AccountSharedData {
     ) -> Result<Self, bincode::Error> {
         shared_new_data(lamports, state, owner)
     }
-    
+
     pub fn new_ref_data<T: serde::Serialize>(
         lamports: u64,
         state: &T,
@@ -656,7 +647,7 @@ impl AccountSharedData {
     ) -> Result<RefCell<Self>, bincode::Error> {
         shared_new_ref_data(lamports, state, owner)
     }
-    
+
     pub fn new_data_with_space<T: serde::Serialize>(
         lamports: u64,
         state: &T,
@@ -665,7 +656,7 @@ impl AccountSharedData {
     ) -> Result<Self, bincode::Error> {
         shared_new_data_with_space(lamports, state, space, owner)
     }
-    
+
     pub fn new_ref_data_with_space<T: serde::Serialize>(
         lamports: u64,
         state: &T,
@@ -677,11 +668,11 @@ impl AccountSharedData {
     pub fn new_rent_epoch(lamports: u64, space: usize, owner: &Pubkey, rent_epoch: Epoch) -> Self {
         shared_new_rent_epoch(lamports, space, owner, rent_epoch)
     }
-    
+
     pub fn deserialize_data<T: serde::de::DeserializeOwned>(&self) -> Result<T, bincode::Error> {
         shared_deserialize_data(self)
     }
-    
+
     pub fn serialize_data<T: serde::Serialize>(&mut self, state: &T) -> Result<(), bincode::Error> {
         shared_serialize_data(self, state)
     }
@@ -689,7 +680,6 @@ impl AccountSharedData {
 
 pub type InheritableAccountFields = (u64, Epoch);
 pub const DUMMY_INHERITABLE_ACCOUNT_FIELDS: InheritableAccountFields = (1, INITIAL_RENT_EPOCH);
-
 
 pub fn create_account_with_fields<S: SysvarSerialize>(
     sysvar: &S,
@@ -702,11 +692,9 @@ pub fn create_account_with_fields<S: SysvarSerialize>(
     account
 }
 
-
 pub fn create_account_for_test<S: SysvarSerialize>(sysvar: &S) -> Account {
     create_account_with_fields(sysvar, DUMMY_INHERITABLE_ACCOUNT_FIELDS)
 }
-
 
 /// Create an `Account` from a `Sysvar`.
 pub fn create_account_shared_data_with_fields<S: SysvarSerialize>(
@@ -716,7 +704,6 @@ pub fn create_account_shared_data_with_fields<S: SysvarSerialize>(
     AccountSharedData::from(create_account_with_fields(sysvar, fields))
 }
 
-
 pub fn create_account_shared_data_for_test<S: SysvarSerialize>(sysvar: &S) -> AccountSharedData {
     AccountSharedData::from(create_account_with_fields(
         sysvar,
@@ -724,12 +711,10 @@ pub fn create_account_shared_data_for_test<S: SysvarSerialize>(sysvar: &S) -> Ac
     ))
 }
 
-
 /// Create a `Sysvar` from an `Account`'s data.
 pub fn from_account<S: SysvarSerialize, T: ReadableAccount>(account: &T) -> Option<S> {
     bincode::deserialize(account.data()).ok()
 }
-
 
 /// Serialize a `Sysvar` into an `Account`'s data.
 pub fn to_account<S: SysvarSerialize, T: WritableAccount>(

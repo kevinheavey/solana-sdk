@@ -494,6 +494,7 @@ pub mod address_lookup_table_interface_inner;
 pub mod big_mod_exp_inner;
 pub mod blake3_hasher_inner;
 pub mod borsh_inner;
+pub mod clock_inner;
 pub mod cpi_inner;
 pub mod epoch_rewards_inner;
 pub mod epoch_schedule_inner;
@@ -553,7 +554,7 @@ pub use {
     program_entrypoint_inner::{self as entrypoint},
     rent_inner as rent,
     solana_account_info::{self as account_info, debug_account_data},
-    solana_clock as clock,
+    clock_inner as clock,
     solana_msg::msg,
     solana_program_option as program_option, solana_pubkey as pubkey,
 };

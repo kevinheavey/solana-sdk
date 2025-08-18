@@ -1,2 +1,2 @@
 #[deprecated(since = "2.1.0", note = "Use `solana-slot-history` crate instead")]
-pub use {solana_clock::Slot, super::slot_history_inner::*};
+pub use {super::clock_inner::Slot, super::slot_history_inner::*};

@@ -125,7 +125,7 @@ use super::Sysvar;
 use super::SysvarSerialize;
 use crate::impl_sysvar_get;
 pub use {
-    solana_clock::Clock,
+    super::super::clock_inner::Clock,
     solana_sdk_ids::sysvar::clock::{check_id, id, ID},
 };
 

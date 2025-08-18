@@ -3,6 +3,6 @@
     note = "Use solana-clock and solana-epoch-schedule crates instead."
 )]
 pub use {
-    solana_clock::{Epoch, Slot, DEFAULT_SLOTS_PER_EPOCH},
+    super::clock_inner::{Epoch, Slot, DEFAULT_SLOTS_PER_EPOCH},
     super::epoch_schedule_inner::*,
 };

@@ -280,7 +280,7 @@ pub mod solana_sdk {
             solana_account::{self as account, state_traits as account_utils},
             solana_signer::{self as signer, signers},
         },
-        solana_clock::Clock,
+        super::super::clock_inner::Clock,
         solana_hash as hash, solana_instruction as instruction, super::super::keccak_hasher_inner as keccak,
         solana_nonce as nonce,
         solana_pubkey::{self as pubkey, Pubkey},

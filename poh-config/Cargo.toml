@@ -28,9 +28,5 @@ solana-frozen-abi-macro = { workspace = true, optional = true, features = [
     "frozen-abi",
 ] }
 
-[dev-dependencies]
-solana-clock = { workspace = true }
-static_assertions = { workspace = true }
-
 [lints]
 workspace = true

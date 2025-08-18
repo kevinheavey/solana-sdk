@@ -24,8 +24,3 @@ serde = { workspace = true, optional = true }
 serde_derive = { workspace = true, optional = true }
 solana-frozen-abi = { workspace = true, optional = true }
 solana-frozen-abi-macro = { workspace = true, optional = true }
-
-[dev-dependencies]
-solana-clock = { workspace = true }
-solana-logger = { workspace = true }
-static_assertions = { workspace = true }
