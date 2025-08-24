@@ -62,8 +62,9 @@ mod non_bpf_modules {
 
 #[cfg(not(target_os = "solana"))]
 pub use non_bpf_modules::*;
-pub use {compiled_keys::CompileError, legacy::Message};
 pub use {
+    compiled_keys::CompileError,
+    legacy::Message,
     solana_hash::Hash,
     solana_instruction::{AccountMeta, Instruction},
     solana_pubkey::Pubkey,
