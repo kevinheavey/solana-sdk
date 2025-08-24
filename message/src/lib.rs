@@ -63,6 +63,11 @@ mod non_bpf_modules {
 #[cfg(not(target_os = "solana"))]
 pub use non_bpf_modules::*;
 pub use {compiled_keys::CompileError, legacy::Message};
+pub use {
+    solana_hash::Hash,
+    solana_instruction::{AccountMeta, Instruction},
+    solana_pubkey::Pubkey,
+};
 
 /// The length of a message header in bytes.
 pub const MESSAGE_HEADER_LENGTH: usize = 3;
@@ -128,6 +133,6 @@ pub struct MessageHeader {
 /// As used by the `crate::v0` message format.
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub struct AddressLookupTableAccount {
-    pub key: solana_pubkey::Pubkey,
-    pub addresses: Vec<solana_pubkey::Pubkey>,
+    pub key: Pubkey,
+    pub addresses: Vec<Pubkey>,
 }
