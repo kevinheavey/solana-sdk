@@ -110,26 +110,25 @@
 //! # Ok::<(), anyhow::Error>(())
 //! ```
 
+#[cfg(feature = "bincode")]
+pub use solana_hash::Hash;
+#[cfg(feature = "bincode")]
+use solana_signer::{signers::Signers, SignerError};
 #[cfg(feature = "serde")]
 use {
     serde_derive::{Deserialize, Serialize},
     solana_short_vec as short_vec,
 };
-#[cfg(feature = "bincode")]
-use {
-    solana_hash::Hash,
-    solana_signer::{signers::Signers, SignerError},
+pub use {
+    solana_instruction::{AccountMeta, Instruction},
+    solana_message::{compiled_instruction::CompiledInstruction, Message, VersionedMessage},
+    solana_pubkey::Pubkey,
+    solana_signature::Signature,
 };
 use {
-    solana_instruction::Instruction,
-    solana_message::{
-        compiled_instruction::CompiledInstruction, inline_nonce::is_advance_nonce_instruction_data,
-        Message,
-    },
-    solana_pubkey::Pubkey,
+    solana_message::inline_nonce::is_advance_nonce_instruction_data,
     solana_sanitize::{Sanitize, SanitizeError},
     solana_sdk_ids::system_program,
-    solana_signature::Signature,
     solana_transaction_error::{TransactionError, TransactionResult as Result},
     std::result,
 };
