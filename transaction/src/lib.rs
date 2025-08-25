@@ -110,14 +110,15 @@
 //! # Ok::<(), anyhow::Error>(())
 //! ```
 
-#[cfg(feature = "bincode")]
-pub use solana_hash::Hash;
-#[cfg(feature = "bincode")]
-use solana_signer::{signers::Signers, SignerError};
 #[cfg(feature = "serde")]
 use {
     serde_derive::{Deserialize, Serialize},
     solana_short_vec as short_vec,
+};
+#[cfg(feature = "bincode")]
+pub use {
+    solana_hash::Hash,
+    solana_signer::{signers::Signers, SignerError},
 };
 pub use {
     solana_instruction::{AccountMeta, Instruction},
