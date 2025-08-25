@@ -45,6 +45,7 @@ solana-frozen-abi = { workspace = true, optional = true }
 solana-frozen-abi-macro = { workspace = true, optional = true }
 solana-hash = { workspace = true }
 solana-instruction = { workspace = true }
+solana-instruction-error = { workspace = true }
 solana-logger = { workspace = true, optional = true }
 solana-message = { workspace = true }
 solana-pubkey = { workspace = true }

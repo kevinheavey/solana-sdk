@@ -4056,6 +4056,7 @@ dependencies = [
  "solana-frozen-abi-macro",
  "solana-hash",
  "solana-instruction",
+ "solana-instruction-error",
  "solana-keypair",
  "solana-logger",
  "solana-message",

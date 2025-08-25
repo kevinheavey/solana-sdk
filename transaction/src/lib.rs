@@ -121,15 +121,16 @@ use {
 };
 pub use {
     solana_instruction::{AccountMeta, Instruction},
+    solana_instruction_error::InstructionError,
     solana_message::{compiled_instruction::CompiledInstruction, Message, VersionedMessage},
     solana_pubkey::Pubkey,
     solana_signature::Signature,
+    solana_transaction_error::{TransactionError, TransactionResult},
 };
 use {
     solana_message::inline_nonce::is_advance_nonce_instruction_data,
     solana_sanitize::{Sanitize, SanitizeError},
     solana_sdk_ids::system_program,
-    solana_transaction_error::{TransactionError, TransactionResult as Result},
     std::result,
 };
 
@@ -975,7 +976,7 @@ impl Transaction {
     /// # Errors
     ///
     /// Returns [`TransactionError::SignatureFailure`] on error.
-    pub fn verify(&self) -> Result<()> {
+    pub fn verify(&self) -> TransactionResult<()> {
         let message_bytes = self.message_data();
         if !self
             ._verify_with_results(&message_bytes)
@@ -994,7 +995,7 @@ impl Transaction {
     /// # Errors
     ///
     /// Returns [`TransactionError::SignatureFailure`] on error.
-    pub fn verify_and_hash_message(&self) -> Result<Hash> {
+    pub fn verify_and_hash_message(&self) -> TransactionResult<Hash> {
         let message_bytes = self.message_data();
         if !self
             ._verify_with_results(&message_bytes)
@@ -1028,7 +1029,10 @@ impl Transaction {
     /// Get the positions of the pubkeys in `account_keys` associated with signing keypairs.
     ///
     /// [`account_keys`]: Message::account_keys
-    pub fn get_signing_keypair_positions(&self, pubkeys: &[Pubkey]) -> Result<Vec<Option<usize>>> {
+    pub fn get_signing_keypair_positions(
+        &self,
+        pubkeys: &[Pubkey],
+    ) -> TransactionResult<Vec<Option<usize>>> {
         if self.message.account_keys.len() < self.message.header.num_required_signatures as usize {
             return Err(TransactionError::InvalidAccountIndex);
         }
@@ -1043,7 +1047,7 @@ impl Transaction {
 
     #[cfg(feature = "verify")]
     /// Replace all the signatures and pubkeys.
-    pub fn replace_signatures(&mut self, signers: &[(Pubkey, Signature)]) -> Result<()> {
+    pub fn replace_signatures(&mut self, signers: &[(Pubkey, Signature)]) -> TransactionResult<()> {
         let num_required_signatures = self.message.header.num_required_signatures as usize;
         if signers.len() != num_required_signatures
             || self.signatures.len() != num_required_signatures
