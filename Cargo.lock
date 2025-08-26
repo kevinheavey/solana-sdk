@@ -4051,6 +4051,7 @@ dependencies = [
  "borsh",
  "serde",
  "serde_derive",
+ "solana-address",
  "solana-example-mocks",
  "solana-frozen-abi",
  "solana-frozen-abi-macro",

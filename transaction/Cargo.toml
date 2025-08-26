@@ -41,6 +41,7 @@ verify = ["blake3", "solana-signature/verify"]
 bincode = { workspace = true, optional = true }
 serde = { workspace = true, optional = true }
 serde_derive = { workspace = true, optional = true }
+solana-address = { workspace = true }
 solana-frozen-abi = { workspace = true, optional = true }
 solana-frozen-abi-macro = { workspace = true, optional = true }
 solana-hash = { workspace = true }
@@ -48,7 +49,6 @@ solana-instruction = { workspace = true }
 solana-instruction-error = { workspace = true }
 solana-logger = { workspace = true, optional = true }
 solana-message = { workspace = true }
-solana-pubkey = { workspace = true }
 solana-sanitize = { workspace = true }
 solana-sdk-ids = { workspace = true }
 solana-short-vec = { workspace = true, optional = true }

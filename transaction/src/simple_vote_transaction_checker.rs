@@ -1,6 +1,6 @@
 use {
     crate::versioned::sanitized::SanitizedVersionedTransaction, solana_message::VersionedMessage,
-    solana_pubkey::Pubkey, solana_signature::Signature,
+    solana_address::Address, solana_signature::Signature,
 };
 
 /// Simple vote transaction meets these conditions:
@@ -36,7 +36,7 @@ pub fn is_simple_vote_transaction(
 pub fn is_simple_vote_transaction_impl<'a>(
     signatures: &[Signature],
     is_legacy_message: bool,
-    mut instruction_programs: impl Iterator<Item = &'a Pubkey>,
+    mut instruction_programs: impl Iterator<Item = &'a Address>,
 ) -> bool {
     signatures.len() < 3
         && is_legacy_message
