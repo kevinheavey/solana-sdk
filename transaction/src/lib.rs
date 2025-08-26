@@ -115,18 +115,18 @@ use {
     serde_derive::{Deserialize, Serialize},
     solana_short_vec as short_vec,
 };
+pub use {
+    solana_address::Address,
+    solana_instruction::{AccountMeta, Instruction},
+    solana_instruction_error::InstructionError,
+    solana_message::{compiled_instruction::CompiledInstruction, Message, VersionedMessage},
+    solana_signature::Signature,
+    solana_transaction_error::{TransactionError, TransactionResult},
+};
 #[cfg(feature = "bincode")]
 pub use {
     solana_hash::Hash,
     solana_signer::{signers::Signers, SignerError},
-};
-pub use {
-    solana_instruction::{AccountMeta, Instruction},
-    solana_instruction_error::InstructionError,
-    solana_message::{compiled_instruction::CompiledInstruction, Message, VersionedMessage},
-    solana_address::Address,
-    solana_signature::Signature,
-    solana_transaction_error::{TransactionError, TransactionResult},
 };
 use {
     solana_message::inline_nonce::is_advance_nonce_instruction_data,
@@ -1048,7 +1048,10 @@ impl Transaction {
 
     #[cfg(feature = "verify")]
     /// Replace all the signatures and pubkeys.
-    pub fn replace_signatures(&mut self, signers: &[(Address, Signature)]) -> TransactionResult<()> {
+    pub fn replace_signatures(
+        &mut self,
+        signers: &[(Address, Signature)],
+    ) -> TransactionResult<()> {
         let num_required_signatures = self.message.header.num_required_signatures as usize;
         if signers.len() != num_required_signatures
             || self.signatures.len() != num_required_signatures

@@ -1,6 +1,6 @@
 use {
-    crate::versioned::sanitized::SanitizedVersionedTransaction, solana_message::VersionedMessage,
-    solana_address::Address, solana_signature::Signature,
+    crate::versioned::sanitized::SanitizedVersionedTransaction, solana_address::Address,
+    solana_message::VersionedMessage, solana_signature::Signature,
 };
 
 /// Simple vote transaction meets these conditions:

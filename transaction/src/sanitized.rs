@@ -1,5 +1,6 @@
 use {
     crate::versioned::{sanitized::SanitizedVersionedTransaction, VersionedTransaction},
+    solana_address::Address,
     solana_hash::Hash,
     solana_message::{
         legacy,
@@ -7,7 +8,6 @@ use {
         AddressLoader, LegacyMessage, SanitizedMessage, SanitizedVersionedMessage,
         VersionedMessage,
     },
-    solana_address::Address,
     solana_signature::Signature,
     solana_transaction_error::{TransactionError, TransactionResult},
     std::collections::HashSet,
