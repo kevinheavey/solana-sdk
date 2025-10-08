@@ -132,7 +132,7 @@ pub enum SystemInstruction {
         base: Address,
 
         /// String of ASCII chars, no longer than `Address::MAX_SEED_LEN`
-        seed: String,
+        seed: Vec<u8>,
 
         /// Number of lamports to transfer to the new account
         lamports: u64,
@@ -208,7 +208,7 @@ pub enum SystemInstruction {
         base: Address,
 
         /// String of ASCII chars, no longer than `Address::MAX_SEED_LEN`
-        seed: String,
+        seed: Vec<u8>,
 
         /// Number of bytes of memory to allocate
         space: u64,
@@ -227,7 +227,7 @@ pub enum SystemInstruction {
         base: Address,
 
         /// String of ASCII chars, no longer than `Address::MAX_SEED_LEN`
-        seed: String,
+        seed: Vec<u8>,
 
         /// Owner program account
         owner: Address,
@@ -244,7 +244,7 @@ pub enum SystemInstruction {
         lamports: u64,
 
         /// Seed to use to derive the funding account address
-        from_seed: String,
+        from_seed: Vec<u8>,
 
         /// Owner to use to derive the funding account address
         from_owner: Address,
@@ -479,7 +479,7 @@ pub fn create_account_with_seed(
     from_address: &Address,
     to_address: &Address, // must match create_with_seed(base, seed, owner)
     base: &Address,
-    seed: &str,
+    seed: &[u8],
     lamports: u64,
     space: u64,
     owner: &Address,
@@ -496,7 +496,7 @@ pub fn create_account_with_seed(
         ID,
         &SystemInstruction::CreateAccountWithSeed {
             base: *base,
-            seed: seed.to_string(),
+            seed: seed.to_vec(),
             lamports,
             space,
             owner: *owner,
@@ -680,7 +680,7 @@ pub fn assign(address: &Address, owner: &Address) -> Instruction {
 pub fn assign_with_seed(
     address: &Address, // must match create_with_seed(base, seed, owner)
     base: &Address,
-    seed: &str,
+    seed: &[u8],
     owner: &Address,
 ) -> Instruction {
     let account_metas = vec![
@@ -691,7 +691,7 @@ pub fn assign_with_seed(
         ID,
         &SystemInstruction::AssignWithSeed {
             base: *base,
-            seed: seed.to_string(),
+            seed: seed.to_vec(),
             owner: *owner,
         },
         account_metas,
@@ -873,7 +873,7 @@ pub fn transfer(from_address: &Address, to_address: &Address, lamports: u64) -> 
 pub fn transfer_with_seed(
     from_address: &Address, // must match create_with_seed(base, seed, owner)
     from_base: &Address,
-    from_seed: String,
+    from_seed: Vec<u8>,
     from_owner: &Address,
     to_address: &Address,
     lamports: u64,
@@ -1068,7 +1068,7 @@ pub fn allocate(address: &Address, space: u64) -> Instruction {
 pub fn allocate_with_seed(
     address: &Address, // must match create_with_seed(base, seed, owner)
     base: &Address,
-    seed: &str,
+    seed: &[u8],
     space: u64,
     owner: &Address,
 ) -> Instruction {
@@ -1080,7 +1080,7 @@ pub fn allocate_with_seed(
         ID,
         &SystemInstruction::AllocateWithSeed {
             base: *base,
-            seed: seed.to_string(),
+            seed: seed.to_vec(),
             space,
             owner: *owner,
         },
@@ -1236,7 +1236,7 @@ pub fn create_nonce_account_with_seed(
     from_address: &Address,
     nonce_address: &Address,
     base: &Address,
-    seed: &str,
+    seed: &[u8],
     authority: &Address,
     lamports: u64,
 ) -> Vec<Instruction> {
