@@ -75,7 +75,7 @@ const NONCE_STATE_SIZE: usize = 80;
 /// An instruction to the system program.
 #[cfg_attr(
     feature = "frozen-abi",
-    solana_frozen_abi_macro::frozen_abi(digest = "CBvp4X1gf36kwDqnprAa6MpKckptiAHfXSxFRHFnNRVw"),
+    solana_frozen_abi_macro::frozen_abi(digest = "7Hc7pX4JYnEsBEyixxKP76aDSq3668bLUc1V7L9Vqm68"),
     derive(
         solana_frozen_abi_macro::AbiExample,
         solana_frozen_abi_macro::AbiEnumVisitor
